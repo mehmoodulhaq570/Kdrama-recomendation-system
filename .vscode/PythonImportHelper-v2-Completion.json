@@ -188,7 +188,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def fuzzy_match_title(user_input: str, threshold=70):\n    match, score, _ = process.extractOne(user_input, titles, scorer=fuzz.WRatio)\n    if score >= threshold:\n        return match, score\n    return None, score\n@lru_cache(maxsize=128)\ndef cached_encode(text: str):\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb",
+        "peekOfCode": "def fuzzy_match_title(user_input: str, threshold=70):\n    \"\"\"Handle typos and near matches using fuzzy logic.\"\"\"\n    match, score, _ = process.extractOne(user_input, titles, scorer=fuzz.WRatio)\n    if score >= threshold:\n        return match, score\n    return None, score\n@lru_cache(maxsize=128)\ndef cached_encode(text: str):\n    \"\"\"Cached embedding generation for speed.\"\"\"\n    emb = model.encode([text], convert_to_numpy=True)",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -197,7 +197,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def cached_encode(text: str):\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb\n# ======================================================\n# Hybrid Recommendation Logic\n# ======================================================\ndef recommend(title: str, top_n=5, alpha=0.7):\n    # Try to find by title\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)",
+        "peekOfCode": "def cached_encode(text: str):\n    \"\"\"Cached embedding generation for speed.\"\"\"\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb\n# ======================================================\n# STAGE 4 — HYBRID RECOMMENDATION PIPELINE\n# ======================================================\ndef recommend(title: str, top_n=5, alpha=0.7):\n    \"\"\"",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -206,7 +206,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def recommend(title: str, top_n=5, alpha=0.7):\n    # Try to find by title\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:\n        match, score = fuzzy_match_title(title)\n        if match:\n            drama = next((m for m in metadata if m[\"Title\"] == match), None)\n            print(f\"Fuzzy match: '{title}' → '{match}' ({score:.1f}%)\")\n        else:\n            print(f\"No close match for '{title}', treating as query text.\")",
+        "peekOfCode": "def recommend(title: str, top_n=5, alpha=0.7):\n    \"\"\"\n    Stage-based pipeline:\n    1. Resolve user input (fuzzy match or free-text)\n    2. Semantic search (FAISS)\n    3. Lexical search (BM25)\n    4. Hybrid combination\n    5. Optional reranking (Cross-Encoder)\n    \"\"\"\n    # ---- Stage 4.1: Title resolution ----",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -215,7 +215,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def root():\n    return {\"message\": \"Hybrid Kdrama Recommendation API v3.0 is running\"}\n@app.get(\"/recommend\")\ndef get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or query\"),\n    top_n: int = 5\n):\n    return recommend(title, top_n)\n# ======================================================\n# Run Server",
+        "peekOfCode": "def root():\n    return {\"message\": \"Hybrid Kdrama Recommendation API v3.1 is running\"}\n@app.get(\"/recommend\")\ndef get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or user query\"),\n    top_n: int = 5\n):\n    \"\"\"Main recommendation endpoint.\"\"\"\n    return recommend(title, top_n)\n# ======================================================",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -224,7 +224,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or query\"),\n    top_n: int = 5\n):\n    return recommend(title, top_n)\n# ======================================================\n# Run Server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn",
+        "peekOfCode": "def get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or user query\"),\n    top_n: int = 5\n):\n    \"\"\"Main recommendation endpoint.\"\"\"\n    return recommend(title, top_n)\n# ======================================================\n# STAGE 6 — RUN LOCALLY\n# ======================================================\nif __name__ == \"__main__\":",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -233,7 +233,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nCROSS_ENCODER_MODEL = \"cross-encoder/ms-marco-MiniLM-L-6-v2\"  # optional reranker\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.0\")\napp.add_middleware(\n    CORSMiddleware,",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nCROSS_ENCODER_MODEL = \"cross-encoder/ms-marco-MiniLM-L-6-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# FASTAPI SETUP\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.1\")\napp.add_middleware(\n    CORSMiddleware,",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -242,7 +242,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "CROSS_ENCODER_MODEL = \"cross-encoder/ms-marco-MiniLM-L-6-v2\"  # optional reranker\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],",
+        "peekOfCode": "CROSS_ENCODER_MODEL = \"cross-encoder/ms-marco-MiniLM-L-6-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# FASTAPI SETUP\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.1\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -251,7 +251,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# FASTAPI SETUP\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.1\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -260,7 +260,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recommendation\\model_training\\faiss_index\"\n# ======================================================\n# FASTAPI SETUP\n# ======================================================\napp = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.1\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -269,7 +269,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "app = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# ======================================================\n# Load models and data",
+        "peekOfCode": "app = FastAPI(title=\"Kdrama Hybrid Recommendation API\", version=\"3.1\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# ======================================================\n# STAGE 1 — LOAD MODELS & INDEXES",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -278,7 +278,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\ncorpus = [f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\" for m in metadata]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully!\")\n# Optional cross-encoder reranker (semantic reranking)\ntry:",
+        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\ncorpus = [\n    f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\"\n    for m in metadata\n]\nbm25 = BM25Okapi([doc.split() for doc in corpus])",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -287,7 +287,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\ncorpus = [f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\" for m in metadata]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully!\")\n# Optional cross-encoder reranker (semantic reranking)\ntry:\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)",
+        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\ncorpus = [\n    f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\"\n    for m in metadata\n]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully.\")",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -296,7 +296,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "titles = [m[\"Title\"] for m in metadata]\ncorpus = [f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\" for m in metadata]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully!\")\n# Optional cross-encoder reranker (semantic reranking)\ntry:\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)\n    use_reranker = True\n    print(\"Cross-encoder reranker loaded successfully.\")\nexcept Exception as e:",
+        "peekOfCode": "titles = [m[\"Title\"] for m in metadata]\ncorpus = [\n    f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\"\n    for m in metadata\n]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully.\")\n# ======================================================\n# STAGE 2 — LOAD OPTIONAL RERANKER\n# ======================================================",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -305,7 +305,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "corpus = [f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\" for m in metadata]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully!\")\n# Optional cross-encoder reranker (semantic reranking)\ntry:\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)\n    use_reranker = True\n    print(\"Cross-encoder reranker loaded successfully.\")\nexcept Exception as e:\n    reranker = None",
+        "peekOfCode": "corpus = [\n    f\"{m.get('Title', '')} {m.get('Genre', '')} {m.get('Description', '')} {m.get('Cast', '')}\"\n    for m in metadata\n]\nbm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully.\")\n# ======================================================\n# STAGE 2 — LOAD OPTIONAL RERANKER\n# ======================================================\ntry:",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -314,7 +314,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "bm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully!\")\n# Optional cross-encoder reranker (semantic reranking)\ntry:\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)\n    use_reranker = True\n    print(\"Cross-encoder reranker loaded successfully.\")\nexcept Exception as e:\n    reranker = None\n    use_reranker = False",
+        "peekOfCode": "bm25 = BM25Okapi([doc.split() for doc in corpus])\nprint(f\"Loaded {len(metadata)} dramas successfully.\")\n# ======================================================\n# STAGE 2 — LOAD OPTIONAL RERANKER\n# ======================================================\ntry:\n    print(\"Stage 2: Loading cross-encoder reranker...\")\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)\n    use_reranker = True\n    print(\"Cross-encoder reranker loaded successfully.\")",
         "detail": "backend.app",
         "documentation": {}
     },
