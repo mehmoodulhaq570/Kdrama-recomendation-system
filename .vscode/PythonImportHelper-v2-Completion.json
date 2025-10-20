@@ -1,5 +1,29 @@
 [
     {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -37,14 +61,6 @@
     },
     {
         "label": "SentenceTransformer",
-        "importPath": "sentence_transformers",
-        "description": "sentence_transformers",
-        "isExtraImport": true,
-        "detail": "sentence_transformers",
-        "documentation": {}
-    },
-    {
-        "label": "util",
         "importPath": "sentence_transformers",
         "description": "sentence_transformers",
         "isExtraImport": true,
@@ -132,7 +148,25 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"\n    # Find the drama in metadata\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:\n        print(f\" Drama '{title}' not found in dataset.\")\n        return []\n    # Create query embedding\n    query_text = f\"{drama['Title']} {drama['Genre']} {drama['Description']} {drama['Cast']}\"\n    query_emb = model.encode([query_text], convert_to_numpy=True)",
+        "peekOfCode": "def recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:\n        return {\"error\": f\"Drama '{title}' not found.\"}\n    query_text = f\"{drama['Title']} {drama['Genre']} {drama['Description']} {drama['Cast']}\"\n    query_emb = model.encode([query_text], convert_to_numpy=True)\n    faiss.normalize_L2(query_emb)\n    D, I = index.search(query_emb, top_n + 1)\n    results = []\n    for idx, score in zip(I[0][1:], D[0][1:]):",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def root():\n    return {\"message\": \"Kdrama Recommendation API is running!\"}\n@app.get(\"/recommend\")\ndef get_recommendations(title: str = Query(..., description=\"Kdrama title\"), top_n: int = 5):\n    return recommend(title, top_n)\n# ======================================================\n# 6️⃣ Run server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "get_recommendations",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def get_recommendations(title: str = Query(..., description=\"Kdrama title\"), top_n: int = 5):\n    return recommend(title, top_n)\n# ======================================================\n# 6️⃣ Run server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn\n    uvicorn.run(\"app:app\", host=\"127.0.0.1\", port=8001, reload=True)",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -141,7 +175,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -150,7 +184,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -159,7 +193,16 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this\n    allow_credentials=True,",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "app = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# ======================================================",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -168,7 +211,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 3️⃣ Helper: Recommend function\n# ======================================================\ndef recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"",
+        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 4️⃣ Recommendation logic\n# ======================================================\ndef recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -177,7 +220,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 3️⃣ Helper: Recommend function\n# ======================================================\ndef recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"\n    # Find the drama in metadata",
+        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 4️⃣ Recommendation logic\n# ======================================================\ndef recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:",
         "detail": "backend.app",
         "documentation": {}
     },
