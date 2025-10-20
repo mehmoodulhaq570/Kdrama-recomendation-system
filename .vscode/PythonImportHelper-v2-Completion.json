@@ -1,0 +1,178 @@
+[
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "webdriver",
+        "importPath": "selenium",
+        "description": "selenium",
+        "isExtraImport": true,
+        "detail": "selenium",
+        "documentation": {}
+    },
+    {
+        "label": "By",
+        "importPath": "selenium.webdriver.common.by",
+        "description": "selenium.webdriver.common.by",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.by",
+        "documentation": {}
+    },
+    {
+        "label": "Options",
+        "importPath": "selenium.webdriver.chrome.options",
+        "description": "selenium.webdriver.chrome.options",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.chrome.options",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "remove_refs",
+        "kind": 2,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "def remove_refs(text):\n    \"\"\"Remove all reference markers like [1], [ko], [citation needed].\"\"\"\n    return re.sub(r'\\[.*?\\]', '', str(text))\ndef clean_multiline(text):\n    \"\"\"Convert multiline text to properly comma-separated clean string.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\"]:\n        return \"-\"\n    text = remove_refs(text)\n    parts = re.split(r'[\\n\\r]+', str(text))\n    parts = [p.strip() for p in parts if p.strip()]",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "clean_multiline",
+        "kind": 2,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "def clean_multiline(text):\n    \"\"\"Convert multiline text to properly comma-separated clean string.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\"]:\n        return \"-\"\n    text = remove_refs(text)\n    parts = re.split(r'[\\n\\r]+', str(text))\n    parts = [p.strip() for p in parts if p.strip()]\n    return \", \".join(parts) if parts else \"-\"\ndef clean_description(desc):\n    \"\"\"Clean [1], etc. and normalize spaces.\"\"\"",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "clean_description",
+        "kind": 2,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "def clean_description(desc):\n    \"\"\"Clean [1], etc. and normalize spaces.\"\"\"\n    if not desc:\n        return \"-\"\n    desc = remove_refs(desc)\n    desc = re.sub(r'\\s+', ' ', desc).strip()\n    return desc if desc else \"-\"\ndef extract_years_from_release(text):\n    \"\"\"Extract release year(s) from release date text.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\", \"-\"]:",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "extract_years_from_release",
+        "kind": 2,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "def extract_years_from_release(text):\n    \"\"\"Extract release year(s) from release date text.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\", \"-\"]:\n        return \"-\"\n    text = remove_refs(text)\n    # Match 4-digit years (e.g., 2004, 2015, 2020)\n    years = re.findall(r'(19|20)\\d{2}', text)\n    # Join unique years (sorted in order of appearance)\n    if not years:\n        return \"-\"",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "get_description_fallback",
+        "kind": 2,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "def get_description_fallback(url):\n    headers = {\n        \"User-Agent\": (\n            \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) \"\n            \"AppleWebKit/537.36 (KHTML, like Gecko) \"\n            \"Chrome/118.0.0.0 Safari/537.36\"\n        )\n    }\n    try:\n        response = requests.get(url, headers=headers, timeout=10)",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "chrome_options",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "chrome_options = Options()\nchrome_options.add_argument(\"--headless\")\nchrome_options.add_argument(\"--no-sandbox\")\nchrome_options.add_argument(\"--disable-dev-shm-usage\")\ndriver = webdriver.Chrome(options=chrome_options)\n# ---------------------------\n# Wikipedia main list\n# ---------------------------\nbase_url = \"https://en.wikipedia.org/wiki/List_of_South_Korean_dramas\"\ndriver.get(base_url)",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "driver",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "driver = webdriver.Chrome(options=chrome_options)\n# ---------------------------\n# Wikipedia main list\n# ---------------------------\nbase_url = \"https://en.wikipedia.org/wiki/List_of_South_Korean_dramas\"\ndriver.get(base_url)\ntime.sleep(3)\n# ---------------------------\n# Collect all drama links\n# ---------------------------",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "base_url",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "base_url = \"https://en.wikipedia.org/wiki/List_of_South_Korean_dramas\"\ndriver.get(base_url)\ntime.sleep(3)\n# ---------------------------\n# Collect all drama links\n# ---------------------------\nprint(\"Collecting drama links...\")\ndrama_links = []\nelems = driver.find_elements(By.CLASS_NAME, \"div-col\")\nfor elem in elems:",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "drama_links",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "drama_links = []\nelems = driver.find_elements(By.CLASS_NAME, \"div-col\")\nfor elem in elems:\n    links = elem.find_elements(By.CSS_SELECTOR, \"a[href]\")\n    for link in links:\n        href = link.get_attribute(\"href\")\n        if href and \"wiki\" in href and \"redlink\" not in href:\n            drama_links.append(href)\ndrama_links = list(set(drama_links))\nprint(f\"Found {len(drama_links)} drama links\")",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "elems",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "elems = driver.find_elements(By.CLASS_NAME, \"div-col\")\nfor elem in elems:\n    links = elem.find_elements(By.CSS_SELECTOR, \"a[href]\")\n    for link in links:\n        href = link.get_attribute(\"href\")\n        if href and \"wiki\" in href and \"redlink\" not in href:\n            drama_links.append(href)\ndrama_links = list(set(drama_links))\nprint(f\"Found {len(drama_links)} drama links\")\n# ---------------------------",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "drama_links",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "drama_links = list(set(drama_links))\nprint(f\"Found {len(drama_links)} drama links\")\n# ---------------------------\n# Scrape each drama page\n# ---------------------------\ntitles, alt_titles, writers, directors, casts, genres, networks, episodes, releases, release_years, posters, descriptions = [], [], [], [], [], [], [], [], [], [], [], []\nfor i, url in enumerate(drama_links[:100]):  # you can limit with [:10] for testing\n    print(f\"\\nScraping ({i+1}/{len(drama_links)}): {url}\")\n    driver.get(url)\n    time.sleep(1.5)",
+        "detail": "scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "scrapper",
+        "description": "scrapper",
+        "peekOfCode": "df = pd.DataFrame({\n    \"Title\": titles,\n    \"Also Known As\": alt_titles,\n    \"Written By\": writers,\n    \"Director\": directors,\n    \"Cast\": casts,\n    \"Genre\": genres,\n    \"Network\": networks,\n    \"Episodes\": episodes,\n    \"Release Dates\": releases,",
+        "detail": "scrapper",
+        "documentation": {}
+    }
+]
