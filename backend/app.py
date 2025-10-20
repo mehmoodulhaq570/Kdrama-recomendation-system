@@ -1,122 +1,64 @@
-# app.py
 import os
-import json
-import numpy as np
+import pickle
 import faiss
-from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel
-from typing import List
-from sentence_transformers import SentenceTransformer
-from sklearn.preprocessing import normalize
+import numpy as np
+from sentence_transformers import SentenceTransformer, util
 
-INDEX_DIR = "faiss_index"
-INDEX_PATH = os.path.join(INDEX_DIR, "kdrama_index_flat_ip.faiss")
-META_PATH = os.path.join(INDEX_DIR, "metadata.json")
-TITLES_PATH = os.path.join(INDEX_DIR, "titles.npy")
+# ======================================================
+# 1️⃣ Paths
+# ======================================================
+MODEL_NAME = "paraphrase-multilingual-mpnet-base-v2"
+MODEL_DIR = r"D:\Projects\Kdrama-recomendation\model_traning\models"
+INDEX_DIR = r"D:\Projects\Kdrama-recomendation\model_traning\faiss_index"
 
-EMBEDDING_MODEL = "paraphrase-multilingual-mpnet-base-v2"  # same as used when building
 
-# weights must match ones used during indexing
-W_GENRE = 0.35
-W_CAST = 0.25
-W_DIRECTOR = 0.10
-W_DESC = 0.30
+# ======================================================
+# 2️⃣ Load model and FAISS index
+# ======================================================
+print(" Loading model and FAISS index...")
+model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)
+index = faiss.read_index(os.path.join(INDEX_DIR, "index.faiss"))
 
-app = FastAPI(title="KDrama Recommender API (Content-based + FAISS)")
+with open(os.path.join(INDEX_DIR, "meta.pkl"), "rb") as f:
+    metadata = pickle.load(f)
 
-# Load index and metadata at startup
-print("Loading FAISS index...")
-if not os.path.exists(INDEX_PATH):
-    raise FileNotFoundError(f"Index not found at {INDEX_PATH}. Run build_index.py first.")
-index = faiss.read_index(INDEX_PATH)
+print(" Model and index loaded!")
 
-print("Loading metadata...")
-with open(META_PATH, 'r', encoding='utf-8') as f:
-    metadata = json.load(f)
+# ======================================================
+# 3️⃣ Helper: Recommend function
+# ======================================================
+def recommend(title: str, top_n=5):
+    """Get top-N recommendations based on drama title."""
+    # Find the drama in metadata
+    drama = next((m for m in metadata if m["Title"].lower() == title.lower()), None)
+    if not drama:
+        print(f" Drama '{title}' not found in dataset.")
+        return []
 
-titles = np.load(TITLES_PATH, allow_pickle=True)
+    # Create query embedding
+    query_text = f"{drama['Title']} {drama['Genre']} {drama['Description']} {drama['Cast']}"
+    query_emb = model.encode([query_text], convert_to_numpy=True)
+    faiss.normalize_L2(query_emb)
 
-print("Loading embedding model...")
-model = SentenceTransformer(EMBEDDING_MODEL)
-
-def clean_text(text: str):
-    import re
-    if not isinstance(text, str):
-        return ''
-    text = re.sub(r'\[.*?\]', '', text)
-    text = text.replace('â€“', '-').replace('\n', ' ')
-    text = text.replace('"', '').replace("'", '')
-    text = re.sub(r'\s{2,}', ' ', text).strip()
-    return text
-
-def encode_item(genre, cast, director, description):
-    # encode per-field and fuse with same weights used in build_index
-    parts = []
-    g = clean_text(genre or "")
-    c = clean_text(cast or "")
-    d = clean_text(director or "")
-    desc = clean_text(description or "")
-    # model.encode can accept list, we'll combine
-    emb_g = model.encode([g], convert_to_numpy=True)[0]
-    emb_c = model.encode([c], convert_to_numpy=True)[0]
-    emb_d = model.encode([d], convert_to_numpy=True)[0]
-    emb_desc = model.encode([desc], convert_to_numpy=True)[0]
-    # normalize each
-    from sklearn.preprocessing import normalize
-    emb_g = normalize(emb_g.reshape(1, -1))[0]
-    emb_c = normalize(emb_c.reshape(1, -1))[0]
-    emb_d = normalize(emb_d.reshape(1, -1))[0]
-    emb_desc = normalize(emb_desc.reshape(1, -1))[0]
-    combined = W_GENRE * emb_g + W_CAST * emb_c + W_DIRECTOR * emb_d + W_DESC * emb_desc
-    combined = normalize(combined.reshape(1, -1)).astype('float32')
-    return combined
-
-class RecommendResponse(BaseModel):
-    title: str
-    year: str
-    genre: str
-    cast: str
-    director: str
-    description: str
-    score: float
-
-@app.get("/recommend", response_model=List[RecommendResponse])
-def recommend(title: str = Query(..., description="Drama title present in dataset"), k: int = Query(10, gt=0, le=50)):
-    # Find index of given title
-    # exact match first, then case-insensitive fallback
-    matches = np.where(titles == title)[0]
-    if len(matches) == 0:
-        matches = np.where(np.char.lower(titles.astype(str)) == title.lower())[0]
-    if len(matches) == 0:
-        raise HTTPException(status_code=404, detail=f"Title '{title}' not found.")
-    idx = int(matches[0])
-
-    # Retrieve corresponding metadata row to re-encode its features (safer) OR use stored embedding
-    meta = metadata[idx]
-    # Encode query vector using same fusion
-    q_emb = encode_item(meta.get('genre', ''), meta.get('cast', ''), meta.get('director', ''), meta.get('description', ''))
-
-    # Search FAISS (inner product on normalized vectors -> cosine similarity)
-    D, I = index.search(q_emb, k + 1)  # +1 to skip the item itself
+    # Search
+    D, I = index.search(query_emb, top_n + 1)  # +1 to exclude the same item
     results = []
-    for score, i in zip(D[0], I[0]):
-        if i == idx:
-            continue
-        m = metadata[i]
-        results.append({
-            "title": m['title'],
-            "year": m.get('year', ''),
-            "genre": m.get('genre', ''),
-            "cast": m.get('cast', ''),
-            "director": m.get('director', ''),
-            "description": m.get('description', ''),
-            "score": float(score)
-        })
-        if len(results) >= k:
-            break
+    for idx, score in zip(I[0][1:], D[0][1:]):  # skip self-match
+        rec = metadata[idx]
+        rec["similarity"] = float(score)
+        results.append(rec)
+
+    print(f"\n Top {top_n} Recommendations for '{title}':\n")
+    for i, r in enumerate(results, 1):
+        print(f"{i}. {r['Title']} ({r['Release Years']}) — {r['Genre']}")
+        print(f"   Similarity: {r['similarity']:.3f}")
+        print(f"   Network: {r.get('Network', '-')}")
+        print(f"   Description: {r['Description'][:180]}...\n")
 
     return results
 
+# ======================================================
+# 4️⃣ Example usage
+# ======================================================
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    recommend("Do Do Sol Sol La La Sol", top_n=5)

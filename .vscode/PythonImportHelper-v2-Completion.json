@@ -9,21 +9,12 @@
         "documentation": {}
     },
     {
-        "label": "json",
+        "label": "pickle",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
-        "label": "numpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "numpy",
-        "description": "numpy",
-        "detail": "numpy",
+        "importPath": "pickle",
+        "description": "pickle",
+        "detail": "pickle",
         "documentation": {}
     },
     {
@@ -36,47 +27,24 @@
         "documentation": {}
     },
     {
-        "label": "FastAPI",
-        "importPath": "fastapi",
-        "description": "fastapi",
+        "label": "numpy",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "HTTPException",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "Query",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
         "documentation": {}
     },
     {
         "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "util",
         "importPath": "sentence_transformers",
         "description": "sentence_transformers",
         "isExtraImport": true,
@@ -89,22 +57,6 @@
         "description": "sentence_transformers",
         "isExtraImport": true,
         "detail": "sentence_transformers",
-        "documentation": {}
-    },
-    {
-        "label": "normalize",
-        "importPath": "sklearn.preprocessing",
-        "description": "sklearn.preprocessing",
-        "isExtraImport": true,
-        "detail": "sklearn.preprocessing",
-        "documentation": {}
-    },
-    {
-        "label": "normalize",
-        "importPath": "sklearn.preprocessing",
-        "description": "sklearn.preprocessing",
-        "isExtraImport": true,
-        "detail": "sklearn.preprocessing",
         "documentation": {}
     },
     {
@@ -176,46 +128,29 @@
         "documentation": {}
     },
     {
-        "label": "tqdm",
-        "importPath": "tqdm",
-        "description": "tqdm",
-        "isExtraImport": true,
-        "detail": "tqdm",
-        "documentation": {}
-    },
-    {
-        "label": "RecommendResponse",
-        "kind": 6,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "class RecommendResponse(BaseModel):\n    title: str\n    year: str\n    genre: str\n    cast: str\n    director: str\n    description: str\n    score: float\n@app.get(\"/recommend\", response_model=List[RecommendResponse])\ndef recommend(title: str = Query(..., description=\"Drama title present in dataset\"), k: int = Query(10, gt=0, le=50)):",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "clean_text",
-        "kind": 2,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "def clean_text(text: str):\n    import re\n    if not isinstance(text, str):\n        return ''\n    text = re.sub(r'\\[.*?\\]', '', text)\n    text = text.replace('â€“', '-').replace('\\n', ' ')\n    text = text.replace('\"', '').replace(\"'\", '')\n    text = re.sub(r'\\s{2,}', ' ', text).strip()\n    return text\ndef encode_item(genre, cast, director, description):",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "encode_item",
-        "kind": 2,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "def encode_item(genre, cast, director, description):\n    # encode per-field and fuse with same weights used in build_index\n    parts = []\n    g = clean_text(genre or \"\")\n    c = clean_text(cast or \"\")\n    d = clean_text(director or \"\")\n    desc = clean_text(description or \"\")\n    # model.encode can accept list, we'll combine\n    emb_g = model.encode([g], convert_to_numpy=True)[0]\n    emb_c = model.encode([c], convert_to_numpy=True)[0]",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
         "label": "recommend",
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def recommend(title: str = Query(..., description=\"Drama title present in dataset\"), k: int = Query(10, gt=0, le=50)):\n    # Find index of given title\n    # exact match first, then case-insensitive fallback\n    matches = np.where(titles == title)[0]\n    if len(matches) == 0:\n        matches = np.where(np.char.lower(titles.astype(str)) == title.lower())[0]\n    if len(matches) == 0:\n        raise HTTPException(status_code=404, detail=f\"Title '{title}' not found.\")\n    idx = int(matches[0])\n    # Retrieve corresponding metadata row to re-encode its features (safer) OR use stored embedding",
+        "peekOfCode": "def recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"\n    # Find the drama in metadata\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:\n        print(f\" Drama '{title}' not found in dataset.\")\n        return []\n    # Create query embedding\n    query_text = f\"{drama['Title']} {drama['Genre']} {drama['Description']} {drama['Cast']}\"\n    query_emb = model.encode([query_text], convert_to_numpy=True)",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_NAME",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_DIR",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -224,106 +159,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "INDEX_DIR = \"faiss_index\"\nINDEX_PATH = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nMETA_PATH = os.path.join(INDEX_DIR, \"metadata.json\")\nTITLES_PATH = os.path.join(INDEX_DIR, \"titles.npy\")\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # same as used when building\n# weights must match ones used during indexing\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "INDEX_PATH",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "INDEX_PATH = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nMETA_PATH = os.path.join(INDEX_DIR, \"metadata.json\")\nTITLES_PATH = os.path.join(INDEX_DIR, \"titles.npy\")\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # same as used when building\n# weights must match ones used during indexing\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "META_PATH",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "META_PATH = os.path.join(INDEX_DIR, \"metadata.json\")\nTITLES_PATH = os.path.join(INDEX_DIR, \"titles.npy\")\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # same as used when building\n# weights must match ones used during indexing\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "TITLES_PATH",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "TITLES_PATH = os.path.join(INDEX_DIR, \"titles.npy\")\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # same as used when building\n# weights must match ones used during indexing\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "EMBEDDING_MODEL",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "EMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # same as used when building\n# weights must match ones used during indexing\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "W_GENRE",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "W_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):\n    raise FileNotFoundError(f\"Index not found at {INDEX_PATH}. Run build_index.py first.\")\nindex = faiss.read_index(INDEX_PATH)",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "W_CAST",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "W_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):\n    raise FileNotFoundError(f\"Index not found at {INDEX_PATH}. Run build_index.py first.\")\nindex = faiss.read_index(INDEX_PATH)\nprint(\"Loading metadata...\")",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "W_DIRECTOR",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "W_DIRECTOR = 0.10\nW_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):\n    raise FileNotFoundError(f\"Index not found at {INDEX_PATH}. Run build_index.py first.\")\nindex = faiss.read_index(INDEX_PATH)\nprint(\"Loading metadata...\")\nwith open(META_PATH, 'r', encoding='utf-8') as f:",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "W_DESC",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "W_DESC = 0.30\napp = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):\n    raise FileNotFoundError(f\"Index not found at {INDEX_PATH}. Run build_index.py first.\")\nindex = faiss.read_index(INDEX_PATH)\nprint(\"Loading metadata...\")\nwith open(META_PATH, 'r', encoding='utf-8') as f:\n    metadata = json.load(f)",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "app",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "app = FastAPI(title=\"KDrama Recommender API (Content-based + FAISS)\")\n# Load index and metadata at startup\nprint(\"Loading FAISS index...\")\nif not os.path.exists(INDEX_PATH):\n    raise FileNotFoundError(f\"Index not found at {INDEX_PATH}. Run build_index.py first.\")\nindex = faiss.read_index(INDEX_PATH)\nprint(\"Loading metadata...\")\nwith open(META_PATH, 'r', encoding='utf-8') as f:\n    metadata = json.load(f)\ntitles = np.load(TITLES_PATH, allow_pickle=True)",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "index",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "index = faiss.read_index(INDEX_PATH)\nprint(\"Loading metadata...\")\nwith open(META_PATH, 'r', encoding='utf-8') as f:\n    metadata = json.load(f)\ntitles = np.load(TITLES_PATH, allow_pickle=True)\nprint(\"Loading embedding model...\")\nmodel = SentenceTransformer(EMBEDDING_MODEL)\ndef clean_text(text: str):\n    import re\n    if not isinstance(text, str):",
-        "detail": "backend.app",
-        "documentation": {}
-    },
-    {
-        "label": "titles",
-        "kind": 5,
-        "importPath": "backend.app",
-        "description": "backend.app",
-        "peekOfCode": "titles = np.load(TITLES_PATH, allow_pickle=True)\nprint(\"Loading embedding model...\")\nmodel = SentenceTransformer(EMBEDDING_MODEL)\ndef clean_text(text: str):\n    import re\n    if not isinstance(text, str):\n        return ''\n    text = re.sub(r'\\[.*?\\]', '', text)\n    text = text.replace('â€“', '-').replace('\\n', ' ')\n    text = text.replace('\"', '').replace(\"'\", '')",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ Load model and FAISS index\n# ======================================================\nprint(\" Loading model and FAISS index...\")\nmodel = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -332,7 +168,16 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "model = SentenceTransformer(EMBEDDING_MODEL)\ndef clean_text(text: str):\n    import re\n    if not isinstance(text, str):\n        return ''\n    text = re.sub(r'\\[.*?\\]', '', text)\n    text = text.replace('â€“', '-').replace('\\n', ' ')\n    text = text.replace('\"', '').replace(\"'\", '')\n    text = re.sub(r'\\s{2,}', ' ', text).strip()\n    return text",
+        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 3️⃣ Helper: Recommend function\n# ======================================================\ndef recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 3️⃣ Helper: Recommend function\n# ======================================================\ndef recommend(title: str, top_n=5):\n    \"\"\"Get top-N recommendations based on drama title.\"\"\"\n    # Find the drama in metadata",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -445,38 +290,29 @@
         "documentation": {}
     },
     {
-        "label": "clean_text",
-        "kind": 2,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "def clean_text(text):\n    if pd.isna(text):\n        return \"\"\n    text = str(text)\n    text = re.sub(r'\\[.*?\\]', '', text)           # remove [1], [ko], etc.\n    text = text.replace('â€“', '-').replace('\\n', ' ')\n    text = text.replace('\"', '').replace(\"'\", '')\n    text = re.sub(r'\\s{2,}', ' ', text).strip()\n    return text\ndef safe_col(df, col):",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "safe_col",
-        "kind": 2,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "def safe_col(df, col):\n    return df[col].astype(str).fillna('').apply(clean_text) if col in df.columns else pd.Series([''] * len(df))\n# ---------- Load & prepare data ----------\nprint(\"Loading CSV...\")\ndf = pd.read_csv(CSV_PATH, dtype=str).fillna('')\n# Clean important columns (play safe)\ndf['Title'] = safe_col(df, 'Title')\ndf['Genre'] = safe_col(df, 'Genre')\ndf['Cast'] = safe_col(df, 'Cast')\ndf['Director'] = safe_col(df, 'Director')",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "embed_texts",
-        "kind": 2,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "def embed_texts(texts):\n    # texts: list of strings\n    embeddings = []\n    for i in range(0, len(texts), BATCH_SIZE):\n        batch = texts[i:i+BATCH_SIZE]\n        emb = model.encode(batch, show_progress_bar=False, convert_to_numpy=True)\n        embeddings.append(emb)\n    return np.vstack(embeddings)\n# ---------- Create per-field embeddings ----------\nprint(\"Encoding Genre...\")",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "CSV_PATH",
+        "label": "DATA_PATH",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "CSV_PATH = r\"D:\\Projects\\Kdrama-recomendation\\data_scrapper\\kdrama_dataset_detailed_v7.csv\"   # your cleaned CSV (or original; cleaning included)\nINDEX_DIR = r\"model_traning\\faiss_index\"\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # multilingual\nBATCH_SIZE = 64\n# Feature weights (tune these)\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)",
+        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\Kdrama-recomendation\\data_scrapper\\kdrama_dataset_detailed_v7.csv\"\nMODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\nprint(\" Loading dataset...\")\ndf = pd.read_csv(DATA_PATH)\ndf.fillna(\"\", inplace=True)\n# Create a unified content column",
+        "detail": "model_traning.build_index",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_NAME",
+        "kind": 5,
+        "importPath": "model_traning.build_index",
+        "description": "model_traning.build_index",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\nprint(\" Loading dataset...\")\ndf = pd.read_csv(DATA_PATH)\ndf.fillna(\"\", inplace=True)\n# Create a unified content column\ndf[\"content\"] = (",
+        "detail": "model_traning.build_index",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_DIR",
+        "kind": 5,
+        "importPath": "model_traning.build_index",
+        "description": "model_traning.build_index",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\nprint(\" Loading dataset...\")\ndf = pd.read_csv(DATA_PATH)\ndf.fillna(\"\", inplace=True)\n# Create a unified content column\ndf[\"content\"] = (\n    df[\"Title\"].astype(str) + \" \" +",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -485,61 +321,7 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "INDEX_DIR = r\"model_traning\\faiss_index\"\nEMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # multilingual\nBATCH_SIZE = 64\n# Feature weights (tune these)\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "EMBEDDING_MODEL",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "EMBEDDING_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"  # multilingual\nBATCH_SIZE = 64\n# Feature weights (tune these)\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "BATCH_SIZE",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "BATCH_SIZE = 64\n# Feature weights (tune these)\nW_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):\n    if pd.isna(text):",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "W_GENRE",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "W_GENRE = 0.35\nW_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):\n    if pd.isna(text):\n        return \"\"\n    text = str(text)",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "W_CAST",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "W_CAST = 0.25\nW_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):\n    if pd.isna(text):\n        return \"\"\n    text = str(text)\n    text = re.sub(r'\\[.*?\\]', '', text)           # remove [1], [ko], etc.",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "W_DIRECTOR",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "W_DIRECTOR = 0.10\nW_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):\n    if pd.isna(text):\n        return \"\"\n    text = str(text)\n    text = re.sub(r'\\[.*?\\]', '', text)           # remove [1], [ko], etc.\n    text = text.replace('â€“', '-').replace('\\n', ' ')",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "W_DESC",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "W_DESC = 0.30\nos.makedirs(INDEX_DIR, exist_ok=True)\n# ---------- Helpers ----------\ndef clean_text(text):\n    if pd.isna(text):\n        return \"\"\n    text = str(text)\n    text = re.sub(r'\\[.*?\\]', '', text)           # remove [1], [ko], etc.\n    text = text.replace('â€“', '-').replace('\\n', ' ')\n    text = text.replace('\"', '').replace(\"'\", '')",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\nprint(\" Loading dataset...\")\ndf = pd.read_csv(DATA_PATH)\ndf.fillna(\"\", inplace=True)\n# Create a unified content column\ndf[\"content\"] = (\n    df[\"Title\"].astype(str) + \" \" +\n    df[\"Genre\"].astype(str) + \" \" +",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -548,61 +330,16 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "df = pd.read_csv(CSV_PATH, dtype=str).fillna('')\n# Clean important columns (play safe)\ndf['Title'] = safe_col(df, 'Title')\ndf['Genre'] = safe_col(df, 'Genre')\ndf['Cast'] = safe_col(df, 'Cast')\ndf['Director'] = safe_col(df, 'Director')\n# prefer 'Description' or fallback to 'Plot' if yours differ\ndf['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:",
+        "peekOfCode": "df = pd.read_csv(DATA_PATH)\ndf.fillna(\"\", inplace=True)\n# Create a unified content column\ndf[\"content\"] = (\n    df[\"Title\"].astype(str) + \" \" +\n    df[\"Genre\"].astype(str) + \" \" +\n    df[\"Description\"].astype(str) + \" \" +\n    df[\"Cast\"].astype(str)\n)\n# ======================================================",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
     {
-        "label": "df['Title']",
+        "label": "df[\"content\"]",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "df['Title'] = safe_col(df, 'Title')\ndf['Genre'] = safe_col(df, 'Genre')\ndf['Cast'] = safe_col(df, 'Cast')\ndf['Director'] = safe_col(df, 'Director')\n# prefer 'Description' or fallback to 'Plot' if yours differ\ndf['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:\n    df['Year'] = df['Release Years'].fillna('')\nelif 'Year' in df.columns:",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "df['Genre']",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "df['Genre'] = safe_col(df, 'Genre')\ndf['Cast'] = safe_col(df, 'Cast')\ndf['Director'] = safe_col(df, 'Director')\n# prefer 'Description' or fallback to 'Plot' if yours differ\ndf['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:\n    df['Year'] = df['Release Years'].fillna('')\nelif 'Year' in df.columns:\n    df['Year'] = df['Year'].fillna('')",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "df['Cast']",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "df['Cast'] = safe_col(df, 'Cast')\ndf['Director'] = safe_col(df, 'Director')\n# prefer 'Description' or fallback to 'Plot' if yours differ\ndf['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:\n    df['Year'] = df['Release Years'].fillna('')\nelif 'Year' in df.columns:\n    df['Year'] = df['Year'].fillna('')\nelse:",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "df['Director']",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "df['Director'] = safe_col(df, 'Director')\n# prefer 'Description' or fallback to 'Plot' if yours differ\ndf['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:\n    df['Year'] = df['Release Years'].fillna('')\nelif 'Year' in df.columns:\n    df['Year'] = df['Year'].fillna('')\nelse:\n    df['Year'] = ''",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "df['Description']",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "df['Description'] = safe_col(df, 'Description')\n# If Release Years column exists, keep it\nif 'Release Years' in df.columns:\n    df['Year'] = df['Release Years'].fillna('')\nelif 'Year' in df.columns:\n    df['Year'] = df['Year'].fillna('')\nelse:\n    df['Year'] = ''\nn_items = len(df)\nprint(f\"Items: {n_items}\")",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "n_items",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "n_items = len(df)\nprint(f\"Items: {n_items}\")\n# ---------- Load model ----------\nprint(\"Loading SentenceTransformer model...\")\nmodel = SentenceTransformer(EMBEDDING_MODEL)\n# ---------- Encode function with batching ----------\ndef embed_texts(texts):\n    # texts: list of strings\n    embeddings = []\n    for i in range(0, len(texts), BATCH_SIZE):",
+        "peekOfCode": "df[\"content\"] = (\n    df[\"Title\"].astype(str) + \" \" +\n    df[\"Genre\"].astype(str) + \" \" +\n    df[\"Description\"].astype(str) + \" \" +\n    df[\"Cast\"].astype(str)\n)\n# ======================================================\n# 2️⃣ Load model\n# ======================================================\nprint(\" Loading SentenceTransformer model...\")",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -611,106 +348,25 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "model = SentenceTransformer(EMBEDDING_MODEL)\n# ---------- Encode function with batching ----------\ndef embed_texts(texts):\n    # texts: list of strings\n    embeddings = []\n    for i in range(0, len(texts), BATCH_SIZE):\n        batch = texts[i:i+BATCH_SIZE]\n        emb = model.encode(batch, show_progress_bar=False, convert_to_numpy=True)\n        embeddings.append(emb)\n    return np.vstack(embeddings)",
+        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nprint(\" Model loaded!\")\n# ======================================================\n# 3️⃣ Generate embeddings\n# ======================================================\nprint(\" Generating embeddings...\")\nembeddings = model.encode(df[\"content\"].tolist(), show_progress_bar=True, convert_to_numpy=True)\n# ======================================================\n# 4️⃣ Build FAISS index\n# ======================================================",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
     {
-        "label": "genre_emb",
+        "label": "embeddings",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "genre_emb = embed_texts(df['Genre'].tolist())\nprint(\"Encoding Cast...\")\ncast_emb = embed_texts(df['Cast'].tolist())\nprint(\"Encoding Director...\")\ndir_emb = embed_texts(df['Director'].tolist())\nprint(\"Encoding Description...\")\ndesc_emb = embed_texts(df['Description'].tolist())\n# ---------- Normalize per-field embeddings ----------\ngenre_emb = normalize(genre_emb)\ncast_emb = normalize(cast_emb)",
+        "peekOfCode": "embeddings = model.encode(df[\"content\"].tolist(), show_progress_bar=True, convert_to_numpy=True)\n# ======================================================\n# 4️⃣ Build FAISS index\n# ======================================================\ndim = embeddings.shape[1]\nindex = faiss.IndexFlatIP(dim)  # Inner product (cosine similarity)\nfaiss.normalize_L2(embeddings)\nindex.add(embeddings)\nprint(f\"FAISS index built with {index.ntotal} items.\")\n# ======================================================",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
     {
-        "label": "cast_emb",
+        "label": "dim",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "cast_emb = embed_texts(df['Cast'].tolist())\nprint(\"Encoding Director...\")\ndir_emb = embed_texts(df['Director'].tolist())\nprint(\"Encoding Description...\")\ndesc_emb = embed_texts(df['Description'].tolist())\n# ---------- Normalize per-field embeddings ----------\ngenre_emb = normalize(genre_emb)\ncast_emb = normalize(cast_emb)\ndir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "dir_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "dir_emb = embed_texts(df['Director'].tolist())\nprint(\"Encoding Description...\")\ndesc_emb = embed_texts(df['Description'].tolist())\n# ---------- Normalize per-field embeddings ----------\ngenre_emb = normalize(genre_emb)\ncast_emb = normalize(cast_emb)\ndir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "desc_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "desc_emb = embed_texts(df['Description'].tolist())\n# ---------- Normalize per-field embeddings ----------\ngenre_emb = normalize(genre_emb)\ncast_emb = normalize(cast_emb)\ndir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")\nprint(f\"  Genre: {W_GENRE}, Cast: {W_CAST}, Director: {W_DIRECTOR}, Description: {W_DESC}\")\ncombined_emb = (",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "genre_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "genre_emb = normalize(genre_emb)\ncast_emb = normalize(cast_emb)\ndir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")\nprint(f\"  Genre: {W_GENRE}, Cast: {W_CAST}, Director: {W_DIRECTOR}, Description: {W_DESC}\")\ncombined_emb = (\n    W_GENRE * genre_emb +\n    W_CAST * cast_emb +",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "cast_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "cast_emb = normalize(cast_emb)\ndir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")\nprint(f\"  Genre: {W_GENRE}, Cast: {W_CAST}, Director: {W_DIRECTOR}, Description: {W_DESC}\")\ncombined_emb = (\n    W_GENRE * genre_emb +\n    W_CAST * cast_emb +\n    W_DIRECTOR * dir_emb +",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "dir_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "dir_emb = normalize(dir_emb)\ndesc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")\nprint(f\"  Genre: {W_GENRE}, Cast: {W_CAST}, Director: {W_DIRECTOR}, Description: {W_DESC}\")\ncombined_emb = (\n    W_GENRE * genre_emb +\n    W_CAST * cast_emb +\n    W_DIRECTOR * dir_emb +\n    W_DESC * desc_emb",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "desc_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "desc_emb = normalize(desc_emb)\n# ---------- Weighted fusion ----------\nprint(\"Fusing embeddings with weights:\")\nprint(f\"  Genre: {W_GENRE}, Cast: {W_CAST}, Director: {W_DIRECTOR}, Description: {W_DESC}\")\ncombined_emb = (\n    W_GENRE * genre_emb +\n    W_CAST * cast_emb +\n    W_DIRECTOR * dir_emb +\n    W_DESC * desc_emb\n)",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "combined_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "combined_emb = (\n    W_GENRE * genre_emb +\n    W_CAST * cast_emb +\n    W_DIRECTOR * dir_emb +\n    W_DESC * desc_emb\n)\n# Final normalize\nprint(\"Normalizing combined embeddings...\")\ncombined_emb = normalize(combined_emb).astype('float32')  # faiss expects float32\n# ---------- Build FAISS index ----------",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "combined_emb",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "combined_emb = normalize(combined_emb).astype('float32')  # faiss expects float32\n# ---------- Build FAISS index ----------\nd = combined_emb.shape[1]\nprint(f\"Building FAISS IndexFlatIP (dimension={d}) ...\")\nindex = faiss.IndexFlatIP(d)   # inner product; since vectors normalized, this equals cosine similarity\nindex.add(combined_emb)\nprint(f\"Indexed vectors: {index.ntotal}\")\n# ---------- Save index and metadata ----------\nindex_path = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nmeta_path = os.path.join(INDEX_DIR, \"metadata.json\")",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "d",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "d = combined_emb.shape[1]\nprint(f\"Building FAISS IndexFlatIP (dimension={d}) ...\")\nindex = faiss.IndexFlatIP(d)   # inner product; since vectors normalized, this equals cosine similarity\nindex.add(combined_emb)\nprint(f\"Indexed vectors: {index.ntotal}\")\n# ---------- Save index and metadata ----------\nindex_path = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nmeta_path = os.path.join(INDEX_DIR, \"metadata.json\")\ntitles_path = os.path.join(INDEX_DIR, \"titles.npy\")\nprint(f\"Saving FAISS index to {index_path} ...\")",
+        "peekOfCode": "dim = embeddings.shape[1]\nindex = faiss.IndexFlatIP(dim)  # Inner product (cosine similarity)\nfaiss.normalize_L2(embeddings)\nindex.add(embeddings)\nprint(f\"FAISS index built with {index.ntotal} items.\")\n# ======================================================\n# 5️⃣ Save index and metadata\n# ======================================================\nfaiss.write_index(index, os.path.join(INDEX_DIR, \"index.faiss\"))\nmeta_data = df[[\"Title\", \"Genre\", \"Description\", \"Cast\", \"Network\", \"Release Years\"]].to_dict(orient=\"records\")",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -719,43 +375,16 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "index = faiss.IndexFlatIP(d)   # inner product; since vectors normalized, this equals cosine similarity\nindex.add(combined_emb)\nprint(f\"Indexed vectors: {index.ntotal}\")\n# ---------- Save index and metadata ----------\nindex_path = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nmeta_path = os.path.join(INDEX_DIR, \"metadata.json\")\ntitles_path = os.path.join(INDEX_DIR, \"titles.npy\")\nprint(f\"Saving FAISS index to {index_path} ...\")\nfaiss.write_index(index, index_path)\nprint(f\"Saving metadata to {meta_path} ...\")",
+        "peekOfCode": "index = faiss.IndexFlatIP(dim)  # Inner product (cosine similarity)\nfaiss.normalize_L2(embeddings)\nindex.add(embeddings)\nprint(f\"FAISS index built with {index.ntotal} items.\")\n# ======================================================\n# 5️⃣ Save index and metadata\n# ======================================================\nfaiss.write_index(index, os.path.join(INDEX_DIR, \"index.faiss\"))\nmeta_data = df[[\"Title\", \"Genre\", \"Description\", \"Cast\", \"Network\", \"Release Years\"]].to_dict(orient=\"records\")\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"wb\") as f:",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
     {
-        "label": "index_path",
+        "label": "meta_data",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "index_path = os.path.join(INDEX_DIR, \"kdrama_index_flat_ip.faiss\")\nmeta_path = os.path.join(INDEX_DIR, \"metadata.json\")\ntitles_path = os.path.join(INDEX_DIR, \"titles.npy\")\nprint(f\"Saving FAISS index to {index_path} ...\")\nfaiss.write_index(index, index_path)\nprint(f\"Saving metadata to {meta_path} ...\")\n# Save minimal metadata: list of dicts with title, year, genre, and original CSV index\nmetadata = []\nfor i, row in df.reset_index().iterrows():\n    metadata.append({",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "meta_path",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "meta_path = os.path.join(INDEX_DIR, \"metadata.json\")\ntitles_path = os.path.join(INDEX_DIR, \"titles.npy\")\nprint(f\"Saving FAISS index to {index_path} ...\")\nfaiss.write_index(index, index_path)\nprint(f\"Saving metadata to {meta_path} ...\")\n# Save minimal metadata: list of dicts with title, year, genre, and original CSV index\nmetadata = []\nfor i, row in df.reset_index().iterrows():\n    metadata.append({\n        \"idx\": int(row['index']),",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "titles_path",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "titles_path = os.path.join(INDEX_DIR, \"titles.npy\")\nprint(f\"Saving FAISS index to {index_path} ...\")\nfaiss.write_index(index, index_path)\nprint(f\"Saving metadata to {meta_path} ...\")\n# Save minimal metadata: list of dicts with title, year, genre, and original CSV index\nmetadata = []\nfor i, row in df.reset_index().iterrows():\n    metadata.append({\n        \"idx\": int(row['index']),\n        \"title\": row['Title'],",
-        "detail": "model_traning.build_index",
-        "documentation": {}
-    },
-    {
-        "label": "metadata",
-        "kind": 5,
-        "importPath": "model_traning.build_index",
-        "description": "model_traning.build_index",
-        "peekOfCode": "metadata = []\nfor i, row in df.reset_index().iterrows():\n    metadata.append({\n        \"idx\": int(row['index']),\n        \"title\": row['Title'],\n        \"year\": row.get('Year', ''),\n        \"genre\": row.get('Genre', ''),\n        \"cast\": row.get('Cast', ''),\n        \"director\": row.get('Director', ''),\n        \"description\": row.get('Description', '')",
+        "peekOfCode": "meta_data = df[[\"Title\", \"Genre\", \"Description\", \"Cast\", \"Network\", \"Release Years\"]].to_dict(orient=\"records\")\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"wb\") as f:\n    pickle.dump(meta_data, f)\nprint(\" Index and metadata saved successfully!\")",
         "detail": "model_traning.build_index",
         "documentation": {}
     }
