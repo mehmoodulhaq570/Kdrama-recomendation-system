@@ -76,6 +76,30 @@
         "documentation": {}
     },
     {
+        "label": "process",
+        "importPath": "rapidfuzz",
+        "description": "rapidfuzz",
+        "isExtraImport": true,
+        "detail": "rapidfuzz",
+        "documentation": {}
+    },
+    {
+        "label": "fuzz",
+        "importPath": "rapidfuzz",
+        "description": "rapidfuzz",
+        "isExtraImport": true,
+        "detail": "rapidfuzz",
+        "documentation": {}
+    },
+    {
+        "label": "lru_cache",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -144,11 +168,29 @@
         "documentation": {}
     },
     {
+        "label": "fuzzy_match_title",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def fuzzy_match_title(user_input: str, threshold=70):\n    \"\"\"Find best fuzzy match for a user-entered title.\"\"\"\n    match, score, _ = process.extractOne(\n        user_input, titles, scorer=fuzz.WRatio\n    )\n    if score >= threshold:\n        return match, score\n    return None, score\n# ======================================================\n# 5️⃣ Caching Decorator",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "cached_encode",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def cached_encode(text: str):\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb\n# ======================================================\n# 6️⃣ Recommendation Logic\n# ======================================================\ndef recommend(title: str, top_n=5):\n    \"\"\"Recommend similar dramas based on title or description.\"\"\"\n    # 1️⃣ Try to find exact title",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
         "label": "recommend",
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:\n        return {\"error\": f\"Drama '{title}' not found.\"}\n    query_text = f\"{drama['Title']} {drama['Genre']} {drama['Description']} {drama['Cast']}\"\n    query_emb = model.encode([query_text], convert_to_numpy=True)\n    faiss.normalize_L2(query_emb)\n    D, I = index.search(query_emb, top_n + 1)\n    results = []\n    for idx, score in zip(I[0][1:], D[0][1:]):",
+        "peekOfCode": "def recommend(title: str, top_n=5):\n    \"\"\"Recommend similar dramas based on title or description.\"\"\"\n    # 1️⃣ Try to find exact title\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    # 2️⃣ If not found, fuzzy match\n    if not drama:\n        match, score = fuzzy_match_title(title)\n        if match:\n            drama = next((m for m in metadata if m[\"Title\"] == match), None)\n            print(f\" Fuzzy match: '{title}' -> '{match}' ({score:.1f}%)\")",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -157,7 +199,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def root():\n    return {\"message\": \"Kdrama Recommendation API is running!\"}\n@app.get(\"/recommend\")\ndef get_recommendations(title: str = Query(..., description=\"Kdrama title\"), top_n: int = 5):\n    return recommend(title, top_n)\n# ======================================================\n# 6️⃣ Run server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn",
+        "peekOfCode": "def root():\n    return {\"message\": \"Kdrama Recommendation API (v2) is running!\"}\n@app.get(\"/recommend\")\ndef get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or text query\"),\n    top_n: int = 5\n):\n    return recommend(title, top_n)\n# ======================================================\n# 8️⃣ Run Server",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -166,7 +208,7 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def get_recommendations(title: str = Query(..., description=\"Kdrama title\"), top_n: int = 5):\n    return recommend(title, top_n)\n# ======================================================\n# 6️⃣ Run server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn\n    uvicorn.run(\"app:app\", host=\"127.0.0.1\", port=8001, reload=True)",
+        "peekOfCode": "def get_recommendations(\n    title: str = Query(..., description=\"Kdrama title or text query\"),\n    top_n: int = 5\n):\n    return recommend(title, top_n)\n# ======================================================\n# 8️⃣ Run Server\n# ======================================================\nif __name__ == \"__main__\":\n    import uvicorn",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -175,7 +217,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"2.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # 🔒 restrict later in production",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -184,7 +226,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"2.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # 🔒 restrict later in production\n    allow_credentials=True,",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -193,7 +235,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this\n    allow_credentials=True,",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\Kdrama-recomendation\\model_traning\\faiss_index\"\n# ======================================================\n# 2️⃣ App Setup\n# ======================================================\napp = FastAPI(title=\"Kdrama Recommender API\", version=\"2.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # 🔒 restrict later in production\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -202,7 +244,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "app = FastAPI(title=\"Kdrama Recommender API\", version=\"1.0\")\n# Allow local frontend or React app access\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # for production, restrict this\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# ======================================================",
+        "peekOfCode": "app = FastAPI(title=\"Kdrama Recommender API\", version=\"2.0\")\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # 🔒 restrict later in production\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# ======================================================\n# 3️⃣ Load model and FAISS index",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -211,7 +253,7 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 4️⃣ Recommendation logic\n# ======================================================\ndef recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)",
+        "peekOfCode": "model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_DIR)\nindex = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\nprint(f\" Model and index loaded! ({len(titles)} dramas)\")\n# ======================================================\n# 4️⃣ Helper — Find Closest Match (Fuzzy)\n# ======================================================\ndef fuzzy_match_title(user_input: str, threshold=70):",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -220,7 +262,16 @@
         "kind": 5,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\nprint(\" Model and index loaded!\")\n# ======================================================\n# 4️⃣ Recommendation logic\n# ======================================================\ndef recommend(title: str, top_n=5):\n    drama = next((m for m in metadata if m[\"Title\"].lower() == title.lower()), None)\n    if not drama:",
+        "peekOfCode": "index = faiss.read_index(os.path.join(INDEX_DIR, \"index.faiss\"))\nwith open(os.path.join(INDEX_DIR, \"meta.pkl\"), \"rb\") as f:\n    metadata = pickle.load(f)\ntitles = [m[\"Title\"] for m in metadata]\nprint(f\" Model and index loaded! ({len(titles)} dramas)\")\n# ======================================================\n# 4️⃣ Helper — Find Closest Match (Fuzzy)\n# ======================================================\ndef fuzzy_match_title(user_input: str, threshold=70):\n    \"\"\"Find best fuzzy match for a user-entered title.\"\"\"",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "titles",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "titles = [m[\"Title\"] for m in metadata]\nprint(f\" Model and index loaded! ({len(titles)} dramas)\")\n# ======================================================\n# 4️⃣ Helper — Find Closest Match (Fuzzy)\n# ======================================================\ndef fuzzy_match_title(user_input: str, threshold=70):\n    \"\"\"Find best fuzzy match for a user-entered title.\"\"\"\n    match, score, _ = process.extractOne(\n        user_input, titles, scorer=fuzz.WRatio\n    )",
         "detail": "backend.app",
         "documentation": {}
     },
