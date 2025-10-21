@@ -116,12 +116,79 @@
         "documentation": {}
     },
     {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "Route",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "expect",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -175,12 +242,11 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
+        "label": "sync_playwright",
+        "importPath": "playwright.sync_api",
+        "description": "playwright.sync_api",
         "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
+        "detail": "playwright.sync_api",
         "documentation": {}
     },
     {
@@ -319,6 +385,15 @@
         "documentation": {}
     },
     {
+        "label": "USER_AGENTS",
+        "kind": 5,
+        "importPath": "data_scrapper.html_extractor",
+        "description": "data_scrapper.html_extractor",
+        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Helper to block unnecessary resources\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "detail": "data_scrapper.html_extractor",
+        "documentation": {}
+    },
+    {
         "label": "remove_refs",
         "kind": 2,
         "importPath": "data_scrapper.scrapper",
@@ -413,7 +488,7 @@
         "kind": 5,
         "importPath": "data_scrapper.scrapper",
         "description": "data_scrapper.scrapper",
-        "peekOfCode": "drama_links = list(set(drama_links))\nprint(f\"Found {len(drama_links)} drama links\")\n# ---------------------------\n# Scrape each drama page\n# ---------------------------\ntitles, alt_titles, writers, directors, casts, genres, networks, episodes, releases, release_years, posters, descriptions = [], [], [], [], [], [], [], [], [], [], [], []\nfor i, url in enumerate(drama_links[:100]):  # you can limit with [:10] for testing\n    print(f\"\\nScraping ({i+1}/{len(drama_links)}): {url}\")\n    driver.get(url)\n    time.sleep(1.5)",
+        "peekOfCode": "drama_links = list(set(drama_links))\nprint(f\"Found {len(drama_links)} drama links\")\n# ---------------------------\n# Scrape each drama page\n# ---------------------------\ntitles, alt_titles, writers, directors, casts, genres, networks, episodes, releases, release_years, posters, descriptions = [], [], [], [], [], [], [], [], [], [], [], []\nfor i, url in enumerate(drama_links):  # you can limit with [:10] for testing\n    print(f\"\\nScraping ({i+1}/{len(drama_links)}): {url}\")\n    driver.get(url)\n    time.sleep(1.5)",
         "detail": "data_scrapper.scrapper",
         "documentation": {}
     },
@@ -424,6 +499,51 @@
         "description": "data_scrapper.scrapper",
         "peekOfCode": "df = pd.DataFrame({\n    \"Title\": titles,\n    \"Also Known As\": alt_titles,\n    \"Written By\": writers,\n    \"Director\": directors,\n    \"Cast\": casts,\n    \"Genre\": genres,\n    \"Network\": networks,\n    \"Episodes\": episodes,\n    \"Release Dates\": releases,",
         "detail": "data_scrapper.scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "remove_refs",
+        "kind": 2,
+        "importPath": "data_scrapper.scrapper_playwright",
+        "description": "data_scrapper.scrapper_playwright",
+        "peekOfCode": "def remove_refs(text):\n    \"\"\"Remove all reference markers like [1], [ko], [citation needed].\"\"\"\n    return re.sub(r'\\[.*?\\]', '', str(text))\ndef clean_multiline(text):\n    \"\"\"Convert multiline text to properly comma-separated clean string.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\"]:\n        return \"-\"\n    text = remove_refs(text)\n    parts = re.split(r'[\\n\\r]+', str(text))\n    parts = [p.strip() for p in parts if p.strip()]",
+        "detail": "data_scrapper.scrapper_playwright",
+        "documentation": {}
+    },
+    {
+        "label": "clean_multiline",
+        "kind": 2,
+        "importPath": "data_scrapper.scrapper_playwright",
+        "description": "data_scrapper.scrapper_playwright",
+        "peekOfCode": "def clean_multiline(text):\n    \"\"\"Convert multiline text to properly comma-separated clean string.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\"]:\n        return \"-\"\n    text = remove_refs(text)\n    parts = re.split(r'[\\n\\r]+', str(text))\n    parts = [p.strip() for p in parts if p.strip()]\n    return \", \".join(parts) if parts else \"-\"\ndef clean_description(desc):\n    \"\"\"Clean [1], etc. and normalize spaces.\"\"\"",
+        "detail": "data_scrapper.scrapper_playwright",
+        "documentation": {}
+    },
+    {
+        "label": "clean_description",
+        "kind": 2,
+        "importPath": "data_scrapper.scrapper_playwright",
+        "description": "data_scrapper.scrapper_playwright",
+        "peekOfCode": "def clean_description(desc):\n    \"\"\"Clean [1], etc. and normalize spaces.\"\"\"\n    if not desc:\n        return \"-\"\n    desc = remove_refs(desc)\n    desc = re.sub(r'\\s+', ' ', desc).strip()\n    return desc if desc else \"-\"\ndef extract_years_from_release(text):\n    \"\"\"Extract release year(s) from release date text.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\", \"-\"]:",
+        "detail": "data_scrapper.scrapper_playwright",
+        "documentation": {}
+    },
+    {
+        "label": "extract_years_from_release",
+        "kind": 2,
+        "importPath": "data_scrapper.scrapper_playwright",
+        "description": "data_scrapper.scrapper_playwright",
+        "peekOfCode": "def extract_years_from_release(text):\n    \"\"\"Extract release year(s) from release date text.\"\"\"\n    if not text or str(text).strip().lower() in [\"n/a\", \"na\", \"-\"]:\n        return \"-\"\n    text = remove_refs(text)\n    full_years = re.findall(r'(?:19|20)\\d{2}', text)\n    unique_years = list(dict.fromkeys(full_years))  # preserve order\n    return \", \".join(unique_years) if unique_years else \"-\"\n# =========================================================\n# Fallback: Description method",
+        "detail": "data_scrapper.scrapper_playwright",
+        "documentation": {}
+    },
+    {
+        "label": "get_description_fallback",
+        "kind": 2,
+        "importPath": "data_scrapper.scrapper_playwright",
+        "description": "data_scrapper.scrapper_playwright",
+        "peekOfCode": "def get_description_fallback(url):\n    headers = {\n        \"User-Agent\": (\n            \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) \"\n            \"AppleWebKit/537.36 (KHTML, like Gecko) \"\n            \"Chrome/118.0.0.0 Safari/537.36\"\n        )\n    }\n    try:\n        response = requests.get(url, headers=headers, timeout=10)",
+        "detail": "data_scrapper.scrapper_playwright",
         "documentation": {}
     },
     {

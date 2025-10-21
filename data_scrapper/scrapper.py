@@ -733,7 +733,7 @@ print(f"Found {len(drama_links)} drama links")
 # ---------------------------
 titles, alt_titles, writers, directors, casts, genres, networks, episodes, releases, release_years, posters, descriptions = [], [], [], [], [], [], [], [], [], [], [], []
 
-for i, url in enumerate(drama_links[:100]):  # you can limit with [:10] for testing
+for i, url in enumerate(drama_links):  # you can limit with [:10] for testing
     print(f"\nScraping ({i+1}/{len(drama_links)}): {url}")
     driver.get(url)
     time.sleep(1.5)
@@ -851,8 +851,8 @@ df = pd.DataFrame({
 })
 
 df.replace(["N/A", "NA", "", None], "-", inplace=True)
-df.to_csv("kdrama_dataset_detailed_v7.csv", index=False, encoding="utf-8-sig")
+df.to_csv("data_scrapper\kdrama_dataset_detailed_v8.csv", index=False, encoding="utf-8-sig")
 
-print("\nDone! Data saved to kdrama_dataset_detailed_v7.csv")
+print("\n Done! Data saved to data_scrapper\kdrama_dataset_detailed_v8.csv")
 
 driver.quit()
