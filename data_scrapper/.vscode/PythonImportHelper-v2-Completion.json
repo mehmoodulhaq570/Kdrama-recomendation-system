@@ -1,20 +1,11 @@
 [
     {
-        "label": "asyncio",
+        "label": "os",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "asyncio",
-        "description": "asyncio",
-        "detail": "asyncio",
-        "documentation": {}
-    },
-    {
-        "label": "random",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "random",
-        "description": "random",
-        "detail": "random",
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
         "documentation": {}
     },
     {
@@ -27,12 +18,45 @@
         "documentation": {}
     },
     {
-        "label": "os",
+        "label": "csv",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
         "documentation": {}
     },
     {
@@ -44,43 +68,12 @@
         "documentation": {}
     },
     {
-        "label": "Route",
-        "importPath": "playwright.async_api",
-        "description": "playwright.async_api",
+        "label": "sys",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "playwright.async_api",
-        "documentation": {}
-    },
-    {
-        "label": "expect",
-        "importPath": "playwright.async_api",
-        "description": "playwright.async_api",
-        "isExtraImport": true,
-        "detail": "playwright.async_api",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
         "documentation": {}
     },
     {
@@ -90,30 +83,6 @@
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -167,38 +136,38 @@
         "documentation": {}
     },
     {
-        "label": "USER_AGENTS",
-        "kind": 5,
+        "label": "extract_drama_data_from_html",
+        "kind": 2,
         "importPath": "html_extractor",
         "description": "html_extractor",
-        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Helper to block unnecessary resources\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "peekOfCode": "def extract_drama_data_from_html(html_content):\n    \"\"\"\n    Extracts drama information from the given HTML content string.\n    Returns a list of dictionaries.\n    \"\"\"\n    soup = BeautifulSoup(html_content, 'html.parser')\n    drama_items = soup.find_all('div', class_='box')\n    extracted_data = []\n    BASE_URL = \"https://mydramalist.com\"\n    for item in drama_items:",
         "detail": "html_extractor",
         "documentation": {}
     },
     {
-        "label": "extract_all_drama_info_from_kisskh",
+        "label": "extract_from_folder",
         "kind": 2,
+        "importPath": "html_extractor",
+        "description": "html_extractor",
+        "peekOfCode": "def extract_from_folder(folder_path, output_csv):\n    \"\"\"\n    Loops through all .html files in the given folder,\n    extracts drama data from each file, and saves everything to one CSV.\n    \"\"\"\n    all_data = []\n    for filename in os.listdir(folder_path):\n        if filename.lower().endswith(\".html\"):\n            file_path = os.path.join(folder_path, filename)\n            print(f\"Processing file: {filename}\")",
+        "detail": "html_extractor",
+        "documentation": {}
+    },
+    {
+        "label": "URL",
+        "kind": 5,
         "importPath": "kissh_extractor",
         "description": "kissh_extractor",
-        "peekOfCode": "def extract_all_drama_info_from_kisskh(url: str) -> List[Dict]:\n    \"\"\"\n    Fetches the content from the KissKH explore URL, finds all drama cards,\n    and extracts the picture link, drama name, and episode count for each.\n    Args:\n        url: The URL of the KissKH Explore page.\n    Returns:\n        A list of dictionaries, where each dictionary contains the\n        extracted information for one drama.\n    \"\"\"",
+        "peekOfCode": "URL = \"https://kisskh.co/Explore?status=2&country=2&sub=1&type=1&order=1\"\n# Use a distinct filename for the debug run\nFILENAME = \"kissh_debug_output.html\"\n# Run the asynchronous function\nif __name__ == \"__main__\":\n    asyncio.run(debug_html_fetch_with_playwright(URL, FILENAME))",
         "detail": "kissh_extractor",
         "documentation": {}
     },
     {
-        "label": "target_url",
+        "label": "FILENAME",
         "kind": 5,
         "importPath": "kissh_extractor",
         "description": "kissh_extractor",
-        "peekOfCode": "target_url = \"https://kisskh.co/Explore?status=2&country=2&sub=1&type=1&order=1\"\n# Run the extraction function\nresults = extract_all_drama_info_from_kisskh(target_url)\n# Display the results\nprint(\"\\n\" + \"=\" * 50)\nprint(\"Extracted Drama Information (First 5 Results):\")\nprint(\"=\" * 50)\n# Print only the first 5 results for brevity\nfor i, drama in enumerate(results[:5]):\n    print(f\"\\n--- Drama {i + 1} ---\")",
-        "detail": "kissh_extractor",
-        "documentation": {}
-    },
-    {
-        "label": "results",
-        "kind": 5,
-        "importPath": "kissh_extractor",
-        "description": "kissh_extractor",
-        "peekOfCode": "results = extract_all_drama_info_from_kisskh(target_url)\n# Display the results\nprint(\"\\n\" + \"=\" * 50)\nprint(\"Extracted Drama Information (First 5 Results):\")\nprint(\"=\" * 50)\n# Print only the first 5 results for brevity\nfor i, drama in enumerate(results[:5]):\n    print(f\"\\n--- Drama {i + 1} ---\")\n    print(f\"Drama Name:   {drama.get('drama_name', 'N/A')}\")\n    print(f\"Episode:      {drama.get('episode_number', 'N/A')}\")",
+        "peekOfCode": "FILENAME = \"kissh_debug_output.html\"\n# Run the asynchronous function\nif __name__ == \"__main__\":\n    asyncio.run(debug_html_fetch_with_playwright(URL, FILENAME))",
         "detail": "kissh_extractor",
         "documentation": {}
     },

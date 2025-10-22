@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/data_scrapper" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/model_traning" vcs="Git" />
   </component>
 </project>
