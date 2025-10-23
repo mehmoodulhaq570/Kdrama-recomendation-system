@@ -68,6 +68,14 @@
         "documentation": {}
     },
     {
+        "label": "tqdm",
+        "importPath": "tqdm",
+        "description": "tqdm",
+        "isExtraImport": true,
+        "detail": "tqdm",
+        "documentation": {}
+    },
+    {
         "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
@@ -198,7 +206,7 @@
         "kind": 2,
         "importPath": "DramaList_Scrapper.scrapper",
         "description": "DramaList_Scrapper.scrapper",
-        "peekOfCode": "def extract_mydramalist_data(html_path):\n    \"\"\"Extract detailed drama data (including alternate names and full description) from a MyDramaList HTML file.\"\"\"\n    with open(html_path, 'r', encoding='utf-8') as f:\n        html = f.read()\n    soup = BeautifulSoup(html, 'html.parser')\n    # --------------------------------------------------------\n    # 1️⃣ Extract structured JSON-LD data\n    # --------------------------------------------------------\n    jsonld_tag = soup.find('script', type='application/ld+json', string=re.compile('TVSeries'))\n    data = {}",
+        "peekOfCode": "def extract_mydramalist_data(html_path):\n    \"\"\"Extract detailed drama data (including alternate names and full description) from a MyDramaList HTML file.\"\"\"\n    try:\n        with open(html_path, 'r', encoding='utf-8') as f:\n            html = f.read()\n    except Exception as e:\n        print(f\"Error reading {html_path}: {e}\")\n        return None\n    soup = BeautifulSoup(html, 'html.parser')\n    # --------------------------------------------------------",
         "detail": "DramaList_Scrapper.scrapper",
         "documentation": {}
     },
@@ -207,7 +215,7 @@
         "kind": 2,
         "importPath": "DramaList_Scrapper.scrapper",
         "description": "DramaList_Scrapper.scrapper",
-        "peekOfCode": "def process_folder(input_path, output_csv=\"output.csv\"):\n    all_dramas = []\n    if os.path.isdir(input_path):\n        files = [f for f in os.listdir(input_path) if f.lower().endswith(\".html\")]\n        for file in files:\n            full_path = os.path.join(input_path, file)\n            info = extract_mydramalist_data(full_path)\n            if info:\n                all_dramas.append(info)\n    else:",
+        "peekOfCode": "def process_folder(input_path, output_csv=\"output.csv\"):\n    all_dramas = []\n    if os.path.isdir(input_path):\n        files = [f for f in os.listdir(input_path) if f.lower().endswith(\".html\")]\n        print(f\"Found {len(files)} HTML files. Starting extraction...\\n\")\n        for file in tqdm(files, desc=\"Extracting dramas\", unit=\"file\"):\n            full_path = os.path.join(input_path, file)\n            try:\n                info = extract_mydramalist_data(full_path)\n                if info:",
         "detail": "DramaList_Scrapper.scrapper",
         "documentation": {}
     },

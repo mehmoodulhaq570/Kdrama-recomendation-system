@@ -5,17 +5,21 @@ import re
 from bs4 import BeautifulSoup
 import os
 import csv
+from tqdm import tqdm  # progress bar
 
 def extract_mydramalist_data(html_path):
     """Extract detailed drama data (including alternate names and full description) from a MyDramaList HTML file."""
-    
-    with open(html_path, 'r', encoding='utf-8') as f:
-        html = f.read()
+    try:
+        with open(html_path, 'r', encoding='utf-8') as f:
+            html = f.read()
+    except Exception as e:
+        print(f"Error reading {html_path}: {e}")
+        return None
     
     soup = BeautifulSoup(html, 'html.parser')
 
     # --------------------------------------------------------
-    # 1️⃣ Extract structured JSON-LD data
+    # 1. Extract structured JSON-LD data
     # --------------------------------------------------------
     jsonld_tag = soup.find('script', type='application/ld+json', string=re.compile('TVSeries'))
     data = {}
@@ -23,7 +27,7 @@ def extract_mydramalist_data(html_path):
         try:
             data = json.loads(jsonld_tag.string)
         except json.JSONDecodeError:
-            pass
+            print(f"JSON parse error in file: {html_path}")
 
     drama_info = {
         'title': data.get('name'),
@@ -42,7 +46,7 @@ def extract_mydramalist_data(html_path):
     }
 
     # --------------------------------------------------------
-    # 2️⃣ Extract full description from HTML (if available)
+    # 2. Extract full description from HTML (if available)
     # --------------------------------------------------------
     desc_div = soup.find('div', class_=re.compile(r'(show-synopsis|show-synopsis__text|show-details-item__content)'))
     if desc_div:
@@ -54,18 +58,24 @@ def extract_mydramalist_data(html_path):
 
 
 # --------------------------------------------------------
-# 3️⃣ Process a single file or all HTMLs in a folder
+# 3. Process a single file or all HTMLs in a folder
 # --------------------------------------------------------
 def process_folder(input_path, output_csv="output.csv"):
     all_dramas = []
 
     if os.path.isdir(input_path):
         files = [f for f in os.listdir(input_path) if f.lower().endswith(".html")]
-        for file in files:
+        print(f"Found {len(files)} HTML files. Starting extraction...\n")
+        
+        for file in tqdm(files, desc="Extracting dramas", unit="file"):
             full_path = os.path.join(input_path, file)
-            info = extract_mydramalist_data(full_path)
-            if info:
-                all_dramas.append(info)
+            try:
+                info = extract_mydramalist_data(full_path)
+                if info:
+                    all_dramas.append(info)
+            except Exception as e:
+                print(f"Error processing {file}: {e}")
+                continue
     else:
         # Single file mode
         info = extract_mydramalist_data(input_path)
@@ -73,7 +83,7 @@ def process_folder(input_path, output_csv="output.csv"):
             all_dramas.append(info)
 
     # --------------------------------------------------------
-    # 4️⃣ Save results to CSV (UTF-8 encoded)
+    # 4. Save results to CSV (UTF-8 encoded)
     # --------------------------------------------------------
     if all_dramas:
         keys = list(all_dramas[0].keys())
@@ -82,14 +92,11 @@ def process_folder(input_path, output_csv="output.csv"):
             writer.writeheader()
             writer.writerows(all_dramas)
 
-        print(f" Extracted {len(all_dramas)} dramas and saved to '{output_csv}'")
+        print(f"\nExtracted {len(all_dramas)} dramas and saved to '{output_csv}'")
     else:
-        print(" No dramas found.")
+        print("\nNo dramas extracted.")
 
 
 # Example usage:
-# For one HTML file:
-process_folder("DramaList_Scrapper/The Heirs - MyDramaList.html")
-
-# For a folder containing multiple saved pages:
-# process_folder("path_to_your_html_folder")
+# process_folder("DramaList_Scrapper/The Heirs - MyDramaList.html")
+process_folder(r"D:\Projects\Kdrama-recommendation\data_scrapper\dramas_html")

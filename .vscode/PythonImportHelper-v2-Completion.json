@@ -116,6 +116,73 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "tqdm",
+        "importPath": "tqdm",
+        "description": "tqdm",
+        "isExtraImport": true,
+        "detail": "tqdm",
+        "documentation": {}
+    },
+    {
         "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
@@ -134,12 +201,12 @@
         "documentation": {}
     },
     {
-        "label": "re",
+        "label": "pandas",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
         "documentation": {}
     },
     {
@@ -167,11 +234,28 @@
         "documentation": {}
     },
     {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
         "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
         "documentation": {}
     },
     {
@@ -181,22 +265,6 @@
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -221,15 +289,6 @@
         "description": "selenium.webdriver.chrome.options",
         "isExtraImport": true,
         "detail": "selenium.webdriver.chrome.options",
-        "documentation": {}
-    },
-    {
-        "label": "pandas",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
         "documentation": {}
     },
     {
@@ -385,12 +444,66 @@
         "documentation": {}
     },
     {
+        "label": "extract_mydramalist_data",
+        "kind": 2,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper",
+        "peekOfCode": "def extract_mydramalist_data(html_path):\n    \"\"\"Extract detailed drama data (including alternate names and full description) from a MyDramaList HTML file.\"\"\"\n    try:\n        with open(html_path, 'r', encoding='utf-8') as f:\n            html = f.read()\n    except Exception as e:\n        print(f\"Error reading {html_path}: {e}\")\n        return None\n    soup = BeautifulSoup(html, 'html.parser')\n    # --------------------------------------------------------",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "process_folder",
+        "kind": 2,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper",
+        "peekOfCode": "def process_folder(input_path, output_csv=\"output.csv\"):\n    all_dramas = []\n    if os.path.isdir(input_path):\n        files = [f for f in os.listdir(input_path) if f.lower().endswith(\".html\")]\n        print(f\"Found {len(files)} HTML files. Starting extraction...\\n\")\n        for file in tqdm(files, desc=\"Extracting dramas\", unit=\"file\"):\n            full_path = os.path.join(input_path, file)\n            try:\n                info = extract_mydramalist_data(full_path)\n                if info:",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper",
+        "documentation": {}
+    },
+    {
         "label": "USER_AGENTS",
         "kind": 5,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper_2",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper_2",
+        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Block unnecessary resources (faster scraping)\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper_2",
+        "documentation": {}
+    },
+    {
+        "label": "extract_drama_data_from_html",
+        "kind": 2,
         "importPath": "data_scrapper.html_extractor",
         "description": "data_scrapper.html_extractor",
-        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Helper to block unnecessary resources\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "peekOfCode": "def extract_drama_data_from_html(html_content):\n    \"\"\"\n    Extracts drama information from the given HTML content string.\n    Returns a list of dictionaries.\n    \"\"\"\n    soup = BeautifulSoup(html_content, 'html.parser')\n    drama_items = soup.find_all('div', class_='box')\n    extracted_data = []\n    BASE_URL = \"https://mydramalist.com\"\n    for item in drama_items:",
         "detail": "data_scrapper.html_extractor",
+        "documentation": {}
+    },
+    {
+        "label": "extract_from_folder",
+        "kind": 2,
+        "importPath": "data_scrapper.html_extractor",
+        "description": "data_scrapper.html_extractor",
+        "peekOfCode": "def extract_from_folder(folder_path, output_csv):\n    \"\"\"\n    Loops through all .html files in the given folder,\n    extracts drama data from each file, and saves everything to one CSV.\n    \"\"\"\n    all_data = []\n    for filename in os.listdir(folder_path):\n        if filename.lower().endswith(\".html\"):\n            file_path = os.path.join(folder_path, filename)\n            print(f\"Processing file: {filename}\")",
+        "detail": "data_scrapper.html_extractor",
+        "documentation": {}
+    },
+    {
+        "label": "URL",
+        "kind": 5,
+        "importPath": "data_scrapper.kissh_extractor",
+        "description": "data_scrapper.kissh_extractor",
+        "peekOfCode": "URL = \"https://kisskh.co/Explore?status=2&country=2&sub=1&type=1&order=1\"\n# Use a distinct filename for the debug run\nFILENAME = \"kissh_debug_output.html\"\n# Run the asynchronous function\nif __name__ == \"__main__\":\n    asyncio.run(debug_html_fetch_with_playwright(URL, FILENAME))",
+        "detail": "data_scrapper.kissh_extractor",
+        "documentation": {}
+    },
+    {
+        "label": "FILENAME",
+        "kind": 5,
+        "importPath": "data_scrapper.kissh_extractor",
+        "description": "data_scrapper.kissh_extractor",
+        "peekOfCode": "FILENAME = \"kissh_debug_output.html\"\n# Run the asynchronous function\nif __name__ == \"__main__\":\n    asyncio.run(debug_html_fetch_with_playwright(URL, FILENAME))",
+        "detail": "data_scrapper.kissh_extractor",
         "documentation": {}
     },
     {
