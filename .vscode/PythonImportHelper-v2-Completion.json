@@ -125,47 +125,6 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
-        "label": "BeautifulSoup",
-        "importPath": "bs4",
-        "description": "bs4",
-        "isExtraImport": true,
-        "detail": "bs4",
-        "documentation": {}
-    },
-    {
         "label": "csv",
         "kind": 6,
         "isExtraImport": true,
@@ -175,11 +134,44 @@
         "documentation": {}
     },
     {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "ThreadPoolExecutor",
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
+        "isExtraImport": true,
+        "detail": "concurrent.futures",
+        "documentation": {}
+    },
+    {
+        "label": "as_completed",
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
+        "isExtraImport": true,
+        "detail": "concurrent.futures",
+        "documentation": {}
+    },
+    {
         "label": "tqdm",
         "importPath": "tqdm",
         "description": "tqdm",
         "isExtraImport": true,
         "detail": "tqdm",
+        "documentation": {}
+    },
+    {
+        "label": "html",
+        "importPath": "lxml",
+        "description": "lxml",
+        "isExtraImport": true,
+        "detail": "lxml",
         "documentation": {}
     },
     {
@@ -226,7 +218,7 @@
         "documentation": {}
     },
     {
-        "label": "expect",
+        "label": "TimeoutError",
         "importPath": "playwright.async_api",
         "description": "playwright.async_api",
         "isExtraImport": true,
@@ -242,11 +234,27 @@
         "documentation": {}
     },
     {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -448,7 +456,7 @@
         "kind": 2,
         "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
         "description": "data_scrapper.DramaList_Scrapper.scrapper",
-        "peekOfCode": "def extract_mydramalist_data(html_path):\n    \"\"\"Extract detailed drama data (including alternate names and full description) from a MyDramaList HTML file.\"\"\"\n    try:\n        with open(html_path, 'r', encoding='utf-8') as f:\n            html = f.read()\n    except Exception as e:\n        print(f\"Error reading {html_path}: {e}\")\n        return None\n    soup = BeautifulSoup(html, 'html.parser')\n    # --------------------------------------------------------",
+        "peekOfCode": "def extract_mydramalist_data(file_path):\n    \"\"\"Ultra-fast extractor using lxml (no BeautifulSoup).\"\"\"\n    try:\n        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n            text = f.read()\n    except Exception:\n        return None\n    try:\n        doc = html.fromstring(text)\n    except Exception:",
         "detail": "data_scrapper.DramaList_Scrapper.scrapper",
         "documentation": {}
     },
@@ -457,8 +465,35 @@
         "kind": 2,
         "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
         "description": "data_scrapper.DramaList_Scrapper.scrapper",
-        "peekOfCode": "def process_folder(input_path, output_csv=\"output.csv\"):\n    all_dramas = []\n    if os.path.isdir(input_path):\n        files = [f for f in os.listdir(input_path) if f.lower().endswith(\".html\")]\n        print(f\"Found {len(files)} HTML files. Starting extraction...\\n\")\n        for file in tqdm(files, desc=\"Extracting dramas\", unit=\"file\"):\n            full_path = os.path.join(input_path, file)\n            try:\n                info = extract_mydramalist_data(full_path)\n                if info:",
+        "peekOfCode": "def process_folder(input_path, output_csv=\"output_fast.csv\", max_workers=None, skip_existing=True):\n    \"\"\"Process all HTML files using multithreading and lxml for maximum speed.\"\"\"\n    if not os.path.exists(input_path):\n        print(f\"Path not found: {input_path}\")\n        return\n    # Collect HTML files\n    if os.path.isdir(input_path):\n        files = [os.path.join(input_path, f) for f in os.listdir(input_path)\n                 if f.lower().endswith(\".html\")]\n    else:",
         "detail": "data_scrapper.DramaList_Scrapper.scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "TVSERIES_RE",
+        "kind": 5,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper",
+        "peekOfCode": "TVSERIES_RE = re.compile('TVSeries')\nDESC_CLASS_RE = re.compile(r'(show-synopsis|show-synopsis__text|show-details-item__content)')\ndef extract_mydramalist_data(file_path):\n    \"\"\"Ultra-fast extractor using lxml (no BeautifulSoup).\"\"\"\n    try:\n        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n            text = f.read()\n    except Exception:\n        return None\n    try:",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "DESC_CLASS_RE",
+        "kind": 5,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper",
+        "peekOfCode": "DESC_CLASS_RE = re.compile(r'(show-synopsis|show-synopsis__text|show-details-item__content)')\ndef extract_mydramalist_data(file_path):\n    \"\"\"Ultra-fast extractor using lxml (no BeautifulSoup).\"\"\"\n    try:\n        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n            text = f.read()\n    except Exception:\n        return None\n    try:\n        doc = html.fromstring(text)",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper",
+        "documentation": {}
+    },
+    {
+        "label": "remove_emojis",
+        "kind": 2,
+        "importPath": "data_scrapper.DramaList_Scrapper.scrapper_2",
+        "description": "data_scrapper.DramaList_Scrapper.scrapper_2",
+        "peekOfCode": "def remove_emojis(text):\n    return re.sub(r'[\\U00010000-\\U0010ffff]', '', text)\n# -------------------------------------------\n# Download single page\n# -------------------------------------------\nasync def download_page(i, url, context, output_dir, semaphore):\n    url = url.strip()\n    if not url or url.lower() in [\"n/a\", \"none\", \"null\"] or not url.startswith(\"https://mydramalist.com/\"):\n        print(f\"[{i}] Skipping invalid URL: {url}\")\n        return",
+        "detail": "data_scrapper.DramaList_Scrapper.scrapper_2",
         "documentation": {}
     },
     {
@@ -466,7 +501,7 @@
         "kind": 5,
         "importPath": "data_scrapper.DramaList_Scrapper.scrapper_2",
         "description": "data_scrapper.DramaList_Scrapper.scrapper_2",
-        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Block unnecessary resources (faster scraping)\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# -------------------------------------------\n# Block unnecessary resources\n# -------------------------------------------\nasync def block_images_and_fonts(route: Route):",
         "detail": "data_scrapper.DramaList_Scrapper.scrapper_2",
         "documentation": {}
     },

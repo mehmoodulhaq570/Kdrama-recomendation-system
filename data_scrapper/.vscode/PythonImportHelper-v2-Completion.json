@@ -119,7 +119,7 @@
         "documentation": {}
     },
     {
-        "label": "async_playwright",
+        "label": "TimeoutError",
         "importPath": "playwright.async_api",
         "description": "playwright.async_api",
         "isExtraImport": true,
@@ -127,11 +127,11 @@
         "documentation": {}
     },
     {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "playwright.async_api",
         "documentation": {}
     },
     {
@@ -212,11 +212,20 @@
         "documentation": {}
     },
     {
+        "label": "remove_emojis",
+        "kind": 2,
+        "importPath": "DramaList_Scrapper.scrapper_2",
+        "description": "DramaList_Scrapper.scrapper_2",
+        "peekOfCode": "def remove_emojis(text):\n    return re.sub(r'[\\U00010000-\\U0010ffff]', '', text)\n# -------------------------------------------\n# Download single page\n# -------------------------------------------\nasync def download_page(i, url, context, output_dir, semaphore):\n    url = url.strip()\n    if not url or url.lower() in [\"n/a\", \"none\", \"null\"] or not url.startswith(\"https://mydramalist.com/\"):\n        print(f\"[{i}] Skipping invalid URL: {url}\")\n        return",
+        "detail": "DramaList_Scrapper.scrapper_2",
+        "documentation": {}
+    },
+    {
         "label": "USER_AGENTS",
         "kind": 5,
         "importPath": "DramaList_Scrapper.scrapper_2",
         "description": "DramaList_Scrapper.scrapper_2",
-        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# ===============================================\n#  Block unnecessary resources (faster scraping)\n# ===============================================\nasync def block_images_and_fonts(route: Route):",
+        "peekOfCode": "USER_AGENTS = [\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n    \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\",\n    \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0\",\n    \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\",\n]\n# -------------------------------------------\n# Block unnecessary resources\n# -------------------------------------------\nasync def block_images_and_fonts(route: Route):",
         "detail": "DramaList_Scrapper.scrapper_2",
         "documentation": {}
     },
