@@ -323,15 +323,147 @@
 #     asyncio.run(main())
 
 
-# Script to fetch HTML pages and save them locally but with N/A handling or other error handling
+# Script to fetch HTML pages and save them locally but with N/A handling or other error handling and downloading single html at a time
 
+
+# import asyncio
+# import random
+# import re
+# import os
+# import pandas as pd
+# from playwright.async_api import async_playwright, Route, expect
+# from typing import Optional
+
+# # ===============================================
+# #  User-Agent rotation (to avoid detection)
+# # ===============================================
+# USER_AGENTS = [
+#     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+#     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+#     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
+#     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+# ]
+
+# # ===============================================
+# #  Block unnecessary resources (faster scraping)
+# # ===============================================
+# async def block_images_and_fonts(route: Route):
+#     if route.request.resource_type in ["image", "font", "media"]:
+#         await route.abort()
+#     else:
+#         await route.continue_()
+
+# # ===============================================
+# #  Fetch HTML of a single page using Playwright
+# # ===============================================
+# async def fetch_rendered_html_playwright(url: str) -> Optional[str]:
+#     selected_user_agent = random.choice(USER_AGENTS)
+#     print(f"Fetching: {url}")
+
+#     try:
+#         async with async_playwright() as p:
+#             browser = await p.chromium.launch(
+#                 headless=True,
+#                 args=["--no-sandbox", "--disable-gpu", "--window-size=1920,1080"],
+#             )
+#             context = await browser.new_context(
+#                 user_agent=selected_user_agent,
+#                 viewport={"width": 1920, "height": 1080},
+#                 ignore_https_errors=True,
+#             )
+#             page = await context.new_page()
+#             await page.route("**/*", block_images_and_fonts)
+
+#             await page.goto(url, timeout=120000)
+
+#             # Wait for a key element (like the main title) to confirm loading
+#             await expect(page.locator("h1")).to_have_text(re.compile(r"\S+"), timeout=60000)
+
+#             await asyncio.sleep(2)
+#             html = await page.content()
+
+#             await browser.close()
+#             return html
+
+#     except Exception as e:
+#         print(f"Error fetching {url}: {e}")
+#         return None
+
+# # ===============================================
+# #  Main Function — read CSV & save HTML files
+# # ===============================================
+# async def main():
+#     CSV_FILE = r"D:\Projects\Kdrama-recommendation\data_scrapper\mydramalist_data.csv"          # Path to your CSV file
+#     OUTPUT_DIR = "dramas_html"       # Output folder
+#     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+#     df = pd.read_csv(CSV_FILE)
+
+#     if "Title_URL" not in df.columns:
+#         raise ValueError("CSV must contain a 'Title_URL' column!")
+
+#     urls = df["Title_URL"].dropna().astype(str).tolist()
+
+#     for i, url in enumerate(urls, start=1):
+#         url = url.strip()
+
+#         # Skip empty or invalid URLs
+#         if not url or url.lower() in ["n/a", "none", "null"]:
+#             print(f"[{i}] Skipping invalid URL: {url}")
+#             continue
+
+#         # Clean and extract a safe filename from the URL
+#         if not url.startswith("https://mydramalist.com/"):
+#             print(f"[{i}] Skipping non-MyDramaList URL: {url}")
+#             continue
+
+#         drama_id = url.split("/")[-1].strip()
+#         if not drama_id:
+#             print(f"[{i}] Skipping invalid drama ID from URL: {url}")
+#             continue
+
+#         output_path = os.path.join(OUTPUT_DIR, f"{drama_id}.html")
+
+#         # Skip if file already exists
+#         if os.path.exists(output_path):
+#             print(f"[{i}] Already saved — skipping: {drama_id}")
+#             continue
+
+#         print(f"\n[{i}] Downloading: {url}")
+#         html_source = await fetch_rendered_html_playwright(url)
+
+#         # Skip if page could not be fetched
+#         if not html_source:
+#             print(f"[{i}] Failed to fetch page — skipping: {url}")
+#             continue
+
+#         try:
+#             with open(output_path, "w", encoding="utf-8") as f:
+#                 f.write(html_source)
+#             print(f"[{i}] Saved: {output_path} ({len(html_source)} chars)")
+#         except Exception as e:
+#             print(f"[{i}] Error saving {output_path}: {e}")
+
+#         # Random delay to reduce detection risk
+#         sleep_time = random.uniform(3, 7)
+#         print(f"Sleeping {sleep_time:.1f}s...\n")
+#         await asyncio.sleep(sleep_time)
+
+# # ===============================================
+# #  Entry Point
+# # ===============================================
+# if __name__ == "__main__":
+#     asyncio.run(main())
+
+
+# Works parallel downloads with error handling and N/A handling
 
 import asyncio
 import random
 import re
 import os
 import pandas as pd
-from playwright.async_api import async_playwright, Route, expect
+from playwright.async_api import async_playwright, Route
 from typing import Optional
 
 # ===============================================
@@ -354,103 +486,94 @@ async def block_images_and_fonts(route: Route):
         await route.continue_()
 
 # ===============================================
-#  Fetch HTML of a single page using Playwright
+#  Download a single page safely
 # ===============================================
-async def fetch_rendered_html_playwright(url: str) -> Optional[str]:
-    selected_user_agent = random.choice(USER_AGENTS)
-    print(f"Fetching: {url}")
+async def download_page(i, url, browser, output_dir, semaphore):
+    url = url.strip()
 
-    try:
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(
-                headless=True,
-                args=["--no-sandbox", "--disable-gpu", "--window-size=1920,1080"],
-            )
-            context = await browser.new_context(
-                user_agent=selected_user_agent,
-                viewport={"width": 1920, "height": 1080},
-                ignore_https_errors=True,
-            )
+    if not url or url.lower() in ["n/a", "none", "null"]:
+        print(f"[{i}] Skipping invalid URL: {url}")
+        return
+
+    if not url.startswith("https://mydramalist.com/"):
+        print(f"[{i}] Skipping non-MyDramaList URL: {url}")
+        return
+
+    drama_id = url.split("/")[-1].strip()
+    if not drama_id:
+        print(f"[{i}] Skipping invalid drama ID from URL: {url}")
+        return
+
+    output_path = os.path.join(output_dir, f"{drama_id}.html")
+    if os.path.exists(output_path):
+        print(f"[{i}] Already saved — skipping: {drama_id}")
+        return
+
+    async with semaphore:
+        selected_user_agent = random.choice(USER_AGENTS)
+
+        # Create a new context per page with user agent
+        context = await browser.new_context(
+            viewport={"width": 1920, "height": 1080},
+            ignore_https_errors=True,
+            user_agent=selected_user_agent,
+        )
+
+        try:
             page = await context.new_page()
             await page.route("**/*", block_images_and_fonts)
-
             await page.goto(url, timeout=120000)
+            await page.locator("h1").wait_for(timeout=60000)  # wait for page to load
+            await asyncio.sleep(random.uniform(1, 2))
 
-            # Wait for a key element (like the main title) to confirm loading
-            await expect(page.locator("h1")).to_have_text(re.compile(r"\S+"), timeout=60000)
+            html_source = await page.content()
+            await page.close()
 
-            await asyncio.sleep(2)
-            html = await page.content()
+            # Save HTML
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(html_source)
+            print(f"[{i}] Saved: {output_path} ({len(html_source)} chars)")
 
-            await browser.close()
-            return html
+        except Exception as e:
+            print(f"[{i}] Failed to fetch page — {url}: {e}")
 
-    except Exception as e:
-        print(f"Error fetching {url}: {e}")
-        return None
+        finally:
+            await context.close()
+            await asyncio.sleep(random.uniform(1, 3))  # small delay
 
 # ===============================================
-#  Main Function — read CSV & save HTML files
+#  Main function — parallel downloads
 # ===============================================
 async def main():
-    CSV_FILE = r"D:\Projects\Kdrama-recommendation\data_scrapper\mydramalist_data.csv"          # Path to your CSV file
-    OUTPUT_DIR = "dramas_html"       # Output folder
+    CSV_FILE = r"D:\Projects\Kdrama-recommendation\data_scrapper\mydramalist_data.csv"
+    OUTPUT_DIR = "dramas_html"
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     df = pd.read_csv(CSV_FILE)
-
     if "Title_URL" not in df.columns:
         raise ValueError("CSV must contain a 'Title_URL' column!")
 
     urls = df["Title_URL"].dropna().astype(str).tolist()
 
-    for i, url in enumerate(urls, start=1):
-        url = url.strip()
+    # Limit concurrent downloads
+    semaphore = asyncio.Semaphore(5)  # adjust this number as needed
 
-        # Skip empty or invalid URLs
-        if not url or url.lower() in ["n/a", "none", "null"]:
-            print(f"[{i}] Skipping invalid URL: {url}")
-            continue
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-gpu", "--window-size=1920,1080"]
+        )
 
-        # Clean and extract a safe filename from the URL
-        if not url.startswith("https://mydramalist.com/"):
-            print(f"[{i}] Skipping non-MyDramaList URL: {url}")
-            continue
+        tasks = [
+            download_page(i, url, browser, OUTPUT_DIR, semaphore)
+            for i, url in enumerate(urls, start=1)
+        ]
+        await asyncio.gather(*tasks)
 
-        drama_id = url.split("/")[-1].strip()
-        if not drama_id:
-            print(f"[{i}] Skipping invalid drama ID from URL: {url}")
-            continue
-
-        output_path = os.path.join(OUTPUT_DIR, f"{drama_id}.html")
-
-        # Skip if file already exists
-        if os.path.exists(output_path):
-            print(f"[{i}] Already saved — skipping: {drama_id}")
-            continue
-
-        print(f"\n[{i}] Downloading: {url}")
-        html_source = await fetch_rendered_html_playwright(url)
-
-        # Skip if page could not be fetched
-        if not html_source:
-            print(f"[{i}] Failed to fetch page — skipping: {url}")
-            continue
-
-        try:
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(html_source)
-            print(f"[{i}] Saved: {output_path} ({len(html_source)} chars)")
-        except Exception as e:
-            print(f"[{i}] Error saving {output_path}: {e}")
-
-        # Random delay to reduce detection risk
-        sleep_time = random.uniform(3, 7)
-        print(f"Sleeping {sleep_time:.1f}s...\n")
-        await asyncio.sleep(sleep_time)
+        await browser.close()
 
 # ===============================================
-#  Entry Point
+#  Entry point
 # ===============================================
 if __name__ == "__main__":
     asyncio.run(main())

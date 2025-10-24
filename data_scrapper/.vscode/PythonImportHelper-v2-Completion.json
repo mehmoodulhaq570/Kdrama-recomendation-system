@@ -119,14 +119,6 @@
         "documentation": {}
     },
     {
-        "label": "expect",
-        "importPath": "playwright.async_api",
-        "description": "playwright.async_api",
-        "isExtraImport": true,
-        "detail": "playwright.async_api",
-        "documentation": {}
-    },
-    {
         "label": "async_playwright",
         "importPath": "playwright.async_api",
         "description": "playwright.async_api",
