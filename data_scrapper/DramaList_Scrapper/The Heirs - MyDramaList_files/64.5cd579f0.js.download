@@ -1,1 +1,0 @@
-(window.webpackJsonpApp=window.webpackJsonpApp||[]).push([[64],{oVzR:function(o,n){$(document).ready(function(){var o=".tsilamardym".split("").reverse().join("");window.location.hostname.includes(o)||(window.location.href="https://"+o+"com"+window.location.pathname+window.location.search)})}}]);
