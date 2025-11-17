@@ -170,6 +170,8 @@ def recommend(
 
     print(f"🔍 Query Analysis: Intent={intent.value}, Alpha={dynamic_alpha:.2f}")
     print(f"📝 Expanded Query: {expanded_query}")
+    if entities.get("genres"):
+        print(f"🎭 Detected Genres: {entities['genres']}")
 
     # Get search strategy for this intent
     strategy = get_search_strategy(intent)
@@ -179,6 +181,37 @@ def recommend(
 
     # ---- Stage 4.1: PRE-FILTER the dataset ----
     filtered_metadata = metadata.copy()
+
+    # Apply detected genres as filters if no explicit genre filter provided
+    detected_genres = entities.get("genres", [])
+    detected_actors = entities.get("actors", [])
+
+    if detected_genres and not genre:
+        # Filter by detected genres (OR logic - match any detected genre)
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if any(
+                g.lower() in str(r.get("Genre", "")).lower() for g in detected_genres
+            )
+        ]
+        print(
+            f"🎯 Genre filtering applied: {len(filtered_metadata)} dramas match genres {detected_genres}"
+        )
+
+    # Apply detected actors as filters (search in Cast field)
+    if detected_actors:
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if any(
+                actor.lower() in str(r.get("Cast", "")).lower()
+                for actor in detected_actors
+            )
+        ]
+        print(
+            f"🎬 Actor filtering applied: {len(filtered_metadata)} dramas with actors {detected_actors}"
+        )
 
     # Apply all filters to create a subset
     if genre:
@@ -276,8 +309,20 @@ def recommend(
         (m for m in filtered_metadata if m["Title"].lower() == title.lower()), None
     )
 
-    if not drama:
-        # Try fuzzy match only within filtered corpus
+    # Only try fuzzy matching for specific title searches, not genre/vague queries
+    from query_analyzer import QueryIntent
+
+    skip_fuzzy_intents = [
+        QueryIntent.GENRE_BROWSE,
+        QueryIntent.VAGUE,
+        QueryIntent.EMOTION_BASED,
+        QueryIntent.TOP_RATED,
+        QueryIntent.TRENDING,
+        QueryIntent.ACTOR_BASED,
+    ]
+
+    if not drama and intent not in skip_fuzzy_intents:
+        # Try fuzzy match only within filtered corpus and only for specific title searches
         filtered_titles = [m["Title"] for m in filtered_metadata]
         if filtered_titles:
             match, score, _ = process.extractOne(
@@ -301,6 +346,10 @@ def recommend(
                 query_text = expanded_query  # Use expanded query
         else:
             query_text = expanded_query
+    elif not drama:
+        # For genre/vague queries, use expanded query directly
+        print(f"Genre/vague query detected, using expanded query: '{expanded_query}'")
+        query_text = expanded_query
     else:
         query_text = f"{drama['Title']} {drama.get('Genre', '')} {drama.get('Description', '')} {drama.get('Cast', '')} {expanded_query}"
 
@@ -339,6 +388,18 @@ def recommend(
         combined_scores[rec["Title"]] = combined_scores.get(rec["Title"], 0) + (
             1 - alpha
         ) * (score / max_bm25)
+
+    # Apply genre boost if genres were detected
+    if detected_genres:
+        print(f"🚀 Applying genre boost for: {detected_genres}")
+        for title, score in combined_scores.items():
+            drama = next((m for m in filtered_metadata if m["Title"] == title), None)
+            if drama:
+                drama_genres = str(drama.get("Genre", "")).lower()
+                # Boost if any detected genre matches
+                if any(g.lower() in drama_genres for g in detected_genres):
+                    combined_scores[title] = score * 1.3  # 30% boost for genre match
+                    print(f"   ✓ Boosted: {title} ({drama.get('Genre', '')})")
 
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [
@@ -386,16 +447,24 @@ def recommend(
         )
     top_results = filtered[:top_n]
     # ---- Stage 4.5: Optional Reranking ----
-    if use_reranker and reranker:
+    # Disabled for performance - cross-encoder adds 2-3 seconds
+    # Re-enable for production if accuracy is critical
+    if False and use_reranker and reranker:  # Disabled for speed
         try:
-            pairs = [[query_text, r["Description"]] for r in top_results]
+            # Limit to top 20 candidates to reduce reranking time
+            rerank_candidates = top_results[:20]
+            pairs = [[query_text, r["Description"]] for r in rerank_candidates]
             rerank_scores = reranker.predict(pairs)
             top_results = [
                 r
                 for _, r in sorted(
-                    zip(rerank_scores, top_results), key=lambda x: x[0], reverse=True
+                    zip(rerank_scores, rerank_candidates),
+                    key=lambda x: x[0],
+                    reverse=True,
                 )
-            ]
+            ] + top_results[
+                20:
+            ]  # Keep rest in original order
         except Exception as e:
             print(f"Reranking failed: {e}")
 
@@ -426,8 +495,21 @@ def recommend(
             print(f"   Boosted based on user preferences")
 
             # Prepare personalization info for frontend
+            # Calculate average boost for reporting
+            avg_boost = (
+                sum(r.get("boost_multiplier", 1.0) for r in top_results)
+                / len(top_results)
+                if top_results
+                else 1.0
+            )
+            boost_applied = any(
+                r.get("boost_multiplier", 1.0) > 1.01 for r in top_results
+            )
+
             personalization_info = {
                 "applied": True,
+                "boost_applied": boost_applied,
+                "average_boost": avg_boost,
                 "alpha_adjusted": abs(personalized_alpha - alpha) > 0.01,
                 "original_alpha": alpha,
                 "personalized_alpha": personalized_alpha,
@@ -496,6 +578,9 @@ def recommend(
     # Add personalization info if available
     if personalization_info:
         response["personalization"] = personalization_info
+        response["personalization_info"] = (
+            personalization_info  # For backward compatibility
+        )
 
     return response
 
@@ -541,6 +626,9 @@ def analyze_query(query: str = Query(..., description="Query to analyze")):
                 else str(analysis["intent"])
             ),
             "entities": analysis["entities"],
+            "detected_genres": analysis["entities"].get(
+                "genres", []
+            ),  # For evaluation script
             "confidence": analysis.get("confidence", 0.8),
         }
     except Exception as e:

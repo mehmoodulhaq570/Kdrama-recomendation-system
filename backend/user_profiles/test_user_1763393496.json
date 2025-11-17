@@ -1,0 +1,102 @@
+{
+  "user_id": "test_user_1763393496",
+  "created_at": "2025-11-17T20:31:38.778675",
+  "last_updated": "2025-11-17T20:31:42.984855",
+  "preferences": {
+    "genres": {
+      "Comedy": 0.76,
+      "Life": 1.0,
+      "Drama": 1.0,
+      "Medical": 1.0,
+      "Family": 0.76,
+      "Romance": 0.76
+    },
+    "actors": {
+      "Jo Jung Suk": 0.76,
+      "Yoo Yeon Seok": 0.76,
+      "Jung Kyung Ho": 0.76,
+      "Kim Dae Myung": 0.76,
+      "Jeon Mi Do": 0.76,
+      "Uhm Jung Hwa": 0.76,
+      "Kim Byung Chul": 0.76,
+      "Myung Se Bin": 0.76,
+      "Min Woo Hyuk": 0.76,
+      "Song Ji Ho": 0.76,
+      "Joo Won": 0.76,
+      "Moon Chae Won": 0.76,
+      "Joo Sang Wook": 0.76,
+      "Kim Min Seo": 0.76,
+      "Ha Kyu Won": 0.76
+    },
+    "directors": {
+      "Shin Won Ho": 0.76,
+      "Kim Dae Jin, Kim Jung Wook": 0.76,
+      "Kim Jin Woo, Ki Min Su": 0.76
+    },
+    "themes": {
+      "friendship": 0.76,
+      "multiple mains": 0.76,
+      "slow romance": 0.76,
+      "multiple couples": 0.76,
+      "healing": 0.76,
+      "bromance": 0.76,
+      "slight romance": 0.76,
+      "smart female lead": 0.76,
+      "nice male lead": 0.76,
+      "music": 0.76,
+      "starting over": 0.76,
+      "hospital setting": 0.76,
+      "rivals to enemies": 0.76,
+      "unhealthy mains' relationship": 0.76,
+      "extramarital affair": 0.76,
+      "loveless marriage": 0.76,
+      "family relationship": 0.76,
+      "second chance": 0.76,
+      "mean male lead": 0.76,
+      "rivalry": 0.76,
+      "autism": 0.76,
+      "eccentric male lead": 0.76,
+      "ableism": 0.76,
+      "slow burn romance": 0.76,
+      "doctor female lead": 0.76,
+      "doctor male lead": 0.76,
+      "autistic male lead": 0.76,
+      "savant syndrome": 0.76,
+      "older woman/younger man": 0.76,
+      "rare condition": 0.76
+    },
+    "publishers": {}
+  },
+  "statistics": {
+    "total_interactions": 3,
+    "total_clicks": 0,
+    "total_watchlist_adds": 0,
+    "total_watched": 3,
+    "avg_rating": 9.0,
+    "total_ratings": 3,
+    "rating_style": "generous"
+  },
+  "viewing_patterns": {
+    "preferred_episode_count": 15,
+    "preferred_years": [],
+    "binge_watcher": false,
+    "rating_style": "neutral"
+  },
+  "recent_interactions": [
+    {
+      "drama_title": "Good Doctor",
+      "interaction_type": "watched",
+      "timestamp": "2025-11-17T20:31:42.984786"
+    },
+    {
+      "drama_title": "Doctor Cha",
+      "interaction_type": "watched",
+      "timestamp": "2025-11-17T20:31:40.904058"
+    },
+    {
+      "drama_title": "Hospital Playlist",
+      "interaction_type": "watched",
+      "timestamp": "2025-11-17T20:31:38.779071"
+    }
+  ]
+}

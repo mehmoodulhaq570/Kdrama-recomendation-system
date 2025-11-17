@@ -209,6 +209,30 @@
         "documentation": {}
     },
     {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "defaultdict",
         "importPath": "collections",
         "description": "collections",
@@ -218,6 +242,14 @@
     },
     {
         "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
         "importPath": "collections",
         "description": "collections",
         "isExtraImport": true,
@@ -1887,6 +1919,132 @@
         "description": "tests.check_genres_2",
         "peekOfCode": "medical_count = 0\nfor drama in metadata:\n    title = drama.get(\"Title\", drama.get(\"title\", \"Unknown\"))\n    genre = str(drama.get(\"Genre\", drama.get(\"genres\", \"\")))\n    if (\n        \"medical\" in genre.lower()\n        or \"doctor\" in genre.lower()\n        or \"hospital\" in genre.lower()\n    ):\n        medical_count += 1",
         "detail": "tests.check_genres_2",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_precision_at_k",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def calculate_precision_at_k(\n    results: List[str], expected: List[str], k: int = 3\n) -> float:\n    \"\"\"Calculate Precision@K - what % of top-k results are relevant\"\"\"\n    if not expected:\n        return None\n    top_k = results[:k]\n    relevant_count = sum(\n        1 for title in top_k if any(exp.lower() in title.lower() for exp in expected)\n    )",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_recall_at_k",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def calculate_recall_at_k(\n    results: List[str], expected: List[str], k: int = 10\n) -> float:\n    \"\"\"Calculate Recall@K - what % of expected results are in top-k\"\"\"\n    if not expected:\n        return None\n    top_k = results[:k]\n    found_count = sum(\n        1 for exp in expected if any(exp.lower() in title.lower() for title in top_k)\n    )",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_mrr",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def calculate_mrr(results: List[str], expected: List[str]) -> float:\n    \"\"\"Calculate Mean Reciprocal Rank - position of first relevant result\"\"\"\n    if not expected:\n        return None\n    for i, title in enumerate(results, 1):\n        if any(exp.lower() in title.lower() for exp in expected):\n            return 1.0 / i\n    return 0.0\ndef calculate_ndcg_at_k(results: List[str], expected: List[str], k: int = 10) -> float:\n    \"\"\"Calculate Normalized Discounted Cumulative Gain@K\"\"\"",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_ndcg_at_k",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def calculate_ndcg_at_k(results: List[str], expected: List[str], k: int = 10) -> float:\n    \"\"\"Calculate Normalized Discounted Cumulative Gain@K\"\"\"\n    if not expected:\n        return None\n    dcg = 0.0\n    for i, title in enumerate(results[:k], 1):\n        relevance = (\n            1.0 if any(exp.lower() in title.lower() for exp in expected) else 0.0\n        )\n        dcg += relevance / np.log2(i + 1)",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_search_accuracy",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def evaluate_search_accuracy():\n    \"\"\"Evaluate search accuracy across different query types\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"TEST 1: SEARCH ACCURACY EVALUATION\")\n    print(\"=\" * 60)\n    results_by_category = defaultdict(\n        lambda: {\"precision\": [], \"recall\": [], \"mrr\": [], \"ndcg\": []}\n    )\n    for query, expected, category in SEARCH_TEST_CASES:\n        try:",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_query_intelligence",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def evaluate_query_intelligence():\n    \"\"\"Evaluate query analyzer and genre detection\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"TEST 2: QUERY INTELLIGENCE EVALUATION\")\n    print(\"=\" * 60)\n    correct_detections = 0\n    total_tests = len(GENRE_DETECTION_TESTS)\n    for query, expected_genres in GENRE_DETECTION_TESTS:\n        try:\n            response = requests.get(f\"{BASE_URL}/analyze\", params={\"query\": query})",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_filter_accuracy",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def evaluate_filter_accuracy():\n    \"\"\"Evaluate filtering accuracy\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"TEST 3: FILTER ACCURACY EVALUATION\")\n    print(\"=\" * 60)\n    passed_tests = 0\n    total_tests = len(FILTER_TEST_CASES)\n    for test_case in FILTER_TEST_CASES:\n        filter_params = {\n            k: v for k, v in test_case.items() if not k.startswith(\"expected_\")",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_personalization",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def evaluate_personalization():\n    \"\"\"Evaluate personalization boost effectiveness\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"TEST 4: PERSONALIZATION EFFECTIVENESS\")\n    print(\"=\" * 60)\n    test_user = f\"test_user_{int(time.time())}\"\n    # Rate some medical dramas highly\n    medical_dramas = [\"Hospital Playlist\", \"Doctor Cha\", \"Good Doctor\"]\n    print(f\"\\nCreating test user: {test_user}\")\n    print(\"Rating medical dramas highly (9.0/10)...\")",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_performance",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def evaluate_performance():\n    \"\"\"Evaluate system response time\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"TEST 5: PERFORMANCE EVALUATION\")\n    print(\"=\" * 60)\n    test_queries = [\n        \"Crash Landing on You\",\n        \"medical drama\",\n        \"romantic comedy with strong female lead\",\n        \"best korean series\",",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "def main():\n    \"\"\"Run all evaluations and generate report\"\"\"\n    print(\"\\n\" + \"=\" * 60)\n    print(\"SEOULMATE RECOMMENDATION SYSTEM - ACCURACY EVALUATION\")\n    print(\"=\" * 60)\n    print(f\"Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\")\n    print(f\"API Endpoint: {BASE_URL}\")\n    # Check if API is running\n    try:\n        response = requests.get(f\"{BASE_URL}/\")",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_URL",
+        "kind": 5,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "BASE_URL = \"http://localhost:8001\"\n# ======================================================\n# TEST DATA - Ground Truth\n# ======================================================\n# Format: (query, expected_top_results, category)\nSEARCH_TEST_CASES = [\n    # Specific title searches (should return exact match first)\n    (\"Crash Landing on You\", [\"Crash Landing on You\"], \"specific_title\"),\n    (\"Itaewon Class\", [\"Itaewon Class\"], \"specific_title\"),\n    (\"Hospital Playlist\", [\"Hospital Playlist\"], \"specific_title\"),",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "SEARCH_TEST_CASES",
+        "kind": 5,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "SEARCH_TEST_CASES = [\n    # Specific title searches (should return exact match first)\n    (\"Crash Landing on You\", [\"Crash Landing on You\"], \"specific_title\"),\n    (\"Itaewon Class\", [\"Itaewon Class\"], \"specific_title\"),\n    (\"Hospital Playlist\", [\"Hospital Playlist\"], \"specific_title\"),\n    (\"Squid Game\", [\"Squid Game\"], \"specific_title\"),\n    (\"Business Proposal\", [\"Business Proposal\"], \"specific_title\"),\n    # Genre searches (should return dramas in that genre)\n    (\"medical drama\", [\"Hospital Playlist\", \"Doctor Cha\", \"Good Doctor\"], \"genre\"),\n    (",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "GENRE_DETECTION_TESTS",
+        "kind": 5,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "GENRE_DETECTION_TESTS = [\n    (\"romantic comedy with strong female lead\", [\"Romance\", \"Comedy\"]),\n    (\"thriller about serial killer\", [\"Thriller\", \"Crime\"]),\n    (\"historical drama about king\", [\"Historical\", \"Drama\"]),\n    (\"medical drama with surgery\", [\"Medical\", \"Drama\"]),\n    (\"action packed spy thriller\", [\"Action\", \"Thriller\"]),\n]\n# Filter test cases\nFILTER_TEST_CASES = [\n    {\"genre\": \"Romance\", \"expected_all_match\": True},",
+        "detail": "tests.evaluate_accuracy",
+        "documentation": {}
+    },
+    {
+        "label": "FILTER_TEST_CASES",
+        "kind": 5,
+        "importPath": "tests.evaluate_accuracy",
+        "description": "tests.evaluate_accuracy",
+        "peekOfCode": "FILTER_TEST_CASES = [\n    {\"genre\": \"Romance\", \"expected_all_match\": True},\n    {\"genre\": \"Medical\", \"expected_all_match\": True},\n    {\"rating_value\": \"8.5\", \"expected_min_rating\": 8.5},\n    {\"year\": \"2020\", \"expected_year\": 2020},\n]\n# ======================================================\n# EVALUATION FUNCTIONS\n# ======================================================\ndef calculate_precision_at_k(",
+        "detail": "tests.evaluate_accuracy",
         "documentation": {}
     },
     {

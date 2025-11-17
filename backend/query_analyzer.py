@@ -254,56 +254,123 @@ class QueryAnalyzer:
         # Extract genres (matching actual dataset genres)
         # Map query terms to actual dataset genre names
         genre_mapping = {
+            # Romance
             "romantic": "Romance",
             "romance": "Romance",
-            "romcom": "Romance, Comedy",
-            "action": "Action",
+            "love": "Romance",
+            "romcom": "Romance",
+            "rom-com": "Romance",
+            "romantic comedy": "Romance",
+            # Comedy
             "comedy": "Comedy",
             "funny": "Comedy",
+            "hilarious": "Comedy",
+            "humor": "Comedy",
+            "humorous": "Comedy",
+            "lighthearted": "Comedy",
+            # Action & Thriller
+            "action": "Action",
             "thriller": "Thriller",
+            "suspense": "Thriller",
+            "intense": "Thriller",
+            # Mystery & Crime
             "mystery": "Mystery",
             "detective": "Mystery",
+            "whodunit": "Mystery",
+            "crime": "Crime",
+            "investigation": "Mystery",
+            # Horror & Dark
             "horror": "Horror",
             "scary": "Horror",
+            "creepy": "Horror",
+            "dark": "Thriller",
+            # Fantasy & Supernatural
             "fantasy": "Fantasy",
             "supernatural": "Supernatural",
+            "paranormal": "Supernatural",
+            "magical": "Fantasy",
+            # Historical
             "historical": "Historical",
             "period": "Historical",
             "sageuk": "Historical",
+            "joseon": "Historical",
+            "dynasty": "Historical",
+            "costume": "Historical",
+            # Drama & Melodrama
             "melodrama": "Melodrama",
             "sad": "Melodrama",
+            "emotional": "Melodrama",
+            "tearjerker": "Melodrama",
+            "touching": "Melodrama",
+            "drama": "Drama",
+            # Family & Life
             "family": "Family",
+            "wholesome": "Family",
+            "heartwarming": "Family",
+            "slice of life": "Life",
+            "life": "Life",
+            # Youth & School
             "youth": "Youth",
             "school": "Youth",
             "teen": "Youth",
+            "high school": "Youth",
+            "college": "Youth",
+            "campus": "Youth",
+            "student": "Youth",
+            # Medical
             "medical": "Medical",
             "hospital": "Medical",
             "doctor": "Medical",
+            "healthcare": "Medical",
+            "surgeon": "Medical",
+            "surgery": "Medical",
+            # Law & Legal
             "law": "Law",
             "legal": "Law",
             "lawyer": "Law",
+            "attorney": "Law",
+            "court": "Law",
+            "justice": "Law",
+            # Business & Office
             "business": "Business",
             "office": "Business",
             "workplace": "Business",
-            "crime": "Crime",
+            "corporate": "Business",
+            "career": "Business",
+            # Others
             "sports": "Sports",
             "music": "Music",
+            "musical": "Music",
             "food": "Food",
             "cooking": "Food",
+            "culinary": "Food",
+            "restaurant": "Food",
             "adventure": "Adventure",
             "sci-fi": "Sci-Fi",
             "scifi": "Sci-Fi",
+            "science fiction": "Sci-Fi",
             "psychological": "Psychological",
             "political": "Political",
-            "life": "Life",
+            "revenge": "Revenge",
+            "vengeance": "Revenge",
+            "zombie": "Thriller",
+            "apocalypse": "Thriller",
         }
 
         query_lower = query.lower()
         detected_genres = []
 
-        for term, genre in genre_mapping.items():
+        # Sort by length (longest first) to match multi-word terms first
+        sorted_terms = sorted(genre_mapping.keys(), key=len, reverse=True)
+
+        for term in sorted_terms:
             if term in query_lower:
-                detected_genres.append(genre)
+                genre = genre_mapping[term]
+                # Handle comma-separated genres (e.g., "Romance, Comedy")
+                if "," in genre:
+                    detected_genres.extend([g.strip() for g in genre.split(",")])
+                else:
+                    detected_genres.append(genre)
 
         entities["genres"] = list(set(detected_genres))  # Remove duplicates
 
