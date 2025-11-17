@@ -219,6 +219,8 @@ def recommend(
     print(f"📝 Expanded Query: {expanded_query}")
     if entities.get("genres"):
         print(f"🎭 Detected Genres: {entities['genres']}")
+    if entities.get("actors"):
+        print(f"🎬 Detected Actors: {entities['actors']}")
 
     # Get search strategy for this intent
     strategy = get_search_strategy(intent)
@@ -446,7 +448,7 @@ def recommend(
                 drama_genres = str(drama.get("Genre", "")).lower()
                 # Boost if any detected genre matches
                 if any(g.lower() in drama_genres for g in detected_genres):
-                    combined_scores[title] = score * 1.3  # 30% boost for genre match
+                    combined_scores[title] = score * 1.4  # 40% boost for genre match
                     print(f"   ✓ Boosted: {title} ({drama.get('Genre', '')})")
 
     # Sort by combined score (filters already applied in Stage 4.0)

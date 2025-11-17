@@ -238,13 +238,53 @@ class QueryAnalyzer:
         entities = {
             "actors": [],
             "genres": [],
+            "themes": [],
             "years": [],
             "emotions": [],
             "constraints": {},
         }
 
         # Extract actors (capitalized names) - Enhanced detection
-        # Common Korean actor name patterns
+        # Known K-drama actors for better matching
+        known_actors = {
+            "hyun bin",
+            "park seo joon",
+            "song joong ki",
+            "lee min ho",
+            "kim soo hyun",
+            "ji chang wook",
+            "gong yoo",
+            "iu",
+            "lee jong suk",
+            "park bo gum",
+            "nam joo hyuk",
+            "lee dong wook",
+            "kim woo bin",
+            "park hyung sik",
+            "yoo seung ho",
+            "song hye kyo",
+            "jun ji hyun",
+            "park shin hye",
+            "suzy",
+            "han ji min",
+            "son ye jin",
+            "kim ji won",
+            "park min young",
+            "seo ye ji",
+            "kim go eun",
+        }
+
+        # Check for known actors first (case-insensitive)
+        query_lower = query.lower()
+        detected_actors = []
+        for actor in known_actors:
+            if actor in query_lower:
+                # Convert to proper case (Title Case)
+                detected_actors.append(
+                    " ".join(word.capitalize() for word in actor.split())
+                )
+
+        # Then use pattern matching for other actors
         actor_pattern = r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b"
         potential_actors = re.findall(actor_pattern, query)
 
@@ -264,11 +304,17 @@ class QueryAnalyzer:
             "Moon Lovers",
             "Goblin Dokkaebi",
         }
-        entities["actors"] = [
-            actor
-            for actor in potential_actors
-            if actor not in non_actor_words and len(actor.split()) >= 2
-        ]
+        detected_actors.extend(
+            [
+                actor
+                for actor in potential_actors
+                if actor not in non_actor_words
+                and len(actor.split()) >= 2
+                and actor.lower() not in [a.lower() for a in detected_actors]
+            ]
+        )
+
+        entities["actors"] = detected_actors
 
         # Extract years
         year_pattern = r"\b(19\d{2}|20[0-2]\d)\b"
@@ -396,6 +442,23 @@ class QueryAnalyzer:
                     detected_genres.append(genre)
 
         entities["genres"] = list(set(detected_genres))  # Remove duplicates
+
+        # Extract themes (common K-drama themes)
+        theme_keywords = {
+            "time travel": ["time travel", "time slip", "time loop"],
+            "north korea": ["north korea", "north korean", "defector"],
+            "food": ["restaurant", "food", "cooking", "chef"],
+            "revenge": ["revenge", "vengeance"],
+            "medical": ["doctor", "hospital", "medical"],
+            "law": ["lawyer", "attorney", "law", "court"],
+        }
+
+        detected_themes = []
+        for theme, keywords in theme_keywords.items():
+            if any(kw in query_lower for kw in keywords):
+                detected_themes.append(theme)
+
+        entities["themes"] = detected_themes
 
         # Extract emotions
         emotions = [
