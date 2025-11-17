@@ -127,6 +127,38 @@ def cached_encode(text: str):
     return emb
 
 
+# Cache for search results (query + filters -> results)
+_result_cache = {}
+_cache_max_size = 200
+_cache_ttl = 300  # 5 minutes
+
+
+def get_cache_key(title, top_n, genre, filters_dict):
+    """Generate cache key from query parameters"""
+    filter_str = f"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}"
+    return f"{title}_{top_n}_{filter_str}"
+
+
+def get_cached_result(cache_key):
+    """Get result from cache if exists and not expired"""
+    if cache_key in _result_cache:
+        result, timestamp = _result_cache[cache_key]
+        if time.time() - timestamp < _cache_ttl:
+            return result
+        else:
+            del _result_cache[cache_key]
+    return None
+
+
+def cache_result(cache_key, result):
+    """Cache result with timestamp"""
+    # Simple LRU: remove oldest if cache is full
+    if len(_result_cache) >= _cache_max_size:
+        oldest_key = min(_result_cache.keys(), key=lambda k: _result_cache[k][1])
+        del _result_cache[oldest_key]
+    _result_cache[cache_key] = (result, time.time())
+
+
 # ======================================================
 # STAGE 4 — HYBRID RECOMMENDATION PIPELINE (v4.0 with Phase 1)
 # ======================================================
@@ -160,6 +192,21 @@ def recommend(
     6. Optional reranking (Cross-Encoder)
     7. Analytics logging (NEW)
     """
+
+    # ---- Check cache first (skip if personalized or has user_id) ----
+    if not user_id:
+        filters_dict = {
+            "genre": genre,
+            "director": director,
+            "publisher": publisher,
+            "rating_value": rating_value,
+            "top_rated": top_rated,
+        }
+        cache_key = get_cache_key(title, top_n, genre, filters_dict)
+        cached = get_cached_result(cache_key)
+        if cached:
+            print(f"⚡ Cache hit for query: '{title}'")
+            return cached
 
     # ---- Stage 4.0: QUERY ANALYSIS (Phase 1) ----
     analysis = query_analyzer.analyze(title)
@@ -355,8 +402,9 @@ def recommend(
 
     # ---- Stage 4.3: FAISS Semantic Search on filtered corpus ----
     query_emb = cached_encode(query_text)
-    # Search more broadly to ensure we get enough results
-    search_k = min(len(filtered_metadata) + 50, len(metadata))
+    # Optimize search_k for better performance while maintaining accuracy
+    # Only search within filtered corpus + small buffer
+    search_k = min(len(filtered_metadata) + 20, max(top_n * 5, 50))
     D_all, I_all = index.search(query_emb, search_k)
 
     # Filter FAISS results to only include filtered_metadata indices
@@ -581,6 +629,18 @@ def recommend(
         response["personalization_info"] = (
             personalization_info  # For backward compatibility
         )
+
+    # Cache result if not personalized
+    if not user_id:
+        filters_dict = {
+            "genre": genre,
+            "director": director,
+            "publisher": publisher,
+            "rating_value": rating_value,
+            "top_rated": top_rated,
+        }
+        cache_key = get_cache_key(title, top_n, genre, filters_dict)
+        cache_result(cache_key, response)
 
     return response
 

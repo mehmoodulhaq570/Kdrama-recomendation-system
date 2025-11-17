@@ -945,7 +945,34 @@
         "kind": 2,
         "importPath": "backend.app",
         "description": "backend.app",
-        "peekOfCode": "def cached_encode(text: str):\n    \"\"\"Cached embedding generation for speed.\"\"\"\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb\n# ======================================================\n# STAGE 4 — HYBRID RECOMMENDATION PIPELINE (v4.0 with Phase 1)\n# ======================================================\ndef recommend(\n    title: str,",
+        "peekOfCode": "def cached_encode(text: str):\n    \"\"\"Cached embedding generation for speed.\"\"\"\n    emb = model.encode([text], convert_to_numpy=True)\n    faiss.normalize_L2(emb)\n    return emb\n# Cache for search results (query + filters -> results)\n_result_cache = {}\n_cache_max_size = 200\n_cache_ttl = 300  # 5 minutes\ndef get_cache_key(title, top_n, genre, filters_dict):",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "get_cache_key",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def get_cache_key(title, top_n, genre, filters_dict):\n    \"\"\"Generate cache key from query parameters\"\"\"\n    filter_str = f\"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}\"\n    return f\"{title}_{top_n}_{filter_str}\"\ndef get_cached_result(cache_key):\n    \"\"\"Get result from cache if exists and not expired\"\"\"\n    if cache_key in _result_cache:\n        result, timestamp = _result_cache[cache_key]\n        if time.time() - timestamp < _cache_ttl:\n            return result",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "get_cached_result",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def get_cached_result(cache_key):\n    \"\"\"Get result from cache if exists and not expired\"\"\"\n    if cache_key in _result_cache:\n        result, timestamp = _result_cache[cache_key]\n        if time.time() - timestamp < _cache_ttl:\n            return result\n        else:\n            del _result_cache[cache_key]\n    return None\ndef cache_result(cache_key, result):",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "cache_result",
+        "kind": 2,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "def cache_result(cache_key, result):\n    \"\"\"Cache result with timestamp\"\"\"\n    # Simple LRU: remove oldest if cache is full\n    if len(_result_cache) >= _cache_max_size:\n        oldest_key = min(_result_cache.keys(), key=lambda k: _result_cache[k][1])\n        del _result_cache[oldest_key]\n    _result_cache[cache_key] = (result, time.time())\n# ======================================================\n# STAGE 4 — HYBRID RECOMMENDATION PIPELINE (v4.0 with Phase 1)\n# ======================================================",
         "detail": "backend.app",
         "documentation": {}
     },
@@ -1162,6 +1189,33 @@
         "importPath": "backend.app",
         "description": "backend.app",
         "peekOfCode": "analytics_tracker = get_tracker()\nprint(\"✓ Query analyzer and analytics tracker initialized.\")\n# ======================================================\n# STAGE 2 — LOAD OPTIONAL RERANKER\n# ======================================================\ntry:\n    print(\"Stage 2: Loading cross-encoder reranker...\")\n    reranker = CrossEncoder(CROSS_ENCODER_MODEL)\n    use_reranker = True\n    print(\"Cross-encoder reranker loaded successfully.\")",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "_result_cache",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "_result_cache = {}\n_cache_max_size = 200\n_cache_ttl = 300  # 5 minutes\ndef get_cache_key(title, top_n, genre, filters_dict):\n    \"\"\"Generate cache key from query parameters\"\"\"\n    filter_str = f\"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}\"\n    return f\"{title}_{top_n}_{filter_str}\"\ndef get_cached_result(cache_key):\n    \"\"\"Get result from cache if exists and not expired\"\"\"\n    if cache_key in _result_cache:",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "_cache_max_size",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "_cache_max_size = 200\n_cache_ttl = 300  # 5 minutes\ndef get_cache_key(title, top_n, genre, filters_dict):\n    \"\"\"Generate cache key from query parameters\"\"\"\n    filter_str = f\"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}\"\n    return f\"{title}_{top_n}_{filter_str}\"\ndef get_cached_result(cache_key):\n    \"\"\"Get result from cache if exists and not expired\"\"\"\n    if cache_key in _result_cache:\n        result, timestamp = _result_cache[cache_key]",
+        "detail": "backend.app",
+        "documentation": {}
+    },
+    {
+        "label": "_cache_ttl",
+        "kind": 5,
+        "importPath": "backend.app",
+        "description": "backend.app",
+        "peekOfCode": "_cache_ttl = 300  # 5 minutes\ndef get_cache_key(title, top_n, genre, filters_dict):\n    \"\"\"Generate cache key from query parameters\"\"\"\n    filter_str = f\"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}\"\n    return f\"{title}_{top_n}_{filter_str}\"\ndef get_cached_result(cache_key):\n    \"\"\"Get result from cache if exists and not expired\"\"\"\n    if cache_key in _result_cache:\n        result, timestamp = _result_cache[cache_key]\n        if time.time() - timestamp < _cache_ttl:",
         "detail": "backend.app",
         "documentation": {}
     },

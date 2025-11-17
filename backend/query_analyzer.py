@@ -243,9 +243,32 @@ class QueryAnalyzer:
             "constraints": {},
         }
 
-        # Extract actors (capitalized names)
+        # Extract actors (capitalized names) - Enhanced detection
+        # Common Korean actor name patterns
         actor_pattern = r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b"
-        entities["actors"] = re.findall(actor_pattern, query)
+        potential_actors = re.findall(actor_pattern, query)
+
+        # Filter out common non-actor phrases
+        non_actor_words = {
+            "Good Doctor",
+            "The King",
+            "My Love",
+            "True Beauty",
+            "Strong Woman",
+            "What Wrong",
+            "Hospital Playlist",
+            "Crash Landing",
+            "Business Proposal",
+            "Secret Garden",
+            "Boys Over",
+            "Moon Lovers",
+            "Goblin Dokkaebi",
+        }
+        entities["actors"] = [
+            actor
+            for actor in potential_actors
+            if actor not in non_actor_words and len(actor.split()) >= 2
+        ]
 
         # Extract years
         year_pattern = r"\b(19\d{2}|20[0-2]\d)\b"
