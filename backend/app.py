@@ -231,22 +231,38 @@ def recommend(
     # ---- Stage 4.1: PRE-FILTER the dataset ----
     filtered_metadata = metadata.copy()
 
-    # Apply detected genres as filters if no explicit genre filter provided
+    # Check for exact title match FIRST - skip filtering if exact match exists
+    exact_title_match = next(
+        (m for m in metadata if m["Title"].lower() == title.lower()), None
+    )
+    if exact_title_match:
+        print(
+            f"✓ Exact title found: {exact_title_match['Title']} - skipping genre/actor filtering"
+        )
+        # Skip to search with exact match prioritized
+    else:
+        # Apply detected genres as filters if no explicit genre filter provided
+        detected_genres = entities.get("genres", [])
+        detected_actors = entities.get("actors", [])
+        detected_themes = entities.get("themes", [])
+
+        if detected_genres and not genre:
+            # Filter by detected genres (OR logic - match any detected genre)
+            filtered_metadata = [
+                r
+                for r in filtered_metadata
+                if any(
+                    g.lower() in str(r.get("Genre", "")).lower()
+                    for g in detected_genres
+                )
+            ]
+            print(
+                f"🎯 Genre filtering applied: {len(filtered_metadata)} dramas match genres {detected_genres}"
+            )
+
+    # Define these outside the else block for later use
     detected_genres = entities.get("genres", [])
     detected_actors = entities.get("actors", [])
-
-    if detected_genres and not genre:
-        # Filter by detected genres (OR logic - match any detected genre)
-        filtered_metadata = [
-            r
-            for r in filtered_metadata
-            if any(
-                g.lower() in str(r.get("Genre", "")).lower() for g in detected_genres
-            )
-        ]
-        print(
-            f"🎯 Genre filtering applied: {len(filtered_metadata)} dramas match genres {detected_genres}"
-        )
 
     # Apply detected actors as filters (search in Cast field)
     if detected_actors:
@@ -377,7 +393,7 @@ def recommend(
             match, score, _ = process.extractOne(
                 title, filtered_titles, scorer=fuzz.WRatio
             )
-            if match and score >= 70:
+            if match and score >= 60:
                 drama = next(
                     (m for m in filtered_metadata if m["Title"] == match), None
                 )
@@ -456,6 +472,17 @@ def recommend(
         next(m for m in filtered_metadata if m["Title"] == t)
         for t, _ in sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)
     ]
+
+    # ---- EXACT TITLE INJECTION ----
+    # If query matches a title exactly or closely, ensure it's at the top
+    exact_match = next(
+        (m for m in metadata if m["Title"].lower() == title.lower()), None
+    )
+    if exact_match:
+        # Remove from current position if exists, then prepend
+        filtered = [r for r in filtered if r["Title"] != exact_match["Title"]]
+        filtered.insert(0, exact_match)
+        print(f"✓ Exact title match injected: {exact_match['Title']}")
 
     # Handle similar_to filter (requires FAISS search)
     if similar_to:
