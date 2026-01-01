@@ -65,6 +65,14 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "Dict",
         "importPath": "typing",
         "description": "typing",
@@ -202,6 +210,94 @@
     },
     {
         "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -242,6 +338,22 @@
     },
     {
         "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
         "importPath": "collections",
         "description": "collections",
         "isExtraImport": true,
@@ -374,6 +486,46 @@
     },
     {
         "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "InputExample",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "losses",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "evaluation",
         "importPath": "sentence_transformers",
         "description": "sentence_transformers",
         "isExtraImport": true,
@@ -836,6 +988,14 @@
         "documentation": {}
     },
     {
+        "label": "DataLoader",
+        "importPath": "torch.utils.data",
+        "description": "torch.utils.data",
+        "isExtraImport": true,
+        "detail": "torch.utils.data",
+        "documentation": {}
+    },
+    {
         "label": "MSELoss",
         "importPath": "torch.nn",
         "description": "torch.nn",
@@ -857,6 +1017,31 @@
         "description": "transformers",
         "isExtraImport": true,
         "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "combinations",
+        "importPath": "itertools",
+        "description": "itertools",
+        "isExtraImport": true,
+        "detail": "itertools",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
         "documentation": {}
     },
     {
@@ -1805,6 +1990,132 @@
         "documentation": {}
     },
     {
+        "label": "load_dataset",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def load_dataset(path: str) -> pd.DataFrame:\n    \"\"\"Load and preprocess the drama dataset.\"\"\"\n    print(f\"Loading dataset from {path}...\")\n    df = pd.read_excel(path)\n    df.fillna(\"\", inplace=True)\n    # Standardize column names\n    column_mapping = {\n        \"title\": \"Title\",\n        \"genres\": \"Genre\",\n        \"description\": \"Description\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "create_weighted_content",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def create_weighted_content(row: pd.Series, weights: Dict[str, float] = None) -> str:\n    \"\"\"\n    Create weighted content string for embedding.\n    Weights determine how much each field contributes to the final embedding.\n    Higher weight = field is repeated more times = more influence on embedding.\n    \"\"\"\n    if weights is None:\n        weights = {\n            \"Title\": 3.0,  # Title is most important\n            \"Genre\": 2.0,  # Genre is very important for discovery",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "create_genre_focused_content",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def create_genre_focused_content(row: pd.Series) -> str:\n    \"\"\"Create content focused on genre for genre-based search.\"\"\"\n    genre = str(row.get(\"Genre\", \"\"))\n    title = str(row.get(\"Title\", \"\"))\n    description = str(row.get(\"Description\", \"\"))[:200]  # First 200 chars\n    # Repeat genre to give it more weight\n    return f\"{genre} {genre} {genre} {title} {description}\"\ndef create_actor_focused_content(row: pd.Series) -> str:\n    \"\"\"Create content focused on cast for actor-based search.\"\"\"\n    cast = str(row.get(\"Cast\", \"\"))",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "create_actor_focused_content",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def create_actor_focused_content(row: pd.Series) -> str:\n    \"\"\"Create content focused on cast for actor-based search.\"\"\"\n    cast = str(row.get(\"Cast\", \"\"))\n    title = str(row.get(\"Title\", \"\"))\n    # Repeat cast to give it more weight\n    return f\"{cast} {cast} {cast} {title}\"\ndef create_theme_embeddings(\n    df: pd.DataFrame, encoder: SentenceTransformer\n) -> Tuple[np.ndarray, Dict]:\n    \"\"\"",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "create_theme_embeddings",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def create_theme_embeddings(\n    df: pd.DataFrame, encoder: SentenceTransformer\n) -> Tuple[np.ndarray, Dict]:\n    \"\"\"\n    Create theme-based embeddings by tagging dramas with themes.\n    Returns:\n        theme_embeddings: Array of theme embeddings for each drama\n        theme_assignments: Dict mapping drama index to themes\n    \"\"\"\n    print(\"\\nCreating theme-based embeddings...\")",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "build_multi_index",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def build_multi_index(\n    df: pd.DataFrame, encoder: SentenceTransformer, output_dir: str\n) -> Dict[str, str]:\n    \"\"\"\n    Build multiple FAISS indices for different search types.\n    Creates:\n    1. main_index - General purpose with weighted content\n    2. genre_index - Genre-focused for genre browsing\n    3. actor_index - Actor-focused for actor search\n    4. theme_index - Theme-focused for theme search",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "get_encoder",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def get_encoder(model_dir: str, base_model: str) -> SentenceTransformer:\n    \"\"\"Load the best available encoder model.\"\"\"\n    # Check for fine-tuned model\n    finetuned_path = os.path.join(model_dir, \"sbert-finetuned-full\")\n    if os.path.exists(finetuned_path):\n        print(f\"Using fine-tuned model: {finetuned_path}\")\n        return SentenceTransformer(finetuned_path)\n    # Check for any fine-tuned model\n    for name in os.listdir(model_dir):\n        if name.startswith(\"sbert-finetuned\") and os.path.isdir(",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser(description=\"Build enhanced FAISS indices\")\n    parser.add_argument(\n        \"--mode\",\n        choices=[\"full\", \"themes-only\", \"genre-only\"],\n        default=\"full\",\n        help=\"Build mode\",\n    )\n    parser.add_argument(\"--data\", default=DATA_PATH, help=\"Path to dataset\")\n    parser.add_argument(\"--output\", default=INDEX_DIR, help=\"Output directory\")",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "DATA_PATH",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_DIR",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "INDEX_DIR",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",\n            \"time loop\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_MODEL",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "BASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",\n            \"time loop\",\n            \"past life\",\n            \"future\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "THEME_DEFINITIONS",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "THEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",\n            \"time loop\",\n            \"past life\",\n            \"future\",\n            \"time machine\",\n            \"temporal\",",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "GENRE_SYNONYMS",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "GENRE_SYNONYMS = {\n    \"thriller\": [\"Thriller\", \"Suspense\", \"Mystery\", \"Crime\", \"Psychological\"],\n    \"historical\": [\"Historical\", \"Period Drama\", \"Sageuk\", \"Historical Drama\"],\n    \"romantic comedy\": [\"Romance\", \"Comedy\"],\n    \"romcom\": [\"Romance\", \"Comedy\"],\n    \"action\": [\"Action\", \"Adventure\", \"Martial Arts\"],\n    \"horror\": [\"Horror\", \"Supernatural\", \"Thriller\"],\n    \"melodrama\": [\"Melodrama\", \"Drama\", \"Romance\"],\n    \"fantasy\": [\"Fantasy\", \"Supernatural\", \"Sci-Fi\"],\n    \"crime\": [\"Crime\", \"Thriller\", \"Mystery\", \"Detective\"],",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
         "label": "load_metadata",
         "kind": 2,
         "importPath": "model_traning.eval_retrieval",
@@ -1904,6 +2215,69 @@
         "documentation": {}
     },
     {
+        "label": "load_training_pairs",
+        "kind": 2,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "def load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )\n    with open(pairs_path, \"r\", encoding=\"utf-8\") as f:\n        pairs = json.load(f)",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "load_training_triplets",
+        "kind": 2,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "def load_training_triplets(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training triplets with hard negatives.\"\"\"\n    triplets_path = os.path.join(data_dir, \"training_triplets.json\")\n    if not os.path.exists(triplets_path):\n        print(\"No triplets found, skipping triplet loss\")\n        return []\n    with open(triplets_path, \"r\", encoding=\"utf-8\") as f:\n        triplets = json.load(f)\n    examples = []\n    for t in triplets:",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "create_evaluator",
+        "kind": 2,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "def create_evaluator(data_dir: str, model: SentenceTransformer):\n    \"\"\"Create an evaluator for monitoring training progress.\"\"\"\n    # Use a subset of genre query pairs for evaluation\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    with open(pairs_path, \"r\", encoding=\"utf-8\") as f:\n        pairs = json.load(f)\n    # Filter to genre_query and theme_query for evaluation\n    eval_pairs = [p for p in pairs if p[\"type\"] in [\"genre_query\", \"theme_query\"]]\n    if len(eval_pairs) < 10:\n        return None",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--base_model\", default=BASE_MODEL, help=\"Base model to fine-tune\"\n    )\n    parser.add_argument(\n        \"--data_dir\", default=TRAINING_DATA_DIR, help=\"Training data directory\"\n    )\n    parser.add_argument(\"--output\", default=OUTPUT_DIR, help=\"Output model directory\")\n    parser.add_argument(",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_MODEL",
+        "kind": 5,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "BASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\nTRAINING_DATA_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "TRAINING_DATA_DIR",
+        "kind": 5,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "TRAINING_DATA_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "OUTPUT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "OUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )\n    with open(pairs_path, \"r\", encoding=\"utf-8\") as f:",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
         "label": "build_examples",
         "kind": 2,
         "importPath": "model_traning.fine_tune_sbert",
@@ -1937,6 +2311,258 @@
         "description": "model_traning.generate_reranker_data",
         "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--index\",\n        default=r\"d:\\Projects\\SeoulMate\\model_traning\\faiss_index\\index.faiss\",\n    )\n    parser.add_argument(\n        \"--meta\", default=r\"d:\\Projects\\SeoulMate\\model_traning\\faiss_index\\meta.pkl\"\n    )\n    parser.add_argument(",
         "detail": "model_traning.generate_reranker_data",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def load_dataset(path: str) -> pd.DataFrame:\n    \"\"\"Load and preprocess dataset.\"\"\"\n    df = pd.read_excel(path)\n    df.fillna(\"\", inplace=True)\n    # Standardize columns\n    column_mapping = {\n        \"title\": \"Title\",\n        \"genres\": \"Genre\",\n        \"description\": \"Description\",\n        \"actors\": \"Cast\",",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_title_description_pairs",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_title_description_pairs(df: pd.DataFrame) -> List[Dict]:\n    \"\"\"\n    Generate (title, description) pairs.\n    Purpose: Teach model that title and description of same drama are related.\n    \"\"\"\n    pairs = []\n    for _, row in df.iterrows():\n        title = str(row[\"Title\"]).strip()\n        desc = str(row[\"Description\"]).strip()\n        if title and desc and len(desc) > 50:",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_genre_pairs",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_genre_pairs(\n    df: pd.DataFrame, max_pairs_per_genre: int = 100\n) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas from the same genre.\n    Purpose: Teach model that dramas with same genre are related.\n    \"\"\"\n    # Group dramas by genre\n    genre_dramas = defaultdict(list)\n    for _, row in df.iterrows():",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_actor_pairs",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_actor_pairs(df: pd.DataFrame, max_pairs_per_actor: int = 50) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas with the same actor.\n    Purpose: Teach model that dramas with same actor are related when searching by actor.\n    \"\"\"\n    # Group dramas by actor\n    actor_dramas = defaultdict(list)\n    for _, row in df.iterrows():\n        cast = str(row.get(\"Cast\", \"\"))\n        title = str(row[\"Title\"]).strip()",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_theme_pairs",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_theme_pairs(df: pd.DataFrame) -> List[Dict]:\n    \"\"\"\n    Generate theme-based training pairs.\n    Purpose: Teach model to associate theme queries with relevant dramas.\n    \"\"\"\n    pairs = []\n    for theme_name, theme_data in THEME_DEFINITIONS.items():\n        # Find dramas matching this theme\n        matching_dramas = []\n        for _, row in df.iterrows():",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_genre_query_pairs",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_genre_query_pairs(df: pd.DataFrame) -> List[Dict]:\n    \"\"\"\n    Generate genre query training pairs.\n    Purpose: Teach model to match \"romantic comedy\" → actual romantic comedy dramas.\n    \"\"\"\n    pairs = []\n    genre_queries = {\n        \"romantic comedy\": [\"Romance\", \"Comedy\"],\n        \"romcom\": [\"Romance\", \"Comedy\"],\n        \"medical drama\": [\"Medical\", \"Drama\"],",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_hard_negatives",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_hard_negatives(df: pd.DataFrame, all_pairs: List[Dict]) -> List[Dict]:\n    \"\"\"\n    Add hard negatives to training data.\n    Hard negatives are examples that look similar but should NOT match.\n    This teaches the model to distinguish subtle differences.\n    \"\"\"\n    # Get all titles for negative sampling\n    all_titles = list(df[\"Title\"].astype(str).unique())\n    # Create title to genre mapping\n    title_to_genre = {}",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "generate_query_variations",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def generate_query_variations(df: pd.DataFrame) -> List[Dict]:\n    \"\"\"\n    Generate query variation pairs.\n    Purpose: Teach model that different ways of asking for same thing are equivalent.\n    \"\"\"\n    pairs = []\n    # Query variations for popular dramas\n    popular_dramas = (\n        df.nlargest(100, \"rating_value\")[\"Title\"].tolist()\n        if \"rating_value\" in df.columns",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "save_training_data",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def save_training_data(pairs: List[Dict], triplets: List[Dict], output_dir: str):\n    \"\"\"Save training data in multiple formats.\"\"\"\n    os.makedirs(output_dir, exist_ok=True)\n    # Save as JSON (full data)\n    with open(\n        os.path.join(output_dir, \"training_pairs.json\"), \"w\", encoding=\"utf-8\"\n    ) as f:\n        json.dump(pairs, f, indent=2, ensure_ascii=False)\n    with open(\n        os.path.join(output_dir, \"training_triplets.json\"), \"w\", encoding=\"utf-8\"",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--data\", default=DATA_PATH, help=\"Path to dataset\")\n    parser.add_argument(\"--output\", default=OUTPUT_DIR, help=\"Output directory\")\n    parser.add_argument(\n        \"--mode\", choices=[\"full\", \"pairs-only\", \"triplets-only\"], default=\"full\"\n    )\n    args = parser.parse_args()\n    # Load dataset\n    df = load_dataset(args.data)",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "DATA_PATH",
+        "kind": 5,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "OUTPUT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "OUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",\n            \"Nine: Nine Time Travels\",",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "THEME_DEFINITIONS",
+        "kind": 5,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "THEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",\n            \"Nine: Nine Time Travels\",\n        ],\n    },",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "RankingExample",
+        "kind": 6,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "class RankingExample:\n    \"\"\"A training example for learning-to-rank.\"\"\"\n    query: str\n    doc_id: int\n    features: np.ndarray\n    label: float  # Relevance score (0-4, or click/no-click binary)\n# ======================================================\n# Feature Extraction\n# ======================================================\nclass FeatureExtractor:",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "FeatureExtractor",
+        "kind": 6,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "class FeatureExtractor:\n    \"\"\"Extract ranking features from query-document pairs.\"\"\"\n    def __init__(self, metadata: List[Dict]):\n        self.metadata = metadata\n        self.title_to_idx = {m[\"Title\"].lower(): i for i, m in enumerate(metadata)}\n        # Pre-compute some global statistics\n        self.max_rating_count = max(\n            float(m.get(\"rating_count\", 0) or 0) for m in metadata\n        )\n        self.current_year = 2026  # For recency calculation",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "LightGBMRanker",
+        "kind": 6,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "class LightGBMRanker:\n    \"\"\"\n    LightGBM-based learning-to-rank model.\n    Uses LambdaRank objective which directly optimizes NDCG.\n    \"\"\"\n    def __init__(self, params: Dict = None):\n        self.model = None\n        self.params = params or {\n            \"objective\": \"lambdarank\",\n            \"metric\": \"ndcg\",",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "generate_synthetic_training_data",
+        "kind": 2,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "def generate_synthetic_training_data(\n    metadata: List[Dict], num_queries: int = 500\n) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:\n    \"\"\"\n    Generate synthetic training data for LTR.\n    Since we don't have real user clicks, we create synthetic\n    training data based on heuristics:\n    - Exact title match = label 4 (highly relevant)\n    - Same genre + high rating = label 3\n    - Same genre = label 2",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--mode\", choices=[\"generate-data\", \"train\", \"evaluate\"], required=True\n    )\n    parser.add_argument(\"--data\", default=DATA_PATH, help=\"Path to dataset\")\n    parser.add_argument(\"--output\", default=LTR_DIR, help=\"Output directory\")\n    parser.add_argument(\"--epochs\", type=int, default=50, help=\"Training epochs/rounds\")\n    parser.add_argument(\n        \"--model_type\", choices=[\"lightgbm\", \"neural\"], default=\"lightgbm\"",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "DATA_PATH",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nLTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "MODEL_DIR",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nLTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "LTR_DIR",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "LTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)\n    \"recency_score\",  # How recent the drama is",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "FEATURE_NAMES",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "FEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)\n    \"recency_score\",  # How recent the drama is\n    \"actor_match\",  # Does drama have searched actor\n    \"theme_match\",  # Does drama match searched theme",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "run_script",
+        "kind": 2,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "def run_script(script_path: str, args: list = None, description: str = \"\"):\n    \"\"\"Run a Python script and handle errors.\"\"\"\n    args = args or []\n    print(f\"\\n{'='*60}\")\n    print(f\"STEP: {description}\")\n    print(f\"Script: {os.path.basename(script_path)}\")\n    print(f\"{'='*60}\")\n    start_time = time.time()\n    cmd = [sys.executable, script_path] + args\n    try:",
+        "detail": "model_traning.train_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "check_requirements",
+        "kind": 2,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "def check_requirements():\n    \"\"\"Check that required packages are installed.\"\"\"\n    required = [\n        (\"sentence_transformers\", \"sentence-transformers\"),\n        (\"faiss\", \"faiss-cpu\"),\n        (\"pandas\", \"pandas\"),\n        (\"numpy\", \"numpy\"),\n        (\"torch\", \"torch\"),\n    ]\n    missing = []",
+        "detail": "model_traning.train_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser(description=\"SeoulMate Model Training Pipeline\")\n    parser.add_argument(\n        \"--mode\",\n        choices=[\n            \"full\",\n            \"quick\",\n            \"generate-data\",\n            \"fine-tune\",\n            \"build-index\",",
+        "detail": "model_traning.train_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "SCRIPTS_DIR",
+        "kind": 5,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))\nPROJECT_ROOT = os.path.dirname(SCRIPTS_DIR)\nSCRIPTS = {\n    \"generate_data\": os.path.join(SCRIPTS_DIR, \"generate_training_data.py\"),\n    \"fine_tune\": os.path.join(SCRIPTS_DIR, \"fine_tune_kdrama_sbert.py\"),\n    \"build_index\": os.path.join(SCRIPTS_DIR, \"enhanced_index_builder.py\"),\n    \"train_ltr\": os.path.join(SCRIPTS_DIR, \"learning_to_rank.py\"),\n}\ndef run_script(script_path: str, args: list = None, description: str = \"\"):\n    \"\"\"Run a Python script and handle errors.\"\"\"",
+        "detail": "model_traning.train_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_ROOT",
+        "kind": 5,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "PROJECT_ROOT = os.path.dirname(SCRIPTS_DIR)\nSCRIPTS = {\n    \"generate_data\": os.path.join(SCRIPTS_DIR, \"generate_training_data.py\"),\n    \"fine_tune\": os.path.join(SCRIPTS_DIR, \"fine_tune_kdrama_sbert.py\"),\n    \"build_index\": os.path.join(SCRIPTS_DIR, \"enhanced_index_builder.py\"),\n    \"train_ltr\": os.path.join(SCRIPTS_DIR, \"learning_to_rank.py\"),\n}\ndef run_script(script_path: str, args: list = None, description: str = \"\"):\n    \"\"\"Run a Python script and handle errors.\"\"\"\n    args = args or []",
+        "detail": "model_traning.train_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "SCRIPTS",
+        "kind": 5,
+        "importPath": "model_traning.train_pipeline",
+        "description": "model_traning.train_pipeline",
+        "peekOfCode": "SCRIPTS = {\n    \"generate_data\": os.path.join(SCRIPTS_DIR, \"generate_training_data.py\"),\n    \"fine_tune\": os.path.join(SCRIPTS_DIR, \"fine_tune_kdrama_sbert.py\"),\n    \"build_index\": os.path.join(SCRIPTS_DIR, \"enhanced_index_builder.py\"),\n    \"train_ltr\": os.path.join(SCRIPTS_DIR, \"learning_to_rank.py\"),\n}\ndef run_script(script_path: str, args: list = None, description: str = \"\"):\n    \"\"\"Run a Python script and handle errors.\"\"\"\n    args = args or []\n    print(f\"\\n{'='*60}\")",
+        "detail": "model_traning.train_pipeline",
         "documentation": {}
     },
     {
