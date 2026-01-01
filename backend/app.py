@@ -462,16 +462,58 @@ def recommend(
             drama = next((m for m in filtered_metadata if m["Title"] == title), None)
             if drama:
                 drama_genres = str(drama.get("Genre", "")).lower()
-                # Boost if any detected genre matches
-                if any(g.lower() in drama_genres for g in detected_genres):
-                    combined_scores[title] = score * 1.4  # 40% boost for genre match
-                    print(f"   ✓ Boosted: {title} ({drama.get('Genre', '')})")
+                # Count matching genres
+                matching_count = sum(
+                    1 for g in detected_genres if g.lower() in drama_genres
+                )
+
+                if matching_count > 0:
+                    # Higher boost for dramas matching ALL detected genres
+                    if (
+                        matching_count >= len(detected_genres)
+                        and len(detected_genres) > 1
+                    ):
+                        boost = 1.6  # 60% boost for full match
+                    else:
+                        boost = 1.4  # 40% boost for partial match
+
+                    # Additional boost for high-rated dramas (8.0+)
+                    try:
+                        rating = float(drama.get("rating_value", 0))
+                        if rating >= 8.5:
+                            boost += 0.15  # Extra 15% for highly rated
+                        elif rating >= 8.0:
+                            boost += 0.1  # Extra 10% for good rating
+                    except:
+                        pass
+
+                    combined_scores[title] = score * boost
+                    print(
+                        f"   ✓ Boosted: {title} ({matching_count}/{len(detected_genres)} genres, boost={boost:.2f})"
+                    )
 
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [
         next(m for m in filtered_metadata if m["Title"] == t)
         for t, _ in sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)
     ]
+
+    # Apply popularity boost - push highly-rated dramas up in genre searches
+    if detected_genres and not exact_title_match:
+
+        def get_popularity_score(drama):
+            try:
+                rating = float(drama.get("rating_value", 0))
+                return rating
+            except:
+                return 0
+
+        # Sort by combined score but with rating as tiebreaker
+        filtered = sorted(
+            filtered,
+            key=lambda r: (combined_scores.get(r["Title"], 0), get_popularity_score(r)),
+            reverse=True,
+        )
 
     # ---- EXACT TITLE INJECTION ----
     # If query matches a title exactly or closely, ensure it's at the top
