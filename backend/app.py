@@ -234,6 +234,45 @@ GENRE_PRIOR_TITLES = {
     ],
 }
 
+GENRE_COMBINATION_PRIOR_TITLES = {
+    ("Drama", "Law"): [
+        "Extraordinary Attorney Woo",
+        "Law School",
+        "Vincenzo",
+        "Lawless Lawyer",
+    ],
+    ("Drama", "Youth"): [
+        "True Beauty",
+        "Dream High",
+        "Extraordinary You",
+        "School 2017",
+    ],
+    ("Fantasy", "Romance"): [
+        "Goblin",
+        "Hotel Del Luna",
+        "Alchemy of Souls",
+        "My Love from the Star",
+    ],
+    ("Drama", "Thriller"): [
+        "All of Us Are Dead",
+        "Kingdom",
+        "Happiness",
+        "Sweet Home",
+    ],
+    ("Horror", "Thriller"): [
+        "All of Us Are Dead",
+        "Kingdom",
+        "Happiness",
+        "Sweet Home",
+    ],
+    ("Revenge", "Thriller"): [
+        "The Glory",
+        "Penthouse",
+        "Eve",
+        "Revenge of Others",
+    ],
+}
+
 ACTOR_PRIOR_TITLES = {
     "Hyun Bin": [
         "Crash Landing on You",
@@ -661,6 +700,13 @@ def recommend(
                     print(
                         f"   ✓ Boosted: {result_title} ({matching_count}/{len(detected_genres)} genres, boost={boost:.2f})"
                     )
+
+        detected_genre_set = set(detected_genres)
+        for genre_combo, prior_titles in GENRE_COMBINATION_PRIOR_TITLES.items():
+            if set(genre_combo).issubset(detected_genre_set):
+                add_prior_title_boosts(
+                    combined_scores, filtered_metadata, prior_titles, boost=2.55
+                )
 
         for detected_genre in detected_genres:
             prior_titles = GENRE_PRIOR_TITLES.get(detected_genre, [])

@@ -4,6 +4,28 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Genre Combination Search
+
+- Added ranking priors for multi-genre intent combinations:
+  - `legal drama`
+  - `school drama`
+  - `fantasy romance`
+  - `zombie drama`
+  - `revenge thriller`
+- Applied the combination boost before single-genre priors so compound queries can surface more representative dramas.
+- Improved expanded benchmark result:
+  - Overall accuracy: `83.10%` to `86.42%`
+  - Overall grade: `B+` to `A`
+  - Search Precision@3: `53.70%` to `60.49%`
+  - Search Recall@10: `88.58%` to `94.14%`
+  - Genre Precision@3: improved to `84.62%`
+  - Genre Recall@10: improved to `94.87%`
+- Remaining weak areas:
+  - theme query `school bullying revenge`
+  - exact title handling for ambiguous titles such as `Goblin`
+  - typo ranking for harder misspellings
+  - year filter accuracy
+
 ### Phase 3 Theme Intelligence
 
 - Added structured theme detection for richer story/theme queries:
