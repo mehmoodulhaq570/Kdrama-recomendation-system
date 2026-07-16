@@ -4,6 +4,53 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Generated Index Foundation
+
+- Added a metadata-driven index generator:
+  - `backend/generate_indexes.py`
+- Generated reusable JSON indexes from `model_traning/faiss_index/meta.pkl`:
+  - `backend/generated_indexes/title_aliases.json`
+  - `backend/generated_indexes/actor_index.json`
+  - `backend/generated_indexes/genre_index.json`
+  - `backend/generated_indexes/theme_index.json`
+  - `backend/generated_indexes/keyword_index.json`
+  - `backend/generated_indexes/manifest.json`
+- Generated index sizes:
+  - actor index: `3,201` keys
+  - genre index: `31` keys
+  - keyword index: `2,199` keys
+  - theme index: `14` keys
+  - title aliases: `11,999` keys
+- Updated the backend to load generated indexes at startup.
+- Switched title alias resolution to use generated aliases plus minimal fallback aliases.
+- Tested broad generated actor/genre/theme/keyword ranking boosts and found they were too noisy when used directly.
+- Kept generated ranking indexes available for future calibrated scoring, but did not blindly merge them into live ranking.
+- Preserved current benchmark result:
+  - Overall accuracy: `88.15%`
+  - Overall grade: `A`
+  - Search Precision@3: `62.96%`
+  - Search Recall@10: `97.22%`
+  - Typo MRR: `1.000`
+
+### Exact Title and Typo Ranking
+
+- Added a small title alias resolver for public/common titles that differ from dataset titles.
+- Added `Goblin` as an alias for `Guardian: The Lonely and Great God`.
+- Updated curated priors to use canonical dataset titles where needed.
+- Added high-confidence fuzzy title resolution for misspelled title-like queries.
+- Used a strict fuzzy threshold so vague queries such as `good drama` do not get incorrectly pinned to random titles.
+- Improved expanded benchmark result:
+  - Overall accuracy: `87.75%` to `88.15%`
+  - Search Precision@3: `62.35%` to `62.96%`
+  - Search MRR: `0.951` to `0.954`
+  - Typo Precision@3: `53.33%` to `66.67%`
+  - Typo MRR: `0.767` to `1.000`
+- Fixed typo cases:
+  - `Hospitl Playlist` now returns `Hospital Playlist` at rank 1.
+  - `Extraordinary Atorney Woo` now returns `Extraordinary Attorney Woo` at rank 1.
+- Remaining caveat:
+  - Public-title aliases still need broader display/evaluation handling for genre and actor searches involving `Goblin`.
+
 ### Theme Query Candidate Recovery
 
 - Fixed theme-heavy queries being hurt by hard genre pre-filtering.

@@ -12,3 +12,6 @@ logs/
 .idea
 .vscode/
 .ipynb_checkpoints/
+.vscode
+PHASE2_STEP2_SUMMARY.md
+Phase-to-implement.txt

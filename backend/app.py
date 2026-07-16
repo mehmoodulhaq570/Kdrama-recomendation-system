@@ -12,6 +12,7 @@ from functools import lru_cache
 from rank_bm25 import BM25Plus
 import uuid
 import time
+import json
 
 # Import Phase 1 enhancements
 from query_analyzer import QueryAnalyzer, get_search_strategy
@@ -29,6 +30,7 @@ MODEL_NAME = "paraphrase-multilingual-mpnet-base-v2"
 CROSS_ENCODER_MODEL = r"D:\Projects\SeoulMate\model_traning\models\cross-enc-excellent"
 MODEL_DIR = r"D:\Projects\SeoulMate\model_traning\models"
 INDEX_DIR = r"D:\Projects\SeoulMate\model_traning\faiss_index"
+GENERATED_INDEX_DIR = os.path.join(os.path.dirname(__file__), "generated_indexes")
 
 # ======================================================
 # FASTAPI SETUP
@@ -131,6 +133,45 @@ def cached_encode(text: str):
 _result_cache = {}
 _cache_max_size = 200
 _cache_ttl = 300  # 5 minutes
+
+
+def load_generated_index(filename: str, default=None):
+    path = os.path.join(GENERATED_INDEX_DIR, filename)
+    if default is None:
+        default = {}
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        print(f"Loaded generated index: {filename} ({len(data)} keys)")
+        return data
+    except FileNotFoundError:
+        print(f"Generated index missing: {filename}; using fallback data.")
+        return default
+    except Exception as exc:
+        print(f"Could not load generated index {filename}: {exc}")
+        return default
+
+
+def merge_title_indexes(generated, curated):
+    merged = {key: value[:] for key, value in generated.items()}
+    for key, titles in curated.items():
+        current = merged.setdefault(key, [])
+        for title in titles:
+            if title not in current:
+                current.insert(0, title)
+    return merged
+
+
+GENERATED_TITLE_ALIASES = load_generated_index("title_aliases.json")
+GENERATED_ACTOR_INDEX = load_generated_index("actor_index.json")
+GENERATED_GENRE_INDEX = load_generated_index("genre_index.json")
+GENERATED_THEME_INDEX = load_generated_index("theme_index.json")
+GENERATED_KEYWORD_INDEX = load_generated_index("keyword_index.json")
+
+TITLE_ALIASES = GENERATED_TITLE_ALIASES | {
+    "goblin": "Guardian: The Lonely and Great God",
+    "guardian": "Guardian: The Lonely and Great God",
+}
 
 THEME_PRIOR_TITLES = {
     "north korea": [
@@ -269,7 +310,7 @@ GENRE_COMBINATION_PRIOR_TITLES = {
         "School 2017",
     ],
     ("Fantasy", "Romance"): [
-        "Goblin",
+        "Guardian: The Lonely and Great God",
         "Hotel Del Luna",
         "Alchemy of Souls",
         "My Love from the Star",
@@ -341,12 +382,11 @@ ACTOR_PRIOR_TITLES = {
         "Encounter",
     ],
     "Gong Yoo": [
-        "Goblin",
+        "Guardian: The Lonely and Great God",
         "Coffee Prince",
         "Big",
     ],
 }
-
 
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
@@ -385,6 +425,17 @@ def add_prior_title_boosts(combined_scores, filtered_metadata, prior_titles, boo
         current = combined_scores.get(title_key, 0.0)
         ranked_boost = boost - (rank * 0.03)
         combined_scores[title_key] = max(current, ranked_boost)
+
+
+def resolve_title_alias(user_input: str, candidates):
+    """Resolve common public titles that differ from dataset titles."""
+    canonical_title = TITLE_ALIASES.get(user_input.lower().strip())
+    if not canonical_title:
+        return None
+    return next(
+        (m for m in candidates if m.get("Title", "").lower() == canonical_title.lower()),
+        None,
+    )
 
 
 # ======================================================
@@ -463,9 +514,11 @@ def recommend(
     exact_title_match = next(
         (m for m in metadata if m["Title"].lower() == title.lower()), None
     )
-    if exact_title_match:
+    alias_title_match = resolve_title_alias(title, metadata)
+    title_resolution_match = exact_title_match or alias_title_match
+    if title_resolution_match:
         print(
-            f"✓ Exact title found: {exact_title_match['Title']} - skipping genre/actor filtering"
+            f"✓ Title found: {title_resolution_match['Title']} - skipping genre/actor filtering"
         )
         # Skip to search with exact match prioritized
     else:
@@ -605,6 +658,25 @@ def recommend(
     drama = next(
         (m for m in filtered_metadata if m["Title"].lower() == title.lower()), None
     )
+    resolved_title_match = drama or resolve_title_alias(title, filtered_metadata)
+    if resolved_title_match:
+        drama = resolved_title_match
+    high_confidence_fuzzy_match = None
+
+    if not drama:
+        filtered_titles = [m["Title"] for m in filtered_metadata]
+        if filtered_titles:
+            match, score, _ = process.extractOne(
+                title, filtered_titles, scorer=fuzz.WRatio
+            )
+            if match and score >= 90:
+                high_confidence_fuzzy_match = next(
+                    (m for m in filtered_metadata if m["Title"] == match), None
+                )
+                drama = high_confidence_fuzzy_match
+                print(
+                    f"High-confidence title match: '{title}' -> '{match}' ({score:.1f}%)"
+                )
 
     # Only try fuzzy matching for specific title searches, not genre/vague queries
     from query_analyzer import QueryIntent
@@ -858,6 +930,16 @@ def recommend(
         filtered.insert(0, exact_match)
         print(f"✓ Exact title match injected: {exact_match['Title']}")
 
+    alias_match = resolve_title_alias(title, metadata)
+    resolved_match = alias_match or high_confidence_fuzzy_match
+    if not resolved_match and not exact_match and intent not in skip_fuzzy_intents:
+        resolved_match = drama
+
+    if resolved_match:
+        filtered = [r for r in filtered if r["Title"] != resolved_match["Title"]]
+        filtered.insert(0, resolved_match)
+        print(f"Title match injected: {resolved_match['Title']}")
+
     # Handle similar_to filter (requires FAISS search)
     if similar_to:
         # Find dramas similar to a given title within filtered metadata
@@ -897,6 +979,20 @@ def recommend(
             reverse=True,
         )
     top_results = filtered[:top_n]
+
+    query_alias = title.lower().strip()
+    canonical_alias_title = TITLE_ALIASES.get(query_alias)
+    if canonical_alias_title:
+        aliased_results = []
+        for result in top_results:
+            if result.get("Title", "").lower() == canonical_alias_title.lower():
+                result = result.copy()
+                result["original_title"] = result["Title"]
+                result["alias_title"] = title.strip()
+                result["Title"] = title.strip()
+            aliased_results.append(result)
+        top_results = aliased_results
+
     # ---- Stage 4.5: Optional Reranking ----
     # Disabled for performance - cross-encoder adds 2-3 seconds
     # Re-enable for production if accuracy is critical

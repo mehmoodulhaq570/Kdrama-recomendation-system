@@ -190,5 +190,60 @@
     "last_active": "2026-07-16T10:33:14.675545",
     "clicked_dramas": [],
     "watchlist": []
+  },
+  "test_user_1784199219": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T10:53:39.273604",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784199467": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T10:57:47.615747",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784208836": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T13:33:57.023891",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784208959": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T13:35:59.321623",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784209088": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T13:38:08.248406",
+    "clicked_dramas": [],
+    "watchlist": []
   }
 }
