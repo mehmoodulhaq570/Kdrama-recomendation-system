@@ -4,6 +4,35 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Expanded Evaluation and Actor Search Improvements
+
+- Expanded the accuracy evaluator with broader coverage:
+  - specific-title searches
+  - genre searches
+  - theme searches
+  - actor searches
+  - typo/fuzzy searches
+  - vague/mood searches
+  - query-intelligence tests
+- Established a broader benchmark baseline:
+  - Overall accuracy: `75.35%`
+  - Search Precision@3: `40.74%`
+  - Search Recall@10: `73.15%`
+  - Actor Precision@3: `13.33%`
+  - Actor Recall@10: `50.00%`
+- Added actor alias normalization for common romanization variants.
+- Added actor-specific ranking priors for major K-drama actors.
+- Improved actor search results:
+  - Actor Precision@3: `13.33%` to `63.33%`
+  - Actor Recall@10: `50.00%` to `100.00%`
+  - Actor MRR: `0.250` to `1.000`
+- Improved expanded benchmark result:
+  - Overall accuracy: `75.35%` to `80.65%`
+  - Search Precision@3: `40.74%` to `50.00%`
+  - Search Recall@10: `73.15%` to `82.41%`
+  - Overall grade: `B` to `B+`
+- Identified theme search as the next major improvement target.
+
 ### Accuracy and Ranking Improvements
 
 - Ran a live evaluation against the current backend.
@@ -201,4 +230,3 @@ SeoulMate evolved through these main stages:
 5. Phase 1 query intelligence with intent detection and query expansion.
 6. Phase 2 personalization with user profiles and preference-based boosting.
 7. Accuracy evaluation, caching, and ranking optimization.
-

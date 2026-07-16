@@ -245,44 +245,41 @@ class QueryAnalyzer:
         }
 
         # Extract actors (capitalized names) - Enhanced detection
-        # Known K-drama actors for better matching
-        known_actors = {
-            "hyun bin",
-            "park seo joon",
-            "song joong ki",
-            "lee min ho",
-            "kim soo hyun",
-            "ji chang wook",
-            "gong yoo",
-            "iu",
-            "lee jong suk",
-            "park bo gum",
-            "nam joo hyuk",
-            "lee dong wook",
-            "kim woo bin",
-            "park hyung sik",
-            "yoo seung ho",
-            "song hye kyo",
-            "jun ji hyun",
-            "park shin hye",
-            "suzy",
-            "han ji min",
-            "son ye jin",
-            "kim ji won",
-            "park min young",
-            "seo ye ji",
-            "kim go eun",
+        # Known K-drama actors with common romanization variants.
+        actor_aliases = {
+            "Hyun Bin": ["hyun bin"],
+            "Park Seo Joon": ["park seo joon", "park seo-joon", "park seo jun"],
+            "Song Joong Ki": ["song joong ki", "song joong-ki"],
+            "Lee Min Ho": ["lee min ho", "lee min-ho"],
+            "Kim Soo Hyun": ["kim soo hyun", "kim soo-hyun", "kim su hyun"],
+            "Ji Chang Wook": ["ji chang wook", "ji chang-wook"],
+            "Gong Yoo": ["gong yoo"],
+            "IU": ["iu", "lee ji eun", "lee ji-eun"],
+            "Lee Jong Suk": ["lee jong suk", "lee jong-suk"],
+            "Park Bo Gum": ["park bo gum", "park bo-gum"],
+            "Nam Joo Hyuk": ["nam joo hyuk", "nam joo-hyuk"],
+            "Lee Dong Wook": ["lee dong wook", "lee dong-wook"],
+            "Kim Woo Bin": ["kim woo bin", "kim woo-bin"],
+            "Park Hyung Sik": ["park hyung sik", "park hyung-sik"],
+            "Yoo Seung Ho": ["yoo seung ho", "yoo seung-ho"],
+            "Song Hye Kyo": ["song hye kyo", "song hye-kyo"],
+            "Jun Ji Hyun": ["jun ji hyun", "jeon ji hyun", "jun ji-hyun"],
+            "Park Shin Hye": ["park shin hye", "park shin-hye"],
+            "Bae Suzy": ["suzy", "bae suzy"],
+            "Han Ji Min": ["han ji min", "han ji-min"],
+            "Son Ye Jin": ["son ye jin", "son ye-jin"],
+            "Kim Ji Won": ["kim ji won", "kim ji-won"],
+            "Park Min Young": ["park min young", "park min-young"],
+            "Seo Ye Ji": ["seo ye ji", "seo yea ji", "seo ye-ji"],
+            "Kim Go Eun": ["kim go eun", "kim go-eun"],
         }
 
         # Check for known actors first (case-insensitive)
         query_lower = query.lower()
         detected_actors = []
-        for actor in known_actors:
-            if actor in query_lower:
-                # Convert to proper case (Title Case)
-                detected_actors.append(
-                    " ".join(word.capitalize() for word in actor.split())
-                )
+        for canonical_actor, aliases in actor_aliases.items():
+            if any(alias in query_lower for alias in aliases):
+                detected_actors.append(canonical_actor)
 
         # Then use pattern matching for other actors
         actor_pattern = r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b"

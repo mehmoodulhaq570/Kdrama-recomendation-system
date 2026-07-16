@@ -188,6 +188,59 @@ GENRE_PRIOR_TITLES = {
     ],
 }
 
+ACTOR_PRIOR_TITLES = {
+    "Hyun Bin": [
+        "Crash Landing on You",
+        "Memories of the Alhambra",
+        "Secret Garden",
+    ],
+    "Park Seo Joon": [
+        "Itaewon Class",
+        "What's Wrong with Secretary Kim",
+        "Fight for My Way",
+    ],
+    "Song Joong Ki": [
+        "Vincenzo",
+        "Descendants of the Sun",
+        "Arthdal Chronicles Part 1: The Children of Prophecy",
+    ],
+    "Kim Soo Hyun": [
+        "My Love from the Star",
+        "It's Okay to Not Be Okay",
+        "Moon Embracing the Sun",
+    ],
+    "Lee Min Ho": [
+        "The Heirs",
+        "The King: Eternal Monarch",
+        "Boys over Flowers",
+    ],
+    "Ji Chang Wook": [
+        "Healer",
+        "Suspicious Partner",
+        "The K2",
+    ],
+    "IU": [
+        "Hotel Del Luna",
+        "My Mister",
+        "Moon Lovers: Scarlet Heart Ryeo",
+    ],
+    "Park Min Young": [
+        "What's Wrong with Secretary Kim",
+        "Her Private Life",
+        "Healer",
+    ],
+    "Song Hye Kyo": [
+        "Descendants of the Sun",
+        "The Glory",
+        "Encounter",
+    ],
+    "Gong Yoo": [
+        "Goblin",
+        "Coffee Prince",
+        "Big",
+    ],
+}
+
 
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
@@ -610,6 +663,28 @@ def recommend(
                 combined_scores[result_title] = score * (
                     1.35 + 0.15 * matching_theme_count
                 )
+
+    if detected_actors:
+        print(f"⭐ Applying actor boost for: {detected_actors}")
+        for detected_actor in detected_actors:
+            prior_titles = ACTOR_PRIOR_TITLES.get(detected_actor, [])
+            if prior_titles:
+                add_prior_title_boosts(
+                    combined_scores, filtered_metadata, prior_titles, boost=2.35
+                )
+
+        for result_title, score in list(combined_scores.items()):
+            drama = next(
+                (m for m in filtered_metadata if m["Title"] == result_title), None
+            )
+            if not drama:
+                continue
+            cast_text = str(drama.get("Cast", "")).lower()
+            actor_match_count = sum(
+                1 for actor in detected_actors if actor.lower() in cast_text
+            )
+            if actor_match_count:
+                combined_scores[result_title] = score * (1.25 + 0.2 * actor_match_count)
 
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [
