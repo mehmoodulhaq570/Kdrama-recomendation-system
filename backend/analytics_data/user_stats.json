@@ -91,5 +91,27 @@
       "Hit the Spot",
       "Romance Is a Bonus Book"
     ]
+  },
+  "test_user_1784181154": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T05:52:40.555744",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784182864": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T06:21:10.820222",
+    "clicked_dramas": [],
+    "watchlist": []
   }
 }

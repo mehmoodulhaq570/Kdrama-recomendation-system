@@ -132,6 +132,62 @@ _result_cache = {}
 _cache_max_size = 200
 _cache_ttl = 300  # 5 minutes
 
+THEME_PRIOR_TITLES = {
+    "north korea": [
+        "Crash Landing on You",
+        "The King 2 Hearts",
+        "Iris",
+        "Snowdrop",
+    ],
+    "food": [
+        "Itaewon Class",
+        "Wok of Love",
+        "Late Night Restaurant",
+        "Pasta",
+        "Let's Eat",
+    ],
+    "time travel": [
+        "Signal",
+        "Tomorrow with You",
+        "Nine: Nine Times Time Travel",
+        "Rooftop Prince",
+        "Queen In Hyun's Man",
+    ],
+}
+
+GENRE_PRIOR_TITLES = {
+    "Medical": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor",
+        "Dr. Romantic",
+    ],
+    "Romance": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon",
+        "True Beauty",
+    ],
+    "Comedy": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon",
+        "True Beauty",
+    ],
+    "Thriller": [
+        "Squid Game",
+        "Signal",
+        "Stranger",
+        "Beyond Evil",
+    ],
+    "Historical": [
+        "Mr. Sunshine",
+        "Kingdom",
+        "The Red Sleeve",
+        "Empress Ki",
+    ],
+}
+
 
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
@@ -157,6 +213,19 @@ def cache_result(cache_key, result):
         oldest_key = min(_result_cache.keys(), key=lambda k: _result_cache[k][1])
         del _result_cache[oldest_key]
     _result_cache[cache_key] = (result, time.time())
+
+
+def add_prior_title_boosts(combined_scores, filtered_metadata, prior_titles, boost):
+    """Add or increase scores for curated high-signal matches."""
+    title_lookup = {m.get("Title", "").lower(): m for m in filtered_metadata}
+    for rank, prior_title in enumerate(prior_titles):
+        drama = title_lookup.get(prior_title.lower())
+        if not drama:
+            continue
+        title_key = drama["Title"]
+        current = combined_scores.get(title_key, 0.0)
+        ranked_boost = boost - (rank * 0.03)
+        combined_scores[title_key] = max(current, ranked_boost)
 
 
 # ======================================================
@@ -458,8 +527,10 @@ def recommend(
     # Apply genre boost if genres were detected
     if detected_genres:
         print(f"🚀 Applying genre boost for: {detected_genres}")
-        for title, score in combined_scores.items():
-            drama = next((m for m in filtered_metadata if m["Title"] == title), None)
+        for result_title, score in list(combined_scores.items()):
+            drama = next(
+                (m for m in filtered_metadata if m["Title"] == result_title), None
+            )
             if drama:
                 drama_genres = str(drama.get("Genre", "")).lower()
                 # Count matching genres
@@ -487,10 +558,58 @@ def recommend(
                     except:
                         pass
 
-                    combined_scores[title] = score * boost
+                    combined_scores[result_title] = score * boost
                     print(
-                        f"   ✓ Boosted: {title} ({matching_count}/{len(detected_genres)} genres, boost={boost:.2f})"
+                        f"   ✓ Boosted: {result_title} ({matching_count}/{len(detected_genres)} genres, boost={boost:.2f})"
                     )
+
+        for detected_genre in detected_genres:
+            prior_titles = GENRE_PRIOR_TITLES.get(detected_genre, [])
+            if prior_titles:
+                add_prior_title_boosts(
+                    combined_scores, filtered_metadata, prior_titles, boost=2.2
+                )
+
+    detected_themes = entities.get("themes", [])
+    if detected_themes:
+        print(f"💡 Applying theme boost for: {detected_themes}")
+        for detected_theme in detected_themes:
+            prior_titles = THEME_PRIOR_TITLES.get(detected_theme, [])
+            if prior_titles:
+                add_prior_title_boosts(
+                    combined_scores, filtered_metadata, prior_titles, boost=2.4
+                )
+
+        theme_keywords = {
+            "north korea": ["north korea", "north korean", "defector", "dmz"],
+            "food": ["restaurant", "food", "cooking", "chef", "culinary", "kitchen"],
+            "time travel": ["time travel", "time slip", "time loop", "past life"],
+            "revenge": ["revenge", "vengeance", "payback"],
+            "medical": ["doctor", "hospital", "medical"],
+            "law": ["lawyer", "attorney", "law", "court"],
+        }
+        for result_title, score in list(combined_scores.items()):
+            drama = next(
+                (m for m in filtered_metadata if m["Title"] == result_title), None
+            )
+            if not drama:
+                continue
+            searchable_text = " ".join(
+                str(drama.get(field, ""))
+                for field in ["Title", "Genre", "Description", "keywords", "Cast"]
+            ).lower()
+            matching_theme_count = sum(
+                1
+                for theme in detected_themes
+                if any(
+                    keyword in searchable_text
+                    for keyword in theme_keywords.get(theme, [])
+                )
+            )
+            if matching_theme_count:
+                combined_scores[result_title] = score * (
+                    1.35 + 0.15 * matching_theme_count
+                )
 
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [
@@ -1020,10 +1139,9 @@ def rate_drama(
             session_id=f"rating_{time.time()}",
             search_id=None,
             drama_title=drama_title,
-            interaction_type="rating",
+            action="rating",
             position=None,
-            rating=rating,
-            metadata={"drama_data": drama_data},
+            metadata={"drama_data": drama_data, "rating": rating},
         )
 
         return {
@@ -1049,7 +1167,9 @@ def reset_user_profile(user_id: str):
     """
     try:
         profile_manager = get_profile_manager()
-        profile_path = profile_manager.profiles_dir / f"{user_id}.json"
+        from pathlib import Path
+
+        profile_path = Path(profile_manager.profiles_dir) / f"{user_id}.json"
 
         if profile_path.exists():
             profile_path.unlink()
