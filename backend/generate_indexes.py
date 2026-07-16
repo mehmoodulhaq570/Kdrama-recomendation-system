@@ -17,6 +17,7 @@ from typing import Iterable
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = BASE_DIR.parent
 META_PATH = PROJECT_DIR / "model_traning" / "faiss_index" / "meta.pkl"
+TRAINING_DATA_DIR = PROJECT_DIR / "model_traning" / "training_data"
 OUTPUT_DIR = BASE_DIR / "generated_indexes"
 
 THEME_RULES = {
@@ -35,6 +36,39 @@ THEME_RULES = {
     "medical": ["doctor", "hospital", "medical", "surgeon"],
     "law": ["lawyer", "attorney", "law", "court", "legal"],
 }
+
+NON_PRIMARY_TITLE_TERMS = [
+    "special",
+    "behind",
+    "behind the scenes",
+    "bts",
+    "recap",
+    "talk",
+    "interview",
+    "documentary",
+    "docu",
+    "fanmeeting",
+    "fan meeting",
+    "concert",
+    "variety",
+    "reunion",
+    "camping",
+    "every moment",
+    "summoning",
+    "young actors",
+    "youn's",
+    "busted",
+    "in the soop",
+]
+
+NON_PRIMARY_GENRE_TERMS = [
+    "documentary",
+    "music",
+    "variety show",
+    "reality show",
+]
+
+SEQUEL_TITLE_PATTERN = re.compile(r"\b(season|part)\s+\d+\b", re.IGNORECASE)
 
 
 def split_csv(value: object) -> list[str]:
@@ -71,8 +105,153 @@ def top_titles(titles: Iterable[str], metadata_by_title: dict[str, dict], limit:
     return sorted(set(titles), key=score, reverse=True)[:limit]
 
 
+def build_title_frequency(metadata_by_title: dict[str, dict]) -> dict[str, int]:
+    frequency = defaultdict(int)
+    titles = list(metadata_by_title.keys())
+    title_pattern = re.compile(
+        "|".join(re.escape(title) for title in sorted(titles, key=len, reverse=True))
+    )
+    for filename in ["st_pairs.json", "st_triplets.json", "training_pairs.json", "training_triplets.json"]:
+        path = TRAINING_DATA_DIR / filename
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for match in title_pattern.finditer(text):
+            frequency[match.group(0)] += 1
+    return frequency
+
+
+def calibrated_actor_titles(
+    titles: Iterable[str],
+    metadata_by_title: dict[str, dict],
+    title_frequency: dict[str, int],
+    limit: int = 12,
+):
+    def score(title: str):
+        drama = metadata_by_title.get(title, {})
+        title_lower = title.lower()
+        genre_lower = str(drama.get("Genre", "")).lower()
+        keyword_lower = str(drama.get("keywords", "")).lower()
+
+        try:
+            rating = float(drama.get("rating_value") or 0)
+        except ValueError:
+            rating = 0.0
+        try:
+            episodes = int(float(drama.get("episodes") or 0))
+        except ValueError:
+            episodes = 0
+
+        primary_penalty = 0
+        if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
+            primary_penalty -= 5
+        if any(term in genre_lower for term in NON_PRIMARY_GENRE_TERMS):
+            primary_penalty -= 2
+        if "web series" in keyword_lower and episodes <= 8:
+            primary_penalty -= 1
+
+        drama_bonus = 0
+        if any(term in genre_lower for term in ["drama", "romance", "thriller", "comedy"]):
+            drama_bonus += 1
+        if 8 <= episodes <= 24:
+            drama_bonus += 0.5
+
+        frequency = title_frequency.get(title, 0)
+        return (primary_penalty, drama_bonus, frequency, rating, episodes, title)
+
+    return sorted(set(titles), key=score, reverse=True)[:limit]
+
+
+def calibrated_genre_titles(
+    titles: Iterable[str],
+    metadata_by_title: dict[str, dict],
+    title_frequency: dict[str, int],
+    limit: int = 20,
+):
+    def score(title: str):
+        drama = metadata_by_title.get(title, {})
+        title_lower = title.lower()
+        genre_lower = str(drama.get("Genre", "")).lower()
+        keyword_lower = str(drama.get("keywords", "")).lower()
+
+        try:
+            rating = float(drama.get("rating_value") or 0)
+        except ValueError:
+            rating = 0.0
+        try:
+            episodes = int(float(drama.get("episodes") or 0))
+        except ValueError:
+            episodes = 0
+
+        primary_score = 0
+        if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
+            primary_score -= 5
+        if any(term in genre_lower for term in NON_PRIMARY_GENRE_TERMS):
+            primary_score -= 4
+        if "web series" in keyword_lower and episodes <= 8:
+            primary_score -= 1
+        if SEQUEL_TITLE_PATTERN.search(title):
+            primary_score -= 1.25
+        if 8 <= episodes <= 24:
+            primary_score += 0.5
+
+        frequency = title_frequency.get(title, 0)
+        return (primary_score, frequency, rating, episodes, title)
+
+    return sorted(set(titles), key=score, reverse=True)[:limit]
+
+
+def calibrated_topic_titles(
+    titles: Iterable[str],
+    metadata_by_title: dict[str, dict],
+    title_frequency: dict[str, int],
+    limit: int = 20,
+):
+    def score(title: str):
+        drama = metadata_by_title.get(title, {})
+        title_lower = title.lower()
+        genre_lower = str(drama.get("Genre", "")).lower()
+        keyword_lower = str(drama.get("keywords", "")).lower()
+        description_lower = str(drama.get("Description", "")).lower()
+
+        try:
+            rating = float(drama.get("rating_value") or 0)
+        except ValueError:
+            rating = 0.0
+        try:
+            episodes = int(float(drama.get("episodes") or 0))
+        except ValueError:
+            episodes = 0
+
+        primary_score = 0
+        if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
+            primary_score -= 5
+        if any(term in genre_lower for term in NON_PRIMARY_GENRE_TERMS):
+            primary_score -= 4
+        if "web series" in keyword_lower and episodes <= 8:
+            primary_score -= 1
+        if SEQUEL_TITLE_PATTERN.search(title):
+            primary_score -= 1
+        if 8 <= episodes <= 24:
+            primary_score += 0.5
+        if any(term in genre_lower for term in ["drama", "romance", "thriller", "comedy", "life"]):
+            primary_score += 0.25
+
+        metadata_depth = 0
+        if keyword_lower:
+            metadata_depth += 0.25
+        if description_lower:
+            metadata_depth += 0.25
+
+        frequency = title_frequency.get(title, 0)
+        return (primary_score, metadata_depth, frequency, rating, episodes, title)
+
+    return sorted(set(titles), key=score, reverse=True)[:limit]
+
+
 def build_indexes(metadata: list[dict]) -> dict[str, dict]:
     metadata_by_title = {item.get("Title", ""): item for item in metadata}
+    title_frequency = build_title_frequency(metadata_by_title)
     actor_index = defaultdict(list)
     genre_index = defaultdict(list)
     keyword_index = defaultdict(list)
@@ -110,16 +289,32 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
         key: top_titles(titles, metadata_by_title)
         for key, titles in sorted(actor_index.items())
     }
+    calibrated_actor_index = {
+        key: calibrated_actor_titles(titles, metadata_by_title, title_frequency)
+        for key, titles in sorted(actor_index.items())
+    }
     genre_index = {
         key.title(): top_titles(titles, metadata_by_title)
+        for key, titles in sorted(genre_index.items())
+    }
+    calibrated_genre_index = {
+        key.title(): calibrated_genre_titles(titles, metadata_by_title, title_frequency)
         for key, titles in sorted(genre_index.items())
     }
     keyword_index = {
         key: top_titles(titles, metadata_by_title, limit=30)
         for key, titles in sorted(keyword_index.items())
     }
+    calibrated_keyword_index = {
+        key: calibrated_topic_titles(titles, metadata_by_title, title_frequency, limit=20)
+        for key, titles in sorted(keyword_index.items())
+    }
     theme_index = {
         key: top_titles(titles, metadata_by_title)
+        for key, titles in sorted(theme_candidates.items())
+    }
+    calibrated_theme_index = {
+        key: calibrated_topic_titles(titles, metadata_by_title, title_frequency, limit=20)
         for key, titles in sorted(theme_candidates.items())
     }
 
@@ -129,9 +324,13 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
 
     return {
         "actor_index": actor_index,
+        "calibrated_actor_index": calibrated_actor_index,
         "genre_index": genre_index,
+        "calibrated_genre_index": calibrated_genre_index,
         "keyword_index": keyword_index,
+        "calibrated_keyword_index": calibrated_keyword_index,
         "theme_index": theme_index,
+        "calibrated_theme_index": calibrated_theme_index,
         "title_aliases": dict(sorted(title_aliases.items())),
     }
 

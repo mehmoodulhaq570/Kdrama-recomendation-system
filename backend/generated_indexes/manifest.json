@@ -2,9 +2,13 @@
   "drama_count": 1922,
   "files": [
     "actor_index.json",
+    "calibrated_actor_index.json",
     "genre_index.json",
+    "calibrated_genre_index.json",
     "keyword_index.json",
+    "calibrated_keyword_index.json",
     "theme_index.json",
+    "calibrated_theme_index.json",
     "title_aliases.json"
   ],
   "source": "model_traning\\faiss_index\\meta.pkl"

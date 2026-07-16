@@ -164,7 +164,9 @@ def merge_title_indexes(generated, curated):
 
 GENERATED_TITLE_ALIASES = load_generated_index("title_aliases.json")
 GENERATED_ACTOR_INDEX = load_generated_index("actor_index.json")
+GENERATED_CALIBRATED_ACTOR_INDEX = load_generated_index("calibrated_actor_index.json")
 GENERATED_GENRE_INDEX = load_generated_index("genre_index.json")
+GENERATED_CALIBRATED_GENRE_INDEX = load_generated_index("calibrated_genre_index.json")
 GENERATED_THEME_INDEX = load_generated_index("theme_index.json")
 GENERATED_KEYWORD_INDEX = load_generated_index("keyword_index.json")
 
@@ -467,6 +469,20 @@ def generated_index_boosts(result_title, detected_actors, detected_genres, detec
             break
 
     return min(multiplier, 1.08)
+
+
+def get_actor_prior_titles(actor: str):
+    curated_titles = ACTOR_PRIOR_TITLES.get(actor)
+    if curated_titles:
+        return curated_titles
+    return GENERATED_CALIBRATED_ACTOR_INDEX.get(actor.lower(), [])
+
+
+def get_genre_prior_titles(genre: str):
+    curated_titles = GENRE_PRIOR_TITLES.get(genre)
+    if curated_titles:
+        return curated_titles
+    return []
 
 
 # ======================================================
@@ -837,7 +853,7 @@ def recommend(
                 )
 
         for detected_genre in detected_genres:
-            prior_titles = GENRE_PRIOR_TITLES.get(detected_genre, [])
+            prior_titles = get_genre_prior_titles(detected_genre)
             if prior_titles:
                 add_prior_title_boosts(
                     combined_scores, filtered_metadata, prior_titles, boost=2.2
@@ -908,7 +924,7 @@ def recommend(
     if detected_actors:
         print(f"⭐ Applying actor boost for: {detected_actors}")
         for detected_actor in detected_actors:
-            prior_titles = ACTOR_PRIOR_TITLES.get(detected_actor, [])
+            prior_titles = get_actor_prior_titles(detected_actor)
             if prior_titles:
                 add_prior_title_boosts(
                     combined_scores, filtered_metadata, prior_titles, boost=2.35

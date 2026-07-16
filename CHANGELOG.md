@@ -4,6 +4,49 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Calibrated Genre Index Trial
+
+- Added `calibrated_genre_index.json` generation from metadata.
+- Added genre-title calibration using:
+  - title/genre filtering for specials, recaps, variety, documentaries, and related non-primary content
+  - sequel/part/season downranking
+  - rating
+  - episode count
+  - title frequency from existing training pairs/triplets
+- Tested using calibrated generated genre priors as fallback for uncovered genres.
+- Result: generated genre fallback reduced ranking quality for several mixed-intent queries.
+- Disabled generated genre fallback from live scoring.
+- Kept `calibrated_genre_index.json` available for future offline tuning.
+- Restored benchmark result:
+  - Overall accuracy: `88.14%`
+  - Genre Precision@3: `87.18%`
+  - Genre Recall@10: `92.31%`
+  - Genre MRR: `0.885`
+- Conclusion:
+  - generated genre indexes are useful for analysis, but not reliable enough yet as ranking priors
+  - genre replacement needs query-specific calibration, especially for business/workplace, revenge, historical/sageuk, and broad romance/comedy
+
+### Calibrated Actor Index Trial
+
+- Added `calibrated_actor_index.json` generation from metadata.
+- Added actor-title calibration using:
+  - title/genre filtering for specials, recaps, variety, documentaries, and related non-primary content
+  - rating
+  - episode count
+  - title frequency from existing training pairs/triplets
+- Tested replacing curated actor priors with generated calibrated actor priors.
+- Result: full replacement reduced actor quality too much, especially for actors with many high-rated variety/special/secondary titles.
+- Kept curated actor priors for known high-confidence actors.
+- Added generated calibrated actor priors as fallback for actors not covered by curated priors.
+- Preserved benchmark result:
+  - Overall accuracy: `88.14%`
+  - Actor Precision@3: `63.33%`
+  - Actor Recall@10: `100.00%`
+  - Actor MRR: `0.950`
+- Conclusion:
+  - actor priors cannot be fully replaced yet without a stronger popularity/relevance signal
+  - generated actor index is now safely used for broader coverage, not for overriding proven curated actor rankings
+
 ### Controlled Generated Index Boosting
 
 - Added `generated_index_boosts()` as a safe scoring layer for generated metadata indexes.
