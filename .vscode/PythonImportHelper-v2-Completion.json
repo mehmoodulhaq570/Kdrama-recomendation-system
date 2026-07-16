@@ -273,6 +273,14 @@
         "documentation": {}
     },
     {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "List",
         "importPath": "typing",
         "description": "typing",
@@ -1020,7 +1028,24 @@
         "documentation": {}
     },
     {
+        "label": "gc",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "gc",
+        "description": "gc",
+        "detail": "gc",
+        "documentation": {}
+    },
+    {
         "label": "combinations",
+        "importPath": "itertools",
+        "description": "itertools",
+        "isExtraImport": true,
+        "detail": "itertools",
+        "documentation": {}
+    },
+    {
+        "label": "islice",
         "importPath": "itertools",
         "description": "itertools",
         "isExtraImport": true,
@@ -1828,11 +1853,29 @@
         "documentation": {}
     },
     {
+        "label": "SCRIPT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.build_index",
+        "description": "model_traning.build_index",
+        "peekOfCode": "SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\nPROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.",
+        "detail": "model_traning.build_index",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_ROOT",
+        "kind": 5,
+        "importPath": "model_traning.build_index",
+        "description": "model_traning.build_index",
+        "peekOfCode": "PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"",
+        "detail": "model_traning.build_index",
+        "documentation": {}
+    },
+    {
         "label": "DATA_PATH",
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nMODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================",
+        "peekOfCode": "DATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -1841,7 +1884,7 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset",
+        "peekOfCode": "MODEL_NAME = \"paraphrase-multilingual-mpnet-base-v2\"\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -1850,7 +1893,7 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset\n# ======================================================",
+        "peekOfCode": "MODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset\n# ======================================================",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -1859,7 +1902,7 @@
         "kind": 5,
         "importPath": "model_traning.build_index",
         "description": "model_traning.build_index",
-        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset\n# ======================================================\nprint(\"Loading dataset...\")",
+        "peekOfCode": "INDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\nos.makedirs(MODEL_DIR, exist_ok=True)\nos.makedirs(INDEX_DIR, exist_ok=True)\n# If you've fine-tuned a local SBERT model, save it to MODEL_DIR/sbert-finetuned*\n# The script will prefer any local fine-tuned model automatically when present.\nFINETUNED_PREFIX = \"sbert-finetuned\"\n# ======================================================\n# 2. Load and Prepare Dataset\n# ======================================================\nprint(\"Loading dataset...\")",
         "detail": "model_traning.build_index",
         "documentation": {}
     },
@@ -2062,11 +2105,29 @@
         "documentation": {}
     },
     {
+        "label": "SCRIPT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\nPROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_ROOT",
+        "kind": 5,
+        "importPath": "model_traning.enhanced_index_builder",
+        "description": "model_traning.enhanced_index_builder",
+        "peekOfCode": "PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [",
+        "detail": "model_traning.enhanced_index_builder",
+        "documentation": {}
+    },
+    {
         "label": "DATA_PATH",
         "kind": 5,
         "importPath": "model_traning.enhanced_index_builder",
         "description": "model_traning.enhanced_index_builder",
-        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",",
+        "peekOfCode": "DATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",",
         "detail": "model_traning.enhanced_index_builder",
         "documentation": {}
     },
@@ -2075,7 +2136,7 @@
         "kind": 5,
         "importPath": "model_traning.enhanced_index_builder",
         "description": "model_traning.enhanced_index_builder",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nINDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",",
+        "peekOfCode": "MODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nINDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",",
         "detail": "model_traning.enhanced_index_builder",
         "documentation": {}
     },
@@ -2084,7 +2145,7 @@
         "kind": 5,
         "importPath": "model_traning.enhanced_index_builder",
         "description": "model_traning.enhanced_index_builder",
-        "peekOfCode": "INDEX_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\faiss_index\"\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",\n            \"time loop\",",
+        "peekOfCode": "INDEX_DIR = os.path.join(SCRIPT_DIR, \"faiss_index\")\n# Base model (use fine-tuned if available)\nBASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\n# Theme definitions for theme-based embeddings\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\n            \"time travel\",\n            \"time slip\",\n            \"time loop\",",
         "detail": "model_traning.enhanced_index_builder",
         "documentation": {}
     },
@@ -2251,11 +2312,29 @@
         "documentation": {}
     },
     {
+        "label": "os.environ[\"PYTORCH_CUDA_ALLOC_CONF\"]",
+        "kind": 5,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "os.environ[\"PYTORCH_CUDA_ALLOC_CONF\"] = \"expandable_segments:True\"\n# ======================================================\n# Configuration\n# ======================================================\n# Configuration (using relative paths)\n# ======================================================\nSCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\n# Use a smaller model for CPU training - still multilingual but faster\nBASE_MODEL = (\n    \"paraphrase-multilingual-MiniLM-L12-v2\"  # Smaller than mpnet, faster on CPU",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
+        "label": "SCRIPT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.fine_tune_kdrama_sbert",
+        "description": "model_traning.fine_tune_kdrama_sbert",
+        "peekOfCode": "SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\n# Use a smaller model for CPU training - still multilingual but faster\nBASE_MODEL = (\n    \"paraphrase-multilingual-MiniLM-L12-v2\"  # Smaller than mpnet, faster on CPU\n)\n# Alternative: \"paraphrase-multilingual-mpnet-base-v2\" for higher quality (needs more RAM)\nTRAINING_DATA_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"models\", \"sbert-kdrama-finetuned\")\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"",
+        "detail": "model_traning.fine_tune_kdrama_sbert",
+        "documentation": {}
+    },
+    {
         "label": "BASE_MODEL",
         "kind": 5,
         "importPath": "model_traning.fine_tune_kdrama_sbert",
         "description": "model_traning.fine_tune_kdrama_sbert",
-        "peekOfCode": "BASE_MODEL = \"paraphrase-multilingual-mpnet-base-v2\"\nTRAINING_DATA_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"",
+        "peekOfCode": "BASE_MODEL = (\n    \"paraphrase-multilingual-MiniLM-L12-v2\"  # Smaller than mpnet, faster on CPU\n)\n# Alternative: \"paraphrase-multilingual-mpnet-base-v2\" for higher quality (needs more RAM)\nTRAINING_DATA_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"models\", \"sbert-kdrama-finetuned\")\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):",
         "detail": "model_traning.fine_tune_kdrama_sbert",
         "documentation": {}
     },
@@ -2264,7 +2343,7 @@
         "kind": 5,
         "importPath": "model_traning.fine_tune_kdrama_sbert",
         "description": "model_traning.fine_tune_kdrama_sbert",
-        "peekOfCode": "TRAINING_DATA_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )",
+        "peekOfCode": "TRAINING_DATA_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"models\", \"sbert-kdrama-finetuned\")\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )",
         "detail": "model_traning.fine_tune_kdrama_sbert",
         "documentation": {}
     },
@@ -2273,7 +2352,7 @@
         "kind": 5,
         "importPath": "model_traning.fine_tune_kdrama_sbert",
         "description": "model_traning.fine_tune_kdrama_sbert",
-        "peekOfCode": "OUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\\sbert-kdrama-finetuned\"\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )\n    with open(pairs_path, \"r\", encoding=\"utf-8\") as f:",
+        "peekOfCode": "OUTPUT_DIR = os.path.join(SCRIPT_DIR, \"models\", \"sbert-kdrama-finetuned\")\ndef load_training_pairs(data_dir: str) -> List[InputExample]:\n    \"\"\"Load training pairs and convert to InputExample format.\"\"\"\n    pairs_path = os.path.join(data_dir, \"training_pairs.json\")\n    if not os.path.exists(pairs_path):\n        raise FileNotFoundError(\n            f\"Training data not found at {pairs_path}. \"\n            \"Run generate_training_data.py first.\"\n        )\n    with open(pairs_path, \"r\", encoding=\"utf-8\") as f:",
         "detail": "model_traning.fine_tune_kdrama_sbert",
         "documentation": {}
     },
@@ -2332,11 +2411,20 @@
         "documentation": {}
     },
     {
+        "label": "sample_combinations",
+        "kind": 2,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "def sample_combinations(items: List, n: int, max_samples: int) -> List[tuple]:\n    \"\"\"\n    Memory-efficient sampling from combinations.\n    Instead of materializing all combinations, sample indices.\n    \"\"\"\n    if len(items) < 2:\n        return []\n    total_combinations = len(items) * (len(items) - 1) // 2\n    if total_combinations <= max_samples:\n        # Small enough to enumerate",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
         "label": "generate_genre_pairs",
         "kind": 2,
         "importPath": "model_traning.generate_training_data",
         "description": "model_traning.generate_training_data",
-        "peekOfCode": "def generate_genre_pairs(\n    df: pd.DataFrame, max_pairs_per_genre: int = 100\n) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas from the same genre.\n    Purpose: Teach model that dramas with same genre are related.\n    \"\"\"\n    # Group dramas by genre\n    genre_dramas = defaultdict(list)\n    for _, row in df.iterrows():",
+        "peekOfCode": "def generate_genre_pairs(df: pd.DataFrame, max_pairs_per_genre: int = 50) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas from the same genre.\n    Purpose: Teach model that dramas with same genre are related.\n    \"\"\"\n    # Group dramas by genre\n    genre_dramas = defaultdict(list)\n    for _, row in df.iterrows():\n        genres = str(row.get(\"Genre\", \"\")).split(\",\")\n        title = str(row[\"Title\"]).strip()",
         "detail": "model_traning.generate_training_data",
         "documentation": {}
     },
@@ -2345,7 +2433,7 @@
         "kind": 2,
         "importPath": "model_traning.generate_training_data",
         "description": "model_traning.generate_training_data",
-        "peekOfCode": "def generate_actor_pairs(df: pd.DataFrame, max_pairs_per_actor: int = 50) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas with the same actor.\n    Purpose: Teach model that dramas with same actor are related when searching by actor.\n    \"\"\"\n    # Group dramas by actor\n    actor_dramas = defaultdict(list)\n    for _, row in df.iterrows():\n        cast = str(row.get(\"Cast\", \"\"))\n        title = str(row[\"Title\"]).strip()",
+        "peekOfCode": "def generate_actor_pairs(\n    df: pd.DataFrame, max_pairs_per_actor: int = 20, max_total: int = 5000\n) -> List[Dict]:\n    \"\"\"\n    Generate pairs of dramas with the same actor.\n    Purpose: Teach model that dramas with same actor are related when searching by actor.\n    \"\"\"\n    # Group dramas by actor\n    actor_dramas = defaultdict(list)\n    for _, row in df.iterrows():",
         "detail": "model_traning.generate_training_data",
         "documentation": {}
     },
@@ -2372,7 +2460,7 @@
         "kind": 2,
         "importPath": "model_traning.generate_training_data",
         "description": "model_traning.generate_training_data",
-        "peekOfCode": "def generate_hard_negatives(df: pd.DataFrame, all_pairs: List[Dict]) -> List[Dict]:\n    \"\"\"\n    Add hard negatives to training data.\n    Hard negatives are examples that look similar but should NOT match.\n    This teaches the model to distinguish subtle differences.\n    \"\"\"\n    # Get all titles for negative sampling\n    all_titles = list(df[\"Title\"].astype(str).unique())\n    # Create title to genre mapping\n    title_to_genre = {}",
+        "peekOfCode": "def generate_hard_negatives(\n    df: pd.DataFrame, all_pairs: List[Dict], max_triplets: int = 5000\n) -> List[Dict]:\n    \"\"\"\n    Add hard negatives to training data.\n    Hard negatives are examples that look similar but should NOT match.\n    This teaches the model to distinguish subtle differences.\n    \"\"\"\n    # Get all titles for negative sampling\n    all_titles = list(df[\"Title\"].astype(str).unique())",
         "detail": "model_traning.generate_training_data",
         "documentation": {}
     },
@@ -2404,11 +2492,29 @@
         "documentation": {}
     },
     {
+        "label": "SCRIPT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\nPROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_ROOT",
+        "kind": 5,
+        "importPath": "model_traning.generate_training_data",
+        "description": "model_traning.generate_training_data",
+        "peekOfCode": "PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",",
+        "detail": "model_traning.generate_training_data",
+        "documentation": {}
+    },
+    {
         "label": "DATA_PATH",
         "kind": 5,
         "importPath": "model_traning.generate_training_data",
         "description": "model_traning.generate_training_data",
-        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nOUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",",
+        "peekOfCode": "DATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nOUTPUT_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",",
         "detail": "model_traning.generate_training_data",
         "documentation": {}
     },
@@ -2417,7 +2523,7 @@
         "kind": 5,
         "importPath": "model_traning.generate_training_data",
         "description": "model_traning.generate_training_data",
-        "peekOfCode": "OUTPUT_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\training_data\"\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",\n            \"Nine: Nine Time Travels\",",
+        "peekOfCode": "OUTPUT_DIR = os.path.join(SCRIPT_DIR, \"training_data\")\n# Theme definitions (same as enhanced_index_builder.py)\nTHEME_DEFINITIONS = {\n    \"time_travel\": {\n        \"keywords\": [\"time travel\", \"time slip\", \"time loop\", \"past life\", \"future\"],\n        \"known_dramas\": [\n            \"Signal\",\n            \"Twinkling Watermelon\",\n            \"Queen In-Hyun's Man\",\n            \"Nine: Nine Time Travels\",",
         "detail": "model_traning.generate_training_data",
         "documentation": {}
     },
@@ -2476,11 +2582,29 @@
         "documentation": {}
     },
     {
+        "label": "SCRIPT_DIR",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))\nPROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nLTR_DIR = os.path.join(SCRIPT_DIR, \"ltr_model\")\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_ROOT",
+        "kind": 5,
+        "importPath": "model_traning.learning_to_rank",
+        "description": "model_traning.learning_to_rank",
+        "peekOfCode": "PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)\nDATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nLTR_DIR = os.path.join(SCRIPT_DIR, \"ltr_model\")\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres",
+        "detail": "model_traning.learning_to_rank",
+        "documentation": {}
+    },
+    {
         "label": "DATA_PATH",
         "kind": 5,
         "importPath": "model_traning.learning_to_rank",
         "description": "model_traning.learning_to_rank",
-        "peekOfCode": "DATA_PATH = r\"D:\\Projects\\SeoulMate\\dataset\\dramalist_kdramas.xlsx\"\nMODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nLTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)",
+        "peekOfCode": "DATA_PATH = os.path.join(PROJECT_ROOT, \"dataset\", \"dramalist_kdramas.xlsx\")\nMODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nLTR_DIR = os.path.join(SCRIPT_DIR, \"ltr_model\")\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)",
         "detail": "model_traning.learning_to_rank",
         "documentation": {}
     },
@@ -2489,7 +2613,7 @@
         "kind": 5,
         "importPath": "model_traning.learning_to_rank",
         "description": "model_traning.learning_to_rank",
-        "peekOfCode": "MODEL_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\models\"\nLTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)",
+        "peekOfCode": "MODEL_DIR = os.path.join(SCRIPT_DIR, \"models\")\nLTR_DIR = os.path.join(SCRIPT_DIR, \"ltr_model\")\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)",
         "detail": "model_traning.learning_to_rank",
         "documentation": {}
     },
@@ -2498,7 +2622,7 @@
         "kind": 5,
         "importPath": "model_traning.learning_to_rank",
         "description": "model_traning.learning_to_rank",
-        "peekOfCode": "LTR_DIR = r\"D:\\Projects\\SeoulMate\\model_traning\\ltr_model\"\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)\n    \"recency_score\",  # How recent the drama is",
+        "peekOfCode": "LTR_DIR = os.path.join(SCRIPT_DIR, \"ltr_model\")\n# Feature names for the ranking model\nFEATURE_NAMES = [\n    \"semantic_score\",  # FAISS cosine similarity\n    \"lexical_score\",  # BM25 score\n    \"genre_match_count\",  # Number of matching genres\n    \"genre_match_ratio\",  # Ratio of matched genres\n    \"rating_value\",  # Drama rating (0-10)\n    \"rating_count\",  # Number of ratings (popularity)\n    \"recency_score\",  # How recent the drama is",
         "detail": "model_traning.learning_to_rank",
         "documentation": {}
     },
