@@ -438,6 +438,37 @@ def resolve_title_alias(user_input: str, candidates):
     )
 
 
+def generated_index_boosts(result_title, detected_actors, detected_genres, detected_themes):
+    """Return a small, capped multiplier from generated indexes.
+
+    Generated indexes are broad metadata signals, so they should only nudge
+    already-retrieved results. They should not inject titles or overpower the
+    curated ranking layer.
+    """
+    multiplier = 1.0
+    title_lower = result_title.lower()
+
+    for actor in detected_actors:
+        actor_titles = GENERATED_ACTOR_INDEX.get(actor.lower(), [])
+        if any(title_lower == candidate.lower() for candidate in actor_titles):
+            multiplier += 0.04
+            break
+
+    for genre in detected_genres:
+        genre_titles = GENERATED_GENRE_INDEX.get(genre, [])
+        if any(title_lower == candidate.lower() for candidate in genre_titles[:80]):
+            multiplier += 0.025
+            break
+
+    for theme in detected_themes:
+        theme_titles = GENERATED_THEME_INDEX.get(theme, [])
+        if any(title_lower == candidate.lower() for candidate in theme_titles[:60]):
+            multiplier += 0.025
+            break
+
+    return min(multiplier, 1.08)
+
+
 # ======================================================
 # STAGE 4 — HYBRID RECOMMENDATION PIPELINE (v4.0 with Phase 1)
 # ======================================================
@@ -895,6 +926,20 @@ def recommend(
             )
             if actor_match_count:
                 combined_scores[result_title] = score * (1.25 + 0.2 * actor_match_count)
+
+    generated_boosted_count = 0
+    if detected_actors or detected_genres or detected_themes:
+        for result_title, score in list(combined_scores.items()):
+            multiplier = generated_index_boosts(
+                result_title, detected_actors, detected_genres, detected_themes
+            )
+            if multiplier > 1.0:
+                combined_scores[result_title] = score * multiplier
+                generated_boosted_count += 1
+        if generated_boosted_count:
+            print(
+                f"Generated index boosts applied to {generated_boosted_count} retrieved results"
+            )
 
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [

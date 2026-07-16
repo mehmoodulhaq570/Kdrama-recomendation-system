@@ -4,6 +4,27 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Controlled Generated Index Boosting
+
+- Added `generated_index_boosts()` as a safe scoring layer for generated metadata indexes.
+- The boost only applies to titles already retrieved by FAISS/BM25.
+- The boost does not inject generated-index titles into the result set.
+- Added small capped multipliers:
+  - actor index match: `+0.04`
+  - genre index match: `+0.025`
+  - theme index match: `+0.025`
+  - total generated boost cap: `1.08x`
+- Verified that controlled boosting avoids the large accuracy drop caused by blind generated-index merging.
+- Evaluation result remained stable:
+  - Overall accuracy: `88.15%` to `88.14%`
+  - Search Precision@3: `62.96%`
+  - Search Recall@10: `97.22%`
+  - Search MRR: `0.954`
+  - Typo MRR: `1.000`
+- Conclusion:
+  - generated indexes are now safely embedded as weak ranking signals
+  - further gains require calibrating each generated index separately against the evaluator
+
 ### Generated Index Foundation
 
 - Added a metadata-driven index generator:
