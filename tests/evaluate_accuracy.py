@@ -42,8 +42,19 @@ SEARCH_TEST_CASES = [
     ("Hospital Playlist", ["Hospital Playlist"], "specific_title"),
     ("Squid Game", ["Squid Game"], "specific_title"),
     ("Business Proposal", ["Business Proposal"], "specific_title"),
+    ("Goblin", ["Goblin"], "specific_title"),
+    ("Descendants of the Sun", ["Descendants of the Sun"], "specific_title"),
+    ("Vincenzo", ["Vincenzo"], "specific_title"),
+    ("Extraordinary Attorney Woo", ["Extraordinary Attorney Woo"], "specific_title"),
+    ("True Beauty", ["True Beauty"], "specific_title"),
+    ("The Glory", ["The Glory"], "specific_title"),
+    ("Mr. Sunshine", ["Mr. Sunshine"], "specific_title"),
+    ("Reply 1988", ["Reply 1988"], "specific_title"),
+    ("Flower of Evil", ["Flower of Evil"], "specific_title"),
+    ("Alchemy of Souls", ["Alchemy of Souls"], "specific_title"),
     # Genre searches (should return dramas in that genre)
     ("medical drama", ["Hospital Playlist", "Doctor Cha", "Good Doctor"], "genre"),
+    ("doctor hospital drama", ["Hospital Playlist", "Doctor Cha", "Good Doctor"], "genre"),
     (
         "romantic comedy",
         [
@@ -53,18 +64,59 @@ SEARCH_TEST_CASES = [
         ],
         "genre",
     ),
+    (
+        "office romance",
+        [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim",
+            "Romance Is a Bonus Book",
+        ],
+        "genre",
+    ),
     ("thriller", ["Squid Game", "Signal", "Stranger"], "genre"),
+    ("crime thriller", ["Signal", "Stranger", "Beyond Evil"], "genre"),
     ("historical", ["Mr. Sunshine", "Kingdom", "The Red Sleeve"], "genre"),
+    ("sageuk royal drama", ["The Red Sleeve", "Empress Ki", "Kingdom"], "genre"),
+    ("legal drama", ["Extraordinary Attorney Woo", "Law School", "Vincenzo"], "genre"),
+    ("school drama", ["True Beauty", "Dream High", "Extraordinary You"], "genre"),
+    ("fantasy romance", ["Goblin", "Hotel Del Luna", "Alchemy of Souls"], "genre"),
+    ("zombie drama", ["All of Us Are Dead", "Kingdom", "Happiness"], "genre"),
+    ("revenge drama", ["The Glory", "Penthouse", "Eve"], "genre"),
     # Theme searches
     ("north korea", ["Crash Landing on You"], "theme"),
     ("restaurant food", ["Itaewon Class", "Wok of Love"], "theme"),
     ("time travel", ["Signal", "Tomorrow with You"], "theme"),
+    ("contract marriage", ["Because This Is My First Life", "Marriage Contract"], "theme"),
+    ("rich CEO romance", ["Business Proposal", "What's Wrong with Secretary Kim"], "theme"),
+    ("school bullying revenge", ["The Glory"], "theme"),
+    ("law firm corruption", ["Vincenzo", "Law School", "Extraordinary Attorney Woo"], "theme"),
+    ("ghost supernatural hotel", ["Hotel Del Luna", "The Master's Sun"], "theme"),
+    ("survival game", ["Squid Game"], "theme"),
+    ("workplace startup", ["Start-Up", "Misaeng"], "theme"),
+    ("healing slice of life", ["Hospital Playlist", "Our Blues", "My Mister"], "theme"),
     # Actor searches
     ("Hyun Bin", ["Crash Landing on You", "Memories of the Alhambra"], "actor"),
     ("Park Seo Joon", ["Itaewon Class", "What's Wrong with Secretary Kim"], "actor"),
+    ("Song Joong Ki", ["Vincenzo", "Descendants of the Sun"], "actor"),
+    ("Kim Soo Hyun", ["My Love from the Star", "It's Okay to Not Be Okay"], "actor"),
+    ("Lee Min Ho", ["The Heirs", "The King: Eternal Monarch"], "actor"),
+    ("Ji Chang Wook", ["Healer", "Suspicious Partner"], "actor"),
+    ("IU", ["Hotel Del Luna", "My Mister"], "actor"),
+    ("Park Min Young", ["What's Wrong with Secretary Kim", "Her Private Life"], "actor"),
+    ("Song Hye Kyo", ["Descendants of the Sun", "The Glory"], "actor"),
+    ("Gong Yoo", ["Goblin", "Coffee Prince"], "actor"),
+    # Typo / fuzzy title searches
+    ("Crash Landng on You", ["Crash Landing on You"], "typo"),
+    ("Hospitl Playlist", ["Hospital Playlist"], "typo"),
+    ("Buisness Proposal", ["Business Proposal"], "typo"),
+    ("Extraordinary Atorney Woo", ["Extraordinary Attorney Woo"], "typo"),
+    ("Descendents of the Sun", ["Descendants of the Sun"], "typo"),
     # Vague queries (should return popular/relevant results)
     ("good drama", None, "vague"),  # Should return high-rated dramas
     ("best korean series", None, "vague"),
+    ("something funny and light", None, "vague"),
+    ("sad emotional drama", None, "vague"),
+    ("popular kdrama to binge", None, "vague"),
 ]
 
 # Genre detection test cases
@@ -74,6 +126,16 @@ GENRE_DETECTION_TESTS = [
     ("historical drama about king", ["Historical", "Drama"]),
     ("medical drama with surgery", ["Medical", "Drama"]),
     ("action packed spy thriller", ["Action", "Thriller"]),
+    ("legal courtroom drama", ["Law", "Drama"]),
+    ("school romance drama", ["Youth", "Romance", "Drama"]),
+    ("fantasy supernatural romance", ["Fantasy", "Supernatural", "Romance"]),
+    ("office workplace romance", ["Business", "Romance"]),
+    ("revenge thriller", ["Revenge", "Thriller"]),
+    ("zombie survival horror", ["Thriller", "Horror"]),
+    ("food restaurant cooking drama", ["Food", "Drama"]),
+    ("sports youth drama", ["Sports", "Youth", "Drama"]),
+    ("music idol romance", ["Music", "Romance"]),
+    ("sad melodrama", ["Melodrama"]),
 ]
 
 # Filter test cases
