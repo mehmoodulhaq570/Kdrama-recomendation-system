@@ -4,6 +4,25 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Theme Query Candidate Recovery
+
+- Fixed theme-heavy queries being hurt by hard genre pre-filtering.
+- Skipped automatic genre pre-filtering when a query has detected themes, allowing theme priors to rank the full candidate pool.
+- Added compound theme priors for combinations such as:
+  - `school bullying` + `revenge`
+  - `legal corruption` + `revenge`
+  - `rich CEO romance` + `contract marriage`
+- Expanded bullying/revenge theme keywords.
+- Improved expanded benchmark result:
+  - Overall accuracy: `86.42%` to `87.75%`
+  - Search Precision@3: `60.49%` to `62.35%`
+  - Search Recall@10: `94.14%` to `97.22%`
+  - Theme Precision@3: `42.42%` to `48.48%`
+  - Theme Recall@10: `77.27%` to `95.45%`
+  - Theme MRR: `0.909` to `1.000`
+- Fixed the known weak query:
+  - `school bullying revenge` now returns `The Glory` at rank 1.
+
 ### Genre Combination Search
 
 - Added ranking priors for multi-genre intent combinations:

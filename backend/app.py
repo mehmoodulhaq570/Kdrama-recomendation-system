@@ -201,6 +201,27 @@ THEME_PRIOR_TITLES = {
     ],
 }
 
+THEME_COMBINATION_PRIOR_TITLES = {
+    ("school bullying", "revenge"): [
+        "The Glory",
+        "Angry Mom",
+        "Weak Hero Class 1",
+        "My Strange Hero",
+    ],
+    ("legal corruption", "revenge"): [
+        "Vincenzo",
+        "Lawless Lawyer",
+        "Again My Life",
+        "The Devil Judge",
+    ],
+    ("rich ceo romance", "contract marriage"): [
+        "Business Proposal",
+        "Love in Contract",
+        "Because This Is My First Life",
+        "Marriage Contract",
+    ],
+}
+
 GENRE_PRIOR_TITLES = {
     "Medical": [
         "Hospital Playlist",
@@ -453,7 +474,7 @@ def recommend(
         detected_actors = entities.get("actors", [])
         detected_themes = entities.get("themes", [])
 
-        if detected_genres and not genre:
+        if detected_genres and not genre and not detected_themes:
             # Filter by detected genres (OR logic - match any detected genre)
             filtered_metadata = [
                 r
@@ -465,6 +486,10 @@ def recommend(
             ]
             print(
                 f"🎯 Genre filtering applied: {len(filtered_metadata)} dramas match genres {detected_genres}"
+            )
+        elif detected_genres and detected_themes and not genre:
+            print(
+                f"🎯 Genre pre-filter skipped for theme query; ranking will use genres {detected_genres} and themes {detected_themes}"
             )
 
     # Define these outside the else block for later use
@@ -718,6 +743,13 @@ def recommend(
     detected_themes = entities.get("themes", [])
     if detected_themes:
         print(f"💡 Applying theme boost for: {detected_themes}")
+        detected_theme_set = set(detected_themes)
+        for theme_combo, prior_titles in THEME_COMBINATION_PRIOR_TITLES.items():
+            if set(theme_combo).issubset(detected_theme_set):
+                add_prior_title_boosts(
+                    combined_scores, filtered_metadata, prior_titles, boost=3.1
+                )
+
         for detected_theme in detected_themes:
             prior_titles = THEME_PRIOR_TITLES.get(detected_theme, [])
             if prior_titles:
@@ -731,7 +763,13 @@ def recommend(
             "time travel": ["time travel", "time slip", "time loop", "past life"],
             "contract marriage": ["contract marriage", "fake marriage", "marriage contract"],
             "rich ceo romance": ["rich ceo", "ceo", "chaebol", "rich boss"],
-            "school bullying": ["school bullying", "bullying", "school violence"],
+            "school bullying": [
+                "school bullying",
+                "bullying",
+                "school violence",
+                "bully revenge",
+                "bullying revenge",
+            ],
             "legal corruption": ["law firm", "corruption", "corrupt", "prosecutor"],
             "supernatural hotel": ["ghost", "supernatural", "hotel", "spirit"],
             "survival game": ["survival game", "survival", "deadly game", "game"],

@@ -168,5 +168,27 @@
     "last_active": "2026-07-16T09:49:26.223459",
     "clicked_dramas": [],
     "watchlist": []
+  },
+  "test_user_1784197869": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T10:31:10.126796",
+    "clicked_dramas": [],
+    "watchlist": []
+  },
+  "test_user_1784197994": {
+    "total_searches": 0,
+    "total_clicks": 0,
+    "watchlist_adds": 0,
+    "favorite_genres": [],
+    "favorite_actors": [],
+    "interaction_count": 3,
+    "last_active": "2026-07-16T10:33:14.675545",
+    "clicked_dramas": [],
+    "watchlist": []
   }
 }
