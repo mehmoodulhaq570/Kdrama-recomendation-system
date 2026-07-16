@@ -153,6 +153,52 @@ THEME_PRIOR_TITLES = {
         "Rooftop Prince",
         "Queen In Hyun's Man",
     ],
+    "contract marriage": [
+        "Marriage Contract",
+        "Because This Is My First Life",
+        "Love in Contract",
+        "The Story of Park's Marriage Contract",
+    ],
+    "rich ceo romance": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon",
+        "King the Land",
+    ],
+    "school bullying": [
+        "The Glory",
+        "Weak Hero Class 1",
+        "My Strange Hero",
+        "Angry Mom",
+    ],
+    "legal corruption": [
+        "Vincenzo",
+        "Law School",
+        "Extraordinary Attorney Woo",
+        "Lawless Lawyer",
+    ],
+    "supernatural hotel": [
+        "Hotel Del Luna",
+        "The Master's Sun",
+        "Oh My Ghost",
+    ],
+    "survival game": [
+        "Squid Game",
+        "All of Us Are Dead",
+        "Happiness",
+    ],
+    "startup workplace": [
+        "Start-Up",
+        "Misaeng",
+        "Agency",
+        "Hot Stove League",
+    ],
+    "healing slice of life": [
+        "Hospital Playlist",
+        "Our Blues",
+        "My Mister",
+        "A Piece of Your Mind",
+    ],
 }
 
 GENRE_PRIOR_TITLES = {
@@ -637,6 +683,14 @@ def recommend(
             "north korea": ["north korea", "north korean", "defector", "dmz"],
             "food": ["restaurant", "food", "cooking", "chef", "culinary", "kitchen"],
             "time travel": ["time travel", "time slip", "time loop", "past life"],
+            "contract marriage": ["contract marriage", "fake marriage", "marriage contract"],
+            "rich ceo romance": ["rich ceo", "ceo", "chaebol", "rich boss"],
+            "school bullying": ["school bullying", "bullying", "school violence"],
+            "legal corruption": ["law firm", "corruption", "corrupt", "prosecutor"],
+            "supernatural hotel": ["ghost", "supernatural", "hotel", "spirit"],
+            "survival game": ["survival game", "survival", "deadly game", "game"],
+            "startup workplace": ["startup", "start-up", "workplace", "office"],
+            "healing slice of life": ["healing", "slice of life", "comfort", "everyday"],
             "revenge": ["revenge", "vengeance", "payback"],
             "medical": ["doctor", "hospital", "medical"],
             "law": ["lawyer", "attorney", "law", "court"],

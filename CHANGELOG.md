@@ -4,6 +4,32 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-16
 
+### Phase 3 Theme Intelligence
+
+- Added structured theme detection for richer story/theme queries:
+  - `contract marriage`
+  - `rich CEO romance`
+  - `school bullying`
+  - `legal corruption`
+  - `supernatural hotel`
+  - `survival game`
+  - `startup workplace`
+  - `healing slice of life`
+- Added theme ranking priors for representative dramas.
+- Added theme keyword boosts during recommendation scoring.
+- Updated the evaluator to support `SEOULMATE_API_URL`, allowing manual tests against alternate backend ports.
+- Improved expanded benchmark result:
+  - Overall accuracy: `80.65%` to `83.10%`
+  - Search Precision@3: `50.00%` to `53.70%`
+  - Search Recall@10: `82.41%` to `88.58%`
+  - Theme Precision@3: `24.24%` to `42.42%`
+  - Theme Recall@10: `46.97%` to `77.27%`
+  - Theme MRR: `0.523` to `0.909`
+- Remaining weak areas:
+  - genre combinations such as legal, school, fantasy romance, and zombie
+  - year filter
+  - broader non-curated theme generalization
+
 ### Expanded Evaluation and Actor Search Improvements
 
 - Expanded the accuracy evaluator with broader coverage:

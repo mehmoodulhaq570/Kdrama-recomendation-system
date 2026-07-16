@@ -27,8 +27,9 @@ from typing import List, Dict, Tuple
 import numpy as np
 from collections import defaultdict
 
-# API endpoint
-BASE_URL = "http://localhost:8001"
+# API endpoint. Override when testing a separate backend instance:
+#   $env:SEOULMATE_API_URL='http://127.0.0.1:8002'
+BASE_URL = os.environ.get("SEOULMATE_API_URL", "http://localhost:8001")
 
 # ======================================================
 # TEST DATA - Ground Truth
