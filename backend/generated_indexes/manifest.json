@@ -5,6 +5,7 @@
     "calibrated_actor_index.json",
     "genre_index.json",
     "calibrated_genre_index.json",
+    "calibrated_genre_combo_index.json",
     "keyword_index.json",
     "calibrated_keyword_index.json",
     "theme_index.json",

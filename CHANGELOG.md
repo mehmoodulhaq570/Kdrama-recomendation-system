@@ -2,6 +2,105 @@
 
 Important project history reconstructed from Git commits and project documentation.
 
+## 2026-07-20
+
+### Calibrated Actor Index Improvement
+
+- Improved `calibrated_actor_index.json` ordering in `backend/generate_indexes.py`.
+- Added cast-position scoring so lead roles rank above secondary/cameo appearances before rating and frequency are considered.
+- Made `tests/validate_generated_indexes.py` alias-aware so titles like `Goblin` and `Guardian: The Lonely and Great God` are evaluated as the same drama where aliases exist.
+- Updated validator recommendations to prefer the strongest top-rank index when Hit@10 is tied.
+- Regenerated generated index files from `model_traning/faiss_index/meta.pkl`.
+- Offline actor-index validation improved:
+  - `actor_index.json`: Hit@1 `50.00%`, Hit@3 `70.00%`, Hit@10 `100.00%`
+  - `calibrated_actor_index.json`: Hit@1 `70.00%`, Hit@3 `100.00%`, Hit@10 `100.00%`
+- Live benchmark remained stable:
+  - Overall accuracy: `88.14%`
+  - Search Precision@3: `62.96%`
+  - Search Recall@10: `97.22%`
+  - Search MRR: `0.954`
+- Conclusion:
+  - calibrated actor index is now good enough for cautious actor fallback experiments
+  - curated actor priors should still stay active until a full replacement beats the benchmark
+
+### Calibrated Genre Index Improvement
+
+- Improved offline validation of multi-genre generated index candidates in `tests/validate_generated_indexes.py`.
+- Multi-key genre queries now rank titles that appear under multiple detected genre keys ahead of titles that only match one genre key.
+- Increased `calibrated_genre_index.json` coverage from top 20 to top 40 titles per genre in `backend/generate_indexes.py`.
+- Regenerated generated index files from `model_traning/faiss_index/meta.pkl`.
+- Offline genre-index validation improved:
+  - Previous `calibrated_genre_index.json`: Hit@3 `46.15%`, Hit@10 `69.23%`, Hit@20 `84.62%`
+  - Current `calibrated_genre_index.json`: Hit@3 `61.54%`, Hit@10 `69.23%`, Hit@20 `84.62%`
+- Conclusion:
+  - calibrated genre index ordering is better for combined genre queries
+  - genre index is still not ready to replace curated genre priors because Hit@3 remains below the safe threshold
+  - next improvement should focus on query-specific genre combinations such as romantic comedy, fantasy romance, revenge drama, and sageuk/royal drama
+
+### Generated Genre Combo Index
+
+- Added `calibrated_genre_combo_index.json` generation from metadata genre pairs.
+- Added query-specific combo validation in `tests/validate_generated_indexes.py`.
+- Added training-triplet combo frequency so anchors like `romantic comedy` and `medical drama` can influence combo-title ordering.
+- Added virtual combo labels for metadata-backed themes, starting with `revenge`, so queries such as `revenge drama` can be represented even when `Revenge` is stored as a keyword/theme instead of a formal genre.
+- Regenerated generated index files from `model_traning/faiss_index/meta.pkl`.
+- Generated combo index coverage:
+  - `321` genre-combo keys
+- Offline combo-index validation:
+  - `calibrated_genre_combo_index.json`: Hit@1 `9.09%`, Hit@3 `63.64%`, Hit@10 `90.91%`, Hit@20 `90.91%`
+- Conclusion:
+  - generated combo index is now useful for recall/debug and future candidate expansion
+  - combo index should not be used for top-rank boosting yet because Hit@3 is still below the safe threshold
+  - remaining weak area: `crime thriller`, where generated ordering favors adjacent action/crime titles before `Signal`, `Stranger`, and `Beyond Evil`
+
+### Crime Thriller Combo Calibration
+
+- Improved `calibrated_genre_combo_index.json` for `crime|thriller` queries.
+- Added metadata-derived virtual `crime` labels so dramas with crime-solving keywords can be represented even when `Crime` is not stored as a formal genre.
+- Added crime/thriller focus scoring for investigation, detective, murder, serial-killer, corruption, psychological, suspense, and cold-case signals.
+- Added light penalties for action-heavy crime metadata so action/noir titles do not dominate investigation-focused crime thriller queries.
+- Fixed combo scoring so virtual labels are used both when collecting candidates and when checking exact combo matches.
+- Regenerated generated index files from `model_traning/faiss_index/meta.pkl`.
+- `crime|thriller` top results improved to:
+  - `Beyond Evil`
+  - `Signal`
+  - `Stranger`
+- Offline combo-index validation improved:
+  - Previous `calibrated_genre_combo_index.json`: Hit@3 `63.64%`, Hit@10 `90.91%`
+  - Current `calibrated_genre_combo_index.json`: Hit@3 `72.73%`, Hit@10 `100.00%`
+- Conclusion:
+  - combo index is now stronger for recall and analysis
+  - still keep it out of live top-rank boosting until Hit@3 reaches the safe threshold around `80.00%`
+
+### Generated Index Offline Validation
+
+- Added offline generated-index validation:
+  - `tests/validate_generated_indexes.py`
+- The validator checks generated indexes against evaluator ground-truth titles without calling the backend API.
+- Added validation metrics:
+  - Hit@1
+  - Hit@3
+  - Hit@10
+  - Hit@20
+  - sample misses for debugging
+- Validated raw and calibrated indexes:
+  - actor
+  - genre
+  - theme
+  - keyword
+- Current validation findings:
+  - `actor_index.json`: Hit@3 `70.00%`, Hit@10 `100.00%`
+  - `calibrated_actor_index.json`: Hit@3 `80.00%`, Hit@10 `90.00%`
+  - `genre_index.json`: Hit@3 `30.77%`, Hit@10 `61.54%`
+  - `calibrated_genre_index.json`: Hit@3 `38.46%`, Hit@10 `61.54%`
+  - `theme_index.json`: Hit@3 `27.27%`, Hit@10 `54.55%`
+  - `calibrated_theme_index.json`: Hit@3 `27.27%`, Hit@10 `36.36%`
+  - `calibrated_keyword_index.json`: Hit@3 `8.33%`, Hit@10 `29.17%`
+- Conclusion:
+  - actor indexes are useful for recall/debug and fallback coverage
+  - genre, theme, and keyword indexes are not ready for live ranking
+  - future tuning should improve generated index quality offline before wiring stronger live boosts
+
 ## 2026-07-16
 
 ### Calibrated Genre Index Trial
