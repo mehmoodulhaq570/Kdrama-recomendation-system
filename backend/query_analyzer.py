@@ -419,8 +419,9 @@ class QueryAnalyzer:
             "political": "Political",
             "revenge": "Revenge",
             "vengeance": "Revenge",
-            "zombie": "Thriller",
-            "apocalypse": "Thriller",
+            "zombie": "Thriller, Horror",
+            "zombies": "Thriller, Horror",
+            "apocalypse": "Thriller, Horror",
         }
 
         query_lower = query.lower()

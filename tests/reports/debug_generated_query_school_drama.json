@@ -1,0 +1,194 @@
+{
+  "generated_at": "2026-07-23T00:26:52",
+  "query": "school drama",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "True Beauty",
+    "Dream High",
+    "Extraordinary You"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "school drama",
+      "intent": "genre_browse",
+      "expanded_query": "school youth high school drama",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Drama",
+          "Youth"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.65,
+      "confidence": 0.7,
+      "timestamp": "2026-07-22T19:26:11.205048"
+    },
+    "api": {
+      "query": "school drama",
+      "intent": "genre_browse",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Youth",
+          "Drama"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Youth",
+        "Drama"
+      ],
+      "confidence": 0.7
+    },
+    "intent": "genre_browse"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Drama",
+      "Youth"
+    ],
+    "genre_sections": [
+      {
+        "key": "Drama",
+        "titles": [
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Extraordinary Attorney Woo",
+          "Daily Dose of Sunshine",
+          "My Mister",
+          "Prison Playbook",
+          "Tomorrow",
+          "Weak Hero Class 1",
+          "Vincenzo",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Happiness",
+          "Twinkling Watermelon",
+          "The Good Bad Mother",
+          "The Glory"
+        ]
+      },
+      {
+        "key": "Youth",
+        "titles": [
+          "Mouse",
+          "Hospital Playlist",
+          "Signal",
+          "Mother",
+          "Reply 1988",
+          "Extraordinary Attorney Woo",
+          "Elite League",
+          "NCT WORLD 2.0",
+          "Weak Hero Class 1",
+          "Happiness",
+          "Moving",
+          "Twinkling Watermelon",
+          "The Glory",
+          "Twenty-Five Twenty-One",
+          "Guardian: The Lonely and Great God"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "drama|youth",
+        "titles": [
+          "Seasons of Blossom",
+          "The World of My 17",
+          "True Beauty",
+          "Sassy Go Go",
+          "Love Alarm",
+          "Boys over Flowers",
+          "The Heirs Christmas Edition",
+          "Drama Special Season 8: If We Were A Season",
+          "Best Mistake Season 2",
+          "Girls' Generation 1979",
+          "The Flatterer",
+          "School 2021",
+          "Goong",
+          "Secret Campus",
+          "Live On"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Seasons of Blossom",
+      "The World of My 17",
+      "True Beauty",
+      "Sassy Go Go",
+      "Love Alarm",
+      "Boys over Flowers",
+      "The Heirs Christmas Edition",
+      "Drama Special Season 8: If We Were A Season",
+      "Best Mistake Season 2",
+      "Girls' Generation 1979",
+      "The Flatterer",
+      "School 2021",
+      "Goong",
+      "Secret Campus",
+      "Live On",
+      "Hospital Playlist",
+      "Under the Queen's Umbrella",
+      "Extraordinary Attorney Woo",
+      "Daily Dose of Sunshine",
+      "My Mister",
+      "Prison Playbook",
+      "Tomorrow",
+      "Weak Hero Class 1",
+      "Vincenzo",
+      "It's Okay to Not Be Okay",
+      "My Dearest",
+      "Happiness",
+      "Twinkling Watermelon",
+      "The Good Bad Mother",
+      "The Glory",
+      "Mouse",
+      "Signal",
+      "Mother",
+      "Reply 1988",
+      "Elite League",
+      "NCT WORLD 2.0",
+      "Moving",
+      "Twenty-Five Twenty-One",
+      "Guardian: The Lonely and Great God"
+    ]
+  },
+  "final_top10": [
+    "Seasons of Blossom",
+    "The World of My 17",
+    "True Beauty",
+    "Sassy Go Go",
+    "Love Alarm",
+    "Boys over Flowers",
+    "The Heirs Christmas Edition",
+    "Drama Special Season 8: If We Were A Season",
+    "Best Mistake Season 2",
+    "Girls' Generation 1979"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 3,
+  "final_expected_rank": 3,
+  "titles_above_expected": [
+    "Seasons of Blossom",
+    "The World of My 17"
+  ]
+}

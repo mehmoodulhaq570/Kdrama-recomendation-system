@@ -1,0 +1,204 @@
+{
+  "generated_at": "2026-07-22T23:41:31",
+  "query": "sageuk royal drama",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "The Red Sleeve",
+    "Empress Ki",
+    "Kingdom"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "sageuk royal drama",
+      "intent": "actor_based",
+      "expanded_query": "sageuk royal drama",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Historical",
+          "Drama"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.35,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T18:41:13.251872"
+    },
+    "api": {
+      "query": "sageuk royal drama",
+      "intent": "actor_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Drama",
+          "Historical"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Drama",
+        "Historical"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "actor_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Historical",
+      "Drama"
+    ],
+    "genre_sections": [
+      {
+        "key": "Historical",
+        "titles": [
+          "Under the Queen's Umbrella",
+          "Tree with Deep Roots",
+          "Moon Embracing the Sun",
+          "Mr. Queen",
+          "The Red Sleeve",
+          "The Crowned Clown",
+          "The Princess's Man",
+          "Bon Appetit, Your Majesty",
+          "Moon Lovers: Scarlet Heart Ryeo",
+          "My Dearest",
+          "My Country: The New Age",
+          "Queen and I",
+          "Knight Flower",
+          "Chief Detective 1958",
+          "The Tale of Lady Ok"
+        ]
+      },
+      {
+        "key": "Drama",
+        "titles": [
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Extraordinary Attorney Woo",
+          "Daily Dose of Sunshine",
+          "My Mister",
+          "Prison Playbook",
+          "Tomorrow",
+          "Weak Hero Class 1",
+          "Vincenzo",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Happiness",
+          "Twinkling Watermelon",
+          "The Good Bad Mother",
+          "The Glory"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "drama|historical",
+        "titles": [
+          "Under the Queen's Umbrella",
+          "Bloody Heart",
+          "Grand Prince",
+          "The Queen Who Crowns",
+          "The Emperor: Owner of the Mask",
+          "Captivating the King",
+          "Queen Seon Deok",
+          "Love in the Moonlight",
+          "The King's Affection",
+          "Jumong",
+          "Yi San",
+          "Splendid Politics",
+          "The Red Sleeve",
+          "100 Days My Prince",
+          "Jang Ok Jung"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Under the Queen's Umbrella",
+      "Bloody Heart",
+      "Grand Prince",
+      "The Queen Who Crowns",
+      "The Emperor: Owner of the Mask",
+      "Captivating the King",
+      "Queen Seon Deok",
+      "Love in the Moonlight",
+      "The King's Affection",
+      "Jumong",
+      "Yi San",
+      "Splendid Politics",
+      "The Red Sleeve",
+      "100 Days My Prince",
+      "Jang Ok Jung",
+      "Tree with Deep Roots",
+      "Moon Embracing the Sun",
+      "Mr. Queen",
+      "The Crowned Clown",
+      "The Princess's Man",
+      "Bon Appetit, Your Majesty",
+      "Moon Lovers: Scarlet Heart Ryeo",
+      "My Dearest",
+      "My Country: The New Age",
+      "Queen and I",
+      "Knight Flower",
+      "Chief Detective 1958",
+      "The Tale of Lady Ok",
+      "Hospital Playlist",
+      "Extraordinary Attorney Woo",
+      "Daily Dose of Sunshine",
+      "My Mister",
+      "Prison Playbook",
+      "Tomorrow",
+      "Weak Hero Class 1",
+      "Vincenzo",
+      "It's Okay to Not Be Okay",
+      "Happiness",
+      "Twinkling Watermelon",
+      "The Good Bad Mother",
+      "The Glory"
+    ]
+  },
+  "final_top10": [
+    "Under the Queen's Umbrella",
+    "Bloody Heart",
+    "Grand Prince",
+    "The Queen Who Crowns",
+    "The Emperor: Owner of the Mask",
+    "Captivating the King",
+    "Queen Seon Deok",
+    "Love in the Moonlight",
+    "The King's Affection",
+    "Jumong"
+  ],
+  "classification": "lost_between_generated_index_and_final_api",
+  "generated_expected_rank": 13,
+  "final_expected_rank": null,
+  "titles_above_expected": [
+    "Under the Queen's Umbrella",
+    "Bloody Heart",
+    "Grand Prince",
+    "The Queen Who Crowns",
+    "The Emperor: Owner of the Mask",
+    "Captivating the King",
+    "Queen Seon Deok",
+    "Love in the Moonlight",
+    "The King's Affection",
+    "Jumong"
+  ]
+}

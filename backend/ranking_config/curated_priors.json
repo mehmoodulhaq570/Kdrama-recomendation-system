@@ -1,0 +1,235 @@
+{
+  "weights": {
+    "genre_combo": 2.55,
+    "genre": 2.2,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "theme_priors": {
+    "north korea": [
+      "Crash Landing on You",
+      "The King 2 Hearts",
+      "Iris",
+      "Snowdrop"
+    ],
+    "food": [
+      "Itaewon Class",
+      "Wok of Love",
+      "Late Night Restaurant",
+      "Pasta",
+      "Let's Eat"
+    ],
+    "time travel": [
+      "Signal",
+      "Tomorrow with You",
+      "Nine: Nine Times Time Travel",
+      "Rooftop Prince",
+      "Queen In Hyun's Man"
+    ],
+    "contract marriage": [
+      "Marriage Contract",
+      "Because This Is My First Life",
+      "Love in Contract",
+      "The Story of Park's Marriage Contract"
+    ],
+    "rich ceo romance": [
+      "Business Proposal",
+      "What's Wrong with Secretary Kim",
+      "Strong Woman Do Bong Soon",
+      "King the Land"
+    ],
+    "school bullying": [
+      "The Glory",
+      "Weak Hero Class 1",
+      "My Strange Hero",
+      "Angry Mom"
+    ],
+    "legal corruption": [
+      "Vincenzo",
+      "Law School",
+      "Extraordinary Attorney Woo",
+      "Lawless Lawyer"
+    ],
+    "supernatural hotel": [
+      "Hotel Del Luna",
+      "The Master's Sun",
+      "Oh My Ghost"
+    ],
+    "survival game": [
+      "Squid Game",
+      "All of Us Are Dead",
+      "Happiness"
+    ],
+    "startup workplace": [
+      "Start-Up",
+      "Misaeng",
+      "Agency",
+      "Hot Stove League"
+    ],
+    "healing slice of life": [
+      "Hospital Playlist",
+      "Our Blues",
+      "My Mister",
+      "A Piece of Your Mind"
+    ],
+    "revenge": [
+      "The Glory",
+      "The Penthouse: War in Life",
+      "Eve",
+      "Revenge of Others"
+    ]
+  },
+  "theme_combo_priors": {
+    "school bullying|revenge": [
+      "The Glory",
+      "Angry Mom",
+      "Weak Hero Class 1",
+      "My Strange Hero"
+    ],
+    "legal corruption|revenge": [
+      "Vincenzo",
+      "Lawless Lawyer",
+      "Again My Life",
+      "The Devil Judge"
+    ],
+    "rich ceo romance|contract marriage": [
+      "Business Proposal",
+      "Love in Contract",
+      "Because This Is My First Life",
+      "Marriage Contract"
+    ]
+  },
+  "genre_priors": {
+    "Medical": [
+      "Hospital Playlist",
+      "Doctor Cha",
+      "Good Doctor",
+      "Dr. Romantic"
+    ],
+    "Romance": [
+      "Business Proposal",
+      "What's Wrong with Secretary Kim",
+      "Strong Woman Do Bong Soon",
+      "True Beauty"
+    ],
+    "Comedy": [
+      "Business Proposal",
+      "What's Wrong with Secretary Kim",
+      "Strong Woman Do Bong Soon",
+      "True Beauty"
+    ],
+    "Thriller": [
+      "Squid Game",
+      "Signal",
+      "Stranger",
+      "Beyond Evil"
+    ],
+    "Historical": [
+      "Mr. Sunshine",
+      "Kingdom",
+      "The Red Sleeve",
+      "Empress Ki"
+    ]
+  },
+  "genre_combo_priors": {
+    "Drama|Law": [
+      "Extraordinary Attorney Woo",
+      "Law School",
+      "Vincenzo",
+      "Lawless Lawyer"
+    ],
+    "Drama|Youth": [
+      "True Beauty",
+      "Dream High",
+      "Extraordinary You",
+      "School 2017"
+    ],
+    "Fantasy|Romance": [
+      "Guardian: The Lonely and Great God",
+      "Hotel Del Luna",
+      "Alchemy of Souls",
+      "My Love from the Star"
+    ],
+    "Drama|Thriller": [
+      "All of Us Are Dead",
+      "Kingdom",
+      "Happiness",
+      "Sweet Home"
+    ],
+    "Horror|Thriller": [
+      "All of Us Are Dead",
+      "Kingdom",
+      "Happiness",
+      "Sweet Home"
+    ],
+    "Revenge|Thriller": [
+      "The Glory",
+      "Penthouse",
+      "Eve",
+      "Revenge of Others"
+    ],
+    "Drama|Revenge": [
+      "The Glory",
+      "The Penthouse: War in Life",
+      "Eve",
+      "Revenge of Others"
+    ]
+  },
+  "actor_priors": {
+    "Hyun Bin": [
+      "Crash Landing on You",
+      "Memories of the Alhambra",
+      "Secret Garden"
+    ],
+    "Park Seo Joon": [
+      "Itaewon Class",
+      "What's Wrong with Secretary Kim",
+      "Fight for My Way"
+    ],
+    "Song Joong Ki": [
+      "Vincenzo",
+      "Descendants of the Sun",
+      "Arthdal Chronicles Part 1: The Children of Prophecy"
+    ],
+    "Kim Soo Hyun": [
+      "My Love from the Star",
+      "It's Okay to Not Be Okay",
+      "Moon Embracing the Sun"
+    ],
+    "Lee Min Ho": [
+      "The Heirs",
+      "The King: Eternal Monarch",
+      "Boys over Flowers"
+    ],
+    "Ji Chang Wook": [
+      "Healer",
+      "Suspicious Partner",
+      "The K2"
+    ],
+    "IU": [
+      "Hotel Del Luna",
+      "My Mister",
+      "Moon Lovers: Scarlet Heart Ryeo"
+    ],
+    "Park Min Young": [
+      "What's Wrong with Secretary Kim",
+      "Her Private Life",
+      "Healer"
+    ],
+    "Song Hye Kyo": [
+      "Descendants of the Sun",
+      "The Glory",
+      "Encounter"
+    ],
+    "Gong Yoo": [
+      "Guardian: The Lonely and Great God",
+      "Coffee Prince",
+      "Big"
+    ]
+  }
+}

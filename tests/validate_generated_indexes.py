@@ -138,6 +138,7 @@ def empty_metrics():
         "keyed_cases": 0,
         "hits": {cutoff: 0 for cutoff in RANK_CUTOFFS},
         "misses": [],
+        "near_misses": [],
     }
 
 
@@ -173,6 +174,8 @@ def validate_index(category: str, filename: str, analyzer: QueryAnalyzer):
         if rank is None:
             metrics["misses"].append((query, expected_titles, keys, candidates[:5]))
             continue
+        if 3 < rank <= 10:
+            metrics["near_misses"].append((query, expected_titles, keys, rank, candidates[:10]))
 
         for cutoff in RANK_CUTOFFS:
             if rank <= cutoff:
@@ -203,6 +206,13 @@ def print_report(results: dict):
                 print("  Sample misses:")
                 for query, expected, keys, sample in metrics["misses"][:5]:
                     print(f"    - {query!r} expected={expected} keys={keys} sample={sample}")
+            if metrics["near_misses"]:
+                print("  Near misses:")
+                for query, expected, keys, rank, sample in metrics["near_misses"][:5]:
+                    print(
+                        f"    - {query!r} best_rank={rank} "
+                        f"expected={expected} keys={keys} sample={sample}"
+                    )
 
 
 def summarize_recommendations(results: dict):

@@ -1,0 +1,191 @@
+{
+  "generated_at": "2026-07-23T01:01:46",
+  "query": "fantasy romance",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Goblin",
+    "Hotel Del Luna",
+    "Alchemy of Souls"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "fantasy romance",
+      "intent": "emotion_based",
+      "expanded_query": "fantasy supernatural magical romance",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Romance",
+          "Fantasy"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.85,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T20:01:13.106075"
+    },
+    "api": {
+      "query": "fantasy romance",
+      "intent": "emotion_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Fantasy",
+          "Romance"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Fantasy",
+        "Romance"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "emotion_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Romance",
+      "Fantasy"
+    ],
+    "genre_sections": [
+      {
+        "key": "Romance",
+        "titles": [
+          "Crash Landing on You",
+          "Mr. Sunshine",
+          "Alchemy of Souls",
+          "Reply 1988",
+          "Extraordinary Attorney Woo",
+          "Tale of the Nine-Tailed 1938",
+          "Mr. Queen",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Twinkling Watermelon",
+          "Flower of Evil",
+          "Healer",
+          "Twenty-Five Twenty-One",
+          "Guardian: The Lonely and Great God",
+          "The Red Sleeve"
+        ]
+      },
+      {
+        "key": "Fantasy",
+        "titles": [
+          "Alchemy of Souls",
+          "Tomorrow",
+          "Tale of the Nine-Tailed 1938",
+          "Mr. Queen",
+          "Twinkling Watermelon",
+          "Guardian: The Lonely and Great God",
+          "W",
+          "365: Repeat the Year",
+          "Ghost Doctor",
+          "Reborn Rich",
+          "Mystic Pop-Up Bar",
+          "Tunnel",
+          "Moon Lovers: Scarlet Heart Ryeo",
+          "Perfect Marriage Revenge",
+          "Hotel del Luna"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "fantasy|romance",
+        "titles": [
+          "Guardian: The Lonely and Great God",
+          "Hotel del Luna",
+          "The Story of Bi Hyeong: Enchanted Master of the Goblin",
+          "Alchemy of Souls",
+          "The Midnight Studio",
+          "Black Knight: The Man Who Guards Me",
+          "Kokdu: Season of Deity",
+          "The Haunted Palace",
+          "Alchemy of Souls Season 2: Light and Shadow",
+          "A Korean Odyssey",
+          "Handmade Love",
+          "Kiss Goblin",
+          "Jinxed at First",
+          "Doom at Your Service",
+          "Miracle That We Met"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Guardian: The Lonely and Great God",
+      "Hotel del Luna",
+      "The Story of Bi Hyeong: Enchanted Master of the Goblin",
+      "Alchemy of Souls",
+      "The Midnight Studio",
+      "Black Knight: The Man Who Guards Me",
+      "Kokdu: Season of Deity",
+      "The Haunted Palace",
+      "Alchemy of Souls Season 2: Light and Shadow",
+      "A Korean Odyssey",
+      "Handmade Love",
+      "Kiss Goblin",
+      "Jinxed at First",
+      "Doom at Your Service",
+      "Miracle That We Met",
+      "Crash Landing on You",
+      "Mr. Sunshine",
+      "Reply 1988",
+      "Extraordinary Attorney Woo",
+      "Tale of the Nine-Tailed 1938",
+      "Mr. Queen",
+      "It's Okay to Not Be Okay",
+      "My Dearest",
+      "Twinkling Watermelon",
+      "Flower of Evil",
+      "Healer",
+      "Twenty-Five Twenty-One",
+      "The Red Sleeve",
+      "Tomorrow",
+      "W",
+      "365: Repeat the Year",
+      "Ghost Doctor",
+      "Reborn Rich",
+      "Mystic Pop-Up Bar",
+      "Tunnel",
+      "Moon Lovers: Scarlet Heart Ryeo",
+      "Perfect Marriage Revenge"
+    ]
+  },
+  "final_top10": [
+    "Guardian: The Lonely and Great God",
+    "Hotel del Luna",
+    "The Story of Bi Hyeong: Enchanted Master of the Goblin",
+    "Alchemy of Souls",
+    "The Midnight Studio",
+    "Black Knight: The Man Who Guards Me",
+    "Kokdu: Season of Deity",
+    "The Haunted Palace",
+    "Alchemy of Souls Season 2: Light and Shadow",
+    "A Korean Odyssey"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 2,
+  "final_expected_rank": 2,
+  "titles_above_expected": [
+    "Guardian: The Lonely and Great God"
+  ]
+}

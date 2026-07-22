@@ -1,0 +1,682 @@
+{
+  "generated_at": "2026-07-23T01:18:43",
+  "source": "D:\\Projects\\SeoulMate\\tests\\reports\\ranking_mode_comparison.json",
+  "primary_mode": "generated_genre_soft",
+  "summary": {
+    "baseline": {
+      "precision_at_3": 0.6358024691358024,
+      "recall_at_10": 0.9845679012345678,
+      "mrr": 0.9629629629629629
+    },
+    "generated": {
+      "precision_at_3": 0.5493827160493827,
+      "recall_at_10": 0.9413580246913581,
+      "mrr": 0.9382716049382716
+    },
+    "label_counts": {
+      "expected_ranked_too_low": 10,
+      "top3_precision_regression": 10,
+      "expected_missing_from_generated_top10": 5,
+      "first_relevant_rank_regression": 4,
+      "noisy_titles_above_expected": 4
+    },
+    "category_impact": {
+      "genre": 3.55
+    },
+    "top_query_impact": [
+      [
+        "historical",
+        0.41666666666666674
+      ],
+      [
+        "thriller",
+        0.6333333333333334
+      ],
+      [
+        "school drama",
+        0.6666666666666667
+      ],
+      [
+        "sageuk royal drama",
+        0.41666666666666663
+      ],
+      [
+        "zombie drama",
+        0.25
+      ],
+      [
+        "medical drama",
+        0.30000000000000004
+      ],
+      [
+        "doctor hospital drama",
+        0.30000000000000004
+      ],
+      [
+        "office romance",
+        0.26666666666666666
+      ],
+      [
+        "romantic comedy",
+        0.15000000000000002
+      ],
+      [
+        "legal drama",
+        0.15000000000000002
+      ]
+    ]
+  },
+  "cases": [
+    {
+      "query": "school drama",
+      "category": "genre",
+      "expected": [
+        "True Beauty",
+        "Dream High",
+        "Extraordinary You"
+      ],
+      "labels": [
+        "expected_missing_from_generated_top10",
+        "expected_ranked_too_low",
+        "top3_precision_regression",
+        "first_relevant_rank_regression",
+        "noisy_titles_above_expected"
+      ],
+      "impact": 0.6666666666666667,
+      "baseline_top5": [
+        "True Beauty",
+        "Dream High",
+        "Extraordinary You",
+        "School 2017",
+        "IN-SEOUL"
+      ],
+      "generated_top10": [
+        "Seasons of Blossom",
+        "The World of My 17",
+        "True Beauty",
+        "Sassy Go Go",
+        "Love Alarm",
+        "Boys over Flowers",
+        "The Heirs Christmas Edition",
+        "Drama Special Season 8: If We Were A Season",
+        "Best Mistake Season 2",
+        "Girls' Generation 1979"
+      ],
+      "generated_top5": [
+        "Seasons of Blossom",
+        "The World of My 17",
+        "True Beauty",
+        "Sassy Go Go",
+        "Love Alarm"
+      ],
+      "missing_top10": [
+        "Dream High",
+        "Extraordinary You"
+      ],
+      "ranked_too_low": [],
+      "noisy_above_expected": [
+        "Seasons of Blossom",
+        "The World of My 17"
+      ],
+      "deltas": {
+        "precision_at_3": -0.6666666666666667,
+        "recall_at_10": -0.6666666666666667,
+        "mrr": -0.6666666666666667
+      },
+      "detected": {
+        "genres": [
+          "Youth",
+          "Drama"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "thriller",
+      "category": "genre",
+      "expected": [
+        "Squid Game",
+        "Signal",
+        "Stranger"
+      ],
+      "labels": [
+        "expected_missing_from_generated_top10",
+        "expected_ranked_too_low",
+        "top3_precision_regression",
+        "first_relevant_rank_regression",
+        "noisy_titles_above_expected"
+      ],
+      "impact": 0.6333333333333334,
+      "baseline_top5": [
+        "Squid Game",
+        "Signal",
+        "Stranger",
+        "Beyond Evil",
+        "The Virus"
+      ],
+      "generated_top10": [
+        "Mouse",
+        "Signal",
+        "Mother",
+        "Tomorrow",
+        "Happiness",
+        "Moving",
+        "Flower of Evil",
+        "The Glory",
+        "Healer",
+        "Taxi Driver"
+      ],
+      "generated_top5": [
+        "Mouse",
+        "Signal",
+        "Mother",
+        "Tomorrow",
+        "Happiness"
+      ],
+      "missing_top10": [
+        "Squid Game",
+        "Stranger"
+      ],
+      "ranked_too_low": [],
+      "noisy_above_expected": [
+        "Mouse"
+      ],
+      "deltas": {
+        "precision_at_3": -0.6666666666666667,
+        "recall_at_10": -0.6666666666666667,
+        "mrr": -0.5
+      },
+      "detected": {
+        "genres": [
+          "Thriller"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "historical",
+      "category": "genre",
+      "expected": [
+        "Mr. Sunshine",
+        "Kingdom",
+        "The Red Sleeve"
+      ],
+      "labels": [
+        "expected_missing_from_generated_top10",
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.41666666666666674,
+      "baseline_top5": [
+        "Mr. Sunshine",
+        "Kingdom",
+        "The Red Sleeve",
+        "Empress Ki",
+        "The Three Musketeers"
+      ],
+      "generated_top10": [
+        "Mr. Sunshine",
+        "Alchemy of Souls",
+        "Under the Queen's Umbrella",
+        "Tale of the Nine-Tailed 1938",
+        "Mr. Queen",
+        "My Dearest",
+        "The Red Sleeve",
+        "Moon Lovers: Scarlet Heart Ryeo",
+        "Gyeongseong Creature",
+        "Pachinko"
+      ],
+      "generated_top5": [
+        "Mr. Sunshine",
+        "Alchemy of Souls",
+        "Under the Queen's Umbrella",
+        "Tale of the Nine-Tailed 1938",
+        "Mr. Queen"
+      ],
+      "missing_top10": [
+        "Kingdom"
+      ],
+      "ranked_too_low": [
+        "The Red Sleeve"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.6666666666666667,
+        "recall_at_10": -0.33333333333333337,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Historical"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "sageuk royal drama",
+      "category": "genre",
+      "expected": [
+        "The Red Sleeve",
+        "Empress Ki",
+        "Kingdom"
+      ],
+      "labels": [
+        "expected_missing_from_generated_top10",
+        "expected_ranked_too_low",
+        "top3_precision_regression",
+        "first_relevant_rank_regression",
+        "noisy_titles_above_expected"
+      ],
+      "impact": 0.41666666666666663,
+      "baseline_top5": [
+        "Mr. Sunshine",
+        "Kingdom",
+        "The Red Sleeve",
+        "Empress Ki",
+        "Bloody Heart"
+      ],
+      "generated_top10": [
+        "Under the Queen's Umbrella",
+        "My Dearest",
+        "The Red Sleeve",
+        "Pachinko",
+        "My Country: The New Age",
+        "100 Days My Prince",
+        "Iljimae",
+        "The King's Affection",
+        "Love in the Moonlight",
+        "Bloody Heart"
+      ],
+      "generated_top5": [
+        "Under the Queen's Umbrella",
+        "My Dearest",
+        "The Red Sleeve",
+        "Pachinko",
+        "My Country: The New Age"
+      ],
+      "missing_top10": [
+        "Empress Ki",
+        "Kingdom"
+      ],
+      "ranked_too_low": [],
+      "noisy_above_expected": [
+        "Under the Queen's Umbrella",
+        "My Dearest"
+      ],
+      "deltas": {
+        "precision_at_3": -0.3333333333333333,
+        "recall_at_10": -0.6666666666666667,
+        "mrr": -0.16666666666666669
+      },
+      "detected": {
+        "genres": [
+          "Drama",
+          "Historical"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "medical drama",
+      "category": "genre",
+      "expected": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.30000000000000004,
+      "baseline_top5": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor",
+        "Dr. Romantic",
+        "Hospital Ship"
+      ],
+      "generated_top10": [
+        "Hospital Playlist",
+        "Daily Dose of Sunshine",
+        "Dr. Romantic",
+        "The Trauma Code: Heroes on Call",
+        "If You Wish Upon Me",
+        "Good Doctor",
+        "God's Quiz",
+        "D-Day",
+        "Doctor Cha",
+        "Doctor Lawyer"
+      ],
+      "generated_top5": [
+        "Hospital Playlist",
+        "Daily Dose of Sunshine",
+        "Dr. Romantic",
+        "The Trauma Code: Heroes on Call",
+        "If You Wish Upon Me"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.6666666666666667,
+        "recall_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Drama",
+          "Medical"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "doctor hospital drama",
+      "category": "genre",
+      "expected": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.30000000000000004,
+      "baseline_top5": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor",
+        "Dr. Romantic",
+        "Hospital Ship"
+      ],
+      "generated_top10": [
+        "Hospital Playlist",
+        "Daily Dose of Sunshine",
+        "Dr. Romantic",
+        "The Trauma Code: Heroes on Call",
+        "If You Wish Upon Me",
+        "Good Doctor",
+        "God's Quiz",
+        "D-Day",
+        "Hospital Ship",
+        "Doctor Cha"
+      ],
+      "generated_top5": [
+        "Hospital Playlist",
+        "Daily Dose of Sunshine",
+        "Dr. Romantic",
+        "The Trauma Code: Heroes on Call",
+        "If You Wish Upon Me"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.6666666666666667,
+        "recall_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Drama",
+          "Medical"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "office romance",
+      "category": "genre",
+      "expected": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Romance Is a Bonus Book"
+      ],
+      "labels": [
+        "expected_missing_from_generated_top10",
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.26666666666666666,
+      "baseline_top5": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon",
+        "True Beauty",
+        "Agency"
+      ],
+      "generated_top10": [
+        "What's Wrong with Secretary Kim",
+        "Gaus Electronics",
+        "Fated to Love You",
+        "Falling for Innocence",
+        "Romance Is a Bonus Book",
+        "Go Ho's Starry Night",
+        "The Greatest Love",
+        "Start-Up",
+        "Something in the Rain",
+        "Search: WWW"
+      ],
+      "generated_top5": [
+        "What's Wrong with Secretary Kim",
+        "Gaus Electronics",
+        "Fated to Love You",
+        "Falling for Innocence",
+        "Romance Is a Bonus Book"
+      ],
+      "missing_top10": [
+        "Business Proposal"
+      ],
+      "ranked_too_low": [
+        "Romance Is a Bonus Book"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.3333333333333333,
+        "recall_at_10": -0.33333333333333337,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Business",
+          "Romance"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "zombie drama",
+      "category": "genre",
+      "expected": [
+        "All of Us Are Dead",
+        "Kingdom",
+        "Happiness"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression",
+        "first_relevant_rank_regression",
+        "noisy_titles_above_expected"
+      ],
+      "impact": 0.25,
+      "baseline_top5": [
+        "All of Us Are Dead",
+        "Kingdom",
+        "Happiness",
+        "Sweet Home",
+        "Squid Game"
+      ],
+      "generated_top10": [
+        "Sweet Home",
+        "All of Us Are Dead",
+        "Kingdom: Ashin of the North",
+        "Happiness",
+        "Kingdom",
+        "Strangers from Hell",
+        "Duty after School: Part 1",
+        "Priest",
+        "Dark Hole",
+        "Monstrous"
+      ],
+      "generated_top5": [
+        "Sweet Home",
+        "All of Us Are Dead",
+        "Kingdom: Ashin of the North",
+        "Happiness",
+        "Kingdom"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "Happiness"
+      ],
+      "noisy_above_expected": [
+        "Sweet Home"
+      ],
+      "deltas": {
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": 0.0,
+        "mrr": -0.5
+      },
+      "detected": {
+        "genres": [
+          "Horror",
+          "Thriller",
+          "Drama"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "romantic comedy",
+      "category": "genre",
+      "expected": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.15000000000000002,
+      "baseline_top5": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon",
+        "True Beauty",
+        "Romance"
+      ],
+      "generated_top10": [
+        "Business Proposal",
+        "Strong Woman Do Bong Soon",
+        "The Secret Life of My Secretary",
+        "What's Wrong with Secretary Kim",
+        "Love in Contract",
+        "Crazy Love",
+        "Level Up",
+        "Gaus Electronics",
+        "Cunning Single Lady",
+        "Romance"
+      ],
+      "generated_top5": [
+        "Business Proposal",
+        "Strong Woman Do Bong Soon",
+        "The Secret Life of My Secretary",
+        "What's Wrong with Secretary Kim",
+        "Love in Contract"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "What's Wrong with Secretary Kim"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Comedy",
+          "Romance"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "legal drama",
+      "category": "genre",
+      "expected": [
+        "Extraordinary Attorney Woo",
+        "Law School",
+        "Vincenzo"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.15000000000000002,
+      "baseline_top5": [
+        "Extraordinary Attorney Woo",
+        "Law School",
+        "Vincenzo",
+        "Lawless Lawyer",
+        "Delayed Justice"
+      ],
+      "generated_top10": [
+        "Extraordinary Attorney Woo",
+        "Vincenzo",
+        "Defendant",
+        "Stranger",
+        "The Devil Judge",
+        "Law School",
+        "Big Mouth",
+        "Juvenile Justice",
+        "One Dollar Lawyer",
+        "Good Partner"
+      ],
+      "generated_top5": [
+        "Extraordinary Attorney Woo",
+        "Vincenzo",
+        "Defendant",
+        "Stranger",
+        "The Devil Judge"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "Law School"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Law",
+          "Drama"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    }
+  ]
+}

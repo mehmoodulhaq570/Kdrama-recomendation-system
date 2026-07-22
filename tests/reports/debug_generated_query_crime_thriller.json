@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-07-23T00:24:32",
+  "query": "crime thriller",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Signal",
+    "Stranger",
+    "Beyond Evil"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "crime thriller",
+      "intent": "emotion_based",
+      "expanded_query": "crime thriller",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Thriller",
+          "Crime"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.85,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T19:23:54.288927"
+    },
+    "api": {
+      "query": "crime thriller",
+      "intent": "emotion_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Thriller",
+          "Crime"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Thriller",
+        "Crime"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "emotion_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Thriller",
+      "Crime"
+    ],
+    "genre_sections": [
+      {
+        "key": "Thriller",
+        "titles": [
+          "Mouse",
+          "Signal",
+          "Mother",
+          "Tomorrow",
+          "Happiness",
+          "Moving",
+          "Flower of Evil",
+          "The Glory",
+          "Healer",
+          "Taxi Driver",
+          "My Name",
+          "The Guest",
+          "The Worst of Evil",
+          "Tunnel",
+          "Defendant"
+        ]
+      },
+      {
+        "key": "Crime",
+        "titles": [
+          "Beyond Evil",
+          "Signal",
+          "Stranger",
+          "Mouse",
+          "Flower of Evil",
+          "Life on Mars",
+          "Through the Darkness",
+          "Mother",
+          "Taxi Driver",
+          "My Name",
+          "My Mister",
+          "Healer",
+          "The Guest",
+          "Defendant",
+          "Flex X Cop"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "crime|thriller",
+        "titles": [
+          "Beyond Evil",
+          "Signal",
+          "Stranger",
+          "Voice",
+          "Mouse",
+          "Blind",
+          "Black Out",
+          "Hello Monster",
+          "Train",
+          "Ghost",
+          "Watcher",
+          "Chimera",
+          "Children of a Lesser God",
+          "Hometown",
+          "A Killer Paradox"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Beyond Evil",
+      "Signal",
+      "Stranger",
+      "Voice",
+      "Mouse",
+      "Blind",
+      "Black Out",
+      "Hello Monster",
+      "Train",
+      "Ghost",
+      "Watcher",
+      "Chimera",
+      "Children of a Lesser God",
+      "Hometown",
+      "A Killer Paradox",
+      "Mother",
+      "Tomorrow",
+      "Happiness",
+      "Moving",
+      "Flower of Evil",
+      "The Glory",
+      "Healer",
+      "Taxi Driver",
+      "My Name",
+      "The Guest",
+      "The Worst of Evil",
+      "Tunnel",
+      "Defendant",
+      "Life on Mars",
+      "Through the Darkness",
+      "My Mister",
+      "Flex X Cop"
+    ]
+  },
+  "final_top10": [
+    "Beyond Evil",
+    "Signal",
+    "Stranger",
+    "Voice",
+    "Mouse",
+    "Blind",
+    "Black Out",
+    "Hello Monster",
+    "Train",
+    "Ghost"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 1,
+  "final_expected_rank": 1,
+  "titles_above_expected": []
+}

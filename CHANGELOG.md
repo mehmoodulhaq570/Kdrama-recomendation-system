@@ -2,6 +2,296 @@
 
 Important project history reconstructed from Git commits and project documentation.
 
+
+## 2026-07-21
+
+### Ranking Prior Experiment Runner
+
+- Added configurable ranking-prior weights to `backend/ranking_config/curated_priors.json`.
+- Updated `backend/app.py` so genre, theme, actor, and generated-index boost weights can be changed through JSON instead of code edits.
+- Added `SEOULMATE_PRIOR_WEIGHTS` support for temporary experiment overrides.
+- Added `SEOULMATE_GENRE_PRIOR_SOURCE` support to test curated genre priors against calibrated generated genre indexes.
+- Added `SEOULMATE_PORT` and `SEOULMATE_RELOAD` support so isolated experiment backend instances can be launched safely.
+- Added `tests/experiment_ranking_priors.py` to run controlled ranking experiments against separate backend ports.
+- Added `tests/report_weak_queries.py` plus generated reports in `tests/reports/` to identify weak queries by category, metrics, analyzer output, and likely failure reason.
+- Experiment results showed curated priors are important:
+  - removing genre priors dropped overall accuracy by `8.07` points
+  - removing actor priors dropped overall accuracy by `5.20` points
+  - removing theme priors dropped overall accuracy by `4.74` points
+- First genre-replacement experiment showed calibrated generated genre priors are useful but not ready to replace curated genre priors:
+  - curated genre baseline: `88.50%`
+  - no genre priors: `80.28%`
+  - calibrated generated genre replacement: `81.62%`
+  - softer calibrated generated genre replacement: `82.36%`
+  - stronger calibrated generated genre replacement: `79.85%`
+- Improved generated genre-combo calibration in `backend/generate_indexes.py`.
+- Added metadata-based focus rules for high-signal combo patterns:
+  - `comedy|romance`
+  - `fantasy|romance`
+- Regenerated `backend/generated_indexes/calibrated_genre_combo_index.json`.
+- Offline generated genre-combo validation improved:
+  - Hit@3: `81.82%` -> `90.91%`
+  - Hit@10: stayed `100.00%`
+- Live replacement experiment improved only slightly because single-genre generated indexes remain the bottleneck:
+  - previous best generated replacement: `82.50%`
+  - updated best generated replacement: `82.51%`
+- Improved single-genre generated calibration for noisy genre keys including `Medical`, `Law`, `Food`, `Business`, `Crime`, and `Revenge`.
+- Added targeted metadata focus scoring for those noisy genre keys while keeping the original scoring for broader genres where focus scoring was harmful.
+- Regenerated `backend/generated_indexes/calibrated_genre_index.json`.
+- Offline single-genre generated validation improved:
+  - Hit@10: `69.23%` -> `76.92%`
+  - Hit@3: stayed `61.54%`
+- Live generated genre replacement improved:
+  - previous best full generated genre replacement: `82.37%`
+  - updated best full generated genre replacement: `82.48%`
+  - Recall@10 improved to `90.43%`
+- Added `tests/compare_ranking_modes.py`.
+- Generated side-by-side reports:
+  - `tests/reports/ranking_mode_comparison.json`
+  - `tests/reports/ranking_mode_comparison.md`
+- The comparison report shows the main generated-replacement regressions are broad genre top-3 ordering cases:
+  - `historical`
+  - `school drama`
+  - `thriller`
+  - `romantic comedy`
+  - `zombie drama`
+  - `medical drama`
+  - `office romance`
+- The current generated replacement finds many correct titles by top 10, but still ranks newer/noisier candidates above expected high-signal titles in top 3.
+- Added `title_reliability_score()` to `backend/generate_indexes.py`.
+- Reliability scoring now uses metadata signals instead of manual title lists:
+  - rating bands
+  - training-data title frequency
+  - normal episode-count range
+  - penalties for specials, variety/reality/documentary entries, short web series, sequels, and very recent releases
+- Applied reliability scoring to calibrated generated genre and genre-combo indexes.
+- Regenerated:
+  - `backend/generated_indexes/calibrated_genre_index.json`
+  - `backend/generated_indexes/calibrated_genre_combo_index.json`
+- Offline generated validation improved:
+  - single-genre Hit@3: `61.54%` -> `69.23%`
+  - single-genre Hit@10: stayed `76.92%`
+  - genre-combo Hit@1: `27.27%` -> `54.55%`
+  - genre-combo Hit@3: stayed `90.91%`
+  - genre-combo Hit@10: stayed `100.00%`
+- Live generated replacement improved:
+  - previous best full generated genre replacement: `82.48%`
+  - updated best full generated genre replacement: `82.84%`
+  - Recall@10: `91.67%`
+  - MRR: `0.917`
+- Added an experimental generated query-pattern profile layer in `backend/app.py`.
+- Added `SEOULMATE_ENABLE_QUERY_PROFILES=1` as an opt-in flag for profile experiments.
+- Added experiment scenarios:
+  - `generated_genre_soft_profiles`
+  - `generated_combo_only_soft_profiles`
+- Query-pattern profiles are disabled by default because the measured results were worse than the current generated replacement:
+  - best generated replacement without profiles: `82.84%`
+  - generated genre soft with profiles: `81.49%`
+  - generated combo-only soft with profiles: `81.45%`
+- Conclusion:
+  - metadata profile matching is useful as an experiment path
+  - current profile boosts are too blunt for live/generated replacement ranking
+  - the active generated replacement baseline remains `82.84%`
+- Added steeper rank decay for generated genre priors in `backend/app.py`.
+- Curated priors keep their existing decay, while generated genre/combo priors now make index ordering matter more strongly.
+- Live full generated replacement improved:
+  - previous best: `82.84%`
+  - updated best: `82.90%`
+- Refreshed `tests/reports/ranking_mode_comparison.json` and `tests/reports/ranking_mode_comparison.md` after the rank-decay update.
+- Added `tests/audit_generated_replacement.py` to classify the gap between curated priors and full generated replacement.
+- Generated audit reports:
+  - `tests/reports/generated_replacement_audit.json`
+  - `tests/reports/generated_replacement_audit.md`
+- Audit moved replacement work from trial-and-error to failure-class tracking.
+- Current generated replacement audit:
+  - curated baseline: P@3 `63.58%`, R@10 `98.46%`, MRR `0.963`
+  - generated replacement: P@3 `51.85%`, R@10 `91.05%`, MRR `0.915`
+- Top failure classes:
+  - `expected_ranked_too_low`: `11`
+  - `top3_precision_regression`: `11`
+  - `expected_missing_from_generated_top10`: `7`
+  - `first_relevant_rank_regression`: `6`
+  - `noisy_titles_above_expected`: `6`
+- Highest-impact generated replacement gaps are genre queries:
+  - `school drama`
+  - `zombie drama`
+  - `thriller`
+  - `romantic comedy`
+  - `historical`
+  - `sageuk royal drama`
+- Next evidence-based fix order:
+  - first improve generated index coverage for expected titles missing from top 10
+  - then improve generated top-3 ordering for expected titles already present
+  - then add general negative signals for noisy titles above expected titles
+- Improved virtual-genre handling in `backend/generate_indexes.py`.
+- Metadata-derived virtual genres are now added to single-genre generated indexes, so titles with strong keyword/description evidence can be recovered even when the scraped `Genre` field is incomplete.
+- Added virtual `youth` genre extraction from metadata terms such as `school`, `student`, `high school`, `campus`, and `youth`.
+- Scoped virtual genres used for combo generation to avoid damaging the already-strong generated combo index.
+- Regenerated generated genre indexes and refreshed comparison/audit reports.
+- Offline generated index validation improved:
+  - single-genre Hit@3: `69.23%` -> `84.62%`
+  - single-genre Hit@10: `76.92%` -> `84.62%`
+  - genre-combo Hit@10: restored to `100.00%`
+- Live generated replacement did not improve yet:
+  - generated replacement remained P@3 `51.85%`, R@10 `91.05%`, MRR `0.915`
+  - this means the next bottleneck remains API ranking/retrieval interaction, not only offline index contents
+- Tested generated-aware backend pre-filtering in `backend/app.py`.
+- Added a genre matcher that can include generated-index genre membership during generated replacement modes.
+- Refreshed ranking comparison and generated replacement audit after the pre-filter change.
+- Result:
+  - generated replacement stayed P@3 `51.85%`, R@10 `91.05%`, MRR `0.915`
+  - candidate filtering is not the main remaining bottleneck
+  - remaining bottleneck is generated prior scoring/top-3 ordering inside the live backend
+- Disabled generated-index live nudges by default because the experiment showed a tiny improvement without them:
+  - baseline with generated nudges: `88.49%`
+  - generated nudges disabled: `88.50%`
+- Kept generated indexes available for offline discovery and future calibrated experiments.
+- Added `tests/debug_generated_query.py` for single-query generated replacement tracing.
+- The debugger compares query analyzer output, calibrated generated index candidates, and final `/recommend` top 10 results.
+- Generated first single-query reports:
+  - `tests/reports/debug_generated_query_school_drama.json`
+  - `tests/reports/debug_generated_query_school_drama.md`
+- `school drama` debug result:
+  - analyzer detected `Drama` and `Youth`
+  - generated index contained expected title `True Beauty` at generated candidate rank `8`
+  - final generated-mode API top 10 contained none of the expected titles
+  - classification: `lost_between_generated_index_and_final_api`
+- New bottleneck is clearer:
+  - generated indexes can now surface some expected titles
+  - final live ranking still lets broad/noisy candidates outrank expected school-drama titles
+  - next improvement should focus on converting generated index rank into stronger, safer final ranking signals
+- Added generated combo-prior gating in `backend/app.py`.
+- In generated replacement mode, when a multi-genre generated combo prior matches the query, single generated genre priors are skipped for that query.
+- Reason:
+  - generated combo indexes are more specific than broad single generated genre lists
+  - this prevents broad `Drama` and noisy virtual genres like `Youth` from overpowering a matched combo such as `drama|youth`
+- Focused `school drama` debug improved:
+  - before: expected title was missing from final top 10
+  - after: `True Beauty` reached final API rank `8`
+  - classification moved from `lost_between_generated_index_and_final_api` to `final_ranking_too_low`
+- Full generated replacement accuracy changed slightly:
+  - previous best full generated replacement: `82.90%`
+  - updated full generated replacement: `82.91%`
+  - curated/default baseline remains `88.50%`
+- Refreshed:
+  - `tests/reports/ranking_mode_comparison.json`
+  - `tests/reports/ranking_mode_comparison.md`
+  - `tests/reports/generated_replacement_audit.json`
+  - `tests/reports/generated_replacement_audit.md`
+- Added metadata calibration for the generated `drama|youth` combo index in `backend/generate_indexes.py`.
+- The new combo rule boosts broad school-drama signals such as `high school`, `school setting`, `student`, `romance`, `comedy`, `coming of age`, `friendship`, `love triangle`, and `adapted from a webtoon`.
+- The same rule down-ranks noisier youth-drama signals such as action, violence, gang/fighter terms, fantasy, time travel, historical/martial-law terms, `web series`, and `short length series`.
+- Regenerated generated indexes after the calibration update.
+- Focused `school drama` debug improved again:
+  - previous generated/final expected rank: `4`
+  - updated generated/final expected rank: `3`
+  - classification moved to `ok_top3`
+- Offline generated combo validation improved:
+  - calibrated genre-combo Hit@3: `90.91%` -> `100.00%`
+  - calibrated genre-combo Hit@10: stayed `100.00%`
+- Live generated replacement improved:
+  - previous full generated replacement: `82.91%`
+  - updated full generated replacement: `83.12%`
+  - generated replacement P@3: `51.85%` -> `52.47%`
+  - generated replacement MRR: `0.917` -> `0.921`
+  - curated/default baseline remains `88.50%`
+- Tested a historical/sageuk calibration rule and rejected it after focused debugging.
+- The rejected historical rule over-favored generic palace/royal titles and harmed key expectations:
+  - `historical` fell from expected rank `1` to rank `5`
+  - `sageuk royal drama` lost expected titles from final top 10
+- Removed the harmful historical rule before keeping the next improvement.
+- Added safer metadata calibration for the generated `fantasy|romance` combo index.
+- The fantasy-romance rule now boosts stronger fantasy-romance signals such as `alchemy`, `souls`, `dokkaebi`, `goblin`, `ghost-seeing`, `immortality`, `hotel`, `curse`, `deity`, and `elemental power`.
+- The same rule down-ranks procedural/noisy signals such as mystery, investigation, police, murder, and magician terms.
+- Focused `fantasy romance` debug improved:
+  - previous generated/final expected rank: `4`
+  - updated generated/final expected rank: `2`
+  - classification moved to `ok_top3`
+- Guard checks remained stable:
+  - `school drama`: still `ok_top3`, expected rank `3`
+  - `historical`: restored to `ok_top3`, expected rank `1`
+- Live generated replacement improved again:
+  - previous full generated replacement: `83.12%`
+  - updated full generated replacement: `83.67%`
+  - generated replacement P@3: `52.47%` -> `53.70%`
+  - generated replacement R@10: `91.05%` -> `91.67%`
+  - generated replacement MRR: `0.921` -> `0.926`
+  - curated/default baseline remains `88.50%`
+- Generated replacement audit failure counts improved:
+  - `expected_ranked_too_low`: `11` -> `10`
+  - `top3_precision_regression`: `11` -> `10`
+  - `expected_missing_from_generated_top10`: `8` -> `7`
+  - `first_relevant_rank_regression`: `6` -> `5`
+  - `noisy_titles_above_expected`: `6` -> `5`
+- Improved zombie/thriller generated coverage.
+- Updated `backend/query_analyzer.py` so `zombie`, `zombies`, and `apocalypse` now map to both `Thriller` and `Horror`.
+- Added virtual generated-index `horror` signals for metadata terms such as zombie, zombie apocalypse, epidemic, infectious disease, virus, quarantine, gore, and monster.
+- Added generated combo calibration for zombie/thriller paths:
+  - `drama|horror|thriller`
+  - `horror|thriller`
+  - `drama|thriller`
+- The zombie/thriller combo calibration boosts survival outbreak signals and down-ranks revenge, school-bullying, grim-reaper, legal/prosecutor, and melodrama drift.
+- Focused `zombie drama` debug improved final ranking:
+  - analyzer now detects `Horror`, `Drama`, and `Thriller`
+  - final API top 5 now includes `All of Us Are Dead`, `Happiness`, and `Kingdom`
+  - best expected rank improved to `2`
+- Live generated replacement improved:
+  - previous full generated replacement: `83.67%`
+  - updated full generated replacement: `84.11%`
+  - generated replacement P@3: `53.70%` -> `54.32%`
+  - generated replacement R@10: `91.67%` -> `92.90%`
+  - generated replacement MRR: `0.926` -> `0.929`
+  - curated/default baseline remains `88.50%`
+- Generated replacement audit improved:
+  - `expected_missing_from_generated_top10`: `7` -> `6`
+- Improved generated `comedy|romance` calibration for romantic-comedy coverage.
+- Expanded metadata focus terms for office/CEO/secretary/business romcoms, strong-woman romcoms, supernatural-strength romcoms, rich male lead, workplace, fake/contract relationship, and love-triangle signals.
+- Added metadata penalties for spin-off, side-story, special, short-length, fantasy, melodrama, thriller, revenge, and historical drift inside the generated `comedy|romance` combo.
+- Focused `romantic comedy` debug improved:
+  - previous best expected rank: `2`
+  - updated best expected rank: `1`
+  - final top 4 now includes `Business Proposal`, `Strong Woman Do Bong Soon`, and `What's Wrong with Secretary Kim`
+  - noisy `Spice up Our Love` no longer appears above the expected titles
+- Guard checks remained stable:
+  - `zombie drama`: still `ok_top3`
+  - `fantasy romance`: still `ok_top3`
+- Live generated replacement improved:
+  - previous full generated replacement: `84.11%`
+  - updated full generated replacement: `84.55%`
+  - generated replacement P@3: `54.32%` -> `54.94%`
+  - generated replacement R@10: `92.90%` -> `94.14%`
+  - generated replacement MRR: `0.929` -> `0.938`
+  - curated/default baseline remains `88.50%`
+- Generated replacement audit improved:
+  - `expected_missing_from_generated_top10`: `6` -> `5`
+  - `first_relevant_rank_regression`: `5` -> `4`
+  - `noisy_titles_above_expected`: `5` -> `4`
+
+### Curated Ranking Config Extraction
+
+- Moved trusted curated ranking priors out of `backend/app.py`.
+- Added `backend/ranking_config/curated_priors.json`.
+- The config now stores:
+  - theme priors
+  - theme-combination priors
+  - genre priors
+  - genre-combination priors
+  - actor priors
+- Updated `backend/app.py` to load curated priors from JSON and convert combo keys such as `Drama|Revenge` back into tuple keys for existing ranking logic.
+- Kept generated indexes separate from curated priors:
+  - generated indexes remain broad/offline discovery data
+  - curated config remains the trusted live ranking layer
+- Verification:
+  - `python -m compileall backend\app.py`
+  - `python tests\validate_generated_indexes.py`
+  - `python tests\evaluate_accuracy.py`
+- Live accuracy preserved after refactor:
+  - Overall accuracy: `88.49%`
+  - Search Precision@3: `63.58%`
+  - Search Recall@10: `98.46%`
+  - Search MRR: `0.963`
+
+
 ## 2026-07-20
 
 ### Calibrated Actor Index Improvement
@@ -71,6 +361,62 @@ Important project history reconstructed from Git commits and project documentati
 - Conclusion:
   - combo index is now stronger for recall and analysis
   - still keep it out of live top-rank boosting until Hit@3 reaches the safe threshold around `80.00%`
+
+### Genre Combo Near-Miss Tuning
+
+- Added near-miss reporting to `tests/validate_generated_indexes.py`.
+- Near misses now show cases where expected titles are present but ranked between positions 4 and 10.
+- Used near-miss output to tune `business|romance` without hardcoding expected titles.
+- Added a narrow off-topic penalty for `business|romance` so fantasy, revenge, sports, and time-travel titles do not outrank cleaner office/workplace romance matches.
+- Regenerated generated index files from `model_traning/faiss_index/meta.pkl`.
+- Offline combo-index validation improved:
+  - Previous `calibrated_genre_combo_index.json`: Hit@3 `72.73%`, Hit@10 `100.00%`
+  - Current `calibrated_genre_combo_index.json`: Hit@3 `81.82%`, Hit@10 `100.00%`
+- Conclusion:
+  - generated combo index has reached the cautious fallback threshold
+  - next step can be a small backend candidate-expansion experiment, guarded by full accuracy evaluation
+  - remaining combo near misses are `romantic comedy` and `school drama`
+
+### Backend Genre Combo Boost Trial
+
+- Tested a conservative live backend boost using `calibrated_genre_combo_index.json`.
+- Trial behavior:
+  - loaded the generated combo index in `backend/app.py`
+  - boosted only already-retrieved titles
+  - limited boost to top 5 combo-index titles
+  - used a small generated-index multiplier
+- Trial result:
+  - Overall accuracy dropped from `88.14%` to `87.98%`
+  - Search Precision@3 dropped from `62.96%` to `62.35%`
+  - Search MRR improved slightly from `0.954` to `0.963`, but the overall score still regressed
+- Decision:
+  - disabled the live combo boost
+  - kept `calibrated_genre_combo_index.json` for offline validation, recall analysis, and future candidate-expansion experiments
+- Clean rerun after disabling the live boost restored:
+  - Overall accuracy: `88.14%`
+  - Search Precision@3: `62.96%`
+  - Search Recall@10: `97.22%`
+  - Search MRR: `0.954`
+
+### Revenge Drama Ranking Improvement
+
+- Improved the weak `revenge drama` live query without enabling generated combo boosts.
+- Added a standalone `revenge` theme prior in `backend/app.py`.
+- Added a focused `Drama + Revenge` genre-combination prior.
+- Used dataset titles that are already present in metadata:
+  - `The Glory`
+  - `The Penthouse: War in Life`
+  - `Eve`
+  - `Revenge of Others`
+- Live evaluator improvement:
+  - `revenge drama` changed from low-recall literal revenge results to top results `The Glory`, `The Penthouse: War in Life`, and `Revenge of Others`
+  - Overall accuracy improved from `88.14%` to `88.49%`
+  - Search Precision@3 improved from `62.96%` to `63.58%`
+  - Search Recall@10 improved from `97.22%` to `98.46%`
+  - Search MRR improved from `0.954` to `0.963`
+- Conclusion:
+  - targeted curated priors still outperform broad generated boosts for high-impact weak queries
+  - generated indexes remain useful for finding weak cases and candidate ideas, but live ranking should use narrow validated rules
 
 ### Generated Index Offline Validation
 

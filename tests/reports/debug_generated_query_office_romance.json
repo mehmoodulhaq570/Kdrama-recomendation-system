@@ -1,0 +1,190 @@
+{
+  "generated_at": "2026-07-22T23:43:05",
+  "query": "office romance",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Business Proposal",
+    "What's Wrong with Secretary Kim",
+    "Romance Is a Bonus Book"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "office romance",
+      "intent": "emotion_based",
+      "expanded_query": "office workplace career romance",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Business",
+          "Romance"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.85,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T18:42:44.890526"
+    },
+    "api": {
+      "query": "office romance",
+      "intent": "emotion_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Romance",
+          "Business"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Romance",
+        "Business"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "emotion_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Business",
+      "Romance"
+    ],
+    "genre_sections": [
+      {
+        "key": "Business",
+        "titles": [
+          "Love Scout",
+          "What's Wrong with Secretary Kim",
+          "Gaus Electronics",
+          "Typhoon Family",
+          "Reborn Rich",
+          "Good Manager",
+          "Agency",
+          "Suits",
+          "Misaeng: Incomplete Life",
+          "Fated to Love You",
+          "Romance Is a Bonus Book",
+          "Start-Up",
+          "Search: WWW",
+          "Pegasus Market",
+          "Jinny's Kitchen"
+        ]
+      },
+      {
+        "key": "Romance",
+        "titles": [
+          "Crash Landing on You",
+          "Mr. Sunshine",
+          "Alchemy of Souls",
+          "Reply 1988",
+          "Extraordinary Attorney Woo",
+          "Tale of the Nine-Tailed 1938",
+          "Mr. Queen",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Twinkling Watermelon",
+          "Flower of Evil",
+          "Healer",
+          "Twenty-Five Twenty-One",
+          "Guardian: The Lonely and Great God",
+          "The Red Sleeve"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "business|romance",
+        "titles": [
+          "What's Wrong with Secretary Kim",
+          "Gaus Electronics",
+          "Fated to Love You",
+          "Falling for Innocence",
+          "Romance Is a Bonus Book",
+          "Go Ho's Starry Night",
+          "The Greatest Love",
+          "Start-Up",
+          "Something in the Rain",
+          "Search: WWW",
+          "Love Scout",
+          "Our Dating Sim",
+          "She Would Never Know",
+          "Roommates of Poongduck 304",
+          "Ga Doo Ri\u2019s Sushi Restaurant"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "What's Wrong with Secretary Kim",
+      "Gaus Electronics",
+      "Fated to Love You",
+      "Falling for Innocence",
+      "Romance Is a Bonus Book",
+      "Go Ho's Starry Night",
+      "The Greatest Love",
+      "Start-Up",
+      "Something in the Rain",
+      "Search: WWW",
+      "Love Scout",
+      "Our Dating Sim",
+      "She Would Never Know",
+      "Roommates of Poongduck 304",
+      "Ga Doo Ri\u2019s Sushi Restaurant",
+      "Typhoon Family",
+      "Reborn Rich",
+      "Good Manager",
+      "Agency",
+      "Suits",
+      "Misaeng: Incomplete Life",
+      "Pegasus Market",
+      "Jinny's Kitchen",
+      "Crash Landing on You",
+      "Mr. Sunshine",
+      "Alchemy of Souls",
+      "Reply 1988",
+      "Extraordinary Attorney Woo",
+      "Tale of the Nine-Tailed 1938",
+      "Mr. Queen",
+      "It's Okay to Not Be Okay",
+      "My Dearest",
+      "Twinkling Watermelon",
+      "Flower of Evil",
+      "Healer",
+      "Twenty-Five Twenty-One",
+      "Guardian: The Lonely and Great God",
+      "The Red Sleeve"
+    ]
+  },
+  "final_top10": [
+    "What's Wrong with Secretary Kim",
+    "Gaus Electronics",
+    "Fated to Love You",
+    "Falling for Innocence",
+    "Romance Is a Bonus Book",
+    "Go Ho's Starry Night",
+    "The Greatest Love",
+    "Start-Up",
+    "Something in the Rain",
+    "Search: WWW"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 1,
+  "final_expected_rank": 1,
+  "titles_above_expected": []
+}

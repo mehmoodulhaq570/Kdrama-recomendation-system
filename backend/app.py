@@ -31,6 +31,7 @@ CROSS_ENCODER_MODEL = r"D:\Projects\SeoulMate\model_traning\models\cross-enc-exc
 MODEL_DIR = r"D:\Projects\SeoulMate\model_traning\models"
 INDEX_DIR = r"D:\Projects\SeoulMate\model_traning\faiss_index"
 GENERATED_INDEX_DIR = os.path.join(os.path.dirname(__file__), "generated_indexes")
+RANKING_CONFIG_DIR = os.path.join(os.path.dirname(__file__), "ranking_config")
 
 # ======================================================
 # FASTAPI SETUP
@@ -162,11 +163,50 @@ def merge_title_indexes(generated, curated):
     return merged
 
 
+def combo_prior_keys(priors):
+    return {
+        tuple(part.strip() for part in key.split("|")): titles
+        for key, titles in priors.items()
+    }
+
+
+def load_ranking_config(filename: str):
+    path = os.path.join(RANKING_CONFIG_DIR, filename)
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        print(f"Loaded ranking config: {filename}")
+        return data
+    except FileNotFoundError:
+        print(f"Ranking config missing: {filename}; using empty priors.")
+        return {}
+    except Exception as exc:
+        print(f"Could not load ranking config {filename}: {exc}")
+        return {}
+
+
+def load_prior_weights(defaults):
+    """Load ranking weights, with optional JSON env override for experiments."""
+    weights = defaults.copy()
+    override = os.environ.get("SEOULMATE_PRIOR_WEIGHTS")
+    if not override:
+        return weights
+    try:
+        weights.update(json.loads(override))
+        print(f"Loaded ranking weight override: {weights}")
+    except Exception as exc:
+        print(f"Could not parse SEOULMATE_PRIOR_WEIGHTS: {exc}")
+    return weights
+
+
 GENERATED_TITLE_ALIASES = load_generated_index("title_aliases.json")
 GENERATED_ACTOR_INDEX = load_generated_index("actor_index.json")
 GENERATED_CALIBRATED_ACTOR_INDEX = load_generated_index("calibrated_actor_index.json")
 GENERATED_GENRE_INDEX = load_generated_index("genre_index.json")
 GENERATED_CALIBRATED_GENRE_INDEX = load_generated_index("calibrated_genre_index.json")
+GENERATED_CALIBRATED_GENRE_COMBO_INDEX = load_generated_index(
+    "calibrated_genre_combo_index.json"
+)
 GENERATED_THEME_INDEX = load_generated_index("theme_index.json")
 GENERATED_KEYWORD_INDEX = load_generated_index("keyword_index.json")
 
@@ -175,220 +215,111 @@ TITLE_ALIASES = GENERATED_TITLE_ALIASES | {
     "guardian": "Guardian: The Lonely and Great God",
 }
 
-THEME_PRIOR_TITLES = {
-    "north korea": [
-        "Crash Landing on You",
-        "The King 2 Hearts",
-        "Iris",
-        "Snowdrop",
-    ],
-    "food": [
-        "Itaewon Class",
-        "Wok of Love",
-        "Late Night Restaurant",
-        "Pasta",
-        "Let's Eat",
-    ],
-    "time travel": [
-        "Signal",
-        "Tomorrow with You",
-        "Nine: Nine Times Time Travel",
-        "Rooftop Prince",
-        "Queen In Hyun's Man",
-    ],
-    "contract marriage": [
-        "Marriage Contract",
-        "Because This Is My First Life",
-        "Love in Contract",
-        "The Story of Park's Marriage Contract",
-    ],
-    "rich ceo romance": [
-        "Business Proposal",
-        "What's Wrong with Secretary Kim",
-        "Strong Woman Do Bong Soon",
-        "King the Land",
-    ],
-    "school bullying": [
-        "The Glory",
-        "Weak Hero Class 1",
-        "My Strange Hero",
-        "Angry Mom",
-    ],
-    "legal corruption": [
-        "Vincenzo",
-        "Law School",
-        "Extraordinary Attorney Woo",
-        "Lawless Lawyer",
-    ],
-    "supernatural hotel": [
-        "Hotel Del Luna",
-        "The Master's Sun",
-        "Oh My Ghost",
-    ],
-    "survival game": [
-        "Squid Game",
-        "All of Us Are Dead",
-        "Happiness",
-    ],
-    "startup workplace": [
-        "Start-Up",
-        "Misaeng",
-        "Agency",
-        "Hot Stove League",
-    ],
-    "healing slice of life": [
-        "Hospital Playlist",
-        "Our Blues",
-        "My Mister",
-        "A Piece of Your Mind",
-    ],
-}
+CURATED_PRIORS = load_ranking_config("curated_priors.json")
+GENRE_PRIOR_SOURCE = os.environ.get(
+    "SEOULMATE_GENRE_PRIOR_SOURCE",
+    CURATED_PRIORS.get("genre_prior_source", "curated"),
+)
+PRIOR_WEIGHTS = load_prior_weights(
+    CURATED_PRIORS.get(
+        "weights",
+        {
+            "genre_combo": 2.55,
+            "genre": 2.2,
+            "theme_combo": 3.1,
+            "theme": 2.4,
+            "actor": 2.35,
+            "generated_actor": 0.0,
+            "generated_genre": 0.0,
+            "generated_theme": 0.0,
+            "generated_cap": 1.0,
+        },
+    )
+)
+THEME_PRIOR_TITLES = CURATED_PRIORS.get("theme_priors", {})
+THEME_COMBINATION_PRIOR_TITLES = combo_prior_keys(
+    CURATED_PRIORS.get("theme_combo_priors", {})
+)
+GENRE_PRIOR_TITLES = CURATED_PRIORS.get("genre_priors", {})
+GENRE_COMBINATION_PRIOR_TITLES = combo_prior_keys(
+    CURATED_PRIORS.get("genre_combo_priors", {})
+)
+ACTOR_PRIOR_TITLES = CURATED_PRIORS.get("actor_priors", {})
 
-THEME_COMBINATION_PRIOR_TITLES = {
-    ("school bullying", "revenge"): [
-        "The Glory",
-        "Angry Mom",
-        "Weak Hero Class 1",
-        "My Strange Hero",
-    ],
-    ("legal corruption", "revenge"): [
-        "Vincenzo",
-        "Lawless Lawyer",
-        "Again My Life",
-        "The Devil Judge",
-    ],
-    ("rich ceo romance", "contract marriage"): [
-        "Business Proposal",
-        "Love in Contract",
-        "Because This Is My First Life",
-        "Marriage Contract",
-    ],
-}
-
-GENRE_PRIOR_TITLES = {
-    "Medical": [
-        "Hospital Playlist",
-        "Doctor Cha",
-        "Good Doctor",
-        "Dr. Romantic",
-    ],
-    "Romance": [
-        "Business Proposal",
-        "What's Wrong with Secretary Kim",
-        "Strong Woman Do Bong Soon",
-        "True Beauty",
-    ],
-    "Comedy": [
-        "Business Proposal",
-        "What's Wrong with Secretary Kim",
-        "Strong Woman Do Bong Soon",
-        "True Beauty",
-    ],
-    "Thriller": [
-        "Squid Game",
-        "Signal",
-        "Stranger",
-        "Beyond Evil",
-    ],
-    "Historical": [
-        "Mr. Sunshine",
-        "Kingdom",
-        "The Red Sleeve",
-        "Empress Ki",
-    ],
-}
-
-GENRE_COMBINATION_PRIOR_TITLES = {
-    ("Drama", "Law"): [
-        "Extraordinary Attorney Woo",
-        "Law School",
-        "Vincenzo",
-        "Lawless Lawyer",
-    ],
-    ("Drama", "Youth"): [
-        "True Beauty",
-        "Dream High",
-        "Extraordinary You",
-        "School 2017",
-    ],
-    ("Fantasy", "Romance"): [
-        "Guardian: The Lonely and Great God",
-        "Hotel Del Luna",
-        "Alchemy of Souls",
-        "My Love from the Star",
-    ],
-    ("Drama", "Thriller"): [
-        "All of Us Are Dead",
-        "Kingdom",
-        "Happiness",
-        "Sweet Home",
-    ],
-    ("Horror", "Thriller"): [
-        "All of Us Are Dead",
-        "Kingdom",
-        "Happiness",
-        "Sweet Home",
-    ],
-    ("Revenge", "Thriller"): [
-        "The Glory",
-        "Penthouse",
-        "Eve",
-        "Revenge of Others",
-    ],
-}
-
-ACTOR_PRIOR_TITLES = {
-    "Hyun Bin": [
-        "Crash Landing on You",
-        "Memories of the Alhambra",
-        "Secret Garden",
-    ],
-    "Park Seo Joon": [
-        "Itaewon Class",
-        "What's Wrong with Secretary Kim",
-        "Fight for My Way",
-    ],
-    "Song Joong Ki": [
-        "Vincenzo",
-        "Descendants of the Sun",
-        "Arthdal Chronicles Part 1: The Children of Prophecy",
-    ],
-    "Kim Soo Hyun": [
-        "My Love from the Star",
-        "It's Okay to Not Be Okay",
-        "Moon Embracing the Sun",
-    ],
-    "Lee Min Ho": [
-        "The Heirs",
-        "The King: Eternal Monarch",
-        "Boys over Flowers",
-    ],
-    "Ji Chang Wook": [
-        "Healer",
-        "Suspicious Partner",
-        "The K2",
-    ],
-    "IU": [
-        "Hotel Del Luna",
-        "My Mister",
-        "Moon Lovers: Scarlet Heart Ryeo",
-    ],
-    "Park Min Young": [
-        "What's Wrong with Secretary Kim",
-        "Her Private Life",
-        "Healer",
-    ],
-    "Song Hye Kyo": [
-        "Descendants of the Sun",
-        "The Glory",
-        "Encounter",
-    ],
-    "Gong Yoo": [
-        "Guardian: The Lonely and Great God",
-        "Coffee Prince",
-        "Big",
-    ],
-}
+GENERATED_QUERY_PROFILES = [
+    {
+        "name": "medical_drama",
+        "query_terms": ["medical", "doctor", "hospital"],
+        "required_genres": ["medical"],
+        "focus_terms": ["hospital", "doctor", "surgeon", "resident", "medical"],
+        "penalty_terms": ["action", "fantasy"],
+        "boost": 2.05,
+        "limit": 8,
+    },
+    {
+        "name": "thriller",
+        "query_terms": ["thriller"],
+        "required_genres": ["thriller"],
+        "focus_terms": ["thriller", "mystery", "suspense", "survival", "game"],
+        "penalty_terms": ["romance", "comedy", "youth"],
+        "boost": 1.95,
+        "limit": 8,
+    },
+    {
+        "name": "zombie_drama",
+        "query_terms": ["zombie"],
+        "required_genres": ["thriller"],
+        "focus_terms": ["zombie", "infected", "infection", "survival", "horror"],
+        "penalty_terms": ["revenge", "romance", "comedy"],
+        "boost": 2.15,
+        "limit": 8,
+    },
+    {
+        "name": "historical",
+        "query_terms": ["historical", "sageuk", "royal"],
+        "required_genres": ["historical"],
+        "focus_terms": ["historical", "king", "queen", "royal", "palace", "joseon"],
+        "penalty_terms": ["fantasy", "cooking", "time travel"],
+        "boost": 2.0,
+        "limit": 8,
+    },
+    {
+        "name": "school_drama",
+        "query_terms": ["school", "student", "youth"],
+        "required_genres": ["youth"],
+        "focus_terms": ["school", "student", "high school", "class", "campus"],
+        "penalty_terms": ["action", "gangster", "thriller"],
+        "boost": 2.0,
+        "limit": 8,
+    },
+    {
+        "name": "romantic_comedy",
+        "query_terms": ["romantic comedy", "romcom"],
+        "required_genres": ["romance", "comedy"],
+        "focus_terms": ["romantic comedy", "romance", "comedy", "office", "secretary"],
+        "penalty_terms": ["fantasy", "historical", "melodrama"],
+        "boost": 2.0,
+        "limit": 8,
+    },
+    {
+        "name": "office_romance",
+        "query_terms": ["office romance", "workplace romance"],
+        "required_genres": ["romance"],
+        "focus_terms": ["office", "workplace", "company", "secretary", "business"],
+        "penalty_terms": ["fantasy", "historical", "sports"],
+        "boost": 1.95,
+        "limit": 8,
+    },
+    {
+        "name": "legal_drama",
+        "query_terms": ["legal", "law", "lawyer", "courtroom"],
+        "required_genres": ["law"],
+        "focus_terms": ["law", "lawyer", "attorney", "court", "prosecutor", "legal"],
+        "penalty_terms": ["doctor", "medical", "fantasy"],
+        "boost": 1.95,
+        "limit": 8,
+    },
+]
 
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
@@ -416,7 +347,9 @@ def cache_result(cache_key, result):
     _result_cache[cache_key] = (result, time.time())
 
 
-def add_prior_title_boosts(combined_scores, filtered_metadata, prior_titles, boost):
+def add_prior_title_boosts(
+    combined_scores, filtered_metadata, prior_titles, boost, decay=0.03
+):
     """Add or increase scores for curated high-signal matches."""
     title_lookup = {m.get("Title", "").lower(): m for m in filtered_metadata}
     for rank, prior_title in enumerate(prior_titles):
@@ -425,8 +358,69 @@ def add_prior_title_boosts(combined_scores, filtered_metadata, prior_titles, boo
             continue
         title_key = drama["Title"]
         current = combined_scores.get(title_key, 0.0)
-        ranked_boost = boost - (rank * 0.03)
+        ranked_boost = boost - (rank * decay)
         combined_scores[title_key] = max(current, ranked_boost)
+
+
+def generated_profile_matches(profile, query, detected_genres):
+    query_lower = query.lower()
+    detected_genre_set = {genre.lower() for genre in detected_genres}
+    if not any(term in query_lower for term in profile["query_terms"]):
+        return False
+    return set(profile["required_genres"]).issubset(detected_genre_set)
+
+
+def generated_profile_title_score(drama, profile):
+    searchable_text = " ".join(
+        str(drama.get(field, ""))
+        for field in ["Title", "Genre", "Description", "keywords"]
+    ).lower()
+    genre_text = str(drama.get("Genre", "")).lower()
+
+    focus_score = sum(term in searchable_text for term in profile["focus_terms"])
+    penalty_score = sum(term in searchable_text for term in profile["penalty_terms"])
+    required_score = sum(
+        required in genre_text for required in profile["required_genres"]
+    )
+    try:
+        rating = float(drama.get("rating_value", 0))
+    except (TypeError, ValueError):
+        rating = 0.0
+    try:
+        episodes = int(float(drama.get("episodes", 0)))
+    except (TypeError, ValueError):
+        episodes = 0
+    episode_score = 1 if 8 <= episodes <= 24 else 0
+    return (required_score, focus_score, episode_score, rating, -penalty_score)
+
+
+def apply_generated_query_profile_boosts(
+    combined_scores, filtered_metadata, query, detected_genres
+):
+    if not GENRE_PRIOR_SOURCE.startswith("calibrated_generated"):
+        return
+    if os.environ.get("SEOULMATE_ENABLE_QUERY_PROFILES", "0") != "1":
+        return
+
+    for profile in GENERATED_QUERY_PROFILES:
+        if not generated_profile_matches(profile, query, detected_genres):
+            continue
+        candidates = sorted(
+            filtered_metadata,
+            key=lambda drama: generated_profile_title_score(drama, profile),
+            reverse=True,
+        )[: profile["limit"]]
+        for rank, drama in enumerate(candidates):
+            title_key = drama.get("Title")
+            if not title_key:
+                continue
+            score = generated_profile_title_score(drama, profile)
+            if score[0] == 0 or score[1] == 0:
+                continue
+            current = combined_scores.get(title_key, 0.0)
+            ranked_boost = profile["boost"] - (rank * 0.035)
+            combined_scores[title_key] = max(current, ranked_boost)
+        print(f"Generated query profile applied: {profile['name']}")
 
 
 def resolve_title_alias(user_input: str, candidates):
@@ -453,22 +447,22 @@ def generated_index_boosts(result_title, detected_actors, detected_genres, detec
     for actor in detected_actors:
         actor_titles = GENERATED_ACTOR_INDEX.get(actor.lower(), [])
         if any(title_lower == candidate.lower() for candidate in actor_titles):
-            multiplier += 0.04
+            multiplier += PRIOR_WEIGHTS.get("generated_actor", 0.0)
             break
 
     for genre in detected_genres:
         genre_titles = GENERATED_GENRE_INDEX.get(genre, [])
         if any(title_lower == candidate.lower() for candidate in genre_titles[:80]):
-            multiplier += 0.025
+            multiplier += PRIOR_WEIGHTS.get("generated_genre", 0.0)
             break
 
     for theme in detected_themes:
         theme_titles = GENERATED_THEME_INDEX.get(theme, [])
         if any(title_lower == candidate.lower() for candidate in theme_titles[:60]):
-            multiplier += 0.025
+            multiplier += PRIOR_WEIGHTS.get("generated_theme", 0.0)
             break
 
-    return min(multiplier, 1.08)
+    return min(multiplier, PRIOR_WEIGHTS.get("generated_cap", 1.0))
 
 
 def get_actor_prior_titles(actor: str):
@@ -479,10 +473,34 @@ def get_actor_prior_titles(actor: str):
 
 
 def get_genre_prior_titles(genre: str):
+    if GENRE_PRIOR_SOURCE == "calibrated_generated_combo_only":
+        return []
+    if GENRE_PRIOR_SOURCE == "calibrated_generated":
+        return GENERATED_CALIBRATED_GENRE_INDEX.get(genre, [])
     curated_titles = GENRE_PRIOR_TITLES.get(genre)
     if curated_titles:
         return curated_titles
     return []
+
+
+def iter_genre_combo_priors():
+    if GENRE_PRIOR_SOURCE in {
+        "calibrated_generated",
+        "calibrated_generated_combo_only",
+    }:
+        return combo_prior_keys(GENERATED_CALIBRATED_GENRE_COMBO_INDEX).items()
+    return GENRE_COMBINATION_PRIOR_TITLES.items()
+
+
+def drama_matches_detected_genre(drama, genre_name):
+    genre_lower = genre_name.lower()
+    if genre_lower in str(drama.get("Genre", "")).lower():
+        return True
+    if GENRE_PRIOR_SOURCE.startswith("calibrated_generated"):
+        title_lower = str(drama.get("Title", "")).lower()
+        generated_titles = GENERATED_CALIBRATED_GENRE_INDEX.get(genre_name, [])
+        return any(title_lower == title.lower() for title in generated_titles[:80])
+    return False
 
 
 # ======================================================
@@ -579,10 +597,7 @@ def recommend(
             filtered_metadata = [
                 r
                 for r in filtered_metadata
-                if any(
-                    g.lower() in str(r.get("Genre", "")).lower()
-                    for g in detected_genres
-                )
+                if any(drama_matches_detected_genre(r, g) for g in detected_genres)
             ]
             print(
                 f"🎯 Genre filtering applied: {len(filtered_metadata)} dramas match genres {detected_genres}"
@@ -845,19 +860,46 @@ def recommend(
                         f"   ✓ Boosted: {result_title} ({matching_count}/{len(detected_genres)} genres, boost={boost:.2f})"
                     )
 
-        detected_genre_set = set(detected_genres)
-        for genre_combo, prior_titles in GENRE_COMBINATION_PRIOR_TITLES.items():
-            if set(genre_combo).issubset(detected_genre_set):
+        detected_genre_set = {genre.lower() for genre in detected_genres}
+        genre_prior_decay = (
+            0.09 if GENRE_PRIOR_SOURCE.startswith("calibrated_generated") else 0.03
+        )
+        matched_genre_combo_prior = False
+        for genre_combo, prior_titles in iter_genre_combo_priors():
+            if {genre.lower() for genre in genre_combo}.issubset(detected_genre_set):
+                matched_genre_combo_prior = True
                 add_prior_title_boosts(
-                    combined_scores, filtered_metadata, prior_titles, boost=2.55
+                    combined_scores,
+                    filtered_metadata,
+                    prior_titles,
+                    boost=PRIOR_WEIGHTS.get("genre_combo", 2.55),
+                    decay=genre_prior_decay,
                 )
 
-        for detected_genre in detected_genres:
-            prior_titles = get_genre_prior_titles(detected_genre)
-            if prior_titles:
-                add_prior_title_boosts(
-                    combined_scores, filtered_metadata, prior_titles, boost=2.2
-                )
+        use_single_genre_priors = not (
+            GENRE_PRIOR_SOURCE.startswith("calibrated_generated")
+            and matched_genre_combo_prior
+            and len(detected_genres) > 1
+        )
+        if use_single_genre_priors:
+            for detected_genre in detected_genres:
+                prior_titles = get_genre_prior_titles(detected_genre)
+                if prior_titles:
+                    add_prior_title_boosts(
+                        combined_scores,
+                        filtered_metadata,
+                        prior_titles,
+                        boost=PRIOR_WEIGHTS.get("genre", 2.2),
+                        decay=genre_prior_decay,
+                    )
+        else:
+            print(
+                "Generated combo prior matched; single generated genre priors skipped"
+            )
+
+        apply_generated_query_profile_boosts(
+            combined_scores, filtered_metadata, title, detected_genres
+        )
 
     detected_themes = entities.get("themes", [])
     if detected_themes:
@@ -866,14 +908,20 @@ def recommend(
         for theme_combo, prior_titles in THEME_COMBINATION_PRIOR_TITLES.items():
             if set(theme_combo).issubset(detected_theme_set):
                 add_prior_title_boosts(
-                    combined_scores, filtered_metadata, prior_titles, boost=3.1
+                    combined_scores,
+                    filtered_metadata,
+                    prior_titles,
+                    boost=PRIOR_WEIGHTS.get("theme_combo", 3.1),
                 )
 
         for detected_theme in detected_themes:
             prior_titles = THEME_PRIOR_TITLES.get(detected_theme, [])
             if prior_titles:
                 add_prior_title_boosts(
-                    combined_scores, filtered_metadata, prior_titles, boost=2.4
+                    combined_scores,
+                    filtered_metadata,
+                    prior_titles,
+                    boost=PRIOR_WEIGHTS.get("theme", 2.4),
                 )
 
         theme_keywords = {
@@ -927,7 +975,10 @@ def recommend(
             prior_titles = get_actor_prior_titles(detected_actor)
             if prior_titles:
                 add_prior_title_boosts(
-                    combined_scores, filtered_metadata, prior_titles, boost=2.35
+                    combined_scores,
+                    filtered_metadata,
+                    prior_titles,
+                    boost=PRIOR_WEIGHTS.get("actor", 2.35),
                 )
 
         for result_title, score in list(combined_scores.items()):
@@ -1585,4 +1636,6 @@ def get_user_statistics(user_id: str):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("app:app", host="127.0.0.1", port=8001, reload=True)
+    port = int(os.environ.get("SEOULMATE_PORT", "8001"))
+    reload_enabled = os.environ.get("SEOULMATE_RELOAD", "1") != "0"
+    uvicorn.run("app:app", host="127.0.0.1", port=port, reload=reload_enabled)

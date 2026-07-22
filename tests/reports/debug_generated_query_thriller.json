@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-07-23T00:26:52",
+  "query": "thriller",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Squid Game",
+    "Signal",
+    "Stranger"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "thriller",
+      "intent": "emotion_based",
+      "expanded_query": "thriller",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Thriller"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.85,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T19:26:11.190420"
+    },
+    "api": {
+      "query": "thriller",
+      "intent": "emotion_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Thriller"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Thriller"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "emotion_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Thriller"
+    ],
+    "genre_sections": [
+      {
+        "key": "Thriller",
+        "titles": [
+          "Mouse",
+          "Signal",
+          "Mother",
+          "Tomorrow",
+          "Happiness",
+          "Moving",
+          "Flower of Evil",
+          "The Glory",
+          "Healer",
+          "Taxi Driver",
+          "My Name",
+          "The Guest",
+          "The Worst of Evil",
+          "Tunnel",
+          "Defendant"
+        ]
+      }
+    ],
+    "combo_sections": [],
+    "combined_titles": [
+      "Mouse",
+      "Signal",
+      "Mother",
+      "Tomorrow",
+      "Happiness",
+      "Moving",
+      "Flower of Evil",
+      "The Glory",
+      "Healer",
+      "Taxi Driver",
+      "My Name",
+      "The Guest",
+      "The Worst of Evil",
+      "Tunnel",
+      "Defendant"
+    ]
+  },
+  "final_top10": [
+    "Mouse",
+    "Signal",
+    "Mother",
+    "Tomorrow",
+    "Happiness",
+    "Moving",
+    "Flower of Evil",
+    "The Glory",
+    "Healer",
+    "Taxi Driver"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 2,
+  "final_expected_rank": 2,
+  "titles_above_expected": [
+    "Mouse"
+  ]
+}

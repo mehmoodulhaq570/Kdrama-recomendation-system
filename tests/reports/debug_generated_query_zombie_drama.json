@@ -1,0 +1,280 @@
+{
+  "generated_at": "2026-07-23T01:01:46",
+  "query": "zombie drama",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "All of Us Are Dead",
+    "Kingdom",
+    "Happiness"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "zombie drama",
+      "intent": "genre_browse",
+      "expanded_query": "zombie apocalypse survival drama",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Thriller",
+          "Horror",
+          "Drama"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.65,
+      "confidence": 0.7,
+      "timestamp": "2026-07-22T20:01:13.249066"
+    },
+    "api": {
+      "query": "zombie drama",
+      "intent": "genre_browse",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Drama",
+          "Thriller",
+          "Horror"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Drama",
+        "Thriller",
+        "Horror"
+      ],
+      "confidence": 0.7
+    },
+    "intent": "genre_browse"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Thriller",
+      "Horror",
+      "Drama"
+    ],
+    "genre_sections": [
+      {
+        "key": "Thriller",
+        "titles": [
+          "Mouse",
+          "Signal",
+          "Mother",
+          "Tomorrow",
+          "Happiness",
+          "Moving",
+          "Flower of Evil",
+          "The Glory",
+          "Healer",
+          "Taxi Driver",
+          "My Name",
+          "The Guest",
+          "The Worst of Evil",
+          "Tunnel",
+          "Defendant"
+        ]
+      },
+      {
+        "key": "Horror",
+        "titles": [
+          "Tale of the Nine-Tailed 1938",
+          "Happiness",
+          "Revenant",
+          "Sweet Home",
+          "The Guest",
+          "All of Us Are Dead",
+          "Strangers from Hell",
+          "The Master's Sun",
+          "Hotel del Luna",
+          "Beyond Evil",
+          "A Korean Odyssey",
+          "Search",
+          "Bring It On, Ghost",
+          "Light Shop",
+          "Gyeongseong Creature"
+        ]
+      },
+      {
+        "key": "Drama",
+        "titles": [
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Extraordinary Attorney Woo",
+          "Daily Dose of Sunshine",
+          "My Mister",
+          "Prison Playbook",
+          "Tomorrow",
+          "Weak Hero Class 1",
+          "Vincenzo",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Happiness",
+          "Twinkling Watermelon",
+          "The Good Bad Mother",
+          "The Glory"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "horror|thriller",
+        "titles": [
+          "All of Us Are Dead",
+          "Kingdom",
+          "Dark Hole",
+          "Monstrous",
+          "Kingdom Season 2",
+          "Night Has Come",
+          "Search",
+          "Strangers from Hell",
+          "Tarot",
+          "Squid Game Season 3",
+          "The Cursed",
+          "Revenant",
+          "Light Shop",
+          "Tale of the Nine-Tailed",
+          "The Silent Sea"
+        ]
+      },
+      {
+        "key": "drama|thriller",
+        "titles": [
+          "Kingdom: Ashin of the North",
+          "Happiness",
+          "Duty after School: Part 1",
+          "Strangers from Hell",
+          "Squid Game",
+          "The Tale of Lady Ok",
+          "The 8 Show",
+          "Death's Game",
+          "Bargain",
+          "Squid Game Season 2",
+          "Duty after School: Part 2",
+          "Weak Hero Class 2",
+          "A Shop for Killers",
+          "The Escape of the Seven: War for Survival",
+          "The Defects"
+        ]
+      },
+      {
+        "key": "drama|horror",
+        "titles": [
+          "Sweet Home",
+          "Strangers from Hell",
+          "Priest",
+          "Hometown",
+          "Under the Black Moonlight",
+          "Hellbound",
+          "Sweet Home Season 2",
+          "Sweet Home Season 3"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "All of Us Are Dead",
+      "Kingdom",
+      "Dark Hole",
+      "Monstrous",
+      "Kingdom Season 2",
+      "Night Has Come",
+      "Search",
+      "Strangers from Hell",
+      "Tarot",
+      "Squid Game Season 3",
+      "The Cursed",
+      "Revenant",
+      "Light Shop",
+      "Tale of the Nine-Tailed",
+      "The Silent Sea",
+      "Kingdom: Ashin of the North",
+      "Happiness",
+      "Duty after School: Part 1",
+      "Squid Game",
+      "The Tale of Lady Ok",
+      "The 8 Show",
+      "Death's Game",
+      "Bargain",
+      "Squid Game Season 2",
+      "Duty after School: Part 2",
+      "Weak Hero Class 2",
+      "A Shop for Killers",
+      "The Escape of the Seven: War for Survival",
+      "The Defects",
+      "Sweet Home",
+      "Priest",
+      "Hometown",
+      "Under the Black Moonlight",
+      "Hellbound",
+      "Sweet Home Season 2",
+      "Sweet Home Season 3",
+      "Mouse",
+      "Signal",
+      "Mother",
+      "Tomorrow",
+      "Moving",
+      "Flower of Evil",
+      "The Glory",
+      "Healer",
+      "Taxi Driver",
+      "My Name",
+      "The Guest",
+      "The Worst of Evil",
+      "Tunnel",
+      "Defendant",
+      "Tale of the Nine-Tailed 1938",
+      "The Master's Sun",
+      "Hotel del Luna",
+      "Beyond Evil",
+      "A Korean Odyssey",
+      "Bring It On, Ghost",
+      "Gyeongseong Creature",
+      "Hospital Playlist",
+      "Under the Queen's Umbrella",
+      "Extraordinary Attorney Woo",
+      "Daily Dose of Sunshine",
+      "My Mister",
+      "Prison Playbook",
+      "Weak Hero Class 1",
+      "Vincenzo",
+      "It's Okay to Not Be Okay",
+      "My Dearest",
+      "Twinkling Watermelon",
+      "The Good Bad Mother"
+    ]
+  },
+  "final_top10": [
+    "Sweet Home",
+    "All of Us Are Dead",
+    "Kingdom: Ashin of the North",
+    "Happiness",
+    "Kingdom",
+    "Strangers from Hell",
+    "Duty after School: Part 1",
+    "Priest",
+    "Dark Hole",
+    "Monstrous"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 1,
+  "final_expected_rank": 2,
+  "titles_above_expected": [
+    "Sweet Home"
+  ]
+}

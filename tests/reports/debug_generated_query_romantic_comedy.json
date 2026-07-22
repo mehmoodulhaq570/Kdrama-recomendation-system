@@ -1,0 +1,197 @@
+{
+  "generated_at": "2026-07-23T01:01:46",
+  "query": "romantic comedy",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Business Proposal",
+    "What's Wrong with Secretary Kim",
+    "Strong Woman Do Bong Soon"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "romantic comedy",
+      "intent": "emotion_based",
+      "expanded_query": "romantic romance love story comedy",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Comedy",
+          "Romance"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [
+          "romantic"
+        ],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.95,
+      "confidence": 0.9,
+      "timestamp": "2026-07-22T20:01:13.134322"
+    },
+    "api": {
+      "query": "romantic comedy",
+      "intent": "emotion_based",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Romance",
+          "Comedy"
+        ],
+        "themes": [],
+        "years": [],
+        "emotions": [
+          "romantic"
+        ],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Romance",
+        "Comedy"
+      ],
+      "confidence": 0.9
+    },
+    "intent": "emotion_based"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Comedy",
+      "Romance"
+    ],
+    "genre_sections": [
+      {
+        "key": "Comedy",
+        "titles": [
+          "Crash Landing on You",
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Reply 1988",
+          "Prison Playbook",
+          "NCT WORLD 2.0",
+          "Vincenzo",
+          "Mr. Queen",
+          "It's Okay to Not Be Okay",
+          "The Good Bad Mother",
+          "Study Group",
+          "The Trauma Code: Heroes on Call",
+          "EXO's Showtime",
+          "Running Man",
+          "Nana Tour with Seventeen"
+        ]
+      },
+      {
+        "key": "Romance",
+        "titles": [
+          "Crash Landing on You",
+          "Mr. Sunshine",
+          "Alchemy of Souls",
+          "Reply 1988",
+          "Extraordinary Attorney Woo",
+          "Tale of the Nine-Tailed 1938",
+          "Mr. Queen",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Twinkling Watermelon",
+          "Flower of Evil",
+          "Healer",
+          "Twenty-Five Twenty-One",
+          "Guardian: The Lonely and Great God",
+          "The Red Sleeve"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "comedy|romance",
+        "titles": [
+          "Business Proposal",
+          "Strong Woman Do Bong Soon",
+          "The Secret Life of My Secretary",
+          "What's Wrong with Secretary Kim",
+          "Love in Contract",
+          "Crazy Love",
+          "Level Up",
+          "Gaus Electronics",
+          "Cunning Single Lady",
+          "Lucky Romance",
+          "Monthly Magazine Home",
+          "Dal Ja's Spring",
+          "Dae Jang Geum Is Watching",
+          "Noble, My Love",
+          "Radiant Office"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Business Proposal",
+      "Strong Woman Do Bong Soon",
+      "The Secret Life of My Secretary",
+      "What's Wrong with Secretary Kim",
+      "Love in Contract",
+      "Crazy Love",
+      "Level Up",
+      "Gaus Electronics",
+      "Cunning Single Lady",
+      "Lucky Romance",
+      "Monthly Magazine Home",
+      "Dal Ja's Spring",
+      "Dae Jang Geum Is Watching",
+      "Noble, My Love",
+      "Radiant Office",
+      "Crash Landing on You",
+      "Hospital Playlist",
+      "Under the Queen's Umbrella",
+      "Reply 1988",
+      "Prison Playbook",
+      "NCT WORLD 2.0",
+      "Vincenzo",
+      "Mr. Queen",
+      "It's Okay to Not Be Okay",
+      "The Good Bad Mother",
+      "Study Group",
+      "The Trauma Code: Heroes on Call",
+      "EXO's Showtime",
+      "Running Man",
+      "Nana Tour with Seventeen",
+      "Mr. Sunshine",
+      "Alchemy of Souls",
+      "Extraordinary Attorney Woo",
+      "Tale of the Nine-Tailed 1938",
+      "My Dearest",
+      "Twinkling Watermelon",
+      "Flower of Evil",
+      "Healer",
+      "Twenty-Five Twenty-One",
+      "Guardian: The Lonely and Great God",
+      "The Red Sleeve"
+    ]
+  },
+  "final_top10": [
+    "Business Proposal",
+    "Strong Woman Do Bong Soon",
+    "The Secret Life of My Secretary",
+    "What's Wrong with Secretary Kim",
+    "Love in Contract",
+    "Crazy Love",
+    "Level Up",
+    "Gaus Electronics",
+    "Cunning Single Lady",
+    "Romance"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 1,
+  "final_expected_rank": 1,
+  "titles_above_expected": []
+}

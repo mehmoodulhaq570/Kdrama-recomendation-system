@@ -54,6 +54,27 @@ VIRTUAL_GENRE_RULES = {
         "crime solving",
     ],
     "revenge": THEME_RULES["revenge"],
+    "youth": [
+        "youth",
+        "student",
+        "students",
+        "school",
+        "high school",
+        "classroom",
+        "campus",
+    ],
+    "horror": [
+        "horror",
+        "zombie",
+        "zombies",
+        "zombie apocalypse",
+        "epidemic",
+        "infectious disease",
+        "virus",
+        "quarantine",
+        "gore",
+        "monster",
+    ],
 }
 
 CRIME_THRILLER_FOCUS_TERMS = [
@@ -80,6 +101,157 @@ CRIME_THRILLER_ACTION_TERMS = [
     "drug cartel",
     "drug dealer",
 ]
+
+ZOMBIE_THRILLER_FOCUS_TERMS = [
+    "zombie",
+    "zombies",
+    "zombie apocalypse",
+    "epidemic",
+    "infectious disease",
+    "virus",
+    "quarantine",
+    "survival",
+    "gore",
+    "apocalypse",
+    "lockdown",
+]
+
+ZOMBIE_THRILLER_OFF_TOPIC_TERMS = [
+    "revenge",
+    "school bullying",
+    "suicide",
+    "grim reaper",
+    "taxi driver",
+    "prosecutor",
+    "law",
+    "melodrama",
+]
+
+BUSINESS_ROMANCE_OFF_TOPIC_TERMS = [
+    "fantasy",
+    "revenge",
+    "sports",
+    "time travel",
+]
+
+ROMANTIC_COMEDY_FOCUS_TERMS = [
+    "romantic comedy",
+    "comedy",
+    "office romance",
+    "office",
+    "business",
+    "secretary",
+    "ceo",
+    "chaebol",
+    "strong female",
+    "strong woman",
+    "supernatural strength",
+    "rich male lead",
+    "boss-employee",
+    "workplace",
+    "contract relationship",
+    "fake relationship",
+    "love triangle",
+    "lighthearted",
+]
+
+ROMANTIC_COMEDY_OFF_TOPIC_TERMS = [
+    "historical",
+    "fantasy",
+    "melodrama",
+    "thriller",
+    "revenge",
+    "spin-off",
+    "side story",
+    "special",
+    "short length series",
+]
+
+FANTASY_ROMANCE_FOCUS_TERMS = [
+    "alchemy",
+    "souls",
+    "fantasy",
+    "supernatural",
+    "dokkaebi",
+    "goblin",
+    "ghost",
+    "ghost-seeing",
+    "spirit",
+    "soul",
+    "immortal",
+    "immortality",
+    "hotel",
+    "curse",
+    "deity",
+    "elemental power",
+]
+
+FANTASY_ROMANCE_OFF_TOPIC_TERMS = [
+    "mystery",
+    "investigation",
+    "police",
+    "murder",
+    "magician",
+    "time travel",
+    "youth",
+    "historical",
+    "cooking",
+    "revenge",
+]
+
+YOUTH_DRAMA_FOCUS_TERMS = [
+    "high school",
+    "school setting",
+    "student",
+    "students",
+    "school",
+    "romance",
+    "romantic",
+    "comedy",
+    "coming of age",
+    "friendship",
+    "love triangle",
+    "adapted from a webtoon",
+]
+
+YOUTH_DRAMA_OFF_TOPIC_TERMS = [
+    "action",
+    "violence",
+    "school violence",
+    "skilled fighter",
+    "gang",
+    "thriller",
+    "fantasy",
+    "time travel",
+    "historical",
+    "martial law",
+    "documentary",
+    "web series",
+    "short length series",
+]
+
+GENRE_FOCUS_TERMS = {
+    "business": ["business", "office", "company", "workplace", "secretary", "ceo"],
+    "crime": CRIME_THRILLER_FOCUS_TERMS,
+    "fantasy": ["fantasy", "supernatural", "ghost", "spirit", "soul", "immortal"],
+    "food": ["food", "restaurant", "cooking", "chef", "kitchen", "culinary"],
+    "historical": ["historical", "king", "queen", "royal", "joseon", "palace"],
+    "law": ["law", "lawyer", "attorney", "court", "legal", "prosecutor"],
+    "medical": ["medical", "doctor", "hospital", "surgeon", "clinic"],
+    "revenge": VIRTUAL_GENRE_RULES["revenge"],
+    "romance": ["romance", "love", "relationship", "couple"],
+    "thriller": ["thriller", "suspense", "mystery", "serial killer", "investigation"],
+    "youth": ["school", "student", "youth", "class", "high school", "campus"],
+}
+
+FOCUS_FIRST_GENRES = {
+    "business",
+    "crime",
+    "food",
+    "law",
+    "medical",
+    "revenge",
+}
 
 NON_PRIMARY_TITLE_TERMS = [
     "special",
@@ -136,17 +308,80 @@ def append_title(index: dict[str, list[str]], key: str, title: str) -> None:
 def top_titles(titles: Iterable[str], metadata_by_title: dict[str, dict], limit: int = 40):
     def score(title: str):
         drama = metadata_by_title.get(title, {})
-        try:
-            rating = float(drama.get("rating_value") or 0)
-        except ValueError:
-            rating = 0.0
-        try:
-            episodes = int(float(drama.get("episodes") or 0))
-        except ValueError:
-            episodes = 0
+        rating = parse_rating(drama)
+        episodes = parse_episodes(drama)
         return (rating, episodes, title)
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
+
+
+def parse_rating(drama: dict) -> float:
+    try:
+        return float(drama.get("rating_value") or 0)
+    except ValueError:
+        return 0.0
+
+
+def parse_episodes(drama: dict) -> int:
+    try:
+        return int(float(drama.get("episodes") or 0))
+    except ValueError:
+        return 0
+
+
+def parse_start_year(drama: dict) -> int:
+    match = re.search(r"\b(19|20)\d{2}\b", str(drama.get("Release Years", "")))
+    return int(match.group(0)) if match else 0
+
+
+def title_reliability_score(
+    title: str,
+    drama: dict,
+    title_frequency: dict[str, int],
+) -> float:
+    """Estimate how safe a generated candidate is for top-rank promotion."""
+    title_lower = title.lower()
+    genre_lower = str(drama.get("Genre", "")).lower()
+    keyword_lower = str(drama.get("keywords", "")).lower()
+    description_lower = str(drama.get("Description", "")).lower()
+    searchable_text = " ".join([title_lower, genre_lower, keyword_lower, description_lower])
+
+    rating = parse_rating(drama)
+    episodes = parse_episodes(drama)
+    start_year = parse_start_year(drama)
+    frequency = min(title_frequency.get(title, 0), 8)
+
+    score = 0.0
+    if rating >= 8.8:
+        score += 1.5
+    elif rating >= 8.5:
+        score += 1.0
+    elif rating >= 8.0:
+        score += 0.5
+
+    score += frequency * 0.15
+
+    if 8 <= episodes <= 24:
+        score += 0.75
+    elif episodes and episodes < 6:
+        score -= 1.0
+
+    if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
+        score -= 4.0
+    if any(term in genre_lower for term in NON_PRIMARY_GENRE_TERMS):
+        score -= 3.0
+    if "web series" in keyword_lower and episodes <= 8:
+        score -= 1.25
+    if SEQUEL_TITLE_PATTERN.search(title):
+        score -= 0.75
+    if any(term in searchable_text for term in ["main role", "support role"]):
+        score += 0.25
+    if start_year >= 2025:
+        score -= 1.0
+    elif start_year >= 2024:
+        score -= 0.5
+
+    return score
 
 
 def build_title_frequency(metadata_by_title: dict[str, dict]) -> dict[str, int]:
@@ -211,14 +446,8 @@ def calibrated_actor_titles(
         keyword_lower = str(drama.get("keywords", "")).lower()
         cast = [normalized_key(actor) for actor in split_csv(drama.get("Cast"))]
 
-        try:
-            rating = float(drama.get("rating_value") or 0)
-        except ValueError:
-            rating = 0.0
-        try:
-            episodes = int(float(drama.get("episodes") or 0))
-        except ValueError:
-            episodes = 0
+        rating = parse_rating(drama)
+        episodes = parse_episodes(drama)
 
         primary_penalty = 0
         if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
@@ -255,16 +484,24 @@ def calibrated_actor_titles(
 
 
 def calibrated_genre_titles(
+    genre_key: str,
     titles: Iterable[str],
     metadata_by_title: dict[str, dict],
     title_frequency: dict[str, int],
     limit: int = 40,
 ):
+    genre_key = normalized_key(genre_key)
+    focus_terms = GENRE_FOCUS_TERMS.get(genre_key, [])
+
     def score(title: str):
         drama = metadata_by_title.get(title, {})
         title_lower = title.lower()
         genre_lower = str(drama.get("Genre", "")).lower()
         keyword_lower = str(drama.get("keywords", "")).lower()
+        description_lower = str(drama.get("Description", "")).lower()
+        searchable_text = " ".join(
+            [title_lower, genre_lower, keyword_lower, description_lower]
+        )
 
         try:
             rating = float(drama.get("rating_value") or 0)
@@ -288,7 +525,11 @@ def calibrated_genre_titles(
             primary_score += 0.5
 
         frequency = title_frequency.get(title, 0)
-        return (primary_score, frequency, rating, episodes, title)
+        reliability = title_reliability_score(title, drama, title_frequency)
+        focus_score = sum(term in searchable_text for term in focus_terms)
+        if genre_key in FOCUS_FIRST_GENRES:
+            return (primary_score, focus_score, reliability, frequency, rating, episodes, title)
+        return (primary_score, reliability, frequency, rating, episodes, title)
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
 
@@ -357,12 +598,32 @@ def calibrated_genre_combo_titles(
                 combo_focus += 1
             if "action" in drama_genres:
                 combo_focus -= 1
+        elif combo_key_value in {
+            "drama|horror|thriller",
+            "horror|thriller",
+            "drama|thriller",
+        }:
+            combo_focus += sum(term in searchable_text for term in ZOMBIE_THRILLER_FOCUS_TERMS)
+            combo_focus -= 0.75 * sum(term in searchable_text for term in ZOMBIE_THRILLER_OFF_TOPIC_TERMS)
+        elif combo_key_value == "business|romance":
+            combo_focus -= 0.75 * sum(term in searchable_text for term in BUSINESS_ROMANCE_OFF_TOPIC_TERMS)
+        elif combo_key_value == "comedy|romance":
+            combo_focus += sum(term in searchable_text for term in ROMANTIC_COMEDY_FOCUS_TERMS)
+            combo_focus -= 0.75 * sum(term in searchable_text for term in ROMANTIC_COMEDY_OFF_TOPIC_TERMS)
+        elif combo_key_value == "fantasy|romance":
+            combo_focus += sum(term in searchable_text for term in FANTASY_ROMANCE_FOCUS_TERMS)
+            combo_focus -= 0.75 * sum(term in searchable_text for term in FANTASY_ROMANCE_OFF_TOPIC_TERMS)
+        elif combo_key_value == "drama|youth":
+            combo_focus += sum(term in searchable_text for term in YOUTH_DRAMA_FOCUS_TERMS)
+            combo_focus -= 0.75 * sum(term in searchable_text for term in YOUTH_DRAMA_OFF_TOPIC_TERMS)
         frequency = title_frequency.get(title, 0)
+        reliability = title_reliability_score(title, drama, title_frequency)
         return (
             exact_combo,
             combo_focus,
             overlap,
             primary_score,
+            reliability,
             rating,
             combo_signal,
             frequency,
@@ -446,18 +707,25 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
         for actor in split_csv(drama.get("Cast")):
             append_title(actor_index, actor, title)
 
+        searchable_text = " ".join(
+            str(drama.get(field, ""))
+            for field in ["Title", "Genre", "Description", "keywords", "Cast", "Also Known As"]
+        ).lower()
+
         for genre in split_csv(drama.get("Genre")):
+            append_title(genre_index, genre, title)
+        for genre in virtual_genres_for_text(searchable_text):
             append_title(genre_index, genre, title)
 
         for keyword in split_csv(drama.get("keywords")):
             append_title(keyword_index, keyword, title)
 
-        searchable_text = " ".join(
-            str(drama.get(field, ""))
-            for field in ["Title", "Genre", "Description", "keywords", "Cast", "Also Known As"]
-        ).lower()
         genres = [genre.title() for genre in split_csv(drama.get("Genre"))]
-        genres.extend(genre.title() for genre in virtual_genres_for_text(searchable_text))
+        genres.extend(
+            genre.title()
+            for genre in virtual_genres_for_text(searchable_text)
+            if genre in {"crime", "revenge"}
+        )
         for genre_a, genre_b in combinations(sorted(set(genres)), 2):
             append_title(genre_combo_candidates, combo_key([genre_a, genre_b]), title)
 
@@ -478,7 +746,7 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
         for key, titles in sorted(genre_index.items())
     }
     calibrated_genre_index = {
-        key.title(): calibrated_genre_titles(titles, metadata_by_title, title_frequency)
+        key.title(): calibrated_genre_titles(key, titles, metadata_by_title, title_frequency)
         for key, titles in sorted(genre_index.items())
     }
     calibrated_genre_combo_index = {

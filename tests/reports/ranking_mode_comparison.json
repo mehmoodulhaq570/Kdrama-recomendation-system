@@ -1,0 +1,5405 @@
+{
+  "generated_at": "2026-07-23T01:04:27",
+  "summary": {
+    "curated_baseline": {
+      "precision_at_3": 0.6358024691358024,
+      "recall_at_10": 0.9845679012345678,
+      "mrr": 0.9629629629629629
+    },
+    "generated_genre_soft": {
+      "precision_at_3": 0.5493827160493827,
+      "recall_at_10": 0.9413580246913581,
+      "mrr": 0.9382716049382716
+    },
+    "generated_combo_only_soft": {
+      "precision_at_3": 0.5432098765432098,
+      "recall_at_10": 0.9290123456790123,
+      "mrr": 0.9151234567901234
+    }
+  },
+  "comparisons": [
+    {
+      "query": "historical",
+      "category": "genre",
+      "expected": [
+        "Mr. Sunshine",
+        "Kingdom",
+        "The Red Sleeve"
+      ],
+      "baseline": {
+        "query": "historical",
+        "category": "genre",
+        "expected": [
+          "Mr. Sunshine",
+          "Kingdom",
+          "The Red Sleeve"
+        ],
+        "top10": [
+          "Mr. Sunshine",
+          "Kingdom",
+          "The Red Sleeve",
+          "Empress Ki",
+          "The Three Musketeers",
+          "Time Slip Dr. Jin",
+          "Arthdal Chronicles: The Sword of Aramun",
+          "100 Days My Prince",
+          "Captivating the King",
+          "Six Flying Dragons"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Historical"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "historical",
+          "category": "genre",
+          "expected": [
+            "Mr. Sunshine",
+            "Kingdom",
+            "The Red Sleeve"
+          ],
+          "top10": [
+            "Mr. Sunshine",
+            "Alchemy of Souls",
+            "Under the Queen's Umbrella",
+            "Tale of the Nine-Tailed 1938",
+            "Mr. Queen",
+            "My Dearest",
+            "The Red Sleeve",
+            "Moon Lovers: Scarlet Heart Ryeo",
+            "Gyeongseong Creature",
+            "Pachinko"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.6666666666666666,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Historical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": -0.33333333333333337,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "historical",
+          "category": "genre",
+          "expected": [
+            "Mr. Sunshine",
+            "Kingdom",
+            "The Red Sleeve"
+          ],
+          "top10": [
+            "The Three Musketeers",
+            "Time Slip Dr. Jin",
+            "Arthdal Chronicles: The Sword of Aramun",
+            "100 Days My Prince",
+            "Captivating the King",
+            "Six Flying Dragons",
+            "Capital Scandal",
+            "Dong Yi",
+            "Korea-Khitan War",
+            "Bloody Heart"
+          ],
+          "best_rank": null,
+          "precision_at_3": 0.0,
+          "recall_at_10": 0.0,
+          "mrr": 0.0,
+          "detected_genres": [
+            "Historical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -1.0,
+          "delta_recall_at_10": -1.0,
+          "delta_mrr": -1.0
+        }
+      }
+    },
+    {
+      "query": "thriller",
+      "category": "genre",
+      "expected": [
+        "Squid Game",
+        "Signal",
+        "Stranger"
+      ],
+      "baseline": {
+        "query": "thriller",
+        "category": "genre",
+        "expected": [
+          "Squid Game",
+          "Signal",
+          "Stranger"
+        ],
+        "top10": [
+          "Squid Game",
+          "Signal",
+          "Stranger",
+          "Beyond Evil",
+          "The Virus",
+          "Agents of Mystery",
+          "Bad and Crazy",
+          "Trap",
+          "Spy",
+          "Black"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Thriller"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "thriller",
+          "category": "genre",
+          "expected": [
+            "Squid Game",
+            "Signal",
+            "Stranger"
+          ],
+          "top10": [
+            "Mouse",
+            "Signal",
+            "Mother",
+            "Tomorrow",
+            "Happiness",
+            "Moving",
+            "Flower of Evil",
+            "The Glory",
+            "Healer",
+            "Taxi Driver"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.5,
+          "detected_genres": [
+            "Thriller"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.5
+        },
+        "generated_combo_only_soft": {
+          "query": "thriller",
+          "category": "genre",
+          "expected": [
+            "Squid Game",
+            "Signal",
+            "Stranger"
+          ],
+          "top10": [
+            "The Virus",
+            "Agents of Mystery",
+            "Bad and Crazy",
+            "Stranger",
+            "Trap",
+            "Spy",
+            "Black",
+            "Beyond Evil",
+            "Evilive",
+            "A Killer Paradox"
+          ],
+          "best_rank": 4,
+          "precision_at_3": 0.0,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.25,
+          "detected_genres": [
+            "Thriller"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -1.0,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.75
+        }
+      }
+    },
+    {
+      "query": "school drama",
+      "category": "genre",
+      "expected": [
+        "True Beauty",
+        "Dream High",
+        "Extraordinary You"
+      ],
+      "baseline": {
+        "query": "school drama",
+        "category": "genre",
+        "expected": [
+          "True Beauty",
+          "Dream High",
+          "Extraordinary You"
+        ],
+        "top10": [
+          "True Beauty",
+          "Dream High",
+          "Extraordinary You",
+          "School 2017",
+          "IN-SEOUL",
+          "Moorim School",
+          "Drama Special Season 4: My Friend Is Still Alive",
+          "User Not Found",
+          "Extracurricular",
+          "One: High School Heroes"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Drama",
+          "Youth"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "school drama",
+          "category": "genre",
+          "expected": [
+            "True Beauty",
+            "Dream High",
+            "Extraordinary You"
+          ],
+          "top10": [
+            "Seasons of Blossom",
+            "The World of My 17",
+            "True Beauty",
+            "Sassy Go Go",
+            "Love Alarm",
+            "Boys over Flowers",
+            "The Heirs Christmas Edition",
+            "Drama Special Season 8: If We Were A Season",
+            "Best Mistake Season 2",
+            "Girls' Generation 1979"
+          ],
+          "best_rank": 3,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "detected_genres": [
+            "Youth",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.6666666666666667
+        },
+        "generated_combo_only_soft": {
+          "query": "school drama",
+          "category": "genre",
+          "expected": [
+            "True Beauty",
+            "Dream High",
+            "Extraordinary You"
+          ],
+          "top10": [
+            "Seasons of Blossom",
+            "The World of My 17",
+            "True Beauty",
+            "Sassy Go Go",
+            "Love Alarm",
+            "Boys over Flowers",
+            "The Heirs Christmas Edition",
+            "Drama Special Season 8: If We Were A Season",
+            "Best Mistake Season 2",
+            "Girls' Generation 1979"
+          ],
+          "best_rank": 3,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "detected_genres": [
+            "Drama",
+            "Youth"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.6666666666666667
+        }
+      }
+    },
+    {
+      "query": "sageuk royal drama",
+      "category": "genre",
+      "expected": [
+        "The Red Sleeve",
+        "Empress Ki",
+        "Kingdom"
+      ],
+      "baseline": {
+        "query": "sageuk royal drama",
+        "category": "genre",
+        "expected": [
+          "The Red Sleeve",
+          "Empress Ki",
+          "Kingdom"
+        ],
+        "top10": [
+          "Mr. Sunshine",
+          "Kingdom",
+          "The Red Sleeve",
+          "Empress Ki",
+          "Bloody Heart",
+          "Under the Queen's Umbrella",
+          "Jang Ok Jung",
+          "Queen for Seven Days",
+          "Grand Prince",
+          "Dong Yi"
+        ],
+        "best_rank": 2,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 0.5,
+        "detected_genres": [
+          "Drama",
+          "Historical"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "sageuk royal drama",
+          "category": "genre",
+          "expected": [
+            "The Red Sleeve",
+            "Empress Ki",
+            "Kingdom"
+          ],
+          "top10": [
+            "Under the Queen's Umbrella",
+            "My Dearest",
+            "The Red Sleeve",
+            "Pachinko",
+            "My Country: The New Age",
+            "100 Days My Prince",
+            "Iljimae",
+            "The King's Affection",
+            "Love in the Moonlight",
+            "Bloody Heart"
+          ],
+          "best_rank": 3,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "detected_genres": [
+            "Drama",
+            "Historical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.3333333333333333,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.16666666666666669
+        },
+        "generated_combo_only_soft": {
+          "query": "sageuk royal drama",
+          "category": "genre",
+          "expected": [
+            "The Red Sleeve",
+            "Empress Ki",
+            "Kingdom"
+          ],
+          "top10": [
+            "Under the Queen's Umbrella",
+            "My Dearest",
+            "The Red Sleeve",
+            "Pachinko",
+            "My Country: The New Age",
+            "100 Days My Prince",
+            "Iljimae",
+            "The King's Affection",
+            "Love in the Moonlight",
+            "Bloody Heart"
+          ],
+          "best_rank": 3,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "detected_genres": [
+            "Drama",
+            "Historical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.3333333333333333,
+          "delta_recall_at_10": -0.6666666666666667,
+          "delta_mrr": -0.16666666666666669
+        }
+      }
+    },
+    {
+      "query": "zombie drama",
+      "category": "genre",
+      "expected": [
+        "All of Us Are Dead",
+        "Kingdom",
+        "Happiness"
+      ],
+      "baseline": {
+        "query": "zombie drama",
+        "category": "genre",
+        "expected": [
+          "All of Us Are Dead",
+          "Kingdom",
+          "Happiness"
+        ],
+        "top10": [
+          "All of Us Are Dead",
+          "Kingdom",
+          "Happiness",
+          "Sweet Home",
+          "Squid Game",
+          "Signal",
+          "Stranger",
+          "Beyond Evil",
+          "Zombieverse: New Blood",
+          "Zombieverse"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Drama",
+          "Horror",
+          "Thriller"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "zombie drama",
+          "category": "genre",
+          "expected": [
+            "All of Us Are Dead",
+            "Kingdom",
+            "Happiness"
+          ],
+          "top10": [
+            "Sweet Home",
+            "All of Us Are Dead",
+            "Kingdom: Ashin of the North",
+            "Happiness",
+            "Kingdom",
+            "Strangers from Hell",
+            "Duty after School: Part 1",
+            "Priest",
+            "Dark Hole",
+            "Monstrous"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [
+            "Horror",
+            "Thriller",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": -0.5
+        },
+        "generated_combo_only_soft": {
+          "query": "zombie drama",
+          "category": "genre",
+          "expected": [
+            "All of Us Are Dead",
+            "Kingdom",
+            "Happiness"
+          ],
+          "top10": [
+            "Sweet Home",
+            "All of Us Are Dead",
+            "Kingdom: Ashin of the North",
+            "Happiness",
+            "Kingdom",
+            "Strangers from Hell",
+            "Duty after School: Part 1",
+            "Priest",
+            "Dark Hole",
+            "Monstrous"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [
+            "Thriller",
+            "Horror",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": -0.5
+        }
+      }
+    },
+    {
+      "query": "medical drama",
+      "category": "genre",
+      "expected": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "baseline": {
+        "query": "medical drama",
+        "category": "genre",
+        "expected": [
+          "Hospital Playlist",
+          "Doctor Cha",
+          "Good Doctor"
+        ],
+        "top10": [
+          "Hospital Playlist",
+          "Doctor Cha",
+          "Good Doctor",
+          "Dr. Romantic",
+          "Hospital Ship",
+          "Doctor Lawyer",
+          "Doctor Stranger",
+          "Doctor Prisoner",
+          "Doctor John",
+          "Dr. Romantic Season 2"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Medical",
+          "Drama"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "medical drama",
+          "category": "genre",
+          "expected": [
+            "Hospital Playlist",
+            "Doctor Cha",
+            "Good Doctor"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Daily Dose of Sunshine",
+            "Dr. Romantic",
+            "The Trauma Code: Heroes on Call",
+            "If You Wish Upon Me",
+            "Good Doctor",
+            "God's Quiz",
+            "D-Day",
+            "Doctor Cha",
+            "Doctor Lawyer"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Drama",
+            "Medical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "medical drama",
+          "category": "genre",
+          "expected": [
+            "Hospital Playlist",
+            "Doctor Cha",
+            "Good Doctor"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Daily Dose of Sunshine",
+            "Dr. Romantic",
+            "The Trauma Code: Heroes on Call",
+            "If You Wish Upon Me",
+            "Good Doctor",
+            "God's Quiz",
+            "D-Day",
+            "Doctor Cha",
+            "Doctor Lawyer"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Medical",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "doctor hospital drama",
+      "category": "genre",
+      "expected": [
+        "Hospital Playlist",
+        "Doctor Cha",
+        "Good Doctor"
+      ],
+      "baseline": {
+        "query": "doctor hospital drama",
+        "category": "genre",
+        "expected": [
+          "Hospital Playlist",
+          "Doctor Cha",
+          "Good Doctor"
+        ],
+        "top10": [
+          "Hospital Playlist",
+          "Doctor Cha",
+          "Good Doctor",
+          "Dr. Romantic",
+          "Hospital Ship",
+          "Doctor Prisoner",
+          "Doctor Stranger",
+          "Horse Doctor",
+          "Dr. Romantic Season 2",
+          "Life"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Medical",
+          "Drama"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "doctor hospital drama",
+          "category": "genre",
+          "expected": [
+            "Hospital Playlist",
+            "Doctor Cha",
+            "Good Doctor"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Daily Dose of Sunshine",
+            "Dr. Romantic",
+            "The Trauma Code: Heroes on Call",
+            "If You Wish Upon Me",
+            "Good Doctor",
+            "God's Quiz",
+            "D-Day",
+            "Hospital Ship",
+            "Doctor Cha"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Drama",
+            "Medical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "doctor hospital drama",
+          "category": "genre",
+          "expected": [
+            "Hospital Playlist",
+            "Doctor Cha",
+            "Good Doctor"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Daily Dose of Sunshine",
+            "Dr. Romantic",
+            "The Trauma Code: Heroes on Call",
+            "If You Wish Upon Me",
+            "Good Doctor",
+            "God's Quiz",
+            "D-Day",
+            "Hospital Ship",
+            "Doctor Cha"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Medical",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.6666666666666667,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "office romance",
+      "category": "genre",
+      "expected": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Romance Is a Bonus Book"
+      ],
+      "baseline": {
+        "query": "office romance",
+        "category": "genre",
+        "expected": [
+          "Business Proposal",
+          "What's Wrong with Secretary Kim",
+          "Romance Is a Bonus Book"
+        ],
+        "top10": [
+          "Business Proposal",
+          "What's Wrong with Secretary Kim",
+          "Strong Woman Do Bong Soon",
+          "True Beauty",
+          "Agency",
+          "The Secret Life of My Secretary",
+          "The Queen of Office",
+          "Romance Is a Bonus Book",
+          "The Interest of Love",
+          "Love in Contract"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Romance",
+          "Business"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "office romance",
+          "category": "genre",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim",
+            "Romance Is a Bonus Book"
+          ],
+          "top10": [
+            "What's Wrong with Secretary Kim",
+            "Gaus Electronics",
+            "Fated to Love You",
+            "Falling for Innocence",
+            "Romance Is a Bonus Book",
+            "Go Ho's Starry Night",
+            "The Greatest Love",
+            "Start-Up",
+            "Something in the Rain",
+            "Search: WWW"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.6666666666666666,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business",
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.3333333333333333,
+          "delta_recall_at_10": -0.33333333333333337,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "office romance",
+          "category": "genre",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim",
+            "Romance Is a Bonus Book"
+          ],
+          "top10": [
+            "What's Wrong with Secretary Kim",
+            "Gaus Electronics",
+            "Fated to Love You",
+            "Falling for Innocence",
+            "Romance Is a Bonus Book",
+            "Go Ho's Starry Night",
+            "The Greatest Love",
+            "Start-Up",
+            "Something in the Rain",
+            "Search: WWW"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.6666666666666666,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business",
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.3333333333333333,
+          "delta_recall_at_10": -0.33333333333333337,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "romantic comedy",
+      "category": "genre",
+      "expected": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim",
+        "Strong Woman Do Bong Soon"
+      ],
+      "baseline": {
+        "query": "romantic comedy",
+        "category": "genre",
+        "expected": [
+          "Business Proposal",
+          "What's Wrong with Secretary Kim",
+          "Strong Woman Do Bong Soon"
+        ],
+        "top10": [
+          "Business Proposal",
+          "What's Wrong with Secretary Kim",
+          "Strong Woman Do Bong Soon",
+          "True Beauty",
+          "Romance",
+          "Sad Love Story",
+          "A First Love Story",
+          "Dr. Romantic",
+          "Romanced",
+          "Romance, Talking"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Comedy",
+          "Romance"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "romantic comedy",
+          "category": "genre",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim",
+            "Strong Woman Do Bong Soon"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Strong Woman Do Bong Soon",
+            "The Secret Life of My Secretary",
+            "What's Wrong with Secretary Kim",
+            "Love in Contract",
+            "Crazy Love",
+            "Level Up",
+            "Gaus Electronics",
+            "Cunning Single Lady",
+            "Romance"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Comedy",
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "romantic comedy",
+          "category": "genre",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim",
+            "Strong Woman Do Bong Soon"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Strong Woman Do Bong Soon",
+            "The Secret Life of My Secretary",
+            "What's Wrong with Secretary Kim",
+            "Love in Contract",
+            "Crazy Love",
+            "Level Up",
+            "Gaus Electronics",
+            "Cunning Single Lady",
+            "Romance"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Comedy",
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "legal drama",
+      "category": "genre",
+      "expected": [
+        "Extraordinary Attorney Woo",
+        "Law School",
+        "Vincenzo"
+      ],
+      "baseline": {
+        "query": "legal drama",
+        "category": "genre",
+        "expected": [
+          "Extraordinary Attorney Woo",
+          "Law School",
+          "Vincenzo"
+        ],
+        "top10": [
+          "Extraordinary Attorney Woo",
+          "Law School",
+          "Vincenzo",
+          "Lawless Lawyer",
+          "Delayed Justice",
+          "Divorce Attorney Shin",
+          "Queen of Tears",
+          "Wonderful World",
+          "Legal High",
+          "Run On"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Drama",
+          "Law"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "legal drama",
+          "category": "genre",
+          "expected": [
+            "Extraordinary Attorney Woo",
+            "Law School",
+            "Vincenzo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "Vincenzo",
+            "Defendant",
+            "Stranger",
+            "The Devil Judge",
+            "Law School",
+            "Big Mouth",
+            "Juvenile Justice",
+            "One Dollar Lawyer",
+            "Good Partner"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Law",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "legal drama",
+          "category": "genre",
+          "expected": [
+            "Extraordinary Attorney Woo",
+            "Law School",
+            "Vincenzo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "Vincenzo",
+            "Defendant",
+            "Stranger",
+            "The Devil Judge",
+            "Law School",
+            "Big Mouth",
+            "Juvenile Justice",
+            "One Dollar Lawyer",
+            "Good Partner"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Drama",
+            "Law"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": -0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Crash Landing on You",
+      "category": "specific_title",
+      "expected": [
+        "Crash Landing on You"
+      ],
+      "baseline": {
+        "query": "Crash Landing on You",
+        "category": "specific_title",
+        "expected": [
+          "Crash Landing on You"
+        ],
+        "top10": [
+          "Crash Landing on You",
+          "Crash Landing on You Special: Lunar New Year",
+          "Crash",
+          "Crash Course in Romance",
+          "Fall for You",
+          "Snowdrop",
+          "Stars Falling from the Sky",
+          "Hit the Spot",
+          "Touching You",
+          "You Are My Destiny"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Crash Landing on You",
+          "category": "specific_title",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Crash Landing on You Special: Lunar New Year",
+            "Crash",
+            "Crash Course in Romance",
+            "Fall for You",
+            "Snowdrop",
+            "Stars Falling from the Sky",
+            "Hit the Spot",
+            "Touching You",
+            "You Are My Destiny"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Crash Landing on You",
+          "category": "specific_title",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Crash Landing on You Special: Lunar New Year",
+            "Crash",
+            "Crash Course in Romance",
+            "Fall for You",
+            "Snowdrop",
+            "Stars Falling from the Sky",
+            "Hit the Spot",
+            "Touching You",
+            "You Are My Destiny"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Itaewon Class",
+      "category": "specific_title",
+      "expected": [
+        "Itaewon Class"
+      ],
+      "baseline": {
+        "query": "Itaewon Class",
+        "category": "specific_title",
+        "expected": [
+          "Itaewon Class"
+        ],
+        "top10": [
+          "Itaewon Class",
+          "Heesu in Class 2",
+          "iKON TV",
+          "Kkondae Intern",
+          "The Mysterious Class",
+          "High Class",
+          "Social Savvy Class 101",
+          "Law School",
+          "Class of Lies",
+          "Money Heist: Korea - Joint Economic Area - Part 1"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Itaewon Class",
+          "category": "specific_title",
+          "expected": [
+            "Itaewon Class"
+          ],
+          "top10": [
+            "Itaewon Class",
+            "Heesu in Class 2",
+            "iKON TV",
+            "Kkondae Intern",
+            "The Mysterious Class",
+            "High Class",
+            "Social Savvy Class 101",
+            "Law School",
+            "Class of Lies",
+            "Money Heist: Korea - Joint Economic Area - Part 1"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Itaewon Class",
+          "category": "specific_title",
+          "expected": [
+            "Itaewon Class"
+          ],
+          "top10": [
+            "Itaewon Class",
+            "Heesu in Class 2",
+            "iKON TV",
+            "Kkondae Intern",
+            "The Mysterious Class",
+            "High Class",
+            "Social Savvy Class 101",
+            "Law School",
+            "Class of Lies",
+            "Money Heist: Korea - Joint Economic Area - Part 1"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Hospital Playlist",
+      "category": "specific_title",
+      "expected": [
+        "Hospital Playlist"
+      ],
+      "baseline": {
+        "query": "Hospital Playlist",
+        "category": "specific_title",
+        "expected": [
+          "Hospital Playlist"
+        ],
+        "top10": [
+          "Hospital Playlist",
+          "Doctor Cha",
+          "Good Doctor",
+          "Dr. Romantic",
+          "Hospital Playlist Season 2",
+          "Hospital Ship",
+          "Hospital Playlist Goes Camping",
+          "Medical Top Team",
+          "Doctors",
+          "Resident Playbook"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Medical"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Hospital Playlist",
+          "category": "specific_title",
+          "expected": [
+            "Hospital Playlist"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Dr. Romantic",
+            "Doctor Cha",
+            "The Trauma Code: Heroes on Call",
+            "D-Day",
+            "Doctor Stranger",
+            "Daily Dose of Sunshine",
+            "Ghost Doctor",
+            "Life",
+            "Hospital Playlist Season 2"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Medical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Hospital Playlist",
+          "category": "specific_title",
+          "expected": [
+            "Hospital Playlist"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Hospital Playlist Season 2",
+            "Hospital Ship",
+            "Hospital Playlist Goes Camping",
+            "Medical Top Team",
+            "Doctors",
+            "Resident Playbook",
+            "Doctor Slump",
+            "Obstetrics and Gynecology Doctors",
+            "Heart Surgeons"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Medical"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.3333333333333333,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Squid Game",
+      "category": "specific_title",
+      "expected": [
+        "Squid Game"
+      ],
+      "baseline": {
+        "query": "Squid Game",
+        "category": "specific_title",
+        "expected": [
+          "Squid Game"
+        ],
+        "top10": [
+          "Squid Game",
+          "Squid Game Season 2",
+          "Squid Game Season 3",
+          "Liar Game",
+          "Money Game",
+          "Gyeongseong Creature",
+          "Player",
+          "Death's Game",
+          "Big Bet",
+          "The Frog"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Squid Game",
+          "category": "specific_title",
+          "expected": [
+            "Squid Game"
+          ],
+          "top10": [
+            "Squid Game",
+            "Squid Game Season 2",
+            "Squid Game Season 3",
+            "Liar Game",
+            "Money Game",
+            "Gyeongseong Creature",
+            "Player",
+            "Death's Game",
+            "Big Bet",
+            "The Frog"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Squid Game",
+          "category": "specific_title",
+          "expected": [
+            "Squid Game"
+          ],
+          "top10": [
+            "Squid Game",
+            "Squid Game Season 2",
+            "Squid Game Season 3",
+            "Liar Game",
+            "Money Game",
+            "Gyeongseong Creature",
+            "Player",
+            "Death's Game",
+            "Big Bet",
+            "The Frog"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Business Proposal",
+      "category": "specific_title",
+      "expected": [
+        "Business Proposal"
+      ],
+      "baseline": {
+        "query": "Business Proposal",
+        "category": "specific_title",
+        "expected": [
+          "Business Proposal"
+        ],
+        "top10": [
+          "Business Proposal",
+          "Start-Up",
+          "Agency",
+          "Operation Proposal",
+          "The Incarnation of Money",
+          "Money Flower",
+          "Pegasus Market",
+          "Monster",
+          "The Art of Negotiation",
+          "Can Love Become Money"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Business"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Business Proposal",
+          "category": "specific_title",
+          "expected": [
+            "Business Proposal"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Love Scout",
+            "What's Wrong with Secretary Kim",
+            "Gaus Electronics",
+            "Typhoon Family",
+            "Reborn Rich",
+            "Good Manager",
+            "Agency",
+            "Suits",
+            "Misaeng: Incomplete Life"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Business Proposal",
+          "category": "specific_title",
+          "expected": [
+            "Business Proposal"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Start-Up",
+            "Agency",
+            "Operation Proposal",
+            "The Incarnation of Money",
+            "Money Flower",
+            "Pegasus Market",
+            "Monster",
+            "The Art of Negotiation",
+            "Can Love Become Money"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Goblin",
+      "category": "specific_title",
+      "expected": [
+        "Goblin"
+      ],
+      "baseline": {
+        "query": "Goblin",
+        "category": "specific_title",
+        "expected": [
+          "Goblin"
+        ],
+        "top10": [
+          "Goblin",
+          "The Guardians",
+          "The Great Shaman Ga Doo Shim",
+          "God's Quiz",
+          "Angel Eyes",
+          "Beyond Evil",
+          "A Man Called God",
+          "My Name Is Gabriel",
+          "Watcher",
+          "Glitch"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Goblin",
+          "category": "specific_title",
+          "expected": [
+            "Goblin"
+          ],
+          "top10": [
+            "Goblin",
+            "The Guardians",
+            "The Great Shaman Ga Doo Shim",
+            "God's Quiz",
+            "Angel Eyes",
+            "Beyond Evil",
+            "A Man Called God",
+            "My Name Is Gabriel",
+            "Watcher",
+            "Glitch"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Goblin",
+          "category": "specific_title",
+          "expected": [
+            "Goblin"
+          ],
+          "top10": [
+            "Goblin",
+            "The Guardians",
+            "The Great Shaman Ga Doo Shim",
+            "God's Quiz",
+            "Angel Eyes",
+            "Beyond Evil",
+            "A Man Called God",
+            "My Name Is Gabriel",
+            "Watcher",
+            "Glitch"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Descendants of the Sun",
+      "category": "specific_title",
+      "expected": [
+        "Descendants of the Sun"
+      ],
+      "baseline": {
+        "query": "Descendants of the Sun",
+        "category": "specific_title",
+        "expected": [
+          "Descendants of the Sun"
+        ],
+        "top10": [
+          "Descendants of the Sun",
+          "Descendants of the Sun: BTS",
+          "Descendants of the Sun: Recap Special",
+          "The Master's Sun",
+          "Shining Inheritance",
+          "A Place in the Sun",
+          "Inspiring Generation",
+          "Flower Grandpa Investigation Unit",
+          "A Hundred Year's Inheritance",
+          "Swallow the Sun"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Descendants of the Sun",
+          "category": "specific_title",
+          "expected": [
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "The Master's Sun",
+            "Shining Inheritance",
+            "A Place in the Sun",
+            "Inspiring Generation",
+            "Flower Grandpa Investigation Unit",
+            "A Hundred Year's Inheritance",
+            "Swallow the Sun"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Descendants of the Sun",
+          "category": "specific_title",
+          "expected": [
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "The Master's Sun",
+            "Shining Inheritance",
+            "A Place in the Sun",
+            "Inspiring Generation",
+            "Flower Grandpa Investigation Unit",
+            "A Hundred Year's Inheritance",
+            "Swallow the Sun"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Vincenzo",
+      "category": "specific_title",
+      "expected": [
+        "Vincenzo"
+      ],
+      "baseline": {
+        "query": "Vincenzo",
+        "category": "specific_title",
+        "expected": [
+          "Vincenzo"
+        ],
+        "top10": [
+          "Vincenzo",
+          "Vincenzo: Special",
+          "Pasta",
+          "Dating Agency: Cyrano",
+          "Imaginary Cat",
+          "Hope or Dope",
+          "Twelve",
+          "Narco-Saints",
+          "Gangster Like Me Got a Boyfriend",
+          "Kick Kick Kick Kick"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Vincenzo",
+          "category": "specific_title",
+          "expected": [
+            "Vincenzo"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Vincenzo: Special",
+            "Pasta",
+            "Dating Agency: Cyrano",
+            "Imaginary Cat",
+            "Hope or Dope",
+            "Twelve",
+            "Narco-Saints",
+            "Gangster Like Me Got a Boyfriend",
+            "Kick Kick Kick Kick"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Vincenzo",
+          "category": "specific_title",
+          "expected": [
+            "Vincenzo"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Vincenzo: Special",
+            "Pasta",
+            "Dating Agency: Cyrano",
+            "Imaginary Cat",
+            "Hope or Dope",
+            "Twelve",
+            "Narco-Saints",
+            "Gangster Like Me Got a Boyfriend",
+            "Kick Kick Kick Kick"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Extraordinary Attorney Woo",
+      "category": "specific_title",
+      "expected": [
+        "Extraordinary Attorney Woo"
+      ],
+      "baseline": {
+        "query": "Extraordinary Attorney Woo",
+        "category": "specific_title",
+        "expected": [
+          "Extraordinary Attorney Woo"
+        ],
+        "top10": [
+          "Extraordinary Attorney Woo",
+          "Divorce Attorney Shin",
+          "Law School",
+          "Suits",
+          "Divorce Lawyer in Love",
+          "Doctor Lawyer",
+          "Delayed Justice",
+          "Legal High",
+          "Joseon Attorney: A Morality",
+          "My Lawyer, Mr. Jo"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Law"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Extraordinary Attorney Woo",
+          "category": "specific_title",
+          "expected": [
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "May It Please the Court",
+            "Vincenzo",
+            "Law School",
+            "One Dollar Lawyer",
+            "Suits",
+            "Lawless Lawyer",
+            "Why Her?",
+            "Good Partner",
+            "Touch Your Heart"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Law"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Extraordinary Attorney Woo",
+          "category": "specific_title",
+          "expected": [
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "Divorce Attorney Shin",
+            "Law School",
+            "Suits",
+            "Divorce Lawyer in Love",
+            "Doctor Lawyer",
+            "Delayed Justice",
+            "Legal High",
+            "Joseon Attorney: A Morality",
+            "My Lawyer, Mr. Jo"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Law"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "True Beauty",
+      "category": "specific_title",
+      "expected": [
+        "True Beauty"
+      ],
+      "baseline": {
+        "query": "True Beauty",
+        "category": "specific_title",
+        "expected": [
+          "True Beauty"
+        ],
+        "top10": [
+          "True Beauty",
+          "True Ending",
+          "True to Love",
+          "Beauty and Mr. Romantic",
+          "The Beauty Inside",
+          "Life Is Beautiful",
+          "A Beauty of Revenge",
+          "Beautiful Love, Wonderful Life",
+          "Birth of a Beauty",
+          "Pink Lie"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "True Beauty",
+          "category": "specific_title",
+          "expected": [
+            "True Beauty"
+          ],
+          "top10": [
+            "True Beauty",
+            "True Ending",
+            "True to Love",
+            "Beauty and Mr. Romantic",
+            "The Beauty Inside",
+            "Life Is Beautiful",
+            "A Beauty of Revenge",
+            "Beautiful Love, Wonderful Life",
+            "Birth of a Beauty",
+            "Pink Lie"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "True Beauty",
+          "category": "specific_title",
+          "expected": [
+            "True Beauty"
+          ],
+          "top10": [
+            "True Beauty",
+            "True Ending",
+            "True to Love",
+            "Beauty and Mr. Romantic",
+            "The Beauty Inside",
+            "Life Is Beautiful",
+            "A Beauty of Revenge",
+            "Beautiful Love, Wonderful Life",
+            "Birth of a Beauty",
+            "Pink Lie"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "The Glory",
+      "category": "specific_title",
+      "expected": [
+        "The Glory"
+      ],
+      "baseline": {
+        "query": "The Glory",
+        "category": "specific_title",
+        "expected": [
+          "The Glory"
+        ],
+        "top10": [
+          "The Glory",
+          "The Glory Part 2",
+          "Glory Jane",
+          "Glorious Day",
+          "Splendid Politics",
+          "A Superior Day",
+          "Tree of Heaven",
+          "Doubtful Victory",
+          "Golden Garden",
+          "Golden Rainbow"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "The Glory",
+          "category": "specific_title",
+          "expected": [
+            "The Glory"
+          ],
+          "top10": [
+            "The Glory",
+            "The Glory Part 2",
+            "Glory Jane",
+            "Glorious Day",
+            "Splendid Politics",
+            "A Superior Day",
+            "Tree of Heaven",
+            "Doubtful Victory",
+            "Golden Garden",
+            "Golden Rainbow"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "The Glory",
+          "category": "specific_title",
+          "expected": [
+            "The Glory"
+          ],
+          "top10": [
+            "The Glory",
+            "The Glory Part 2",
+            "Glory Jane",
+            "Glorious Day",
+            "Splendid Politics",
+            "A Superior Day",
+            "Tree of Heaven",
+            "Doubtful Victory",
+            "Golden Garden",
+            "Golden Rainbow"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Mr. Sunshine",
+      "category": "specific_title",
+      "expected": [
+        "Mr. Sunshine"
+      ],
+      "baseline": {
+        "query": "Mr. Sunshine",
+        "category": "specific_title",
+        "expected": [
+          "Mr. Sunshine"
+        ],
+        "top10": [
+          "Mr. Sunshine",
+          "Mr. Back",
+          "Daily Dose of Sunshine",
+          "The Master's Sun",
+          "Mr. Heart",
+          "My Mister",
+          "Military Prosecutor Doberman",
+          "Mr. Queen: The Bamboo Forest",
+          "Gunman in Joseon",
+          "Mr. Queen"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Mr. Sunshine",
+          "category": "specific_title",
+          "expected": [
+            "Mr. Sunshine"
+          ],
+          "top10": [
+            "Mr. Sunshine",
+            "Mr. Back",
+            "Daily Dose of Sunshine",
+            "The Master's Sun",
+            "Mr. Heart",
+            "My Mister",
+            "Military Prosecutor Doberman",
+            "Mr. Queen: The Bamboo Forest",
+            "Gunman in Joseon",
+            "Mr. Queen"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Mr. Sunshine",
+          "category": "specific_title",
+          "expected": [
+            "Mr. Sunshine"
+          ],
+          "top10": [
+            "Mr. Sunshine",
+            "Mr. Back",
+            "Daily Dose of Sunshine",
+            "The Master's Sun",
+            "Mr. Heart",
+            "My Mister",
+            "Military Prosecutor Doberman",
+            "Mr. Queen: The Bamboo Forest",
+            "Gunman in Joseon",
+            "Mr. Queen"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Reply 1988",
+      "category": "specific_title",
+      "expected": [
+        "Reply 1988"
+      ],
+      "baseline": {
+        "query": "Reply 1988",
+        "category": "specific_title",
+        "expected": [
+          "Reply 1988"
+        ],
+        "top10": [
+          "Reply 1988",
+          "Girls' Generation 1979",
+          "Study Group",
+          "My Youth",
+          "Psychopath Diary",
+          "Age of Youth",
+          "Hi! School - Love On",
+          "All In",
+          "New Tales of Gisaeng",
+          "Monstar"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Reply 1988",
+          "category": "specific_title",
+          "expected": [
+            "Reply 1988"
+          ],
+          "top10": [
+            "Reply 1988",
+            "Girls' Generation 1979",
+            "Study Group",
+            "My Youth",
+            "Psychopath Diary",
+            "Age of Youth",
+            "Hi! School - Love On",
+            "All In",
+            "New Tales of Gisaeng",
+            "Monstar"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Reply 1988",
+          "category": "specific_title",
+          "expected": [
+            "Reply 1988"
+          ],
+          "top10": [
+            "Reply 1988",
+            "Girls' Generation 1979",
+            "Study Group",
+            "My Youth",
+            "Psychopath Diary",
+            "Age of Youth",
+            "Hi! School - Love On",
+            "All In",
+            "New Tales of Gisaeng",
+            "Monstar"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Flower of Evil",
+      "category": "specific_title",
+      "expected": [
+        "Flower of Evil"
+      ],
+      "baseline": {
+        "query": "Flower of Evil",
+        "category": "specific_title",
+        "expected": [
+          "Flower of Evil"
+        ],
+        "top10": [
+          "Flower of Evil",
+          "Flower of the Queen",
+          "The Flower in Prison",
+          "Knight Flower",
+          "Sword and Flower",
+          "Bitter Sweet Hell",
+          "Evilive",
+          "Vampire Flower",
+          "Beyond Evil",
+          "Flower Ever After"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Flower of Evil",
+          "category": "specific_title",
+          "expected": [
+            "Flower of Evil"
+          ],
+          "top10": [
+            "Flower of Evil",
+            "Flower of the Queen",
+            "The Flower in Prison",
+            "Knight Flower",
+            "Sword and Flower",
+            "Bitter Sweet Hell",
+            "Evilive",
+            "Vampire Flower",
+            "Beyond Evil",
+            "Flower Ever After"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Flower of Evil",
+          "category": "specific_title",
+          "expected": [
+            "Flower of Evil"
+          ],
+          "top10": [
+            "Flower of Evil",
+            "Flower of the Queen",
+            "The Flower in Prison",
+            "Knight Flower",
+            "Sword and Flower",
+            "Bitter Sweet Hell",
+            "Evilive",
+            "Vampire Flower",
+            "Beyond Evil",
+            "Flower Ever After"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Alchemy of Souls",
+      "category": "specific_title",
+      "expected": [
+        "Alchemy of Souls"
+      ],
+      "baseline": {
+        "query": "Alchemy of Souls",
+        "category": "specific_title",
+        "expected": [
+          "Alchemy of Souls"
+        ],
+        "top10": [
+          "Alchemy of Souls",
+          "Alchemy of Souls Season 2: Light and Shadow",
+          "Alchemist",
+          "Soul",
+          "Soul Mechanic",
+          "Bulgasal: Immortal Souls",
+          "Memories of the Alhambra",
+          "Soul Plate",
+          "Nightmare Teacher",
+          "The Sound of Magic"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Alchemy of Souls",
+          "category": "specific_title",
+          "expected": [
+            "Alchemy of Souls"
+          ],
+          "top10": [
+            "Alchemy of Souls",
+            "Alchemy of Souls Season 2: Light and Shadow",
+            "Alchemist",
+            "Soul",
+            "Soul Mechanic",
+            "Bulgasal: Immortal Souls",
+            "Memories of the Alhambra",
+            "Soul Plate",
+            "Nightmare Teacher",
+            "The Sound of Magic"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Alchemy of Souls",
+          "category": "specific_title",
+          "expected": [
+            "Alchemy of Souls"
+          ],
+          "top10": [
+            "Alchemy of Souls",
+            "Alchemy of Souls Season 2: Light and Shadow",
+            "Alchemist",
+            "Soul",
+            "Soul Mechanic",
+            "Bulgasal: Immortal Souls",
+            "Memories of the Alhambra",
+            "Soul Plate",
+            "Nightmare Teacher",
+            "The Sound of Magic"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "revenge drama",
+      "category": "genre",
+      "expected": [
+        "The Glory",
+        "Penthouse",
+        "Eve"
+      ],
+      "baseline": {
+        "query": "revenge drama",
+        "category": "genre",
+        "expected": [
+          "The Glory",
+          "Penthouse",
+          "Eve"
+        ],
+        "top10": [
+          "The Glory",
+          "The Penthouse: War in Life",
+          "Eve",
+          "Revenge of Others",
+          "Payback: Money and Power",
+          "Sweet Revenge",
+          "A Beauty of Revenge",
+          "Sweet Revenge Season 2",
+          "The Goddess of Revenge",
+          "Vengeance of the Bride"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Drama",
+          "Revenge"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "revenge drama",
+          "category": "genre",
+          "expected": [
+            "The Glory",
+            "Penthouse",
+            "Eve"
+          ],
+          "top10": [
+            "The Glory",
+            "The Penthouse: War in Life",
+            "Eve",
+            "Revenge of Others",
+            "Vincenzo",
+            "Taxi Driver",
+            "The King of Pigs",
+            "Avengers Social Club",
+            "Reborn Rich",
+            "Mystic Pop-Up Bar"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Revenge",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "revenge drama",
+          "category": "genre",
+          "expected": [
+            "The Glory",
+            "Penthouse",
+            "Eve"
+          ],
+          "top10": [
+            "The Glory",
+            "The Penthouse: War in Life",
+            "Eve",
+            "Revenge of Others",
+            "Vincenzo",
+            "Taxi Driver",
+            "The King of Pigs",
+            "Avengers Social Club",
+            "Reborn Rich",
+            "Mystic Pop-Up Bar"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Revenge",
+            "Drama"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "north korea",
+      "category": "theme",
+      "expected": [
+        "Crash Landing on You"
+      ],
+      "baseline": {
+        "query": "north korea",
+        "category": "theme",
+        "expected": [
+          "Crash Landing on You"
+        ],
+        "top10": [
+          "Crash Landing on You",
+          "Iris",
+          "Snowdrop",
+          "Kingdom: Ashin of the North",
+          "Korea-Khitan War",
+          "Korea No. 1",
+          "Missing Korea",
+          "Miss Korea",
+          "A Korean Odyssey",
+          "Sungkyunkwan Scandal"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "north korea",
+          "category": "theme",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Iris",
+            "Snowdrop",
+            "Kingdom: Ashin of the North",
+            "Korea-Khitan War",
+            "Korea No. 1",
+            "Missing Korea",
+            "Miss Korea",
+            "A Korean Odyssey",
+            "Sungkyunkwan Scandal"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "north korea",
+          "category": "theme",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Iris",
+            "Snowdrop",
+            "Kingdom: Ashin of the North",
+            "Korea-Khitan War",
+            "Korea No. 1",
+            "Missing Korea",
+            "Miss Korea",
+            "A Korean Odyssey",
+            "Sungkyunkwan Scandal"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "restaurant food",
+      "category": "theme",
+      "expected": [
+        "Itaewon Class",
+        "Wok of Love"
+      ],
+      "baseline": {
+        "query": "restaurant food",
+        "category": "theme",
+        "expected": [
+          "Itaewon Class",
+          "Wok of Love"
+        ],
+        "top10": [
+          "Wok of Love",
+          "Late Night Restaurant",
+          "Pasta",
+          "Let's Eat",
+          "Itaewon Class",
+          "Ga Doo Ri\u2019s Sushi Restaurant",
+          "Jinny's Kitchen",
+          "Kang's Kitchen",
+          "My Romantic Some Recipe",
+          "Soul Plate"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Food"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "restaurant food",
+          "category": "theme",
+          "expected": [
+            "Itaewon Class",
+            "Wok of Love"
+          ],
+          "top10": [
+            "Wok of Love",
+            "Late Night Restaurant",
+            "Pasta",
+            "Let's Eat",
+            "Itaewon Class",
+            "Jinny's Kitchen",
+            "Culinary Class Wars",
+            "Eccentric! Chef Moon",
+            "Fermentation Family",
+            "Three Meals a Day: Doctors"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Food"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "restaurant food",
+          "category": "theme",
+          "expected": [
+            "Itaewon Class",
+            "Wok of Love"
+          ],
+          "top10": [
+            "Wok of Love",
+            "Late Night Restaurant",
+            "Pasta",
+            "Let's Eat",
+            "Itaewon Class",
+            "Ga Doo Ri\u2019s Sushi Restaurant",
+            "Jinny's Kitchen",
+            "Kang's Kitchen",
+            "My Romantic Some Recipe",
+            "Soul Plate"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Food"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "time travel",
+      "category": "theme",
+      "expected": [
+        "Signal",
+        "Tomorrow with You"
+      ],
+      "baseline": {
+        "query": "time travel",
+        "category": "theme",
+        "expected": [
+          "Signal",
+          "Tomorrow with You"
+        ],
+        "top10": [
+          "Tomorrow with You",
+          "Nine: Nine Times Time Travel",
+          "Rooftop Prince",
+          "Signal",
+          "Love in Time",
+          "One More Time",
+          "Time Slip Dr. Jin",
+          "Time",
+          "A Time Called You",
+          "When Time Stopped"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "time travel",
+          "category": "theme",
+          "expected": [
+            "Signal",
+            "Tomorrow with You"
+          ],
+          "top10": [
+            "Tomorrow with You",
+            "Nine: Nine Times Time Travel",
+            "Rooftop Prince",
+            "Signal",
+            "Love in Time",
+            "One More Time",
+            "Time Slip Dr. Jin",
+            "Time",
+            "A Time Called You",
+            "When Time Stopped"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "time travel",
+          "category": "theme",
+          "expected": [
+            "Signal",
+            "Tomorrow with You"
+          ],
+          "top10": [
+            "Tomorrow with You",
+            "Nine: Nine Times Time Travel",
+            "Rooftop Prince",
+            "Signal",
+            "Love in Time",
+            "One More Time",
+            "Time Slip Dr. Jin",
+            "Time",
+            "A Time Called You",
+            "When Time Stopped"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "contract marriage",
+      "category": "theme",
+      "expected": [
+        "Because This Is My First Life",
+        "Marriage Contract"
+      ],
+      "baseline": {
+        "query": "contract marriage",
+        "category": "theme",
+        "expected": [
+          "Because This Is My First Life",
+          "Marriage Contract"
+        ],
+        "top10": [
+          "Marriage Contract",
+          "Love in Contract",
+          "The Story of Park's Marriage Contract",
+          "Because This Is My First Life",
+          "Perfect Marriage Revenge",
+          "The Wedding Scheme",
+          "Marriage, Not Dating",
+          "Marry My Husband",
+          "Wedding Impossible",
+          "Can We Get Married?"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "contract marriage",
+          "category": "theme",
+          "expected": [
+            "Because This Is My First Life",
+            "Marriage Contract"
+          ],
+          "top10": [
+            "Marriage Contract",
+            "Love in Contract",
+            "The Story of Park's Marriage Contract",
+            "Because This Is My First Life",
+            "Perfect Marriage Revenge",
+            "The Wedding Scheme",
+            "Marriage, Not Dating",
+            "Marry My Husband",
+            "Wedding Impossible",
+            "Can We Get Married?"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "contract marriage",
+          "category": "theme",
+          "expected": [
+            "Because This Is My First Life",
+            "Marriage Contract"
+          ],
+          "top10": [
+            "Marriage Contract",
+            "Love in Contract",
+            "The Story of Park's Marriage Contract",
+            "Because This Is My First Life",
+            "Perfect Marriage Revenge",
+            "The Wedding Scheme",
+            "Marriage, Not Dating",
+            "Marry My Husband",
+            "Wedding Impossible",
+            "Can We Get Married?"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "rich CEO romance",
+      "category": "theme",
+      "expected": [
+        "Business Proposal",
+        "What's Wrong with Secretary Kim"
+      ],
+      "baseline": {
+        "query": "rich CEO romance",
+        "category": "theme",
+        "expected": [
+          "Business Proposal",
+          "What's Wrong with Secretary Kim"
+        ],
+        "top10": [
+          "Business Proposal",
+          "Strong Woman Do Bong Soon",
+          "What's Wrong with Secretary Kim",
+          "King the Land",
+          "True Beauty",
+          "Rich Man",
+          "Que Sera Sera",
+          "Rich Family's Son",
+          "Lucky Romance",
+          "Passionate Love"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Romance"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "rich CEO romance",
+          "category": "theme",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Strong Woman Do Bong Soon",
+            "What's Wrong with Secretary Kim",
+            "King the Land",
+            "Crash Landing on You",
+            "Mr. Sunshine",
+            "Alchemy of Souls",
+            "Reply 1988",
+            "Extraordinary Attorney Woo",
+            "Tale of the Nine-Tailed 1938"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "rich CEO romance",
+          "category": "theme",
+          "expected": [
+            "Business Proposal",
+            "What's Wrong with Secretary Kim"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Strong Woman Do Bong Soon",
+            "What's Wrong with Secretary Kim",
+            "King the Land",
+            "Rich Man",
+            "Que Sera Sera",
+            "Rich Family's Son",
+            "Lucky Romance",
+            "Passionate Love",
+            "Romanced"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "school bullying revenge",
+      "category": "theme",
+      "expected": [
+        "The Glory"
+      ],
+      "baseline": {
+        "query": "school bullying revenge",
+        "category": "theme",
+        "expected": [
+          "The Glory"
+        ],
+        "top10": [
+          "The Glory",
+          "Angry Mom",
+          "Weak Hero Class 1",
+          "My Strange Hero",
+          "The Penthouse: War in Life",
+          "Revenge of Others",
+          "Eve",
+          "High School Return of a Gangster",
+          "Sweet Revenge",
+          "Jungle Fish 2"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Revenge",
+          "Youth"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "school bullying revenge",
+          "category": "theme",
+          "expected": [
+            "The Glory"
+          ],
+          "top10": [
+            "The Glory",
+            "Angry Mom",
+            "Weak Hero Class 1",
+            "My Strange Hero",
+            "The Penthouse: War in Life",
+            "Revenge of Others",
+            "Eve",
+            "High School Return of a Gangster",
+            "Dokgo Rewind",
+            "Semantic Error"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Youth",
+            "Revenge"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "school bullying revenge",
+          "category": "theme",
+          "expected": [
+            "The Glory"
+          ],
+          "top10": [
+            "The Glory",
+            "Angry Mom",
+            "Weak Hero Class 1",
+            "My Strange Hero",
+            "The Penthouse: War in Life",
+            "Revenge of Others",
+            "Eve",
+            "High School Return of a Gangster",
+            "Dokgo Rewind",
+            "Semantic Error"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Revenge",
+            "Youth"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "law firm corruption",
+      "category": "theme",
+      "expected": [
+        "Vincenzo",
+        "Law School",
+        "Extraordinary Attorney Woo"
+      ],
+      "baseline": {
+        "query": "law firm corruption",
+        "category": "theme",
+        "expected": [
+          "Vincenzo",
+          "Law School",
+          "Extraordinary Attorney Woo"
+        ],
+        "top10": [
+          "Vincenzo",
+          "Law School",
+          "Lawless Lawyer",
+          "Extraordinary Attorney Woo",
+          "My Lawyer, Mr. Jo",
+          "One Dollar Lawyer",
+          "Law and the City",
+          "Divorce Lawyer in Love",
+          "Good Partner",
+          "Suits"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Law"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "law firm corruption",
+          "category": "theme",
+          "expected": [
+            "Vincenzo",
+            "Law School",
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Law School",
+            "Lawless Lawyer",
+            "Extraordinary Attorney Woo",
+            "May It Please the Court",
+            "One Dollar Lawyer",
+            "Suits",
+            "Why Her?",
+            "Good Partner",
+            "My Lawyer, Mr. Jo"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Law"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "law firm corruption",
+          "category": "theme",
+          "expected": [
+            "Vincenzo",
+            "Law School",
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Law School",
+            "Lawless Lawyer",
+            "Extraordinary Attorney Woo",
+            "My Lawyer, Mr. Jo",
+            "One Dollar Lawyer",
+            "Law and the City",
+            "Divorce Lawyer in Love",
+            "Good Partner",
+            "Suits"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Law"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "ghost supernatural hotel",
+      "category": "theme",
+      "expected": [
+        "Hotel Del Luna",
+        "The Master's Sun"
+      ],
+      "baseline": {
+        "query": "ghost supernatural hotel",
+        "category": "theme",
+        "expected": [
+          "Hotel Del Luna",
+          "The Master's Sun"
+        ],
+        "top10": [
+          "Hotel del Luna",
+          "The Master's Sun",
+          "Oh My Ghost",
+          "Ghostderella",
+          "Drama Special Season 6: What Is the Ghost Doing?",
+          "My Secret Hotel",
+          "Hotel King",
+          "Cheo Yong",
+          "Item",
+          "Drama Special Season 3: Don't Worry, It's a Ghost"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Supernatural"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "ghost supernatural hotel",
+          "category": "theme",
+          "expected": [
+            "Hotel Del Luna",
+            "The Master's Sun"
+          ],
+          "top10": [
+            "Hotel del Luna",
+            "The Master's Sun",
+            "Oh My Ghost",
+            "Moving",
+            "The Uncanny Counter",
+            "Revenant",
+            "The Guest",
+            "Ghost Doctor",
+            "Chicago Typewriter",
+            "My Love from the Star"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Supernatural"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "ghost supernatural hotel",
+          "category": "theme",
+          "expected": [
+            "Hotel Del Luna",
+            "The Master's Sun"
+          ],
+          "top10": [
+            "Hotel del Luna",
+            "The Master's Sun",
+            "Oh My Ghost",
+            "Ghostderella",
+            "Drama Special Season 6: What Is the Ghost Doing?",
+            "My Secret Hotel",
+            "Hotel King",
+            "Cheo Yong",
+            "Item",
+            "Drama Special Season 3: Don't Worry, It's a Ghost"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Supernatural"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "survival game",
+      "category": "theme",
+      "expected": [
+        "Squid Game"
+      ],
+      "baseline": {
+        "query": "survival game",
+        "category": "theme",
+        "expected": [
+          "Squid Game"
+        ],
+        "top10": [
+          "Squid Game",
+          "All of Us Are Dead",
+          "Happiness",
+          "Siren: Survive the Island",
+          "The Zone: Survival Mission",
+          "Village Survival, the Eight",
+          "Pyramid Game",
+          "Death's Game",
+          "Joseon Survival",
+          "Liar Game"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "survival game",
+          "category": "theme",
+          "expected": [
+            "Squid Game"
+          ],
+          "top10": [
+            "Squid Game",
+            "All of Us Are Dead",
+            "Happiness",
+            "Siren: Survive the Island",
+            "The Zone: Survival Mission",
+            "Village Survival, the Eight",
+            "Pyramid Game",
+            "Death's Game",
+            "Joseon Survival",
+            "Liar Game"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "survival game",
+          "category": "theme",
+          "expected": [
+            "Squid Game"
+          ],
+          "top10": [
+            "Squid Game",
+            "All of Us Are Dead",
+            "Happiness",
+            "Siren: Survive the Island",
+            "The Zone: Survival Mission",
+            "Village Survival, the Eight",
+            "Pyramid Game",
+            "Death's Game",
+            "Joseon Survival",
+            "Liar Game"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "workplace startup",
+      "category": "theme",
+      "expected": [
+        "Start-Up",
+        "Misaeng"
+      ],
+      "baseline": {
+        "query": "workplace startup",
+        "category": "theme",
+        "expected": [
+          "Start-Up",
+          "Misaeng"
+        ],
+        "top10": [
+          "Start-Up",
+          "Agency",
+          "Hot Stove League",
+          "Gaus Electronics",
+          "The New Employee",
+          "Today's Webtoon",
+          "Wish Woosh Season 2",
+          "Beethoven Virus",
+          "The Woman Who Still Wants to Marry",
+          "I Need Romance Season 3"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 0.5,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Business"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "workplace startup",
+          "category": "theme",
+          "expected": [
+            "Start-Up",
+            "Misaeng"
+          ],
+          "top10": [
+            "Start-Up",
+            "Agency",
+            "Love Scout",
+            "What's Wrong with Secretary Kim",
+            "Hot Stove League",
+            "Gaus Electronics",
+            "Typhoon Family",
+            "Good Manager",
+            "Suits",
+            "Reborn Rich"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.5,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "workplace startup",
+          "category": "theme",
+          "expected": [
+            "Start-Up",
+            "Misaeng"
+          ],
+          "top10": [
+            "Start-Up",
+            "Agency",
+            "Hot Stove League",
+            "Gaus Electronics",
+            "The New Employee",
+            "Today's Webtoon",
+            "Wish Woosh Season 2",
+            "Beethoven Virus",
+            "The Woman Who Still Wants to Marry",
+            "I Need Romance Season 3"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 0.5,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Business"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "healing slice of life",
+      "category": "theme",
+      "expected": [
+        "Hospital Playlist",
+        "Our Blues",
+        "My Mister"
+      ],
+      "baseline": {
+        "query": "healing slice of life",
+        "category": "theme",
+        "expected": [
+          "Hospital Playlist",
+          "Our Blues",
+          "My Mister"
+        ],
+        "top10": [
+          "Hospital Playlist",
+          "My Mister",
+          "A Piece of Your Mind",
+          "Our Blues",
+          "Hyori's Bed and Breakfast",
+          "Kian's Bizarre B&amp;B",
+          "Sea of Hope",
+          "BTS in the Soop Season 2",
+          "Love Tractor",
+          "Finland Papa"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [
+          "Life"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "healing slice of life",
+          "category": "theme",
+          "expected": [
+            "Hospital Playlist",
+            "Our Blues",
+            "My Mister"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "My Mister",
+            "A Piece of Your Mind",
+            "Our Blues",
+            "Daily Dose of Sunshine",
+            "Reply 1988",
+            "Hyori's Bed and Breakfast",
+            "Extraordinary Attorney Woo",
+            "Prison Playbook",
+            "Twogether"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Life"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "healing slice of life",
+          "category": "theme",
+          "expected": [
+            "Hospital Playlist",
+            "Our Blues",
+            "My Mister"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "My Mister",
+            "A Piece of Your Mind",
+            "Our Blues",
+            "Hyori's Bed and Breakfast",
+            "Kian's Bizarre B&amp;B",
+            "Sea of Hope",
+            "BTS in the Soop Season 2",
+            "Love Tractor",
+            "Finland Papa"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Life"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Hyun Bin",
+      "category": "actor",
+      "expected": [
+        "Crash Landing on You",
+        "Memories of the Alhambra"
+      ],
+      "baseline": {
+        "query": "Hyun Bin",
+        "category": "actor",
+        "expected": [
+          "Crash Landing on You",
+          "Memories of the Alhambra"
+        ],
+        "top10": [
+          "Crash Landing on You",
+          "Memories of the Alhambra",
+          "Secret Garden",
+          "Crash Landing on You Special: Lunar New Year",
+          "Friend, Our Legend",
+          "Hyde, Jekyll, Me",
+          "Love Andante",
+          "My Lovely Sam Soon",
+          "Part-Time Idol",
+          "Summer Guys"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Hyun Bin",
+          "category": "actor",
+          "expected": [
+            "Crash Landing on You",
+            "Memories of the Alhambra"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Memories of the Alhambra",
+            "Secret Garden",
+            "Crash Landing on You Special: Lunar New Year",
+            "Friend, Our Legend",
+            "Hyde, Jekyll, Me",
+            "Love Andante",
+            "My Lovely Sam Soon",
+            "Part-Time Idol",
+            "Summer Guys"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Hyun Bin",
+          "category": "actor",
+          "expected": [
+            "Crash Landing on You",
+            "Memories of the Alhambra"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Memories of the Alhambra",
+            "Secret Garden",
+            "Crash Landing on You Special: Lunar New Year",
+            "Friend, Our Legend",
+            "Hyde, Jekyll, Me",
+            "Love Andante",
+            "My Lovely Sam Soon",
+            "Part-Time Idol",
+            "Summer Guys"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Park Seo Joon",
+      "category": "actor",
+      "expected": [
+        "Itaewon Class",
+        "What's Wrong with Secretary Kim"
+      ],
+      "baseline": {
+        "query": "Park Seo Joon",
+        "category": "actor",
+        "expected": [
+          "Itaewon Class",
+          "What's Wrong with Secretary Kim"
+        ],
+        "top10": [
+          "Itaewon Class",
+          "What's Wrong with Secretary Kim",
+          "Fight for My Way",
+          "Gyeongseong Creature",
+          "Dream High Season 2",
+          "Gyeongseong Creature Season 2",
+          "Hwarang",
+          "Hwarang Special",
+          "I Summon You, Gold!",
+          "In The Soop: Friendcation"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Park Seo Joon",
+          "category": "actor",
+          "expected": [
+            "Itaewon Class",
+            "What's Wrong with Secretary Kim"
+          ],
+          "top10": [
+            "Itaewon Class",
+            "What's Wrong with Secretary Kim",
+            "Fight for My Way",
+            "Gyeongseong Creature",
+            "Dream High Season 2",
+            "Gyeongseong Creature Season 2",
+            "Hwarang",
+            "Hwarang Special",
+            "I Summon You, Gold!",
+            "In The Soop: Friendcation"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Park Seo Joon",
+          "category": "actor",
+          "expected": [
+            "Itaewon Class",
+            "What's Wrong with Secretary Kim"
+          ],
+          "top10": [
+            "Itaewon Class",
+            "What's Wrong with Secretary Kim",
+            "Fight for My Way",
+            "Gyeongseong Creature",
+            "Dream High Season 2",
+            "Gyeongseong Creature Season 2",
+            "Hwarang",
+            "Hwarang Special",
+            "I Summon You, Gold!",
+            "In The Soop: Friendcation"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Song Joong Ki",
+      "category": "actor",
+      "expected": [
+        "Vincenzo",
+        "Descendants of the Sun"
+      ],
+      "baseline": {
+        "query": "Song Joong Ki",
+        "category": "actor",
+        "expected": [
+          "Vincenzo",
+          "Descendants of the Sun"
+        ],
+        "top10": [
+          "Vincenzo",
+          "Descendants of the Sun",
+          "Arthdal Chronicles Part 1: The Children of Prophecy",
+          "Sungkyunkwan Scandal",
+          "Sungkyunkwan Scandal: Special",
+          "Arthdal Chronicles Part 2: The Sky Turning Inside Out, Rising Land",
+          "Arthdal Chronicles Part 3: The Prelude to All Legends",
+          "Descendants of the Sun: BTS",
+          "Descendants of the Sun: Recap Special",
+          "My Youth"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Song Joong Ki",
+          "category": "actor",
+          "expected": [
+            "Vincenzo",
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Descendants of the Sun",
+            "Arthdal Chronicles Part 1: The Children of Prophecy",
+            "Sungkyunkwan Scandal",
+            "Sungkyunkwan Scandal: Special",
+            "Arthdal Chronicles Part 2: The Sky Turning Inside Out, Rising Land",
+            "Arthdal Chronicles Part 3: The Prelude to All Legends",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "My Youth"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Song Joong Ki",
+          "category": "actor",
+          "expected": [
+            "Vincenzo",
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Vincenzo",
+            "Descendants of the Sun",
+            "Arthdal Chronicles Part 1: The Children of Prophecy",
+            "Sungkyunkwan Scandal",
+            "Sungkyunkwan Scandal: Special",
+            "Arthdal Chronicles Part 2: The Sky Turning Inside Out, Rising Land",
+            "Arthdal Chronicles Part 3: The Prelude to All Legends",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "My Youth"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Kim Soo Hyun",
+      "category": "actor",
+      "expected": [
+        "My Love from the Star",
+        "It's Okay to Not Be Okay"
+      ],
+      "baseline": {
+        "query": "Kim Soo Hyun",
+        "category": "actor",
+        "expected": [
+          "My Love from the Star",
+          "It's Okay to Not Be Okay"
+        ],
+        "top10": [
+          "My Love from the Star",
+          "It's Okay to Not Be Okay",
+          "Moon Embracing the Sun",
+          "A-Teen",
+          "A-Teen Season 2",
+          "Dream High",
+          "Dream High Special Concert",
+          "Go, Back Diary",
+          "Good Day",
+          "One Ordinary Day"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Kim Soo Hyun",
+          "category": "actor",
+          "expected": [
+            "My Love from the Star",
+            "It's Okay to Not Be Okay"
+          ],
+          "top10": [
+            "My Love from the Star",
+            "It's Okay to Not Be Okay",
+            "Moon Embracing the Sun",
+            "A-Teen",
+            "A-Teen Season 2",
+            "Dream High",
+            "Dream High Special Concert",
+            "Go, Back Diary",
+            "Good Day",
+            "One Ordinary Day"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Kim Soo Hyun",
+          "category": "actor",
+          "expected": [
+            "My Love from the Star",
+            "It's Okay to Not Be Okay"
+          ],
+          "top10": [
+            "My Love from the Star",
+            "It's Okay to Not Be Okay",
+            "Moon Embracing the Sun",
+            "A-Teen",
+            "A-Teen Season 2",
+            "Dream High",
+            "Dream High Special Concert",
+            "Go, Back Diary",
+            "Good Day",
+            "One Ordinary Day"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Lee Min Ho",
+      "category": "actor",
+      "expected": [
+        "The Heirs",
+        "The King: Eternal Monarch"
+      ],
+      "baseline": {
+        "query": "Lee Min Ho",
+        "category": "actor",
+        "expected": [
+          "The Heirs",
+          "The King: Eternal Monarch"
+        ],
+        "top10": [
+          "The Heirs",
+          "The King: Eternal Monarch",
+          "Boys over Flowers",
+          "Boys before Flowers: F4 Talk Show Special",
+          "Boys over Flowers: F4 Afterstory",
+          "City Hunter",
+          "Faith",
+          "Mackerel Run",
+          "Pachinko",
+          "Pachinko Season 2"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Lee Min Ho",
+          "category": "actor",
+          "expected": [
+            "The Heirs",
+            "The King: Eternal Monarch"
+          ],
+          "top10": [
+            "The Heirs",
+            "The King: Eternal Monarch",
+            "Boys over Flowers",
+            "Boys before Flowers: F4 Talk Show Special",
+            "Boys over Flowers: F4 Afterstory",
+            "City Hunter",
+            "Faith",
+            "Mackerel Run",
+            "Pachinko",
+            "Pachinko Season 2"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Lee Min Ho",
+          "category": "actor",
+          "expected": [
+            "The Heirs",
+            "The King: Eternal Monarch"
+          ],
+          "top10": [
+            "The Heirs",
+            "The King: Eternal Monarch",
+            "Boys over Flowers",
+            "Boys before Flowers: F4 Talk Show Special",
+            "Boys over Flowers: F4 Afterstory",
+            "City Hunter",
+            "Faith",
+            "Mackerel Run",
+            "Pachinko",
+            "Pachinko Season 2"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Ji Chang Wook",
+      "category": "actor",
+      "expected": [
+        "Healer",
+        "Suspicious Partner"
+      ],
+      "baseline": {
+        "query": "Ji Chang Wook",
+        "category": "actor",
+        "expected": [
+          "Healer",
+          "Suspicious Partner"
+        ],
+        "top10": [
+          "Healer",
+          "Suspicious Partner",
+          "The K2",
+          "Queen Woo",
+          "7 First Kisses",
+          "Bachelor's Vegetable Store",
+          "Backstreet Rookie",
+          "Empress Ki",
+          "Five Fingers",
+          "Gangnam B-Side"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Ji Chang Wook",
+          "category": "actor",
+          "expected": [
+            "Healer",
+            "Suspicious Partner"
+          ],
+          "top10": [
+            "Healer",
+            "Suspicious Partner",
+            "The K2",
+            "Queen Woo",
+            "7 First Kisses",
+            "Bachelor's Vegetable Store",
+            "Backstreet Rookie",
+            "Empress Ki",
+            "Five Fingers",
+            "Gangnam B-Side"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Ji Chang Wook",
+          "category": "actor",
+          "expected": [
+            "Healer",
+            "Suspicious Partner"
+          ],
+          "top10": [
+            "Healer",
+            "Suspicious Partner",
+            "The K2",
+            "Queen Woo",
+            "7 First Kisses",
+            "Bachelor's Vegetable Store",
+            "Backstreet Rookie",
+            "Empress Ki",
+            "Five Fingers",
+            "Gangnam B-Side"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "IU",
+      "category": "actor",
+      "expected": [
+        "Hotel Del Luna",
+        "My Mister"
+      ],
+      "baseline": {
+        "query": "IU",
+        "category": "actor",
+        "expected": [
+          "Hotel Del Luna",
+          "My Mister"
+        ],
+        "top10": [
+          "Hotel del Luna",
+          "My Mister",
+          "Moon Lovers: Scarlet Heart Ryeo",
+          "Bel Ami",
+          "Boss-dol Mart",
+          "Dream High",
+          "Dream High Special Concert",
+          "EXO Arcade",
+          "EXO Arcade Season 2",
+          "EXO's Ladder Season 2"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "IU",
+          "category": "actor",
+          "expected": [
+            "Hotel Del Luna",
+            "My Mister"
+          ],
+          "top10": [
+            "Hotel del Luna",
+            "My Mister",
+            "Moon Lovers: Scarlet Heart Ryeo",
+            "Bel Ami",
+            "Boss-dol Mart",
+            "Dream High",
+            "Dream High Special Concert",
+            "EXO Arcade",
+            "EXO Arcade Season 2",
+            "EXO's Ladder Season 2"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "IU",
+          "category": "actor",
+          "expected": [
+            "Hotel Del Luna",
+            "My Mister"
+          ],
+          "top10": [
+            "Hotel del Luna",
+            "My Mister",
+            "Moon Lovers: Scarlet Heart Ryeo",
+            "Bel Ami",
+            "Boss-dol Mart",
+            "Dream High",
+            "Dream High Special Concert",
+            "EXO Arcade",
+            "EXO Arcade Season 2",
+            "EXO's Ladder Season 2"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Park Min Young",
+      "category": "actor",
+      "expected": [
+        "What's Wrong with Secretary Kim",
+        "Her Private Life"
+      ],
+      "baseline": {
+        "query": "Park Min Young",
+        "category": "actor",
+        "expected": [
+          "What's Wrong with Secretary Kim",
+          "Her Private Life"
+        ],
+        "top10": [
+          "What's Wrong with Secretary Kim",
+          "Her Private Life",
+          "Healer",
+          "Glory Jane",
+          "I Am Your Teacher",
+          "Sungkyunkwan Scandal",
+          "A New Leaf",
+          "Busted",
+          "Busted Season 2",
+          "Busted Season 3"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Park Min Young",
+          "category": "actor",
+          "expected": [
+            "What's Wrong with Secretary Kim",
+            "Her Private Life"
+          ],
+          "top10": [
+            "What's Wrong with Secretary Kim",
+            "Her Private Life",
+            "Healer",
+            "Glory Jane",
+            "I Am Your Teacher",
+            "Sungkyunkwan Scandal",
+            "A New Leaf",
+            "Busted",
+            "Busted Season 2",
+            "Busted Season 3"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Park Min Young",
+          "category": "actor",
+          "expected": [
+            "What's Wrong with Secretary Kim",
+            "Her Private Life"
+          ],
+          "top10": [
+            "What's Wrong with Secretary Kim",
+            "Her Private Life",
+            "Healer",
+            "Glory Jane",
+            "I Am Your Teacher",
+            "Sungkyunkwan Scandal",
+            "A New Leaf",
+            "Busted",
+            "Busted Season 2",
+            "Busted Season 3"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Song Hye Kyo",
+      "category": "actor",
+      "expected": [
+        "Descendants of the Sun",
+        "The Glory"
+      ],
+      "baseline": {
+        "query": "Song Hye Kyo",
+        "category": "actor",
+        "expected": [
+          "Descendants of the Sun",
+          "The Glory"
+        ],
+        "top10": [
+          "Descendants of the Sun",
+          "The Glory",
+          "Encounter",
+          "All In",
+          "Autumn Tale",
+          "Descendants of the Sun: BTS",
+          "Descendants of the Sun: Recap Special",
+          "Full House",
+          "Hotelier",
+          "Now, We Are Breaking Up"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Song Hye Kyo",
+          "category": "actor",
+          "expected": [
+            "Descendants of the Sun",
+            "The Glory"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "The Glory",
+            "Encounter",
+            "All In",
+            "Autumn Tale",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "Full House",
+            "Hotelier",
+            "Now, We Are Breaking Up"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Song Hye Kyo",
+          "category": "actor",
+          "expected": [
+            "Descendants of the Sun",
+            "The Glory"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "The Glory",
+            "Encounter",
+            "All In",
+            "Autumn Tale",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "Full House",
+            "Hotelier",
+            "Now, We Are Breaking Up"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Gong Yoo",
+      "category": "actor",
+      "expected": [
+        "Goblin",
+        "Coffee Prince"
+      ],
+      "baseline": {
+        "query": "Gong Yoo",
+        "category": "actor",
+        "expected": [
+          "Goblin",
+          "Coffee Prince"
+        ],
+        "top10": [
+          "Guardian: The Lonely and Great God",
+          "Coffee Prince",
+          "Big",
+          "Because I Want to Talk",
+          "Biscuit Teacher and Star Candy",
+          "Coffee Prince Special",
+          "Goblin Special: Every Moment of It Shined",
+          "Goblin Special: The Summoning",
+          "Maybe, Maybe Not",
+          "Soundtrack #2"
+        ],
+        "best_rank": 2,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 0.5,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Gong Yoo",
+          "category": "actor",
+          "expected": [
+            "Goblin",
+            "Coffee Prince"
+          ],
+          "top10": [
+            "Guardian: The Lonely and Great God",
+            "Coffee Prince",
+            "Big",
+            "Because I Want to Talk",
+            "Biscuit Teacher and Star Candy",
+            "Coffee Prince Special",
+            "Goblin Special: Every Moment of It Shined",
+            "Goblin Special: The Summoning",
+            "Maybe, Maybe Not",
+            "Soundtrack #2"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Gong Yoo",
+          "category": "actor",
+          "expected": [
+            "Goblin",
+            "Coffee Prince"
+          ],
+          "top10": [
+            "Guardian: The Lonely and Great God",
+            "Coffee Prince",
+            "Big",
+            "Because I Want to Talk",
+            "Biscuit Teacher and Star Candy",
+            "Coffee Prince Special",
+            "Goblin Special: Every Moment of It Shined",
+            "Goblin Special: The Summoning",
+            "Maybe, Maybe Not",
+            "Soundtrack #2"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Crash Landng on You",
+      "category": "typo",
+      "expected": [
+        "Crash Landing on You"
+      ],
+      "baseline": {
+        "query": "Crash Landng on You",
+        "category": "typo",
+        "expected": [
+          "Crash Landing on You"
+        ],
+        "top10": [
+          "Crash Landing on You",
+          "Crash Landing on You Special: Lunar New Year",
+          "Crash",
+          "Crash Course in Romance",
+          "Fall for You",
+          "Snowdrop",
+          "Stars Falling from the Sky",
+          "Hit the Spot",
+          "Touching You",
+          "You Are My Destiny"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Crash Landng on You",
+          "category": "typo",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Crash Landing on You Special: Lunar New Year",
+            "Crash",
+            "Crash Course in Romance",
+            "Fall for You",
+            "Snowdrop",
+            "Stars Falling from the Sky",
+            "Hit the Spot",
+            "Touching You",
+            "You Are My Destiny"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Crash Landng on You",
+          "category": "typo",
+          "expected": [
+            "Crash Landing on You"
+          ],
+          "top10": [
+            "Crash Landing on You",
+            "Crash Landing on You Special: Lunar New Year",
+            "Crash",
+            "Crash Course in Romance",
+            "Fall for You",
+            "Snowdrop",
+            "Stars Falling from the Sky",
+            "Hit the Spot",
+            "Touching You",
+            "You Are My Destiny"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Hospitl Playlist",
+      "category": "typo",
+      "expected": [
+        "Hospital Playlist"
+      ],
+      "baseline": {
+        "query": "Hospitl Playlist",
+        "category": "typo",
+        "expected": [
+          "Hospital Playlist"
+        ],
+        "top10": [
+          "Hospital Playlist",
+          "Hospital Playlist Goes Camping",
+          "Hospital Playlist Season 2",
+          "Hospital Ship",
+          "Medical Top Team",
+          "Love Playlist",
+          "Secret Playlist",
+          "Doctors",
+          "Love Playlist Season 4",
+          "Her Bucket List"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Hospitl Playlist",
+          "category": "typo",
+          "expected": [
+            "Hospital Playlist"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Hospital Playlist Goes Camping",
+            "Hospital Playlist Season 2",
+            "Hospital Ship",
+            "Medical Top Team",
+            "Love Playlist",
+            "Secret Playlist",
+            "Doctors",
+            "Love Playlist Season 4",
+            "Her Bucket List"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Hospitl Playlist",
+          "category": "typo",
+          "expected": [
+            "Hospital Playlist"
+          ],
+          "top10": [
+            "Hospital Playlist",
+            "Hospital Playlist Goes Camping",
+            "Hospital Playlist Season 2",
+            "Hospital Ship",
+            "Medical Top Team",
+            "Love Playlist",
+            "Secret Playlist",
+            "Doctors",
+            "Love Playlist Season 4",
+            "Her Bucket List"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Buisness Proposal",
+      "category": "typo",
+      "expected": [
+        "Business Proposal"
+      ],
+      "baseline": {
+        "query": "Buisness Proposal",
+        "category": "typo",
+        "expected": [
+          "Business Proposal"
+        ],
+        "top10": [
+          "Business Proposal",
+          "Operation Proposal",
+          "Start-Up",
+          "Agency",
+          "The Incarnation of Money",
+          "Business as Usual Special",
+          "Monster",
+          "The Art of Negotiation",
+          "Money Flower",
+          "Can Love Become Money"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Buisness Proposal",
+          "category": "typo",
+          "expected": [
+            "Business Proposal"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Operation Proposal",
+            "Start-Up",
+            "Agency",
+            "The Incarnation of Money",
+            "Business as Usual Special",
+            "Monster",
+            "The Art of Negotiation",
+            "Money Flower",
+            "Can Love Become Money"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Buisness Proposal",
+          "category": "typo",
+          "expected": [
+            "Business Proposal"
+          ],
+          "top10": [
+            "Business Proposal",
+            "Operation Proposal",
+            "Start-Up",
+            "Agency",
+            "The Incarnation of Money",
+            "Business as Usual Special",
+            "Monster",
+            "The Art of Negotiation",
+            "Money Flower",
+            "Can Love Become Money"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Extraordinary Atorney Woo",
+      "category": "typo",
+      "expected": [
+        "Extraordinary Attorney Woo"
+      ],
+      "baseline": {
+        "query": "Extraordinary Atorney Woo",
+        "category": "typo",
+        "expected": [
+          "Extraordinary Attorney Woo"
+        ],
+        "top10": [
+          "Extraordinary Attorney Woo",
+          "Extraordinary You",
+          "Divorce Attorney Shin",
+          "Divorce Lawyer in Love",
+          "Suits",
+          "Law School",
+          "Legal High",
+          "Beyond the Bar",
+          "Joseon Attorney: A Morality",
+          "Doctor Lawyer"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 0.3333333333333333,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Extraordinary Atorney Woo",
+          "category": "typo",
+          "expected": [
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "Extraordinary You",
+            "Divorce Attorney Shin",
+            "Divorce Lawyer in Love",
+            "Suits",
+            "Law School",
+            "Legal High",
+            "Beyond the Bar",
+            "Joseon Attorney: A Morality",
+            "Doctor Lawyer"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Extraordinary Atorney Woo",
+          "category": "typo",
+          "expected": [
+            "Extraordinary Attorney Woo"
+          ],
+          "top10": [
+            "Extraordinary Attorney Woo",
+            "Extraordinary You",
+            "Divorce Attorney Shin",
+            "Divorce Lawyer in Love",
+            "Suits",
+            "Law School",
+            "Legal High",
+            "Beyond the Bar",
+            "Joseon Attorney: A Morality",
+            "Doctor Lawyer"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 0.3333333333333333,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "Descendents of the Sun",
+      "category": "typo",
+      "expected": [
+        "Descendants of the Sun"
+      ],
+      "baseline": {
+        "query": "Descendents of the Sun",
+        "category": "typo",
+        "expected": [
+          "Descendants of the Sun"
+        ],
+        "top10": [
+          "Descendants of the Sun",
+          "Descendants of the Sun: BTS",
+          "Descendants of the Sun: Recap Special",
+          "The Master's Sun",
+          "Shining Inheritance",
+          "A Place in the Sun",
+          "Inspiring Generation",
+          "Flower Grandpa Investigation Unit",
+          "A Hundred Year's Inheritance",
+          "Swallow the Sun"
+        ],
+        "best_rank": 1,
+        "precision_at_3": 1.0,
+        "recall_at_10": 1.0,
+        "mrr": 1.0,
+        "detected_genres": [],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "Descendents of the Sun",
+          "category": "typo",
+          "expected": [
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "The Master's Sun",
+            "Shining Inheritance",
+            "A Place in the Sun",
+            "Inspiring Generation",
+            "Flower Grandpa Investigation Unit",
+            "A Hundred Year's Inheritance",
+            "Swallow the Sun"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "Descendents of the Sun",
+          "category": "typo",
+          "expected": [
+            "Descendants of the Sun"
+          ],
+          "top10": [
+            "Descendants of the Sun",
+            "Descendants of the Sun: BTS",
+            "Descendants of the Sun: Recap Special",
+            "The Master's Sun",
+            "Shining Inheritance",
+            "A Place in the Sun",
+            "Inspiring Generation",
+            "Flower Grandpa Investigation Unit",
+            "A Hundred Year's Inheritance",
+            "Swallow the Sun"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "fantasy romance",
+      "category": "genre",
+      "expected": [
+        "Goblin",
+        "Hotel Del Luna",
+        "Alchemy of Souls"
+      ],
+      "baseline": {
+        "query": "fantasy romance",
+        "category": "genre",
+        "expected": [
+          "Goblin",
+          "Hotel Del Luna",
+          "Alchemy of Souls"
+        ],
+        "top10": [
+          "Guardian: The Lonely and Great God",
+          "Hotel del Luna",
+          "Alchemy of Souls",
+          "My Love from the Star",
+          "Business Proposal",
+          "What's Wrong with Secretary Kim",
+          "Strong Woman Do Bong Soon",
+          "True Beauty",
+          "Genie, Make a Wish",
+          "Eccentric Romance"
+        ],
+        "best_rank": 2,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 0.6666666666666666,
+        "mrr": 0.5,
+        "detected_genres": [
+          "Fantasy",
+          "Romance"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "fantasy romance",
+          "category": "genre",
+          "expected": [
+            "Goblin",
+            "Hotel Del Luna",
+            "Alchemy of Souls"
+          ],
+          "top10": [
+            "Guardian: The Lonely and Great God",
+            "Hotel del Luna",
+            "The Story of Bi Hyeong: Enchanted Master of the Goblin",
+            "Alchemy of Souls",
+            "The Midnight Studio",
+            "Black Knight: The Man Who Guards Me",
+            "Kokdu: Season of Deity",
+            "The Haunted Palace",
+            "Alchemy of Souls Season 2: Light and Shadow",
+            "A Korean Odyssey"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [
+            "Fantasy",
+            "Romance"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.33333333333333337,
+          "delta_mrr": 0.0
+        },
+        "generated_combo_only_soft": {
+          "query": "fantasy romance",
+          "category": "genre",
+          "expected": [
+            "Goblin",
+            "Hotel Del Luna",
+            "Alchemy of Souls"
+          ],
+          "top10": [
+            "Guardian: The Lonely and Great God",
+            "Hotel del Luna",
+            "The Story of Bi Hyeong: Enchanted Master of the Goblin",
+            "Alchemy of Souls",
+            "The Midnight Studio",
+            "Black Knight: The Man Who Guards Me",
+            "Kokdu: Season of Deity",
+            "The Haunted Palace",
+            "Alchemy of Souls Season 2: Light and Shadow",
+            "A Korean Odyssey"
+          ],
+          "best_rank": 2,
+          "precision_at_3": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 0.5,
+          "detected_genres": [
+            "Romance",
+            "Fantasy"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.0,
+          "delta_recall_at_10": 0.33333333333333337,
+          "delta_mrr": 0.0
+        }
+      }
+    },
+    {
+      "query": "crime thriller",
+      "category": "genre",
+      "expected": [
+        "Signal",
+        "Stranger",
+        "Beyond Evil"
+      ],
+      "baseline": {
+        "query": "crime thriller",
+        "category": "genre",
+        "expected": [
+          "Signal",
+          "Stranger",
+          "Beyond Evil"
+        ],
+        "top10": [
+          "Squid Game",
+          "Signal",
+          "Stranger",
+          "Beyond Evil",
+          "Crime Puzzle",
+          "Evilive",
+          "The Killer's Shopping List",
+          "The Ghost Detective",
+          "Less Than Evil",
+          "Spy"
+        ],
+        "best_rank": 2,
+        "precision_at_3": 0.6666666666666666,
+        "recall_at_10": 1.0,
+        "mrr": 0.5,
+        "detected_genres": [
+          "Crime",
+          "Thriller"
+        ],
+        "detected_themes": [],
+        "detected_actors": []
+      },
+      "modes": {
+        "generated_genre_soft": {
+          "query": "crime thriller",
+          "category": "genre",
+          "expected": [
+            "Signal",
+            "Stranger",
+            "Beyond Evil"
+          ],
+          "top10": [
+            "Beyond Evil",
+            "Signal",
+            "Stranger",
+            "Voice",
+            "Mouse",
+            "Blind",
+            "Black Out",
+            "Hello Monster",
+            "Train",
+            "Ghost"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Crime",
+            "Thriller"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.5
+        },
+        "generated_combo_only_soft": {
+          "query": "crime thriller",
+          "category": "genre",
+          "expected": [
+            "Signal",
+            "Stranger",
+            "Beyond Evil"
+          ],
+          "top10": [
+            "Beyond Evil",
+            "Signal",
+            "Stranger",
+            "Voice",
+            "Mouse",
+            "Blind",
+            "Black Out",
+            "Hello Monster",
+            "Train",
+            "Ghost"
+          ],
+          "best_rank": 1,
+          "precision_at_3": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "detected_genres": [
+            "Crime",
+            "Thriller"
+          ],
+          "detected_themes": [],
+          "detected_actors": [],
+          "delta_precision_at_3": 0.33333333333333337,
+          "delta_recall_at_10": 0.0,
+          "delta_mrr": 0.5
+        }
+      }
+    }
+  ]
+}
