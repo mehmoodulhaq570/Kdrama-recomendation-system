@@ -1,7 +1,7 @@
 # Generated Query Debug
 
 - Query: `romantic comedy`
-- Generated at: `2026-07-23T01:01:46`
+- Generated at: `2026-07-23T01:30:21`
 - Mode: `calibrated_generated`
 - Expected: Business Proposal, What's Wrong with Secretary Kim, Strong Woman Do Bong Soon
 - Classification: `ok_top3`
@@ -11,7 +11,7 @@
 ## Analyzer
 
 - Intent: `emotion_based`
-- Detected genres: Comedy, Romance
+- Detected genres: Romance, Comedy
 
 ## Final API Top 10
 
@@ -52,23 +52,6 @@
 
 ## Generated Genre Candidates
 
-### Comedy
-1. Crash Landing on You
-2. Hospital Playlist
-3. Under the Queen's Umbrella
-4. Reply 1988
-5. Prison Playbook
-6. NCT WORLD 2.0
-7. Vincenzo
-8. Mr. Queen
-9. It's Okay to Not Be Okay
-10. The Good Bad Mother
-11. Study Group
-12. The Trauma Code: Heroes on Call
-13. EXO's Showtime
-14. Running Man
-15. Nana Tour with Seventeen
-
 ### Romance
 1. Crash Landing on You
 2. Mr. Sunshine
@@ -85,3 +68,20 @@
 13. Twenty-Five Twenty-One
 14. Guardian: The Lonely and Great God
 15. The Red Sleeve
+
+### Comedy
+1. Crash Landing on You
+2. Hospital Playlist
+3. Under the Queen's Umbrella
+4. Reply 1988
+5. Prison Playbook
+6. NCT WORLD 2.0
+7. Vincenzo
+8. Mr. Queen
+9. It's Okay to Not Be Okay
+10. The Good Bad Mother
+11. Study Group
+12. The Trauma Code: Heroes on Call
+13. EXO's Showtime
+14. Running Man
+15. Nana Tour with Seventeen

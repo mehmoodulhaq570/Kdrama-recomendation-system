@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T01:01:46",
+  "generated_at": "2026-07-23T01:30:21",
   "query": "romantic comedy",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -27,8 +27,8 @@
       "entities": {
         "actors": [],
         "genres": [
-          "Comedy",
-          "Romance"
+          "Romance",
+          "Comedy"
         ],
         "themes": [],
         "years": [],
@@ -39,7 +39,7 @@
       },
       "dynamic_alpha": 0.95,
       "confidence": 0.9,
-      "timestamp": "2026-07-22T20:01:13.134322"
+      "timestamp": "2026-07-22T20:29:56.382363"
     },
     "api": {
       "query": "romantic comedy",
@@ -67,30 +67,10 @@
   },
   "generated_candidates": {
     "detected_genres": [
-      "Comedy",
-      "Romance"
+      "Romance",
+      "Comedy"
     ],
     "genre_sections": [
-      {
-        "key": "Comedy",
-        "titles": [
-          "Crash Landing on You",
-          "Hospital Playlist",
-          "Under the Queen's Umbrella",
-          "Reply 1988",
-          "Prison Playbook",
-          "NCT WORLD 2.0",
-          "Vincenzo",
-          "Mr. Queen",
-          "It's Okay to Not Be Okay",
-          "The Good Bad Mother",
-          "Study Group",
-          "The Trauma Code: Heroes on Call",
-          "EXO's Showtime",
-          "Running Man",
-          "Nana Tour with Seventeen"
-        ]
-      },
       {
         "key": "Romance",
         "titles": [
@@ -109,6 +89,26 @@
           "Twenty-Five Twenty-One",
           "Guardian: The Lonely and Great God",
           "The Red Sleeve"
+        ]
+      },
+      {
+        "key": "Comedy",
+        "titles": [
+          "Crash Landing on You",
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Reply 1988",
+          "Prison Playbook",
+          "NCT WORLD 2.0",
+          "Vincenzo",
+          "Mr. Queen",
+          "It's Okay to Not Be Okay",
+          "The Good Bad Mother",
+          "Study Group",
+          "The Trauma Code: Heroes on Call",
+          "EXO's Showtime",
+          "Running Man",
+          "Nana Tour with Seventeen"
         ]
       }
     ],
@@ -151,31 +151,31 @@
       "Noble, My Love",
       "Radiant Office",
       "Crash Landing on You",
-      "Hospital Playlist",
-      "Under the Queen's Umbrella",
-      "Reply 1988",
-      "Prison Playbook",
-      "NCT WORLD 2.0",
-      "Vincenzo",
-      "Mr. Queen",
-      "It's Okay to Not Be Okay",
-      "The Good Bad Mother",
-      "Study Group",
-      "The Trauma Code: Heroes on Call",
-      "EXO's Showtime",
-      "Running Man",
-      "Nana Tour with Seventeen",
       "Mr. Sunshine",
       "Alchemy of Souls",
+      "Reply 1988",
       "Extraordinary Attorney Woo",
       "Tale of the Nine-Tailed 1938",
+      "Mr. Queen",
+      "It's Okay to Not Be Okay",
       "My Dearest",
       "Twinkling Watermelon",
       "Flower of Evil",
       "Healer",
       "Twenty-Five Twenty-One",
       "Guardian: The Lonely and Great God",
-      "The Red Sleeve"
+      "The Red Sleeve",
+      "Hospital Playlist",
+      "Under the Queen's Umbrella",
+      "Prison Playbook",
+      "NCT WORLD 2.0",
+      "Vincenzo",
+      "The Good Bad Mother",
+      "Study Group",
+      "The Trauma Code: Heroes on Call",
+      "EXO's Showtime",
+      "Running Man",
+      "Nana Tour with Seventeen"
     ]
   },
   "final_top10": [

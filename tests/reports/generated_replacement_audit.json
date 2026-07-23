@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T01:18:43",
+  "generated_at": "2026-07-23T12:18:28",
   "source": "D:\\Projects\\SeoulMate\\tests\\reports\\ranking_mode_comparison.json",
   "primary_mode": "generated_genre_soft",
   "summary": {
@@ -9,19 +9,19 @@
       "mrr": 0.9629629629629629
     },
     "generated": {
-      "precision_at_3": 0.5493827160493827,
+      "precision_at_3": 0.5679012345679012,
       "recall_at_10": 0.9413580246913581,
-      "mrr": 0.9382716049382716
+      "mrr": 0.9475308641975309
     },
     "label_counts": {
       "expected_ranked_too_low": 10,
       "top3_precision_regression": 10,
-      "expected_missing_from_generated_top10": 5,
-      "first_relevant_rank_regression": 4,
-      "noisy_titles_above_expected": 4
+      "expected_missing_from_generated_top10": 6,
+      "first_relevant_rank_regression": 3,
+      "noisy_titles_above_expected": 3
     },
     "category_impact": {
-      "genre": 3.55
+      "genre": 2.9999999999999996
     },
     "top_query_impact": [
       [
@@ -30,7 +30,7 @@
       ],
       [
         "thriller",
-        0.6333333333333334
+        0.15000000000000002
       ],
       [
         "school drama",
@@ -46,11 +46,11 @@
       ],
       [
         "medical drama",
-        0.30000000000000004
+        0.2666666666666667
       ],
       [
         "doctor hospital drama",
-        0.30000000000000004
+        0.2666666666666667
       ],
       [
         "office romance",
@@ -133,69 +133,6 @@
       }
     },
     {
-      "query": "thriller",
-      "category": "genre",
-      "expected": [
-        "Squid Game",
-        "Signal",
-        "Stranger"
-      ],
-      "labels": [
-        "expected_missing_from_generated_top10",
-        "expected_ranked_too_low",
-        "top3_precision_regression",
-        "first_relevant_rank_regression",
-        "noisy_titles_above_expected"
-      ],
-      "impact": 0.6333333333333334,
-      "baseline_top5": [
-        "Squid Game",
-        "Signal",
-        "Stranger",
-        "Beyond Evil",
-        "The Virus"
-      ],
-      "generated_top10": [
-        "Mouse",
-        "Signal",
-        "Mother",
-        "Tomorrow",
-        "Happiness",
-        "Moving",
-        "Flower of Evil",
-        "The Glory",
-        "Healer",
-        "Taxi Driver"
-      ],
-      "generated_top5": [
-        "Mouse",
-        "Signal",
-        "Mother",
-        "Tomorrow",
-        "Happiness"
-      ],
-      "missing_top10": [
-        "Squid Game",
-        "Stranger"
-      ],
-      "ranked_too_low": [],
-      "noisy_above_expected": [
-        "Mouse"
-      ],
-      "deltas": {
-        "precision_at_3": -0.6666666666666667,
-        "recall_at_10": -0.6666666666666667,
-        "mrr": -0.5
-      },
-      "detected": {
-        "genres": [
-          "Thriller"
-        ],
-        "themes": [],
-        "actors": []
-      }
-    },
-    {
       "query": "historical",
       "category": "genre",
       "expected": [
@@ -225,8 +162,8 @@
         "My Dearest",
         "The Red Sleeve",
         "Moon Lovers: Scarlet Heart Ryeo",
-        "Gyeongseong Creature",
-        "Pachinko"
+        "Love in the Moonlight",
+        "Bloody Heart"
       ],
       "generated_top5": [
         "Mr. Sunshine",
@@ -313,8 +250,8 @@
       },
       "detected": {
         "genres": [
-          "Drama",
-          "Historical"
+          "Historical",
+          "Drama"
         ],
         "themes": [],
         "actors": []
@@ -329,10 +266,11 @@
         "Good Doctor"
       ],
       "labels": [
+        "expected_missing_from_generated_top10",
         "expected_ranked_too_low",
         "top3_precision_regression"
       ],
-      "impact": 0.30000000000000004,
+      "impact": 0.2666666666666667,
       "baseline_top5": [
         "Hospital Playlist",
         "Doctor Cha",
@@ -341,39 +279,38 @@
         "Hospital Ship"
       ],
       "generated_top10": [
-        "Hospital Playlist",
-        "Daily Dose of Sunshine",
-        "Dr. Romantic",
-        "The Trauma Code: Heroes on Call",
-        "If You Wish Upon Me",
         "Good Doctor",
-        "God's Quiz",
-        "D-Day",
         "Doctor Cha",
-        "Doctor Lawyer"
+        "Brain",
+        "Dr. Romantic Season 3",
+        "Emergency Couple",
+        "Hyper Knife",
+        "The Trauma Code: Heroes on Call",
+        "Heart Surgeons",
+        "Doctor Stranger",
+        "Mary Kills People"
       ],
       "generated_top5": [
-        "Hospital Playlist",
-        "Daily Dose of Sunshine",
-        "Dr. Romantic",
-        "The Trauma Code: Heroes on Call",
-        "If You Wish Upon Me"
-      ],
-      "missing_top10": [],
-      "ranked_too_low": [
+        "Good Doctor",
         "Doctor Cha",
-        "Good Doctor"
+        "Brain",
+        "Dr. Romantic Season 3",
+        "Emergency Couple"
       ],
+      "missing_top10": [
+        "Hospital Playlist"
+      ],
+      "ranked_too_low": [],
       "noisy_above_expected": [],
       "deltas": {
-        "precision_at_3": -0.6666666666666667,
-        "recall_at_10": 0.0,
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": -0.33333333333333337,
         "mrr": 0.0
       },
       "detected": {
         "genres": [
-          "Drama",
-          "Medical"
+          "Medical",
+          "Drama"
         ],
         "themes": [],
         "actors": []
@@ -388,10 +325,11 @@
         "Good Doctor"
       ],
       "labels": [
+        "expected_missing_from_generated_top10",
         "expected_ranked_too_low",
         "top3_precision_regression"
       ],
-      "impact": 0.30000000000000004,
+      "impact": 0.2666666666666667,
       "baseline_top5": [
         "Hospital Playlist",
         "Doctor Cha",
@@ -400,39 +338,38 @@
         "Hospital Ship"
       ],
       "generated_top10": [
-        "Hospital Playlist",
-        "Daily Dose of Sunshine",
-        "Dr. Romantic",
-        "The Trauma Code: Heroes on Call",
-        "If You Wish Upon Me",
         "Good Doctor",
-        "God's Quiz",
-        "D-Day",
+        "Doctor Cha",
+        "Brain",
+        "Dr. Romantic Season 3",
+        "Emergency Couple",
+        "Hyper Knife",
+        "The Trauma Code: Heroes on Call",
+        "Heart Surgeons",
         "Hospital Ship",
-        "Doctor Cha"
+        "Doctor Stranger"
       ],
       "generated_top5": [
-        "Hospital Playlist",
-        "Daily Dose of Sunshine",
-        "Dr. Romantic",
-        "The Trauma Code: Heroes on Call",
-        "If You Wish Upon Me"
-      ],
-      "missing_top10": [],
-      "ranked_too_low": [
+        "Good Doctor",
         "Doctor Cha",
-        "Good Doctor"
+        "Brain",
+        "Dr. Romantic Season 3",
+        "Emergency Couple"
       ],
+      "missing_top10": [
+        "Hospital Playlist"
+      ],
+      "ranked_too_low": [],
       "noisy_above_expected": [],
       "deltas": {
-        "precision_at_3": -0.6666666666666667,
-        "recall_at_10": 0.0,
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": -0.33333333333333337,
         "mrr": 0.0
       },
       "detected": {
         "genres": [
-          "Drama",
-          "Medical"
+          "Medical",
+          "Drama"
         ],
         "themes": [],
         "actors": []
@@ -554,9 +491,66 @@
       },
       "detected": {
         "genres": [
-          "Horror",
           "Thriller",
+          "Horror",
           "Drama"
+        ],
+        "themes": [],
+        "actors": []
+      }
+    },
+    {
+      "query": "thriller",
+      "category": "genre",
+      "expected": [
+        "Squid Game",
+        "Signal",
+        "Stranger"
+      ],
+      "labels": [
+        "expected_ranked_too_low",
+        "top3_precision_regression"
+      ],
+      "impact": 0.15000000000000002,
+      "baseline_top5": [
+        "Squid Game",
+        "Signal",
+        "Stranger",
+        "Beyond Evil",
+        "The Virus"
+      ],
+      "generated_top10": [
+        "Stranger",
+        "Squid Game",
+        "Beyond Evil",
+        "Dong Jae, the Good or the Bastard",
+        "Voice",
+        "Night Has Come",
+        "Watcher",
+        "Mouse",
+        "Signal",
+        "Big Mouth"
+      ],
+      "generated_top5": [
+        "Stranger",
+        "Squid Game",
+        "Beyond Evil",
+        "Dong Jae, the Good or the Bastard",
+        "Voice"
+      ],
+      "missing_top10": [],
+      "ranked_too_low": [
+        "Signal"
+      ],
+      "noisy_above_expected": [],
+      "deltas": {
+        "precision_at_3": -0.33333333333333337,
+        "recall_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "detected": {
+        "genres": [
+          "Thriller"
         ],
         "themes": [],
         "actors": []

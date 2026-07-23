@@ -1,24 +1,24 @@
 # Generated Replacement Audit
 
-Generated: `2026-07-23T01:18:43`
+Generated: `2026-07-23T12:18:28`
 Mode: `generated_genre_soft`
 
 ## Baseline Gap
 
 - Curated baseline: P@3 `63.58%`, R@10 `98.46%`, MRR `0.963`
-- Generated replacement: P@3 `54.94%`, R@10 `94.14%`, MRR `0.938`
+- Generated replacement: P@3 `56.79%`, R@10 `94.14%`, MRR `0.948`
 
 ## Failure Types
 
 - `expected_ranked_too_low`: `10`
 - `top3_precision_regression`: `10`
-- `expected_missing_from_generated_top10`: `5`
-- `first_relevant_rank_regression`: `4`
-- `noisy_titles_above_expected`: `4`
+- `expected_missing_from_generated_top10`: `6`
+- `first_relevant_rank_regression`: `3`
+- `noisy_titles_above_expected`: `3`
 
 ## Category Impact
 
-- `genre`: `3.550`
+- `genre`: `3.000`
 
 ## Highest Impact Cases
 
@@ -32,17 +32,6 @@ Mode: `generated_genre_soft`
 - Noisy above expected: Seasons of Blossom, The World of My 17
 - Curated top5: True Beauty, Dream High, Extraordinary You, School 2017, IN-SEOUL
 - Generated top5: Seasons of Blossom, The World of My 17, True Beauty, Sassy Go Go, Love Alarm
-
-### thriller (genre)
-
-- Impact: `0.633`
-- Labels: `expected_missing_from_generated_top10`, `expected_ranked_too_low`, `top3_precision_regression`, `first_relevant_rank_regression`, `noisy_titles_above_expected`
-- Expected: Squid Game, Signal, Stranger
-- Missing top10: Squid Game, Stranger
-- Ranked too low: none
-- Noisy above expected: Mouse
-- Curated top5: Squid Game, Signal, Stranger, Beyond Evil, The Virus
-- Generated top5: Mouse, Signal, Mother, Tomorrow, Happiness
 
 ### historical (genre)
 
@@ -68,25 +57,25 @@ Mode: `generated_genre_soft`
 
 ### medical drama (genre)
 
-- Impact: `0.300`
-- Labels: `expected_ranked_too_low`, `top3_precision_regression`
+- Impact: `0.267`
+- Labels: `expected_missing_from_generated_top10`, `expected_ranked_too_low`, `top3_precision_regression`
 - Expected: Hospital Playlist, Doctor Cha, Good Doctor
-- Missing top10: none
-- Ranked too low: Doctor Cha, Good Doctor
+- Missing top10: Hospital Playlist
+- Ranked too low: none
 - Noisy above expected: none
 - Curated top5: Hospital Playlist, Doctor Cha, Good Doctor, Dr. Romantic, Hospital Ship
-- Generated top5: Hospital Playlist, Daily Dose of Sunshine, Dr. Romantic, The Trauma Code: Heroes on Call, If You Wish Upon Me
+- Generated top5: Good Doctor, Doctor Cha, Brain, Dr. Romantic Season 3, Emergency Couple
 
 ### doctor hospital drama (genre)
 
-- Impact: `0.300`
-- Labels: `expected_ranked_too_low`, `top3_precision_regression`
+- Impact: `0.267`
+- Labels: `expected_missing_from_generated_top10`, `expected_ranked_too_low`, `top3_precision_regression`
 - Expected: Hospital Playlist, Doctor Cha, Good Doctor
-- Missing top10: none
-- Ranked too low: Doctor Cha, Good Doctor
+- Missing top10: Hospital Playlist
+- Ranked too low: none
 - Noisy above expected: none
 - Curated top5: Hospital Playlist, Doctor Cha, Good Doctor, Dr. Romantic, Hospital Ship
-- Generated top5: Hospital Playlist, Daily Dose of Sunshine, Dr. Romantic, The Trauma Code: Heroes on Call, If You Wish Upon Me
+- Generated top5: Good Doctor, Doctor Cha, Brain, Dr. Romantic Season 3, Emergency Couple
 
 ### office romance (genre)
 
@@ -109,6 +98,17 @@ Mode: `generated_genre_soft`
 - Noisy above expected: Sweet Home
 - Curated top5: All of Us Are Dead, Kingdom, Happiness, Sweet Home, Squid Game
 - Generated top5: Sweet Home, All of Us Are Dead, Kingdom: Ashin of the North, Happiness, Kingdom
+
+### thriller (genre)
+
+- Impact: `0.150`
+- Labels: `expected_ranked_too_low`, `top3_precision_regression`
+- Expected: Squid Game, Signal, Stranger
+- Missing top10: none
+- Ranked too low: Signal
+- Noisy above expected: none
+- Curated top5: Squid Game, Signal, Stranger, Beyond Evil, The Virus
+- Generated top5: Stranger, Squid Game, Beyond Evil, Dong Jae, the Good or the Bastard, Voice
 
 ### romantic comedy (genre)
 

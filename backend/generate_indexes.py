@@ -25,19 +25,52 @@ OUTPUT_DIR = BASE_DIR / "generated_indexes"
 
 THEME_RULES = {
     "north korea": ["north korea", "north korean", "defector", "dmz"],
-    "food": ["restaurant", "food", "cooking", "chef", "culinary", "kitchen", "cafe"],
-    "time travel": ["time travel", "time slip", "time loop", "past life", "future"],
-    "contract marriage": ["contract marriage", "fake marriage", "marriage contract"],
-    "rich ceo romance": ["ceo", "chaebol", "rich boss", "heir", "billionaire"],
+    "food": ["restaurant", "restaurant setting", "food", "cooking", "chef", "culinary", "kitchen", "cafe", "pub"],
+    "time travel": ["time travel", "time slip", "time loop", "past life", "future", "different timelines", "time altering", "time manipulation"],
+    "contract marriage": ["contract marriage", "fake marriage", "marriage contract", "contract relationship", "marriage of convenience", "cohabitation", "married life"],
+    "rich ceo romance": ["ceo", "chaebol", "rich boss", "heir", "billionaire", "boss-employee", "successful male lead", "rich man"],
     "school bullying": ["school bullying", "bullying", "bullied", "school violence"],
-    "legal corruption": ["corruption", "corrupt", "prosecutor", "law firm"],
+    "legal corruption": ["corruption", "corrupt", "prosecutor", "law firm", "law school", "attorney", "courtroom", "courtroom setting", "justice"],
     "supernatural hotel": ["ghost", "supernatural", "hotel", "spirit", "haunted"],
     "survival game": ["survival game", "death game", "deadly game"],
-    "startup workplace": ["startup", "start-up", "workplace", "office", "company"],
-    "healing slice of life": ["healing", "slice of life", "comfort", "friendship"],
+    "startup workplace": ["startup", "start-up", "start-ups", "workplace", "office", "company", "tech", "artificial intelligence"],
+    "healing slice of life": ["healing", "slice of life", "comfort", "friendship", "depression", "community", "everyday", "omnibus"],
     "revenge": ["revenge", "vengeance", "payback", "retribution"],
     "medical": ["doctor", "hospital", "medical", "surgeon"],
     "law": ["lawyer", "attorney", "law", "court", "legal"],
+}
+
+THEME_FOCUS_TERMS = {
+    "food": ["restaurant", "restaurant setting", "food", "cooking", "chef", "culinary", "kitchen", "cafe", "pub"],
+    "time travel": ["time travel", "time slip", "time loop", "past", "future", "different timelines", "time altering", "time manipulation"],
+    "contract marriage": ["contract marriage", "fake marriage", "marriage contract", "contract relationship", "marriage of convenience", "cohabitation", "married life"],
+    "rich ceo romance": ["ceo", "secretary", "chaebol", "rich boss", "office romance", "boss-employee", "successful male lead", "rich man"],
+    "legal corruption": ["law firm", "corruption", "corrupt", "prosecutor", "lawyer", "attorney", "court", "courtroom", "law school", "justice"],
+    "supernatural hotel": ["hotel", "ghost", "supernatural", "spirit", "haunted"],
+    "startup workplace": ["startup", "start-up", "start-ups", "workplace", "office", "company", "tech", "artificial intelligence"],
+    "healing slice of life": ["healing", "slice of life", "comfort", "friendship", "hospital", "community", "depression", "everyday", "omnibus"],
+}
+
+THEME_OFF_TOPIC_TERMS = {
+    "food": ["vampire", "monster", "thriller", "horror", "variety", "reality show"],
+    "time travel": ["cooking", "food", "chef", "restaurant"],
+    "contract marriage": ["historical", "fantasy", "revenge", "thriller"],
+    "rich ceo romance": ["revenge", "thriller", "crime", "horror", "medical"],
+    "legal corruption": ["fantasy", "supernatural", "medical", "food", "romance"],
+    "supernatural hotel": ["revenge", "crime", "law", "medical"],
+    "startup workplace": ["fantasy", "medical", "historical", "thriller"],
+    "healing slice of life": ["thriller", "horror", "crime", "revenge", "fantasy"],
+}
+
+THEME_GENRE_PREFERENCES = {
+    "food": ["business", "drama", "romance", "comedy", "food"],
+    "time travel": ["thriller", "mystery", "romance", "drama", "sci-fi"],
+    "contract marriage": ["romance", "comedy", "drama", "family"],
+    "rich ceo romance": ["business", "romance", "comedy"],
+    "legal corruption": ["law", "crime", "thriller", "drama"],
+    "supernatural hotel": ["fantasy", "supernatural", "horror", "comedy", "romance"],
+    "startup workplace": ["business", "drama", "life", "comedy"],
+    "healing slice of life": ["life", "drama", "medical", "family", "romance"],
 }
 
 VIRTUAL_GENRE_RULES = {
@@ -90,6 +123,40 @@ CRIME_THRILLER_FOCUS_TERMS = [
     "suspense",
 ]
 
+PLAIN_THRILLER_FOCUS_TERMS = [
+    "death game",
+    "survival",
+    "competition",
+    "massacre",
+    "debt",
+    "suspense",
+    "mystery",
+    "investigation",
+    "corruption",
+    "crime solving",
+    "murder",
+    "serial killer",
+    "psychological",
+    "law",
+    "prosecutor",
+]
+
+PLAIN_THRILLER_OFF_TOPIC_TERMS = [
+    "motherhood",
+    "mother-daughter",
+    "melodrama",
+    "tearjerker",
+    "grim reaper",
+    "underworld",
+    "afterlife",
+    "suicide prevention",
+    "fantasy",
+    "supernatural power",
+    "romance",
+    "revenge",
+    "school bullying",
+]
+
 CRIME_THRILLER_ACTION_TERMS = [
     "action",
     "gang",
@@ -132,6 +199,33 @@ BUSINESS_ROMANCE_OFF_TOPIC_TERMS = [
     "revenge",
     "sports",
     "time travel",
+]
+
+MEDICAL_DRAMA_FOCUS_TERMS = [
+    "doctor",
+    "doctor male lead",
+    "doctor female lead",
+    "surgeon",
+    "chief surgeon",
+    "hospital setting",
+    "university hospital",
+    "medical school",
+    "medical skills",
+    "autistic",
+    "savant",
+    "rare condition",
+    "starting over",
+]
+
+MEDICAL_DRAMA_OFF_TOPIC_TERMS = [
+    "action",
+    "rescue team",
+    "hospice",
+    "terminal illness",
+    "mental illness",
+    "mental hospital",
+    "fantasy",
+    "ghost",
 ]
 
 ROMANTIC_COMEDY_FOCUS_TERMS = [
@@ -240,7 +334,7 @@ GENRE_FOCUS_TERMS = {
     "medical": ["medical", "doctor", "hospital", "surgeon", "clinic"],
     "revenge": VIRTUAL_GENRE_RULES["revenge"],
     "romance": ["romance", "love", "relationship", "couple"],
-    "thriller": ["thriller", "suspense", "mystery", "serial killer", "investigation"],
+    "thriller": PLAIN_THRILLER_FOCUS_TERMS,
     "youth": ["school", "student", "youth", "class", "high school", "campus"],
 }
 
@@ -251,6 +345,7 @@ FOCUS_FIRST_GENRES = {
     "law",
     "medical",
     "revenge",
+    "thriller",
 }
 
 NON_PRIMARY_TITLE_TERMS = [
@@ -310,6 +405,7 @@ def top_titles(titles: Iterable[str], metadata_by_title: dict[str, dict], limit:
         drama = metadata_by_title.get(title, {})
         rating = parse_rating(drama)
         episodes = parse_episodes(drama)
+        start_year = parse_start_year(drama)
         return (rating, episodes, title)
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
@@ -422,6 +518,26 @@ def build_combo_training_frequency(metadata_by_title: dict[str, dict]) -> dict[s
     return frequency
 
 
+def build_actor_training_frequency(metadata_by_title: dict[str, dict]) -> dict[str, dict[str, int]]:
+    analyzer = QueryAnalyzer()
+    frequency = defaultdict(lambda: defaultdict(int))
+    for filename in ["st_triplets.json", "training_triplets.json"]:
+        path = TRAINING_DATA_DIR / filename
+        if not path.exists():
+            continue
+        with path.open("r", encoding="utf-8", errors="ignore") as handle:
+            records = json.load(handle)
+        for record in records:
+            anchor = record.get("anchor", "")
+            positive = record.get("positive", "")
+            if positive not in metadata_by_title:
+                continue
+            actors = analyzer.analyze(anchor)["entities"].get("actors", [])
+            for actor in actors:
+                frequency[normalized_key(actor)][positive] += 1
+    return frequency
+
+
 def virtual_genres_for_text(searchable_text: str) -> list[str]:
     return [
         genre
@@ -435,9 +551,11 @@ def calibrated_actor_titles(
     titles: Iterable[str],
     metadata_by_title: dict[str, dict],
     title_frequency: dict[str, int],
+    actor_frequency: dict[str, int] | None = None,
     limit: int = 12,
 ):
     actor_key = normalized_key(actor_key)
+    actor_frequency = actor_frequency or {}
 
     def score(title: str):
         drama = metadata_by_title.get(title, {})
@@ -448,6 +566,7 @@ def calibrated_actor_titles(
 
         rating = parse_rating(drama)
         episodes = parse_episodes(drama)
+        start_year = parse_start_year(drama)
 
         primary_penalty = 0
         if any(term in title_lower for term in NON_PRIMARY_TITLE_TERMS):
@@ -455,6 +574,14 @@ def calibrated_actor_titles(
         if any(term in genre_lower for term in NON_PRIMARY_GENRE_TERMS):
             primary_penalty -= 2
         if "web series" in keyword_lower and episodes <= 8:
+            primary_penalty -= 1
+        if SEQUEL_TITLE_PATTERN.search(title):
+            primary_penalty -= 1
+        if start_year >= 2025:
+            primary_penalty -= 1
+        elif start_year >= 2024:
+            primary_penalty -= 0.5
+        if SEQUEL_TITLE_PATTERN.search(title):
             primary_penalty -= 1
 
         if actor_key in cast:
@@ -477,8 +604,18 @@ def calibrated_actor_titles(
         if 8 <= episodes <= 24:
             drama_bonus += 0.5
 
+        actor_signal = actor_frequency.get(title, 0)
         frequency = title_frequency.get(title, 0)
-        return (primary_penalty, cast_bonus, drama_bonus, rating, frequency, episodes, title)
+        return (
+            primary_penalty,
+            cast_bonus,
+            actor_signal,
+            drama_bonus,
+            rating,
+            frequency,
+            episodes,
+            title,
+        )
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
 
@@ -527,8 +664,22 @@ def calibrated_genre_titles(
         frequency = title_frequency.get(title, 0)
         reliability = title_reliability_score(title, drama, title_frequency)
         focus_score = sum(term in searchable_text for term in focus_terms)
+        off_topic_score = 0
+        if genre_key == "thriller":
+            off_topic_score = sum(
+                term in searchable_text for term in PLAIN_THRILLER_OFF_TOPIC_TERMS
+            )
         if genre_key in FOCUS_FIRST_GENRES:
-            return (primary_score, focus_score, reliability, frequency, rating, episodes, title)
+            return (
+                primary_score,
+                focus_score,
+                -off_topic_score,
+                reliability,
+                frequency,
+                rating,
+                episodes,
+                title,
+            )
         return (primary_score, reliability, frequency, rating, episodes, title)
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
@@ -605,6 +756,9 @@ def calibrated_genre_combo_titles(
         }:
             combo_focus += sum(term in searchable_text for term in ZOMBIE_THRILLER_FOCUS_TERMS)
             combo_focus -= 0.75 * sum(term in searchable_text for term in ZOMBIE_THRILLER_OFF_TOPIC_TERMS)
+        elif combo_key_value == "drama|medical":
+            combo_focus += sum(term in searchable_text for term in MEDICAL_DRAMA_FOCUS_TERMS)
+            combo_focus -= 0.75 * sum(term in searchable_text for term in MEDICAL_DRAMA_OFF_TOPIC_TERMS)
         elif combo_key_value == "business|romance":
             combo_focus -= 0.75 * sum(term in searchable_text for term in BUSINESS_ROMANCE_OFF_TOPIC_TERMS)
         elif combo_key_value == "comedy|romance":
@@ -636,17 +790,25 @@ def calibrated_genre_combo_titles(
 
 
 def calibrated_topic_titles(
+    topic_key: str,
     titles: Iterable[str],
     metadata_by_title: dict[str, dict],
     title_frequency: dict[str, int],
     limit: int = 20,
 ):
+    topic_key = normalized_key(topic_key)
+    focus_terms = THEME_FOCUS_TERMS.get(topic_key, THEME_RULES.get(topic_key, []))
+    off_topic_terms = THEME_OFF_TOPIC_TERMS.get(topic_key, [])
+    genre_preferences = THEME_GENRE_PREFERENCES.get(topic_key, [])
+
     def score(title: str):
         drama = metadata_by_title.get(title, {})
         title_lower = title.lower()
         genre_lower = str(drama.get("Genre", "")).lower()
         keyword_lower = str(drama.get("keywords", "")).lower()
         description_lower = str(drama.get("Description", "")).lower()
+        alias_count = len(split_csv(drama.get("Also Known As")))
+        searchable_text = " ".join([title_lower, genre_lower, keyword_lower, description_lower])
 
         try:
             rating = float(drama.get("rating_value") or 0)
@@ -677,8 +839,33 @@ def calibrated_topic_titles(
         if description_lower:
             metadata_depth += 0.25
 
+        focus_score = sum(term in searchable_text for term in focus_terms)
+        off_topic_score = sum(term in searchable_text for term in off_topic_terms)
+        genre_fit = sum(term in genre_lower for term in genre_preferences)
         frequency = title_frequency.get(title, 0)
-        return (primary_score, metadata_depth, frequency, rating, episodes, title)
+        canonical_score = 0.0
+        canonical_score += min(frequency, 40) / 8
+        canonical_score += min(alias_count, 12) / 8
+        if rating >= 8.8:
+            canonical_score += 1.0
+        elif rating >= 8.4:
+            canonical_score += 0.6
+        elif rating >= 8.0:
+            canonical_score += 0.3
+        if 8 <= episodes <= 24:
+            canonical_score += 0.5
+        return (
+            primary_score,
+            focus_score,
+            genre_fit,
+            -off_topic_score,
+            canonical_score,
+            metadata_depth,
+            frequency,
+            rating,
+            episodes,
+            title,
+        )
 
     return sorted(set(titles), key=score, reverse=True)[:limit]
 
@@ -687,6 +874,7 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
     metadata_by_title = {item.get("Title", ""): item for item in metadata}
     title_frequency = build_title_frequency(metadata_by_title)
     combo_training_frequency = build_combo_training_frequency(metadata_by_title)
+    actor_training_frequency = build_actor_training_frequency(metadata_by_title)
     actor_index = defaultdict(list)
     genre_index = defaultdict(list)
     genre_combo_candidates = defaultdict(list)
@@ -733,21 +921,32 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
             if any(term in searchable_text for term in terms):
                 theme_candidates[theme].append(title)
 
+    raw_actor_index = actor_index
+    raw_genre_index = genre_index
+    raw_keyword_index = keyword_index
+    raw_theme_candidates = theme_candidates
+
     actor_index = {
         key: top_titles(titles, metadata_by_title)
-        for key, titles in sorted(actor_index.items())
+        for key, titles in sorted(raw_actor_index.items())
     }
     calibrated_actor_index = {
-        key: calibrated_actor_titles(key, titles, metadata_by_title, title_frequency)
-        for key, titles in sorted(actor_index.items())
+        key: calibrated_actor_titles(
+            key,
+            titles,
+            metadata_by_title,
+            title_frequency,
+            actor_training_frequency.get(key, {}),
+        )
+        for key, titles in sorted(raw_actor_index.items())
     }
     genre_index = {
         key.title(): top_titles(titles, metadata_by_title)
-        for key, titles in sorted(genre_index.items())
+        for key, titles in sorted(raw_genre_index.items())
     }
     calibrated_genre_index = {
         key.title(): calibrated_genre_titles(key, titles, metadata_by_title, title_frequency)
-        for key, titles in sorted(genre_index.items())
+        for key, titles in sorted(raw_genre_index.items())
     }
     calibrated_genre_combo_index = {
         key: calibrated_genre_combo_titles(
@@ -761,19 +960,25 @@ def build_indexes(metadata: list[dict]) -> dict[str, dict]:
     }
     keyword_index = {
         key: top_titles(titles, metadata_by_title, limit=30)
-        for key, titles in sorted(keyword_index.items())
+        for key, titles in sorted(raw_keyword_index.items())
     }
     calibrated_keyword_index = {
-        key: calibrated_topic_titles(titles, metadata_by_title, title_frequency, limit=20)
-        for key, titles in sorted(keyword_index.items())
+        key: calibrated_topic_titles(key, titles, metadata_by_title, title_frequency, limit=20)
+        for key, titles in sorted(raw_keyword_index.items())
     }
     theme_index = {
         key: top_titles(titles, metadata_by_title)
-        for key, titles in sorted(theme_candidates.items())
+        for key, titles in sorted(raw_theme_candidates.items())
     }
     calibrated_theme_index = {
-        key: calibrated_topic_titles(titles, metadata_by_title, title_frequency, limit=20)
-        for key, titles in sorted(theme_candidates.items())
+        key: calibrated_topic_titles(
+            key,
+            titles,
+            metadata_by_title,
+            title_frequency,
+            limit=40,
+        )
+        for key, titles in sorted(raw_theme_candidates.items())
     }
 
     # Common English public title not always present in scraped aliases.

@@ -1,12 +1,12 @@
 # Generated Query Debug
 
 - Query: `school drama`
-- Generated at: `2026-07-23T00:26:52`
+- Generated at: `2026-07-23T01:27:37`
 - Mode: `calibrated_generated`
 - Expected: True Beauty, Dream High, Extraordinary You
-- Classification: `ok_top3`
-- Generated candidate rank: `3`
-- Final API rank: `3`
+- Classification: `final_ranking_too_low`
+- Generated candidate rank: `10`
+- Final API rank: `10`
 
 ## Analyzer
 
@@ -15,40 +15,47 @@
 
 ## Final API Top 10
 
-1. Seasons of Blossom
-2. The World of My 17
-3. True Beauty
-4. Sassy Go Go
-5. Love Alarm
-6. Boys over Flowers
-7. The Heirs Christmas Edition
-8. Drama Special Season 8: If We Were A Season
-9. Best Mistake Season 2
-10. Girls' Generation 1979
+1. The World of My 17
+2. Best Mistake
+3. School 2021
+4. Replay: The Moment When It Starts Again
+5. Seasons of Blossom
+6. Love Alarm
+7. The World of My 17 Season 2
+8. Page Turner
+9. Twinkling Watermelon
+10. True Beauty
 
 ## Titles Above Expected
 
-- Seasons of Blossom
 - The World of My 17
+- Best Mistake
+- School 2021
+- Replay: The Moment When It Starts Again
+- Seasons of Blossom
+- Love Alarm
+- The World of My 17 Season 2
+- Page Turner
+- Twinkling Watermelon
 
 ## Generated Combo Candidates
 
 ### drama|youth
-1. Seasons of Blossom
-2. The World of My 17
-3. True Beauty
-4. Sassy Go Go
-5. Love Alarm
-6. Boys over Flowers
-7. The Heirs Christmas Edition
-8. Drama Special Season 8: If We Were A Season
-9. Best Mistake Season 2
-10. Girls' Generation 1979
-11. The Flatterer
-12. School 2021
+1. The World of My 17
+2. Best Mistake
+3. School 2021
+4. Replay: The Moment When It Starts Again
+5. Seasons of Blossom
+6. Love Alarm
+7. The World of My 17 Season 2
+8. Page Turner
+9. Twinkling Watermelon
+10. True Beauty
+11. Sassy Go Go
+12. Light on Me
 13. Goong
-14. Secret Campus
-15. Live On
+14. Love Revolution
+15. Boys over Flowers
 
 
 ## Generated Genre Candidates

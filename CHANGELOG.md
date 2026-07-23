@@ -3,7 +3,222 @@
 Important project history reconstructed from Git commits and project documentation.
 
 
-## 2026-07-21
+## 2026-07-23
+
+### Generated Replacement Accuracy Improvements
+
+- Preserved the local checkpoint commit for generated ranking calibration:
+  - commit: `e5eaf12`
+  - generated replacement checkpoint before today's work: `84.55%`
+- Added a `hybrid_calibrated` ranking mode in `backend/app.py`.
+- Hybrid mode keeps curated genre and genre-combo priors as the primary ranking signal, then applies calibrated generated genre/combo priors as a low-weight supporting signal.
+- Added hybrid mode to `tests/compare_ranking_modes.py` and `tests/experiment_ranking_priors.py`.
+- Tuned hybrid generated weights to avoid overpowering curated priors:
+  - `hybrid_genre`: `0.75`
+  - `hybrid_genre_combo`: `0.95`
+- Hybrid evaluation result:
+  - curated/default baseline: `88.50%`
+  - hybrid calibrated mode: `88.48%`
+  - generated full replacement: `85.31%`
+  - hybrid P@3 stayed `63.58%`
+  - hybrid MRR stayed `0.963`
+  - hybrid R@10 improved from `98.46%` to `99.07%`
+- Decision: keep hybrid as an opt-in bridge mode, not the default replacement, because it improves recall with almost no overall accuracy cost while the full generated replacement is still being improved.
+- Audited actor-based search replacement after genre stabilization.
+- Added `SEOULMATE_ACTOR_PRIOR_SOURCE` in `backend/app.py` so actor priors can be tested independently from genre priors:
+  - `curated`
+  - `calibrated_generated`
+  - `hybrid_calibrated`
+- Added actor-focused scenarios to the ranking comparison and experiment runners:
+  - `generated_actor`
+  - `hybrid_actor`
+  - `hybrid_genre_generated_actor`
+  - `hybrid_genre_actor`
+- Actor replacement result:
+  - curated/default baseline: `88.50%`
+  - full generated actor replacement: `86.68%`
+  - generated actor P@3: `60.49%`
+  - generated actor MRR: `0.932`
+  - actor R@10 stayed `98.46%`
+- Actor hybrid result:
+  - actor hybrid overall: `88.25%`
+  - actor hybrid P@3 stayed `63.58%`
+  - actor hybrid MRR stayed `0.963`
+  - actor hybrid R@10 stayed `98.46%`
+- Combined genre+actor hybrid result:
+  - overall: `88.23%`
+  - P@3: `63.58%`
+  - R@10: `99.07%`
+  - MRR: `0.963`
+- Tested a data-driven actor calibration change that moved training-title frequency ahead of rating and penalized newer/sequel titles.
+- Rejected that actor calibration change because generated actor P@3 dropped from `60.49%` to `59.26%`, even though MRR improved from `0.932` to `0.948`.
+- Decision: do not replace curated actor priors yet. Keep actor generated/hybrid modes as diagnostic opt-in modes only.
+- Current actor bottleneck: generated actor ranking over-prioritizes broad filmography relevance and newer/high-rated entries, while curated priors better capture the iconic dramas users expect for actor-name searches.
+- Revisited actor generated replacement after theme audit.
+- Added an actor-specific training-query frequency signal to generated actor calibration.
+- Added narrow actor noise penalties for sequel/special titles and very recent/future titles:
+  - season/part sequel titles
+  - `2025+` releases
+  - smaller penalty for `2024` releases
+- Result after regenerated actor index:
+  - full generated actor replacement: `86.68%` -> `86.69%`
+  - generated actor P@3 stayed `60.49%`
+  - generated actor R@10 stayed `98.46%`
+  - generated actor MRR improved from `0.932` to `0.941`
+- Decision: keep the narrow actor noise penalty because it improves first-relevant ranking without hurting P@3 or recall, but generated actor replacement is still not ready to replace curated actor priors.
+- Audited theme-based search replacement after actor audit.
+- Added `SEOULMATE_THEME_PRIOR_SOURCE` in `backend/app.py` so theme priors can be tested independently:
+  - `curated`
+  - `calibrated_generated`
+  - `hybrid_calibrated`
+- Loaded `calibrated_theme_index.json` in the backend for explicit generated/hybrid theme experiments.
+- Added theme-focused scenarios to the ranking comparison and experiment runners:
+  - `generated_theme`
+  - `hybrid_theme`
+  - `hybrid_genre_theme`
+- Added theme-aware generated calibration in `backend/generate_indexes.py` using metadata focus/off-topic terms for themes such as food, time travel, contract marriage, rich CEO romance, legal corruption, supernatural hotel, startup workplace, and healing slice of life.
+- Tested a training-query frequency signal for generated theme calibration and rejected it because generated theme accuracy dropped from `83.16%` to `78.38%`.
+- Restored default curated theme behavior so generated theme candidates do not leak into default mode as fallbacks.
+- Theme replacement result:
+  - curated/default baseline: `88.50%`
+  - full generated theme replacement: `83.16%`
+  - generated theme P@3: `54.32%`
+  - generated theme R@10: `88.27%`
+  - generated theme MRR: `0.862`
+- Theme hybrid result:
+  - tuned `hybrid_theme` weight: `0.30`
+  - hybrid theme overall: `88.50%`
+  - hybrid theme P@3: `63.58%`
+  - hybrid theme R@10: `98.46%`
+  - hybrid theme MRR: `0.963`
+- Combined genre+theme hybrid result from ranking comparison:
+  - P@3: `63.58%`
+  - R@10: `99.07%`
+  - MRR: `0.963`
+- Decision: do not replace curated theme priors yet. Keep low-weight theme hybrid as a neutral opt-in diagnostic mode while theme indexes are improved further.
+- Current theme bottleneck: generated theme indexes match literal metadata terms, but they do not yet understand the expected canonical dramas for broad story-intent queries like `restaurant food`, `law firm corruption`, `ghost supernatural hotel`, `time travel`, and `workplace startup`.
+- Improved generated theme index coverage and canonical ranking.
+- Added broader metadata bridge terms for theme candidate generation:
+  - food: restaurant setting, pub
+  - time travel: different timelines, time altering, time manipulation
+  - contract marriage: contract relationship, marriage of convenience, cohabitation, married life
+  - rich CEO romance: boss-employee, successful male lead, rich man
+  - legal corruption: law school, attorney, courtroom, courtroom setting, justice
+  - startup workplace: start-ups, tech, artificial intelligence
+  - healing slice of life: depression, community, everyday, omnibus
+- Added theme genre-preference scoring and canonicality scoring using title frequency, alias breadth, rating, and episode sanity.
+- Increased calibrated theme index depth from `20` to `40` titles per theme so recovered candidates can reach backend scoring.
+- Generated theme replacement improved:
+  - overall: `83.16%` -> `84.09%`
+  - P@3: `54.32%` -> `56.17%`
+  - R@10: `88.27%` -> `91.36%`
+  - MRR: `0.862` -> `0.865`
+- Theme hybrid remained neutral:
+  - overall: `88.50%`
+  - P@3: `63.58%`
+  - R@10: `98.46%`
+  - MRR: `0.963`
+- Remaining theme gap: `restaurant food` still lacks enough metadata coverage for `Itaewon Class` and `Wok of Love`, and `workplace startup` still misses `Misaeng`.
+- Added explicit curated-first generated fallback modes:
+  - `SEOULMATE_GENRE_PRIOR_SOURCE=fallback_generated`
+  - `SEOULMATE_THEME_PRIOR_SOURCE=fallback_generated`
+- Fallback behavior:
+  - curated priors remain primary
+  - generated calibrated indexes are used only when the curated prior is missing for that detected signal
+  - fallback generated boosts use lower weights than curated priors
+- Added fallback scenarios to ranking comparison and experiment runners:
+  - `fallback_genre`
+  - `fallback_theme`
+  - `fallback_genre_theme`
+- Fallback evaluation:
+  - baseline: P@3 `63.58%`, R@10 `98.46%`, MRR `0.963`
+  - fallback theme: P@3 `63.58%`, R@10 `98.46%`, MRR `0.963`
+  - fallback genre: P@3 `63.58%`, R@10 `97.84%`, MRR `0.963`
+  - fallback genre+theme: P@3 `63.58%`, R@10 `97.84%`, MRR `0.963`
+- Decision:
+  - keep actor's existing curated-first generated fallback
+  - keep theme fallback as a safe opt-in mode
+  - do not use genre fallback as the recommended bridge because it reduces recall
+  - keep genre hybrid as the better genre bridge because it improves R@10 to `99.07%`
+- Improved explicit keyword filtering and keyword-based ranking.
+- Loaded `calibrated_keyword_index.json` in the backend.
+- Added keyword filter expansion for common user phrases:
+  - healing / comfort / slice of life
+  - time travel / time slip / time loop / time manipulation
+  - strong female lead / smart female lead
+  - slow burn romance / slow romance
+  - contract marriage / contract relationship / marriage of convenience
+  - school bullying / bullying / school violence
+  - doctor / hospital setting
+  - lawyer / attorney / courtroom setting
+- Added calibrated keyword-index fallback only when direct keyword filtering finds no matches.
+- Added keyword ranking boosts for explicit `keywords=` filters so keyword-filtered searches are ranked by keyword relevance instead of only the free-text title query.
+- Fixed recommendation cache keys so keyword, description, rating count, screenwriter, sorting, and similar-to filters are included in cache identity.
+- Before this fix, different keyword filters could reuse the same cached response for the same title query.
+- Keyword check examples after the fix:
+  - `keywords=contract marriage` returns `Fated to Love You`, `Marriage Contract`, `Would You Marry Me?`, `Full House`
+  - `keywords=time manipulation` returns `My Love from the Star`, `The Light in Your Eyes`, `Tomorrow with You`
+  - `keywords=school bullying` returns `The Glory`, `Weak Hero Class 2`, `The King of Pigs`, `My ID Is Gangnam Beauty`
+  - `keywords=hospital setting` returns `The Trauma Code: Heroes on Call`, `Doctor Cha`, `Yong Pal`
+- Baseline accuracy after keyword changes stayed stable:
+  - overall: `88.50%`
+  - P@3: `63.58%`
+  - R@10: `98.46%`
+  - MRR: `0.963`
+- Added generated `drama|medical` combo ordering calibration in `backend/generate_indexes.py`.
+- The medical rule boosted doctor/hospital/medical-school protagonist signals and improved generated top-3 precision.
+- Medical tradeoff:
+  - P@3 improved, but some medical recall dropped because `Hospital Playlist` moved below top 10 in focused medical debugging
+  - overall generated replacement still improved from `84.55%` to `84.91%`
+- Followed the plain thriller improvement plan.
+- Added plain `Thriller` calibration terms for death-game, survival, competition, massacre, debt, suspense, mystery, investigation, corruption, crime-solving, murder, serial-killer, psychological, law, and prosecutor signals.
+- Added plain `Thriller` off-topic penalties for motherhood/mother-daughter melodrama, tearjerker, grim-reaper/underworld/afterlife, suicide-prevention, fantasy, supernatural power, romance, revenge, and school-bullying drift.
+- Fixed generated-index calibration source quality:
+  - calibrated actor, genre, keyword, and theme indexes now rank from raw candidate pools
+  - simple generated indexes still use their existing truncated top-title outputs
+  - this lets calibrated genre ranking recover titles that were previously cut out before calibration, such as `Squid Game` for plain `Thriller`
+- Focused `thriller` debug improved:
+  - previous generated/final best expected rank: `2`
+  - updated generated/final best expected rank: `1`
+  - final top 10 now contains `Stranger`, `Squid Game`, and `Signal`
+- `crime thriller` remained `ok_top3`.
+- Live generated replacement improved:
+  - previous full generated replacement: `84.91%`
+  - updated full generated replacement: `85.31%`
+  - generated replacement P@3: `56.17%` -> `56.79%`
+  - generated replacement R@10: stayed `94.14%`
+  - generated replacement MRR: `0.938` -> `0.948`
+  - curated/default baseline remains `88.50%`
+- Generated replacement audit changed:
+  - `first_relevant_rank_regression`: `4` -> `3`
+  - `noisy_titles_above_expected`: `4` -> `3`
+  - `expected_missing_from_generated_top10`: `5` -> `6`
+- Tested a second historical/sageuk split calibration and rejected it.
+- The attempted rule added serious historical-political/survival signals and tried to include serious historical titles without a literal `Drama` genre in the generated `drama|historical` combo.
+- Focused inspection showed the rule was harmful:
+  - plain `Historical` became dominated by generic royal/palace titles
+  - `Mr. Sunshine` dropped out of the top historical list
+  - `Kingdom` and `Empress Ki` still did not recover into the useful top ranks
+  - `The Red Sleeve` remained too low
+- Reverted the historical/sageuk calibration before running full accuracy.
+- Restored the safe generated historical behavior:
+  - `historical` focused debug remains `ok_top3`
+  - `Mr. Sunshine` remains rank `1`
+  - full generated replacement checkpoint remains `85.31%`
+- Tested a coverage-only historical bridge for `drama|historical` and rejected it.
+- The bridge only added virtual `Drama` combo membership for strict historical patterns:
+  - `Historical + Political`
+  - `Historical + Horror/Thriller` with survival/zombie/epidemic signals
+  - `Historical + Romance/Melodrama` with dynasty/political signals
+- Result:
+  - focused `historical` and `sageuk royal drama` remained `ok_top3`
+  - `Kingdom` only reached raw `drama|historical` rank `55`
+  - `Empress Ki` only reached raw `drama|historical` rank `57`
+  - neither title entered the useful generated top 30
+- Reverted the bridge before full accuracy testing because it did not solve the missing-title problem and added complexity without measurable benefit.
+- Current generated replacement checkpoint remains `85.31%`.
+
+## 2026-07-22
 
 ### Ranking Prior Experiment Runner
 
@@ -266,6 +481,27 @@ Important project history reconstructed from Git commits and project documentati
   - `expected_missing_from_generated_top10`: `6` -> `5`
   - `first_relevant_rank_regression`: `5` -> `4`
   - `noisy_titles_above_expected`: `5` -> `4`
+- Tested another school-drama coverage expansion and rejected it.
+- The rejected school tweak over-rewarded small web/school series and dropped the best expected school-drama rank from `3` to `10`.
+- Removed that school tweak before keeping the next improvement.
+- Added generated `drama|medical` combo ordering calibration.
+- The medical rule boosts doctor/hospital/medical-school protagonist signals such as doctor leads, surgeons, university hospital, medical skills, autistic/savant medical leads, rare conditions, and starting-over hospital stories.
+- The same rule down-ranks action/rescue, hospice/terminal-illness, mental-health, fantasy, and ghost drift inside generated medical-drama combos.
+- Focused `medical drama` debug improved top-3 ordering:
+  - previous top 3: `Hospital Playlist`, `Daily Dose of Sunshine`, `Dr. Romantic`
+  - updated top 3: `Good Doctor`, `Doctor Cha`, `Brain`
+  - `Doctor Cha` and `Good Doctor` moved into top 3
+- Tradeoff:
+  - `Hospital Playlist` dropped below top 10 in the focused medical debug
+  - generated replacement recall decreased in the comparison
+  - precision gain outweighed the recall loss in the overall score
+- Live generated replacement improved:
+  - previous full generated replacement: `84.55%`
+  - updated full generated replacement: `84.91%`
+  - generated replacement P@3: `54.94%` -> `56.17%`
+  - generated replacement R@10: `94.14%` -> `92.90%`
+  - generated replacement MRR: stayed `0.938`
+  - curated/default baseline remains `88.50%`
 
 ### Curated Ranking Config Extraction
 

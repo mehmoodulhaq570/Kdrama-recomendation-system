@@ -32,6 +32,74 @@ BASE_WEIGHTS = {
 SCENARIOS = {
     "baseline": {"weights": {}},
     "no_genre_priors": {"weights": {"genre": 0.0, "genre_combo": 0.0}},
+    "hybrid_calibrated": {
+        "weights": {"hybrid_genre": 0.75, "hybrid_genre_combo": 0.95},
+        "env": {"SEOULMATE_GENRE_PRIOR_SOURCE": "hybrid_calibrated"},
+    },
+    "fallback_genre": {
+        "weights": {"fallback_genre": 0.65, "fallback_genre_combo": 0.85},
+        "env": {"SEOULMATE_GENRE_PRIOR_SOURCE": "fallback_generated"},
+    },
+    "generated_actor": {
+        "weights": {},
+        "env": {"SEOULMATE_ACTOR_PRIOR_SOURCE": "calibrated_generated"},
+    },
+    "hybrid_actor": {
+        "weights": {"hybrid_actor": 1.0},
+        "env": {"SEOULMATE_ACTOR_PRIOR_SOURCE": "hybrid_calibrated"},
+    },
+    "generated_theme": {
+        "weights": {},
+        "env": {"SEOULMATE_THEME_PRIOR_SOURCE": "calibrated_generated"},
+    },
+    "hybrid_theme": {
+        "weights": {"hybrid_theme": 0.3},
+        "env": {"SEOULMATE_THEME_PRIOR_SOURCE": "hybrid_calibrated"},
+    },
+    "fallback_theme": {
+        "weights": {},
+        "env": {"SEOULMATE_THEME_PRIOR_SOURCE": "fallback_generated"},
+    },
+    "fallback_genre_theme": {
+        "weights": {
+            "fallback_genre": 0.65,
+            "fallback_genre_combo": 0.85,
+            "fallback_theme": 0.8,
+        },
+        "env": {
+            "SEOULMATE_GENRE_PRIOR_SOURCE": "fallback_generated",
+            "SEOULMATE_THEME_PRIOR_SOURCE": "fallback_generated",
+        },
+    },
+    "hybrid_genre_theme": {
+        "weights": {
+            "hybrid_genre": 0.75,
+            "hybrid_genre_combo": 0.95,
+            "hybrid_theme": 0.3,
+        },
+        "env": {
+            "SEOULMATE_GENRE_PRIOR_SOURCE": "hybrid_calibrated",
+            "SEOULMATE_THEME_PRIOR_SOURCE": "hybrid_calibrated",
+        },
+    },
+    "hybrid_genre_generated_actor": {
+        "weights": {"hybrid_genre": 0.75, "hybrid_genre_combo": 0.95},
+        "env": {
+            "SEOULMATE_GENRE_PRIOR_SOURCE": "hybrid_calibrated",
+            "SEOULMATE_ACTOR_PRIOR_SOURCE": "calibrated_generated",
+        },
+    },
+    "hybrid_genre_actor": {
+        "weights": {
+            "hybrid_genre": 0.75,
+            "hybrid_genre_combo": 0.95,
+            "hybrid_actor": 1.0,
+        },
+        "env": {
+            "SEOULMATE_GENRE_PRIOR_SOURCE": "hybrid_calibrated",
+            "SEOULMATE_ACTOR_PRIOR_SOURCE": "hybrid_calibrated",
+        },
+    },
     "calibrated_generated_genre": {
         "weights": {},
         "env": {"SEOULMATE_GENRE_PRIOR_SOURCE": "calibrated_generated"},

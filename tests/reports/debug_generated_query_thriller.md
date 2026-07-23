@@ -1,12 +1,12 @@
 # Generated Query Debug
 
 - Query: `thriller`
-- Generated at: `2026-07-23T00:26:52`
+- Generated at: `2026-07-23T12:04:17`
 - Mode: `calibrated_generated`
 - Expected: Squid Game, Signal, Stranger
 - Classification: `ok_top3`
-- Generated candidate rank: `2`
-- Final API rank: `2`
+- Generated candidate rank: `1`
+- Final API rank: `1`
 
 ## Analyzer
 
@@ -15,20 +15,20 @@
 
 ## Final API Top 10
 
-1. Mouse
-2. Signal
-3. Mother
-4. Tomorrow
-5. Happiness
-6. Moving
-7. Flower of Evil
-8. The Glory
-9. Healer
-10. Taxi Driver
+1. Stranger
+2. Squid Game
+3. Beyond Evil
+4. Dong Jae, the Good or the Bastard
+5. Voice
+6. Night Has Come
+7. Watcher
+8. Mouse
+9. Signal
+10. Big Mouth
 
 ## Titles Above Expected
 
-- Mouse
+- none
 
 ## Generated Combo Candidates
 
@@ -37,18 +37,18 @@
 ## Generated Genre Candidates
 
 ### Thriller
-1. Mouse
-2. Signal
-3. Mother
-4. Tomorrow
-5. Happiness
-6. Moving
-7. Flower of Evil
-8. The Glory
-9. Healer
-10. Taxi Driver
-11. My Name
-12. The Guest
-13. The Worst of Evil
-14. Tunnel
-15. Defendant
+1. Stranger
+2. Squid Game
+3. Beyond Evil
+4. Dong Jae, the Good or the Bastard
+5. Voice
+6. Night Has Come
+7. Watcher
+8. Mouse
+9. Signal
+10. Big Mouth
+11. Class of Lies
+12. One Ordinary Day
+13. Ghost
+14. Inspector Koo
+15. Children of a Lesser God

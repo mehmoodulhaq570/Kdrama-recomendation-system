@@ -1,7 +1,7 @@
 # Generated Query Debug
 
 - Query: `historical`
-- Generated at: `2026-07-22T23:44:35`
+- Generated at: `2026-07-23T12:55:39`
 - Mode: `calibrated_generated`
 - Expected: Mr. Sunshine, Kingdom, The Red Sleeve
 - Classification: `ok_top3`
@@ -23,8 +23,8 @@
 6. My Dearest
 7. The Red Sleeve
 8. Moon Lovers: Scarlet Heart Ryeo
-9. Gyeongseong Creature
-10. Pachinko
+9. Love in the Moonlight
+10. Bloody Heart
 
 ## Titles Above Expected
 
@@ -45,10 +45,10 @@
 6. My Dearest
 7. The Red Sleeve
 8. Moon Lovers: Scarlet Heart Ryeo
-9. Gyeongseong Creature
-10. Pachinko
-11. Tree with Deep Roots
-12. Moon Embracing the Sun
-13. The Crowned Clown
-14. The Princess's Man
-15. Chief Detective 1958
+9. Love in the Moonlight
+10. Bloody Heart
+11. Gyeongseong Creature
+12. The Slave Hunters
+13. Pachinko
+14. Hwarang
+15. 100 Days My Prince

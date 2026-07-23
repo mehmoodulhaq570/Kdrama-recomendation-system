@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T00:26:52",
+  "generated_at": "2026-07-23T12:04:17",
   "query": "thriller",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -36,7 +36,7 @@
       },
       "dynamic_alpha": 0.85,
       "confidence": 0.9,
-      "timestamp": "2026-07-22T19:26:11.190420"
+      "timestamp": "2026-07-23T07:03:51.053248"
     },
     "api": {
       "query": "thriller",
@@ -66,59 +66,57 @@
       {
         "key": "Thriller",
         "titles": [
+          "Stranger",
+          "Squid Game",
+          "Beyond Evil",
+          "Dong Jae, the Good or the Bastard",
+          "Voice",
+          "Night Has Come",
+          "Watcher",
           "Mouse",
           "Signal",
-          "Mother",
-          "Tomorrow",
-          "Happiness",
-          "Moving",
-          "Flower of Evil",
-          "The Glory",
-          "Healer",
-          "Taxi Driver",
-          "My Name",
-          "The Guest",
-          "The Worst of Evil",
-          "Tunnel",
-          "Defendant"
+          "Big Mouth",
+          "Class of Lies",
+          "One Ordinary Day",
+          "Ghost",
+          "Inspector Koo",
+          "Children of a Lesser God"
         ]
       }
     ],
     "combo_sections": [],
     "combined_titles": [
+      "Stranger",
+      "Squid Game",
+      "Beyond Evil",
+      "Dong Jae, the Good or the Bastard",
+      "Voice",
+      "Night Has Come",
+      "Watcher",
       "Mouse",
       "Signal",
-      "Mother",
-      "Tomorrow",
-      "Happiness",
-      "Moving",
-      "Flower of Evil",
-      "The Glory",
-      "Healer",
-      "Taxi Driver",
-      "My Name",
-      "The Guest",
-      "The Worst of Evil",
-      "Tunnel",
-      "Defendant"
+      "Big Mouth",
+      "Class of Lies",
+      "One Ordinary Day",
+      "Ghost",
+      "Inspector Koo",
+      "Children of a Lesser God"
     ]
   },
   "final_top10": [
+    "Stranger",
+    "Squid Game",
+    "Beyond Evil",
+    "Dong Jae, the Good or the Bastard",
+    "Voice",
+    "Night Has Come",
+    "Watcher",
     "Mouse",
     "Signal",
-    "Mother",
-    "Tomorrow",
-    "Happiness",
-    "Moving",
-    "Flower of Evil",
-    "The Glory",
-    "Healer",
-    "Taxi Driver"
+    "Big Mouth"
   ],
   "classification": "ok_top3",
-  "generated_expected_rank": 2,
-  "final_expected_rank": 2,
-  "titles_above_expected": [
-    "Mouse"
-  ]
+  "generated_expected_rank": 1,
+  "final_expected_rank": 1,
+  "titles_above_expected": []
 }

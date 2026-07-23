@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T00:24:32",
+  "generated_at": "2026-07-23T12:04:52",
   "query": "crime thriller",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -27,8 +27,8 @@
       "entities": {
         "actors": [],
         "genres": [
-          "Thriller",
-          "Crime"
+          "Crime",
+          "Thriller"
         ],
         "themes": [],
         "years": [],
@@ -37,7 +37,7 @@
       },
       "dynamic_alpha": 0.85,
       "confidence": 0.9,
-      "timestamp": "2026-07-22T19:23:54.288927"
+      "timestamp": "2026-07-23T07:04:27.977454"
     },
     "api": {
       "query": "crime thriller",
@@ -45,8 +45,8 @@
       "entities": {
         "actors": [],
         "genres": [
-          "Thriller",
-          "Crime"
+          "Crime",
+          "Thriller"
         ],
         "themes": [],
         "years": [],
@@ -54,8 +54,8 @@
         "constraints": {}
       },
       "detected_genres": [
-        "Thriller",
-        "Crime"
+        "Crime",
+        "Thriller"
       ],
       "confidence": 0.9
     },
@@ -63,48 +63,48 @@
   },
   "generated_candidates": {
     "detected_genres": [
-      "Thriller",
-      "Crime"
+      "Crime",
+      "Thriller"
     ],
     "genre_sections": [
-      {
-        "key": "Thriller",
-        "titles": [
-          "Mouse",
-          "Signal",
-          "Mother",
-          "Tomorrow",
-          "Happiness",
-          "Moving",
-          "Flower of Evil",
-          "The Glory",
-          "Healer",
-          "Taxi Driver",
-          "My Name",
-          "The Guest",
-          "The Worst of Evil",
-          "Tunnel",
-          "Defendant"
-        ]
-      },
       {
         "key": "Crime",
         "titles": [
           "Beyond Evil",
           "Signal",
           "Stranger",
+          "Voice",
           "Mouse",
           "Flower of Evil",
           "Life on Mars",
-          "Through the Darkness",
-          "Mother",
-          "Taxi Driver",
-          "My Name",
-          "My Mister",
-          "Healer",
-          "The Guest",
-          "Defendant",
-          "Flex X Cop"
+          "Blind",
+          "Chimera",
+          "Train",
+          "Hello Monster",
+          "The Good Detective",
+          "Kill It",
+          "Ghost",
+          "Black Out"
+        ]
+      },
+      {
+        "key": "Thriller",
+        "titles": [
+          "Stranger",
+          "Squid Game",
+          "Beyond Evil",
+          "Dong Jae, the Good or the Bastard",
+          "Voice",
+          "Night Has Come",
+          "Watcher",
+          "Mouse",
+          "Signal",
+          "Big Mouth",
+          "Class of Lies",
+          "One Ordinary Day",
+          "Ghost",
+          "Inspector Koo",
+          "Children of a Lesser God"
         ]
       }
     ],
@@ -146,23 +146,17 @@
       "Children of a Lesser God",
       "Hometown",
       "A Killer Paradox",
-      "Mother",
-      "Tomorrow",
-      "Happiness",
-      "Moving",
       "Flower of Evil",
-      "The Glory",
-      "Healer",
-      "Taxi Driver",
-      "My Name",
-      "The Guest",
-      "The Worst of Evil",
-      "Tunnel",
-      "Defendant",
       "Life on Mars",
-      "Through the Darkness",
-      "My Mister",
-      "Flex X Cop"
+      "The Good Detective",
+      "Kill It",
+      "Squid Game",
+      "Dong Jae, the Good or the Bastard",
+      "Night Has Come",
+      "Big Mouth",
+      "Class of Lies",
+      "One Ordinary Day",
+      "Inspector Koo"
     ]
   },
   "final_top10": [

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T01:01:46",
+  "generated_at": "2026-07-23T01:27:37",
   "query": "zombie drama",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -27,8 +27,8 @@
       "entities": {
         "actors": [],
         "genres": [
-          "Thriller",
           "Horror",
+          "Thriller",
           "Drama"
         ],
         "themes": [],
@@ -38,7 +38,7 @@
       },
       "dynamic_alpha": 0.65,
       "confidence": 0.7,
-      "timestamp": "2026-07-22T20:01:13.249066"
+      "timestamp": "2026-07-22T20:27:04.124536"
     },
     "api": {
       "query": "zombie drama",
@@ -47,8 +47,8 @@
         "actors": [],
         "genres": [
           "Drama",
-          "Thriller",
-          "Horror"
+          "Horror",
+          "Thriller"
         ],
         "themes": [],
         "years": [],
@@ -57,8 +57,8 @@
       },
       "detected_genres": [
         "Drama",
-        "Thriller",
-        "Horror"
+        "Horror",
+        "Thriller"
       ],
       "confidence": 0.7
     },
@@ -66,31 +66,11 @@
   },
   "generated_candidates": {
     "detected_genres": [
-      "Thriller",
       "Horror",
+      "Thriller",
       "Drama"
     ],
     "genre_sections": [
-      {
-        "key": "Thriller",
-        "titles": [
-          "Mouse",
-          "Signal",
-          "Mother",
-          "Tomorrow",
-          "Happiness",
-          "Moving",
-          "Flower of Evil",
-          "The Glory",
-          "Healer",
-          "Taxi Driver",
-          "My Name",
-          "The Guest",
-          "The Worst of Evil",
-          "Tunnel",
-          "Defendant"
-        ]
-      },
       {
         "key": "Horror",
         "titles": [
@@ -109,6 +89,26 @@
           "Bring It On, Ghost",
           "Light Shop",
           "Gyeongseong Creature"
+        ]
+      },
+      {
+        "key": "Thriller",
+        "titles": [
+          "Mouse",
+          "Signal",
+          "Mother",
+          "Tomorrow",
+          "Happiness",
+          "Moving",
+          "Flower of Evil",
+          "The Glory",
+          "Healer",
+          "Taxi Driver",
+          "My Name",
+          "The Guest",
+          "The Worst of Evil",
+          "Tunnel",
+          "Defendant"
         ]
       },
       {
@@ -154,6 +154,19 @@
         ]
       },
       {
+        "key": "drama|horror",
+        "titles": [
+          "Sweet Home",
+          "Strangers from Hell",
+          "Priest",
+          "Hometown",
+          "Under the Black Moonlight",
+          "Hellbound",
+          "Sweet Home Season 2",
+          "Sweet Home Season 3"
+        ]
+      },
+      {
         "key": "drama|thriller",
         "titles": [
           "Kingdom: Ashin of the North",
@@ -171,19 +184,6 @@
           "A Shop for Killers",
           "The Escape of the Seven: War for Survival",
           "The Defects"
-        ]
-      },
-      {
-        "key": "drama|horror",
-        "titles": [
-          "Sweet Home",
-          "Strangers from Hell",
-          "Priest",
-          "Hometown",
-          "Under the Black Moonlight",
-          "Hellbound",
-          "Sweet Home Season 2",
-          "Sweet Home Season 3"
         ]
       }
     ],
@@ -203,6 +203,13 @@
       "Light Shop",
       "Tale of the Nine-Tailed",
       "The Silent Sea",
+      "Sweet Home",
+      "Priest",
+      "Hometown",
+      "Under the Black Moonlight",
+      "Hellbound",
+      "Sweet Home Season 2",
+      "Sweet Home Season 3",
       "Kingdom: Ashin of the North",
       "Happiness",
       "Duty after School: Part 1",
@@ -217,13 +224,14 @@
       "A Shop for Killers",
       "The Escape of the Seven: War for Survival",
       "The Defects",
-      "Sweet Home",
-      "Priest",
-      "Hometown",
-      "Under the Black Moonlight",
-      "Hellbound",
-      "Sweet Home Season 2",
-      "Sweet Home Season 3",
+      "Tale of the Nine-Tailed 1938",
+      "The Guest",
+      "The Master's Sun",
+      "Hotel del Luna",
+      "Beyond Evil",
+      "A Korean Odyssey",
+      "Bring It On, Ghost",
+      "Gyeongseong Creature",
       "Mouse",
       "Signal",
       "Mother",
@@ -234,17 +242,9 @@
       "Healer",
       "Taxi Driver",
       "My Name",
-      "The Guest",
       "The Worst of Evil",
       "Tunnel",
       "Defendant",
-      "Tale of the Nine-Tailed 1938",
-      "The Master's Sun",
-      "Hotel del Luna",
-      "Beyond Evil",
-      "A Korean Odyssey",
-      "Bring It On, Ghost",
-      "Gyeongseong Creature",
       "Hospital Playlist",
       "Under the Queen's Umbrella",
       "Extraordinary Attorney Woo",

@@ -1,7 +1,7 @@
 # Generated Query Debug
 
 - Query: `zombie drama`
-- Generated at: `2026-07-23T01:01:46`
+- Generated at: `2026-07-23T01:27:37`
 - Mode: `calibrated_generated`
 - Expected: All of Us Are Dead, Kingdom, Happiness
 - Classification: `ok_top3`
@@ -11,7 +11,7 @@
 ## Analyzer
 
 - Intent: `genre_browse`
-- Detected genres: Thriller, Horror, Drama
+- Detected genres: Horror, Thriller, Drama
 
 ## Final API Top 10
 
@@ -49,6 +49,16 @@
 14. Tale of the Nine-Tailed
 15. The Silent Sea
 
+### drama|horror
+1. Sweet Home
+2. Strangers from Hell
+3. Priest
+4. Hometown
+5. Under the Black Moonlight
+6. Hellbound
+7. Sweet Home Season 2
+8. Sweet Home Season 3
+
 ### drama|thriller
 1. Kingdom: Ashin of the North
 2. Happiness
@@ -66,35 +76,8 @@
 14. The Escape of the Seven: War for Survival
 15. The Defects
 
-### drama|horror
-1. Sweet Home
-2. Strangers from Hell
-3. Priest
-4. Hometown
-5. Under the Black Moonlight
-6. Hellbound
-7. Sweet Home Season 2
-8. Sweet Home Season 3
-
 
 ## Generated Genre Candidates
-
-### Thriller
-1. Mouse
-2. Signal
-3. Mother
-4. Tomorrow
-5. Happiness
-6. Moving
-7. Flower of Evil
-8. The Glory
-9. Healer
-10. Taxi Driver
-11. My Name
-12. The Guest
-13. The Worst of Evil
-14. Tunnel
-15. Defendant
 
 ### Horror
 1. Tale of the Nine-Tailed 1938
@@ -112,6 +95,23 @@
 13. Bring It On, Ghost
 14. Light Shop
 15. Gyeongseong Creature
+
+### Thriller
+1. Mouse
+2. Signal
+3. Mother
+4. Tomorrow
+5. Happiness
+6. Moving
+7. Flower of Evil
+8. The Glory
+9. Healer
+10. Taxi Driver
+11. My Name
+12. The Guest
+13. The Worst of Evil
+14. Tunnel
+15. Defendant
 
 ### Drama
 1. Hospital Playlist

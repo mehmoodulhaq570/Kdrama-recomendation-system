@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T23:44:35",
+  "generated_at": "2026-07-23T12:55:39",
   "query": "historical",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -36,7 +36,7 @@
       },
       "dynamic_alpha": 0.65,
       "confidence": 0.7,
-      "timestamp": "2026-07-22T18:44:14.986228"
+      "timestamp": "2026-07-23T07:54:48.089124"
     },
     "api": {
       "query": "historical",
@@ -74,13 +74,13 @@
           "My Dearest",
           "The Red Sleeve",
           "Moon Lovers: Scarlet Heart Ryeo",
+          "Love in the Moonlight",
+          "Bloody Heart",
           "Gyeongseong Creature",
+          "The Slave Hunters",
           "Pachinko",
-          "Tree with Deep Roots",
-          "Moon Embracing the Sun",
-          "The Crowned Clown",
-          "The Princess's Man",
-          "Chief Detective 1958"
+          "Hwarang",
+          "100 Days My Prince"
         ]
       }
     ],
@@ -94,13 +94,13 @@
       "My Dearest",
       "The Red Sleeve",
       "Moon Lovers: Scarlet Heart Ryeo",
+      "Love in the Moonlight",
+      "Bloody Heart",
       "Gyeongseong Creature",
+      "The Slave Hunters",
       "Pachinko",
-      "Tree with Deep Roots",
-      "Moon Embracing the Sun",
-      "The Crowned Clown",
-      "The Princess's Man",
-      "Chief Detective 1958"
+      "Hwarang",
+      "100 Days My Prince"
     ]
   },
   "final_top10": [
@@ -112,8 +112,8 @@
     "My Dearest",
     "The Red Sleeve",
     "Moon Lovers: Scarlet Heart Ryeo",
-    "Gyeongseong Creature",
-    "Pachinko"
+    "Love in the Moonlight",
+    "Bloody Heart"
   ],
   "classification": "ok_top3",
   "generated_expected_rank": 1,

@@ -13,6 +13,7 @@ from rank_bm25 import BM25Plus
 import uuid
 import time
 import json
+import re
 
 # Import Phase 1 enhancements
 from query_analyzer import QueryAnalyzer, get_search_strategy
@@ -208,7 +209,9 @@ GENERATED_CALIBRATED_GENRE_COMBO_INDEX = load_generated_index(
     "calibrated_genre_combo_index.json"
 )
 GENERATED_THEME_INDEX = load_generated_index("theme_index.json")
+GENERATED_CALIBRATED_THEME_INDEX = load_generated_index("calibrated_theme_index.json")
 GENERATED_KEYWORD_INDEX = load_generated_index("keyword_index.json")
+GENERATED_CALIBRATED_KEYWORD_INDEX = load_generated_index("calibrated_keyword_index.json")
 
 TITLE_ALIASES = GENERATED_TITLE_ALIASES | {
     "goblin": "Guardian: The Lonely and Great God",
@@ -220,6 +223,14 @@ GENRE_PRIOR_SOURCE = os.environ.get(
     "SEOULMATE_GENRE_PRIOR_SOURCE",
     CURATED_PRIORS.get("genre_prior_source", "curated"),
 )
+ACTOR_PRIOR_SOURCE = os.environ.get(
+    "SEOULMATE_ACTOR_PRIOR_SOURCE",
+    CURATED_PRIORS.get("actor_prior_source", "curated"),
+)
+THEME_PRIOR_SOURCE = os.environ.get(
+    "SEOULMATE_THEME_PRIOR_SOURCE",
+    CURATED_PRIORS.get("theme_prior_source", "curated"),
+)
 PRIOR_WEIGHTS = load_prior_weights(
     CURATED_PRIORS.get(
         "weights",
@@ -229,10 +240,19 @@ PRIOR_WEIGHTS = load_prior_weights(
             "theme_combo": 3.1,
             "theme": 2.4,
             "actor": 2.35,
+            "keyword": 2.0,
             "generated_actor": 0.0,
             "generated_genre": 0.0,
             "generated_theme": 0.0,
             "generated_cap": 1.0,
+            "hybrid_genre_combo": 0.95,
+            "hybrid_genre": 0.75,
+            "hybrid_actor": 1.0,
+            "hybrid_theme_combo": 1.15,
+            "hybrid_theme": 0.3,
+            "fallback_genre_combo": 0.85,
+            "fallback_genre": 0.65,
+            "fallback_theme": 0.8,
         },
     )
 )
@@ -321,9 +341,93 @@ GENERATED_QUERY_PROFILES = [
     },
 ]
 
+KEYWORD_FILTER_EXPANSIONS = {
+    "healing": ["healing", "comfort", "slice of life"],
+    "time travel": ["time travel", "time slip", "time loop", "time manipulation"],
+    "strong female lead": ["strong female lead", "badass female lead", "smart female lead"],
+    "smart female lead": ["smart female lead", "strong female lead"],
+    "smart male lead": ["smart male lead", "genius male lead"],
+    "slow burn romance": ["slow burn romance", "slow romance", "slow burn"],
+    "contract marriage": [
+        "contract marriage",
+        "contract relationship",
+        "marriage of convenience",
+        "fake relationship",
+    ],
+    "marriage of convenience": [
+        "marriage of convenience",
+        "contract relationship",
+        "contract marriage",
+    ],
+    "contract relationship": [
+        "contract relationship",
+        "contract marriage",
+        "marriage of convenience",
+        "fake relationship",
+    ],
+    "school bullying": ["school bullying", "bullying", "school violence"],
+    "revenge": ["revenge", "vengeance", "payback"],
+    "doctor": ["doctor", "doctor male lead", "doctor female lead", "hospital setting"],
+    "hospital": ["hospital", "hospital setting", "doctor"],
+    "lawyer": ["lawyer", "attorney", "courtroom setting"],
+}
+
+
+def keyword_filter_terms(keyword_query: str) -> list[str]:
+    query = normalized_text = re.sub(r"\s+", " ", keyword_query.lower().strip())
+    terms = [normalized_text]
+    for key, expansions in KEYWORD_FILTER_EXPANSIONS.items():
+        if key in query:
+            terms.extend(expansions)
+    return list(dict.fromkeys(term for term in terms if term))
+
+
+def keyword_generated_fallback_titles(keyword_query: str) -> set[str]:
+    fallback_titles = set()
+    for term in keyword_filter_terms(keyword_query):
+        for title in GENERATED_CALIBRATED_KEYWORD_INDEX.get(term, [])[:40]:
+            fallback_titles.add(title.lower())
+    return fallback_titles
+
+
+def keyword_prior_titles(keyword_query: str) -> list[str]:
+    title_scores = {}
+    for key_order, term in enumerate(keyword_filter_terms(keyword_query)):
+        for rank, title in enumerate(
+            GENERATED_CALIBRATED_KEYWORD_INDEX.get(term, [])[:40], start=1
+        ):
+            title_key = title.lower()
+            if title_key not in title_scores:
+                title_scores[title_key] = {
+                    "title": title,
+                    "best_rank": rank,
+                    "rank_sum": 0,
+                    "key_order": key_order,
+                    "overlap": 0,
+                }
+            score = title_scores[title_key]
+            score["best_rank"] = min(score["best_rank"], rank)
+            score["rank_sum"] += rank
+            score["key_order"] = min(score["key_order"], key_order)
+            score["overlap"] += 1
+
+    return [
+        item["title"]
+        for item in sorted(
+            title_scores.values(),
+            key=lambda item: (
+                -item["overlap"],
+                item["best_rank"],
+                item["rank_sum"],
+                item["key_order"],
+                item["title"],
+            ),
+        )
+    ]
+
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
-    filter_str = f"{genre}_{filters_dict.get('director', '')}_{filters_dict.get('rating_value', '')}"
+    filter_str = json.dumps(filters_dict, sort_keys=True, default=str)
     return f"{title}_{top_n}_{filter_str}"
 
 
@@ -465,22 +569,69 @@ def generated_index_boosts(result_title, detected_actors, detected_genres, detec
     return min(multiplier, PRIOR_WEIGHTS.get("generated_cap", 1.0))
 
 
+def generated_prior_mode_enabled():
+    return GENRE_PRIOR_SOURCE.startswith("calibrated_generated")
+
+
+def hybrid_prior_mode_enabled():
+    return GENRE_PRIOR_SOURCE == "hybrid_calibrated"
+
+
+def fallback_genre_prior_mode_enabled():
+    return GENRE_PRIOR_SOURCE == "fallback_generated"
+
+
+def hybrid_actor_prior_mode_enabled():
+    return ACTOR_PRIOR_SOURCE == "hybrid_calibrated"
+
+
+def hybrid_theme_prior_mode_enabled():
+    return THEME_PRIOR_SOURCE == "hybrid_calibrated"
+
+
+def generated_theme_prior_mode_enabled():
+    return THEME_PRIOR_SOURCE == "calibrated_generated"
+
+
+def fallback_theme_prior_mode_enabled():
+    return THEME_PRIOR_SOURCE == "fallback_generated"
+
+
 def get_actor_prior_titles(actor: str):
+    if ACTOR_PRIOR_SOURCE == "calibrated_generated":
+        return GENERATED_CALIBRATED_ACTOR_INDEX.get(actor.lower(), [])
     curated_titles = ACTOR_PRIOR_TITLES.get(actor)
     if curated_titles:
         return curated_titles
     return GENERATED_CALIBRATED_ACTOR_INDEX.get(actor.lower(), [])
 
 
+def get_theme_prior_titles(theme: str):
+    if generated_theme_prior_mode_enabled():
+        return GENERATED_CALIBRATED_THEME_INDEX.get(theme, []), "generated"
+    curated_titles = THEME_PRIOR_TITLES.get(theme, [])
+    if curated_titles:
+        return curated_titles, "curated"
+    if fallback_theme_prior_mode_enabled():
+        return GENERATED_CALIBRATED_THEME_INDEX.get(theme, []), "fallback"
+    return [], "none"
+
+
+def iter_theme_combo_priors():
+    return THEME_COMBINATION_PRIOR_TITLES.items()
+
+
 def get_genre_prior_titles(genre: str):
     if GENRE_PRIOR_SOURCE == "calibrated_generated_combo_only":
-        return []
+        return [], "none"
     if GENRE_PRIOR_SOURCE == "calibrated_generated":
-        return GENERATED_CALIBRATED_GENRE_INDEX.get(genre, [])
+        return GENERATED_CALIBRATED_GENRE_INDEX.get(genre, []), "generated"
     curated_titles = GENRE_PRIOR_TITLES.get(genre)
     if curated_titles:
-        return curated_titles
-    return []
+        return curated_titles, "curated"
+    if fallback_genre_prior_mode_enabled():
+        return GENERATED_CALIBRATED_GENRE_INDEX.get(genre, []), "fallback"
+    return [], "none"
 
 
 def iter_genre_combo_priors():
@@ -492,11 +643,15 @@ def iter_genre_combo_priors():
     return GENRE_COMBINATION_PRIOR_TITLES.items()
 
 
+def iter_generated_genre_combo_priors():
+    return combo_prior_keys(GENERATED_CALIBRATED_GENRE_COMBO_INDEX).items()
+
+
 def drama_matches_detected_genre(drama, genre_name):
     genre_lower = genre_name.lower()
     if genre_lower in str(drama.get("Genre", "")).lower():
         return True
-    if GENRE_PRIOR_SOURCE.startswith("calibrated_generated"):
+    if generated_prior_mode_enabled() or hybrid_prior_mode_enabled():
         title_lower = str(drama.get("Title", "")).lower()
         generated_titles = GENERATED_CALIBRATED_GENRE_INDEX.get(genre_name, [])
         return any(title_lower == title.lower() for title in generated_titles[:80])
@@ -544,7 +699,14 @@ def recommend(
             "director": director,
             "publisher": publisher,
             "rating_value": rating_value,
+            "rating_count": rating_count,
             "top_rated": top_rated,
+            "description": description,
+            "keywords": keywords,
+            "screenwriters": screenwriters,
+            "sort_by": sort_by,
+            "sort_order": sort_order,
+            "similar_to": similar_to,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cached = get_cached_result(cache_key)
@@ -674,11 +836,21 @@ def recommend(
         except Exception:
             pass
     if keywords:
-        filtered_metadata = [
+        keyword_terms = keyword_filter_terms(keywords)
+        original_keyword_filtered = [
             r
             for r in filtered_metadata
-            if keywords.lower() in str(r.get("keywords", "")).lower()
+            if any(term in str(r.get("keywords", "")).lower() for term in keyword_terms)
         ]
+        if original_keyword_filtered:
+            filtered_metadata = original_keyword_filtered
+        else:
+            fallback_titles = keyword_generated_fallback_titles(keywords)
+            filtered_metadata = [
+                r
+                for r in filtered_metadata
+                if str(r.get("Title", "")).lower() in fallback_titles
+            ]
     if screenwriters:
         filtered_metadata = [
             r
@@ -861,9 +1033,7 @@ def recommend(
                     )
 
         detected_genre_set = {genre.lower() for genre in detected_genres}
-        genre_prior_decay = (
-            0.09 if GENRE_PRIOR_SOURCE.startswith("calibrated_generated") else 0.03
-        )
+        genre_prior_decay = 0.09 if generated_prior_mode_enabled() else 0.03
         matched_genre_combo_prior = False
         for genre_combo, prior_titles in iter_genre_combo_priors():
             if {genre.lower() for genre in genre_combo}.issubset(detected_genre_set):
@@ -876,26 +1046,70 @@ def recommend(
                     decay=genre_prior_decay,
                 )
 
+        if fallback_genre_prior_mode_enabled() and not matched_genre_combo_prior:
+            for genre_combo, prior_titles in iter_generated_genre_combo_priors():
+                if {genre.lower() for genre in genre_combo}.issubset(detected_genre_set):
+                    matched_genre_combo_prior = True
+                    add_prior_title_boosts(
+                        combined_scores,
+                        filtered_metadata,
+                        prior_titles,
+                        boost=PRIOR_WEIGHTS.get("fallback_genre_combo", 0.85),
+                        decay=0.08,
+                    )
+
         use_single_genre_priors = not (
-            GENRE_PRIOR_SOURCE.startswith("calibrated_generated")
+            generated_prior_mode_enabled()
             and matched_genre_combo_prior
             and len(detected_genres) > 1
         )
         if use_single_genre_priors:
             for detected_genre in detected_genres:
-                prior_titles = get_genre_prior_titles(detected_genre)
+                prior_titles, prior_source = get_genre_prior_titles(detected_genre)
                 if prior_titles:
+                    genre_boost = (
+                        PRIOR_WEIGHTS.get("fallback_genre", 0.65)
+                        if prior_source == "fallback"
+                        else PRIOR_WEIGHTS.get("genre", 2.2)
+                    )
                     add_prior_title_boosts(
                         combined_scores,
                         filtered_metadata,
                         prior_titles,
-                        boost=PRIOR_WEIGHTS.get("genre", 2.2),
+                        boost=genre_boost,
                         decay=genre_prior_decay,
                     )
         else:
             print(
                 "Generated combo prior matched; single generated genre priors skipped"
             )
+
+        if hybrid_prior_mode_enabled():
+            matched_generated_combo_prior = False
+            for genre_combo, prior_titles in iter_generated_genre_combo_priors():
+                if {genre.lower() for genre in genre_combo}.issubset(detected_genre_set):
+                    matched_generated_combo_prior = True
+                    add_prior_title_boosts(
+                        combined_scores,
+                        filtered_metadata,
+                        prior_titles,
+                        boost=PRIOR_WEIGHTS.get("hybrid_genre_combo", 0.95),
+                        decay=0.08,
+                    )
+
+            if not (matched_generated_combo_prior and len(detected_genres) > 1):
+                for detected_genre in detected_genres:
+                    prior_titles = GENERATED_CALIBRATED_GENRE_INDEX.get(
+                        detected_genre, []
+                    )
+                    if prior_titles:
+                        add_prior_title_boosts(
+                            combined_scores,
+                            filtered_metadata,
+                            prior_titles,
+                            boost=PRIOR_WEIGHTS.get("hybrid_genre", 0.75),
+                            decay=0.08,
+                        )
 
         apply_generated_query_profile_boosts(
             combined_scores, filtered_metadata, title, detected_genres
@@ -905,7 +1119,7 @@ def recommend(
     if detected_themes:
         print(f"💡 Applying theme boost for: {detected_themes}")
         detected_theme_set = set(detected_themes)
-        for theme_combo, prior_titles in THEME_COMBINATION_PRIOR_TITLES.items():
+        for theme_combo, prior_titles in iter_theme_combo_priors():
             if set(theme_combo).issubset(detected_theme_set):
                 add_prior_title_boosts(
                     combined_scores,
@@ -915,14 +1129,33 @@ def recommend(
                 )
 
         for detected_theme in detected_themes:
-            prior_titles = THEME_PRIOR_TITLES.get(detected_theme, [])
+            prior_titles, prior_source = get_theme_prior_titles(detected_theme)
             if prior_titles:
+                theme_boost = (
+                    PRIOR_WEIGHTS.get("fallback_theme", 0.8)
+                    if prior_source == "fallback"
+                    else PRIOR_WEIGHTS.get("theme", 2.4)
+                )
                 add_prior_title_boosts(
                     combined_scores,
                     filtered_metadata,
                     prior_titles,
-                    boost=PRIOR_WEIGHTS.get("theme", 2.4),
+                    boost=theme_boost,
                 )
+
+        if hybrid_theme_prior_mode_enabled():
+            for detected_theme in detected_themes:
+                generated_prior_titles = GENERATED_CALIBRATED_THEME_INDEX.get(
+                    detected_theme, []
+                )
+                if generated_prior_titles:
+                    add_prior_title_boosts(
+                        combined_scores,
+                        filtered_metadata,
+                        generated_prior_titles,
+                        boost=PRIOR_WEIGHTS.get("hybrid_theme", 0.3),
+                        decay=0.05,
+                    )
 
         theme_keywords = {
             "north korea": ["north korea", "north korean", "defector", "dmz"],
@@ -980,6 +1213,18 @@ def recommend(
                     prior_titles,
                     boost=PRIOR_WEIGHTS.get("actor", 2.35),
                 )
+            if hybrid_actor_prior_mode_enabled():
+                generated_prior_titles = GENERATED_CALIBRATED_ACTOR_INDEX.get(
+                    detected_actor.lower(), []
+                )
+                if generated_prior_titles:
+                    add_prior_title_boosts(
+                        combined_scores,
+                        filtered_metadata,
+                        generated_prior_titles,
+                        boost=PRIOR_WEIGHTS.get("hybrid_actor", 1.0),
+                        decay=0.05,
+                    )
 
         for result_title, score in list(combined_scores.items()):
             drama = next(
@@ -993,6 +1238,31 @@ def recommend(
             )
             if actor_match_count:
                 combined_scores[result_title] = score * (1.25 + 0.2 * actor_match_count)
+
+    if keywords:
+        keyword_terms = keyword_filter_terms(keywords)
+        prior_titles = keyword_prior_titles(keywords)
+        if prior_titles:
+            add_prior_title_boosts(
+                combined_scores,
+                filtered_metadata,
+                prior_titles,
+                boost=PRIOR_WEIGHTS.get("keyword", 2.0),
+                decay=0.04,
+            )
+
+        for result_title, score in list(combined_scores.items()):
+            drama = next(
+                (m for m in filtered_metadata if m["Title"] == result_title), None
+            )
+            if not drama:
+                continue
+            keyword_text = str(drama.get("keywords", "")).lower()
+            matching_keyword_count = sum(term in keyword_text for term in keyword_terms)
+            if matching_keyword_count:
+                combined_scores[result_title] = score * (
+                    1.25 + 0.15 * min(matching_keyword_count, 3)
+                )
 
     generated_boosted_count = 0
     if detected_actors or detected_genres or detected_themes:
@@ -1248,7 +1518,14 @@ def recommend(
             "director": director,
             "publisher": publisher,
             "rating_value": rating_value,
+            "rating_count": rating_count,
             "top_rated": top_rated,
+            "description": description,
+            "keywords": keywords,
+            "screenwriters": screenwriters,
+            "sort_by": sort_by,
+            "sort_order": sort_order,
+            "similar_to": similar_to,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cache_result(cache_key, response)

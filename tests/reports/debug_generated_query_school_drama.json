@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T00:26:52",
+  "generated_at": "2026-07-23T01:27:37",
   "query": "school drama",
   "category": "genre",
   "mode": "calibrated_generated",
@@ -37,7 +37,7 @@
       },
       "dynamic_alpha": 0.65,
       "confidence": 0.7,
-      "timestamp": "2026-07-22T19:26:11.205048"
+      "timestamp": "2026-07-22T20:27:04.070147"
     },
     "api": {
       "query": "school drama",
@@ -45,8 +45,8 @@
       "entities": {
         "actors": [],
         "genres": [
-          "Youth",
-          "Drama"
+          "Drama",
+          "Youth"
         ],
         "themes": [],
         "years": [],
@@ -54,8 +54,8 @@
         "constraints": {}
       },
       "detected_genres": [
-        "Youth",
-        "Drama"
+        "Drama",
+        "Youth"
       ],
       "confidence": 0.7
     },
@@ -112,40 +112,40 @@
       {
         "key": "drama|youth",
         "titles": [
-          "Seasons of Blossom",
           "The World of My 17",
+          "Best Mistake",
+          "School 2021",
+          "Replay: The Moment When It Starts Again",
+          "Seasons of Blossom",
+          "Love Alarm",
+          "The World of My 17 Season 2",
+          "Page Turner",
+          "Twinkling Watermelon",
           "True Beauty",
           "Sassy Go Go",
-          "Love Alarm",
-          "Boys over Flowers",
-          "The Heirs Christmas Edition",
-          "Drama Special Season 8: If We Were A Season",
-          "Best Mistake Season 2",
-          "Girls' Generation 1979",
-          "The Flatterer",
-          "School 2021",
+          "Light on Me",
           "Goong",
-          "Secret Campus",
-          "Live On"
+          "Love Revolution",
+          "Boys over Flowers"
         ]
       }
     ],
     "combined_titles": [
-      "Seasons of Blossom",
       "The World of My 17",
+      "Best Mistake",
+      "School 2021",
+      "Replay: The Moment When It Starts Again",
+      "Seasons of Blossom",
+      "Love Alarm",
+      "The World of My 17 Season 2",
+      "Page Turner",
+      "Twinkling Watermelon",
       "True Beauty",
       "Sassy Go Go",
-      "Love Alarm",
-      "Boys over Flowers",
-      "The Heirs Christmas Edition",
-      "Drama Special Season 8: If We Were A Season",
-      "Best Mistake Season 2",
-      "Girls' Generation 1979",
-      "The Flatterer",
-      "School 2021",
+      "Light on Me",
       "Goong",
-      "Secret Campus",
-      "Live On",
+      "Love Revolution",
+      "Boys over Flowers",
       "Hospital Playlist",
       "Under the Queen's Umbrella",
       "Extraordinary Attorney Woo",
@@ -158,7 +158,6 @@
       "It's Okay to Not Be Okay",
       "My Dearest",
       "Happiness",
-      "Twinkling Watermelon",
       "The Good Bad Mother",
       "The Glory",
       "Mouse",
@@ -173,22 +172,29 @@
     ]
   },
   "final_top10": [
-    "Seasons of Blossom",
     "The World of My 17",
-    "True Beauty",
-    "Sassy Go Go",
-    "Love Alarm",
-    "Boys over Flowers",
-    "The Heirs Christmas Edition",
-    "Drama Special Season 8: If We Were A Season",
-    "Best Mistake Season 2",
-    "Girls' Generation 1979"
-  ],
-  "classification": "ok_top3",
-  "generated_expected_rank": 3,
-  "final_expected_rank": 3,
-  "titles_above_expected": [
+    "Best Mistake",
+    "School 2021",
+    "Replay: The Moment When It Starts Again",
     "Seasons of Blossom",
-    "The World of My 17"
+    "Love Alarm",
+    "The World of My 17 Season 2",
+    "Page Turner",
+    "Twinkling Watermelon",
+    "True Beauty"
+  ],
+  "classification": "final_ranking_too_low",
+  "generated_expected_rank": 10,
+  "final_expected_rank": 10,
+  "titles_above_expected": [
+    "The World of My 17",
+    "Best Mistake",
+    "School 2021",
+    "Replay: The Moment When It Starts Again",
+    "Seasons of Blossom",
+    "Love Alarm",
+    "The World of My 17 Season 2",
+    "Page Turner",
+    "Twinkling Watermelon"
   ]
 }

@@ -1,7 +1,7 @@
 # Generated Query Debug
 
 - Query: `crime thriller`
-- Generated at: `2026-07-23T00:24:32`
+- Generated at: `2026-07-23T12:04:52`
 - Mode: `calibrated_generated`
 - Expected: Signal, Stranger, Beyond Evil
 - Classification: `ok_top3`
@@ -11,7 +11,7 @@
 ## Analyzer
 
 - Intent: `emotion_based`
-- Detected genres: Thriller, Crime
+- Detected genres: Crime, Thriller
 
 ## Final API Top 10
 
@@ -52,36 +52,36 @@
 
 ## Generated Genre Candidates
 
-### Thriller
-1. Mouse
-2. Signal
-3. Mother
-4. Tomorrow
-5. Happiness
-6. Moving
-7. Flower of Evil
-8. The Glory
-9. Healer
-10. Taxi Driver
-11. My Name
-12. The Guest
-13. The Worst of Evil
-14. Tunnel
-15. Defendant
-
 ### Crime
 1. Beyond Evil
 2. Signal
 3. Stranger
-4. Mouse
-5. Flower of Evil
-6. Life on Mars
-7. Through the Darkness
-8. Mother
-9. Taxi Driver
-10. My Name
-11. My Mister
-12. Healer
-13. The Guest
-14. Defendant
-15. Flex X Cop
+4. Voice
+5. Mouse
+6. Flower of Evil
+7. Life on Mars
+8. Blind
+9. Chimera
+10. Train
+11. Hello Monster
+12. The Good Detective
+13. Kill It
+14. Ghost
+15. Black Out
+
+### Thriller
+1. Stranger
+2. Squid Game
+3. Beyond Evil
+4. Dong Jae, the Good or the Bastard
+5. Voice
+6. Night Has Come
+7. Watcher
+8. Mouse
+9. Signal
+10. Big Mouth
+11. Class of Lies
+12. One Ordinary Day
+13. Ghost
+14. Inspector Koo
+15. Children of a Lesser God

@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-07-23T01:30:21",
+  "query": "medical drama",
+  "category": "genre",
+  "mode": "calibrated_generated",
+  "weights": {
+    "genre_combo": 1.9,
+    "genre": 1.65,
+    "theme_combo": 3.1,
+    "theme": 2.4,
+    "actor": 2.35,
+    "generated_actor": 0.0,
+    "generated_genre": 0.0,
+    "generated_theme": 0.0,
+    "generated_cap": 1.0
+  },
+  "expected": [
+    "Hospital Playlist",
+    "Doctor Cha",
+    "Good Doctor"
+  ],
+  "analysis": {
+    "local": {
+      "original_query": "medical drama",
+      "intent": "genre_browse",
+      "expanded_query": "medical doctor hospital drama",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Medical",
+          "Drama"
+        ],
+        "themes": [
+          "medical"
+        ],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "dynamic_alpha": 0.65,
+      "confidence": 0.7,
+      "timestamp": "2026-07-22T20:29:56.269789"
+    },
+    "api": {
+      "query": "medical drama",
+      "intent": "genre_browse",
+      "entities": {
+        "actors": [],
+        "genres": [
+          "Medical",
+          "Drama"
+        ],
+        "themes": [
+          "medical"
+        ],
+        "years": [],
+        "emotions": [],
+        "constraints": {}
+      },
+      "detected_genres": [
+        "Medical",
+        "Drama"
+      ],
+      "confidence": 0.7
+    },
+    "intent": "genre_browse"
+  },
+  "generated_candidates": {
+    "detected_genres": [
+      "Medical",
+      "Drama"
+    ],
+    "genre_sections": [
+      {
+        "key": "Medical",
+        "titles": [
+          "Dr. Romantic",
+          "Doctor Cha",
+          "The Trauma Code: Heroes on Call",
+          "D-Day",
+          "Doctor Stranger",
+          "Hospital Playlist",
+          "Daily Dose of Sunshine",
+          "Ghost Doctor",
+          "Life",
+          "Doctor Lawyer",
+          "God's Quiz",
+          "A Beautiful Mind",
+          "Thank You",
+          "Faith",
+          "God's Quiz: Reboot"
+        ]
+      },
+      {
+        "key": "Drama",
+        "titles": [
+          "Hospital Playlist",
+          "Under the Queen's Umbrella",
+          "Extraordinary Attorney Woo",
+          "Daily Dose of Sunshine",
+          "My Mister",
+          "Prison Playbook",
+          "Tomorrow",
+          "Weak Hero Class 1",
+          "Vincenzo",
+          "It's Okay to Not Be Okay",
+          "My Dearest",
+          "Happiness",
+          "Twinkling Watermelon",
+          "The Good Bad Mother",
+          "The Glory"
+        ]
+      }
+    ],
+    "combo_sections": [
+      {
+        "key": "drama|medical",
+        "titles": [
+          "Good Doctor",
+          "Doctor Cha",
+          "Brain",
+          "Dr. Romantic Season 3",
+          "Emergency Couple",
+          "Hyper Knife",
+          "The Trauma Code: Heroes on Call",
+          "Heart Surgeons",
+          "Doctor Stranger",
+          "Mary Kills People",
+          "Doctor Detective",
+          "God's Quiz Season 3",
+          "God's Quiz Season 4",
+          "Yong Pal",
+          "Hospital Playlist"
+        ]
+      }
+    ],
+    "combined_titles": [
+      "Good Doctor",
+      "Doctor Cha",
+      "Brain",
+      "Dr. Romantic Season 3",
+      "Emergency Couple",
+      "Hyper Knife",
+      "The Trauma Code: Heroes on Call",
+      "Heart Surgeons",
+      "Doctor Stranger",
+      "Mary Kills People",
+      "Doctor Detective",
+      "God's Quiz Season 3",
+      "God's Quiz Season 4",
+      "Yong Pal",
+      "Hospital Playlist",
+      "Dr. Romantic",
+      "D-Day",
+      "Daily Dose of Sunshine",
+      "Ghost Doctor",
+      "Life",
+      "Doctor Lawyer",
+      "God's Quiz",
+      "A Beautiful Mind",
+      "Thank You",
+      "Faith",
+      "God's Quiz: Reboot",
+      "Under the Queen's Umbrella",
+      "Extraordinary Attorney Woo",
+      "My Mister",
+      "Prison Playbook",
+      "Tomorrow",
+      "Weak Hero Class 1",
+      "Vincenzo",
+      "It's Okay to Not Be Okay",
+      "My Dearest",
+      "Happiness",
+      "Twinkling Watermelon",
+      "The Good Bad Mother",
+      "The Glory"
+    ]
+  },
+  "final_top10": [
+    "Good Doctor",
+    "Doctor Cha",
+    "Brain",
+    "Dr. Romantic Season 3",
+    "Emergency Couple",
+    "Hyper Knife",
+    "The Trauma Code: Heroes on Call",
+    "Heart Surgeons",
+    "Doctor Stranger",
+    "Mary Kills People"
+  ],
+  "classification": "ok_top3",
+  "generated_expected_rank": 1,
+  "final_expected_rank": 1,
+  "titles_above_expected": []
+}
