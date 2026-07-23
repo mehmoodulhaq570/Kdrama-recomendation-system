@@ -2,7 +2,7 @@ import pickle
 import os
 
 # Load metadata
-metadata_path = "../model_traning/faiss_index/meta.pkl"
+metadata_path = "../training/faiss_index/meta.pkl"
 with open(metadata_path, "rb") as f:
     metadata = pickle.load(f)
 

@@ -2,6 +2,53 @@
 
 > **An intelligent K-Drama discovery platform with advanced query understanding, personalized recommendations, and comprehensive analytics.**
 
+## Current Repository Structure
+
+```text
+SeoulMate/
+├── backend/
+│   ├── app.py
+│   ├── analytics.py
+│   ├── personalization.py
+│   ├── query_analyzer.py
+│   ├── user_profile.py
+│   ├── ranking/
+│   │   ├── generate_indexes.py
+│   │   ├── config/
+│   │   └── indexes/
+│   └── runtime_data/
+├── frontend/
+│   └── streamlit_app.py
+├── training/
+│   ├── train_pipeline.py
+│   ├── models/
+│   ├── faiss_index/
+│   └── training_data/
+├── data/
+│   └── final/
+├── scrapers/
+├── tests/
+│   └── reports/
+│       ├── audits/
+│       ├── debug/
+│       └── logs/
+├── docs/
+│   └── archived/
+└── scripts/
+    ├── run_backend.ps1
+    ├── run_frontend.ps1
+    └── run_accuracy.ps1
+```
+
+Core rule:
+
+- `backend/` serves recommendations and user-facing API behavior.
+- `backend/ranking/` owns ranking indexes, curated priors, and index generation.
+- `training/` owns model training, FAISS index building, and training artifacts.
+- `data/final/` owns the final dataset used by training scripts.
+- `scrapers/` owns raw data collection scripts and scraped source artifacts.
+- `backend/runtime_data/` owns local logs and user profile files created while running the app.
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-v0.104-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-v1.28-FF4B4B?style=flat&logo=streamlit)](https://streamlit.io/)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python)](https://python.org/)
@@ -370,7 +417,7 @@ SeoulMate/
 │   │   ├── dramas_html/                      # Downloaded HTML files (10K+)
 │   │   └── dramalist_all_dramas.csv          # Scraped data output
 │   └── kdrama_dataset_detailed_v8_playwright.csv  # Final dataset
-├── model_traning/
+├── training/
 │   ├── build_index.py                        # FAISS index builder
 │   ├── faiss_index/
 │   │   ├── index.faiss                       # Vector index
@@ -442,7 +489,7 @@ streamlit run streamlit_app.py
 
 ```bash
 # Scrape MyDramaList data
-cd data_scrapper/DramaList_Scrapper
+cd scrapers/DramaList_Scrapper
 python scrapper.py
 ```
 
@@ -452,9 +499,9 @@ python scrapper.py
 
 ```python
 # Model paths
-MODEL_DIR = r"D:\Projects\SeoulMate\model_traning\models"
-INDEX_DIR = r"D:\Projects\SeoulMate\model_traning\faiss_index"
-CROSS_ENCODER_MODEL = r"D:\Projects\SeoulMate\model_traning\models\cross-enc-excellent"
+MODEL_DIR = r"D:\Projects\SeoulMate\training\models"
+INDEX_DIR = r"D:\Projects\SeoulMate\training\faiss_index"
+CROSS_ENCODER_MODEL = r"D:\Projects\SeoulMate\training\models\cross-enc-excellent"
 
 # Server settings
 HOST = "127.0.0.1"

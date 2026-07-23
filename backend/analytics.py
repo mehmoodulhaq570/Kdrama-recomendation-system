@@ -17,9 +17,10 @@ from typing import Dict, List, Optional
 from collections import defaultdict, Counter
 
 
-# Analytics data file
-ANALYTICS_DIR = Path("analytics_data")
-ANALYTICS_DIR.mkdir(exist_ok=True)
+# Analytics data files live beside the backend runtime code, independent of cwd.
+BACKEND_DIR = Path(__file__).resolve().parent
+ANALYTICS_DIR = BACKEND_DIR / "runtime_data" / "analytics"
+ANALYTICS_DIR.mkdir(parents=True, exist_ok=True)
 
 INTERACTIONS_FILE = ANALYTICS_DIR / "interactions.jsonl"  # JSONL for append efficiency
 SEARCH_LOG_FILE = ANALYTICS_DIR / "search_log.jsonl"

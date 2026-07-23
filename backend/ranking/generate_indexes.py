@@ -9,19 +9,24 @@ from __future__ import annotations
 import json
 import pickle
 import re
+import sys
 from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
 from typing import Iterable
 
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+PROJECT_DIR = BACKEND_DIR.parent
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
+
 from query_analyzer import QueryAnalyzer
 
 
 BASE_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = BASE_DIR.parent
-META_PATH = PROJECT_DIR / "model_traning" / "faiss_index" / "meta.pkl"
-TRAINING_DATA_DIR = PROJECT_DIR / "model_traning" / "training_data"
-OUTPUT_DIR = BASE_DIR / "generated_indexes"
+META_PATH = PROJECT_DIR / "training" / "faiss_index" / "meta.pkl"
+TRAINING_DATA_DIR = PROJECT_DIR / "training" / "training_data"
+OUTPUT_DIR = BASE_DIR / "indexes"
 
 THEME_RULES = {
     "north korea": ["north korea", "north korean", "defector", "dmz"],

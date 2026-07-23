@@ -30,6 +30,8 @@ from evaluate_accuracy import (
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "tests" / "reports"
+AUDIT_DIR = REPORT_DIR / "audits"
+LOG_DIR = REPORT_DIR / "logs"
 DEFAULT_PORT = 8021
 
 
@@ -51,8 +53,8 @@ def start_backend(port):
     env["SEOULMATE_RELOAD"] = "0"
     env["PYTHONIOENCODING"] = "utf-8"
 
-    log_path = REPORT_DIR / "weak_query_backend.log"
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    log_path = LOG_DIR / "weak_query_backend.log"
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     log_handle = log_path.open("w", encoding="utf-8")
     process = subprocess.Popen(
         [sys.executable, "app.py"],
@@ -256,7 +258,7 @@ def main():
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     args = parser.parse_args()
 
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     base_url = args.base_url or f"http://127.0.0.1:{args.port}"
     process = None
     log_handle = None
@@ -272,8 +274,8 @@ def main():
                 raise RuntimeError(f"{exc}\nBackend log tail:\n{tail}") from exc
 
         report = collect_report(base_url)
-        json_path = REPORT_DIR / "weak_queries.json"
-        markdown_path = REPORT_DIR / "weak_queries.md"
+        json_path = AUDIT_DIR / "weak_queries.json"
+        markdown_path = AUDIT_DIR / "weak_queries.md"
         json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
         write_markdown(report, markdown_path)
 

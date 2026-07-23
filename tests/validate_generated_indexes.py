@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 BACKEND_DIR = ROOT_DIR / "backend"
-INDEX_DIR = BACKEND_DIR / "generated_indexes"
+INDEX_DIR = BACKEND_DIR / "ranking" / "indexes"
 
 sys.path.append(str(BACKEND_DIR))
 sys.path.append(str(Path(__file__).resolve().parent))

@@ -16,6 +16,9 @@ import time
 # CONFIG
 # ======================================================
 API_URL = "http://127.0.0.1:8001"
+CURRENT_BACKEND_ACCURACY = "88.50%"
+CURRENT_BACKEND_MODE = "Stable curated + generated fallback"
+CURRENT_BACKEND_RECALL = "98.46%"
 
 # ======================================================
 # SESSION STATE INITIALIZATION
@@ -377,7 +380,7 @@ with st.sidebar:
     
     - 🧠 **Fine-tuned SBERT** - Smart semantic understanding
     - 🔍 **Hybrid Search** - FAISS + BM25Plus for best results
-    - 🎯 **Cross-Encoder** - Precision reranking
+    - 🎯 **Calibrated Ranking** - Genre, actor, theme, and keyword signals
     - 📊 **1,922 Dramas** - Comprehensive database
     """
     )
@@ -514,11 +517,11 @@ with tab1:
     with example_col3:
         if st.button("😂 Romantic Comedy", use_container_width=True):
             st.session_state.quick_search_query = "romantic comedy"
-            st.session_state.quick_search_genre = "Romance"
+            st.session_state.quick_search_genre = None
     with example_col4:
-        if st.button("🕰️ Historical Drama", use_container_width=True):
-            st.session_state.quick_search_query = "historical"
-            st.session_state.quick_search_genre = "Historical"
+        if st.button("🕰️ Time Manipulation", use_container_width=True):
+            st.session_state.quick_search_query = "time manipulation"
+            st.session_state.quick_search_genre = None
 
     # Use quick search values if available
     if st.session_state.quick_search_query:
@@ -1024,13 +1027,13 @@ with tab3:
     with col2:
         st.metric(
             "🤖 AI Model",
-            "v4.0 Phase 2",
-            help="Latest recommendation engine with personalization",
+            CURRENT_BACKEND_MODE,
+            help="Stable backend ranking mode with curated priors and calibrated generated fallbacks",
         )
     with col3:
-        st.metric("🎯 Personalized", "Yes", help="Tailored to your taste")
+        st.metric("🎯 Accuracy", CURRENT_BACKEND_ACCURACY, help="Latest stable evaluator score")
     with col4:
-        st.metric("⚡ Speed", "< 1s", help="Average response time")
+        st.metric("🔎 Recall@10", CURRENT_BACKEND_RECALL, help="Latest stable evaluator recall at 10")
 
     st.markdown("---")
 
@@ -1051,9 +1054,8 @@ with tab3:
           - **Dynamic Alpha** (α=0.2-0.95) 🆕
         
         - **Reranker:** Cross-encoder
-          - 3 epochs training
-          - 25,000+ training pairs
-          - Precision refinement
+          - Precision refinement after retrieval
+          - Ranking guards for noisy generated indexes
         
         - **Phase 1 Enhancements:** 🆕
           - Query intent detection
@@ -1061,11 +1063,11 @@ with tab3:
           - Query expansion with synonyms
           - Click tracking & analytics
         
-        - **Phase 2 Enhancements:** 🎯
+        - **Backend Ranking Enhancements:** 🎯
           - User preference learning
-          - Personalized weighting
-          - Taste profile building
-          - Genre/Actor/Director boosting
+          - Genre/actor/theme hybrid priors
+          - Keyword expansion and generated fallbacks
+          - Accuracy-guarded calibration
         """
         )
 
@@ -1237,7 +1239,7 @@ with tab5:
         **Common Questions:**
         
         - **Q: How accurate are the recommendations?**
-          - A: Our AI is trained on 1,922 dramas with 3 epochs of fine-tuning for high accuracy.
+          - A: The current stable backend evaluates at 88.50% overall accuracy, with 98.46% recall@10.
         
         - **Q: Can I search in other languages?**
           - A: Our model supports multilingual queries!
@@ -1261,7 +1263,7 @@ st.markdown(
             Made with ❤️ by the SeoulMate Team | Powered by AI & Advanced Machine Learning
         </p>
         <p style="font-size: 0.8rem; opacity: 0.7;">
-            © 2025 SeoulMate - Your K-Drama Companion | v4.0 Phase 2 - Personalization �
+            © 2026 SeoulMate - Your K-Drama Companion | Stable Backend Accuracy: 88.50%
         </p>
     </div>
     """,

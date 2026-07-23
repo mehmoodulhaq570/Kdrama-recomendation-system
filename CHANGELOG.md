@@ -2,8 +2,68 @@
 
 Important project history reconstructed from Git commits and project documentation.
 
+## 2026-07-24
+
+### Repository Structure Cleanup
+
+- Reorganized the project layout so backend ranking, training, data, scrapers, docs, and run scripts have clearer ownership.
+- Moved ranking generation and ranking data under `backend/ranking/`:
+  - `backend/ranking/generate_indexes.py`
+  - `backend/ranking/indexes/`
+  - `backend/ranking/config/`
+- Renamed the main training area from `model_traning/` to `training/`.
+- Moved the final dataset folder from `dataset/` to `data/final/`.
+- Moved scraper code from `extra/data_scrapper/` to `scrapers/`.
+- Moved older phase/history docs into `docs/archived/`.
+- Added helper scripts:
+  - `scripts/run_backend.ps1`
+  - `scripts/run_frontend.ps1`
+  - `scripts/run_accuracy.ps1`
+- Updated runtime paths in backend, training scripts, and generated-index test tools to use the new structure.
+- Note: the old `model_traning/` folder still contains a nested `.git` remnant after Windows blocked moving hidden Git metadata. It should be cleaned separately after confirming that nested Git history is not needed.
+
+### Repository Cleanup Follow-Up
+
+- Migrated old backend runtime files into `backend/runtime_data/`:
+  - analytics logs under `backend/runtime_data/analytics/`
+  - test user profiles under `backend/runtime_data/user_profiles/`
+- Removed empty legacy folders after migration:
+  - `extra/`
+  - `backend/analytics_data/`
+  - `backend/user_profiles/`
+- Moved generated reranker training data into `training/training_data/reranker_train.csv`.
+- Organized test reports into clearer buckets:
+  - `tests/reports/logs/`
+  - `tests/reports/debug/`
+  - `tests/reports/audits/`
+- Updated report scripts so future logs/debug/audit outputs use the new report folders.
+- Left nested Git metadata in `training/.git/` and `frontend/.git/` untouched pending explicit approval to delete it.
+
 
 ## 2026-07-23
+
+### Frontend Alignment Phase
+
+- Started the next natural phase after the stable backend checkpoint: frontend and full-system flow review.
+- Updated `frontend/streamlit_app.py` so the UI reflects the current backend state:
+  - stable backend accuracy shown as `88.50%`
+  - recall@10 shown as `98.46%`
+  - ranking mode described as stable curated ranking with generated fallback support
+- Updated quick searches to better exercise the improved backend paths:
+  - kept `romantic comedy` as a pure query instead of forcing the sidebar genre to `Romance`
+  - replaced the old historical quick search with `time manipulation`
+- Verified frontend syntax with:
+  - `python -m compileall frontend\streamlit_app.py`
+- Ran focused backend API smoke checks for frontend-critical queries:
+  - `romantic comedy`
+  - `time manipulation`
+  - `school bullying`
+  - `contract marriage`
+  - `hospital setting`
+- Finding from smoke checks:
+  - romantic comedy, school bullying, contract marriage, and hospital setting returned strong top results
+  - time manipulation still leans toward literal title matches in the top results, so it remains a useful next review area
+- Tried the full live accuracy evaluator, but it timed out in the local run after the backend startup/port checks. Existing stable report numbers remain the current reference for the UI.
 
 ### Generated Replacement Accuracy Improvements
 

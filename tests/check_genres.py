@@ -1,7 +1,7 @@
 import pickle
 
 # Load metadata
-with open(r"D:\Projects\SeoulMate\model_traning\faiss_index\meta.pkl", "rb") as f:
+with open(r"D:\Projects\SeoulMate\training\faiss_index\meta.pkl", "rb") as f:
     meta = pickle.load(f)
 
 print("Sample drama keys:", list(meta[0].keys()))

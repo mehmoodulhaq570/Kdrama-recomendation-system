@@ -26,6 +26,7 @@ from evaluate_accuracy import (
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "tests" / "reports"
+LOG_DIR = REPORT_DIR / "logs"
 BASE_PORT = 8031
 
 BASE_WEIGHTS = {
@@ -137,7 +138,7 @@ def wait_for_api(base_url, timeout=240):
 
 
 def start_backend(mode_name, mode, port):
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
     env["SEOULMATE_PORT"] = str(port)
     env["SEOULMATE_RELOAD"] = "0"
@@ -145,7 +146,7 @@ def start_backend(mode_name, mode, port):
     env["PYTHONIOENCODING"] = "utf-8"
     env.update(mode["env"])
 
-    log_path = REPORT_DIR / f"compare_{mode_name}.log"
+    log_path = LOG_DIR / f"compare_{mode_name}.log"
     log_handle = log_path.open("w", encoding="utf-8")
     process = subprocess.Popen(
         [sys.executable, "app.py"],

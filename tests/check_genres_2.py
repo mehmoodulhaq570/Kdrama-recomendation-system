@@ -4,10 +4,10 @@ import os
 # Find the metadata file
 metadata_path = None
 possible_paths = [
-    "../model_traning/faiss_index/meta.pkl",
+    "../training/faiss_index/meta.pkl",
     "./meta.pkl",
     "faiss_index/meta.pkl",
-    "d:/Projects/SeoulMate/model_traning/faiss_index/meta.pkl",
+    "d:/Projects/SeoulMate/training/faiss_index/meta.pkl",
 ]
 
 for path in possible_paths:

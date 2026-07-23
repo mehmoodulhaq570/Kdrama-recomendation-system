@@ -3,6 +3,14 @@ data_scrapper/dramas_html/
 .vscode/
 __pycache__/
 *.pyc
+backend/runtime_data/
+analytics_data/
+backend/analytics_data/
+backend/user_profiles/
+user_profiles/
+training/.git/
+frontend/.git/
+training/training_data/reranker_train.csv
 .DS_Store
 .env
 .env.*

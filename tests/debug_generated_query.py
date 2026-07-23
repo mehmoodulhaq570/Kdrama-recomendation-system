@@ -27,8 +27,10 @@ from evaluate_accuracy import SEARCH_TEST_CASES
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKEND_DIR = ROOT / "backend"
-GENERATED_INDEX_DIR = BACKEND_DIR / "generated_indexes"
+GENERATED_INDEX_DIR = BACKEND_DIR / "ranking" / "indexes"
 REPORT_DIR = ROOT / "tests" / "reports"
+DEBUG_REPORT_DIR = REPORT_DIR / "debug"
+LOG_DIR = REPORT_DIR / "logs"
 DEFAULT_PORT = 8041
 
 sys.path.append(str(BACKEND_DIR))
@@ -164,7 +166,7 @@ def wait_for_api(base_url, timeout=240):
 
 
 def start_backend(port, mode):
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
     env["SEOULMATE_PORT"] = str(port)
     env["SEOULMATE_RELOAD"] = "0"
@@ -172,7 +174,7 @@ def start_backend(port, mode):
     env["SEOULMATE_PRIOR_WEIGHTS"] = json.dumps(BASE_WEIGHTS)
     env["PYTHONIOENCODING"] = "utf-8"
 
-    log_path = REPORT_DIR / "debug_generated_query_backend.log"
+    log_path = LOG_DIR / "debug_generated_query_backend.log"
     log_handle = log_path.open("w", encoding="utf-8")
     process = subprocess.Popen(
         [sys.executable, "app.py"],
@@ -344,11 +346,11 @@ def main():
     parser.add_argument("--index-limit", type=int, default=15)
     args = parser.parse_args()
 
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    DEBUG_REPORT_DIR.mkdir(parents=True, exist_ok=True)
     report = build_report(args)
     slug = slugify(args.query)
-    json_path = REPORT_DIR / f"debug_generated_query_{slug}.json"
-    markdown_path = REPORT_DIR / f"debug_generated_query_{slug}.md"
+    json_path = DEBUG_REPORT_DIR / f"debug_generated_query_{slug}.json"
+    markdown_path = DEBUG_REPORT_DIR / f"debug_generated_query_{slug}.md"
     json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     write_markdown(report, markdown_path)
 

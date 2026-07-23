@@ -16,9 +16,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "tests" / "reports"
+AUDIT_DIR = REPORT_DIR / "audits"
 COMPARISON_PATH = REPORT_DIR / "ranking_mode_comparison.json"
-JSON_OUT = REPORT_DIR / "generated_replacement_audit.json"
-MD_OUT = REPORT_DIR / "generated_replacement_audit.md"
+JSON_OUT = AUDIT_DIR / "generated_replacement_audit.json"
+MD_OUT = AUDIT_DIR / "generated_replacement_audit.md"
 PRIMARY_MODE = "generated_genre_soft"
 
 

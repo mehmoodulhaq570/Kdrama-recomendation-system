@@ -12,6 +12,11 @@ from collections import defaultdict
 import json
 import os
 import math
+from pathlib import Path
+
+
+BACKEND_DIR = Path(__file__).resolve().parent
+DEFAULT_PROFILES_DIR = BACKEND_DIR / "runtime_data" / "user_profiles"
 
 
 class UserProfileManager:
@@ -26,9 +31,9 @@ class UserProfileManager:
     - Dynamic profile updating
     """
 
-    def __init__(self, profiles_dir: str = "user_profiles"):
-        self.profiles_dir = profiles_dir
-        os.makedirs(profiles_dir, exist_ok=True)
+    def __init__(self, profiles_dir: str = None):
+        self.profiles_dir = str(Path(profiles_dir) if profiles_dir else DEFAULT_PROFILES_DIR)
+        os.makedirs(self.profiles_dir, exist_ok=True)
 
     def get_profile_path(self, user_id: str) -> str:
         """Get file path for user profile"""

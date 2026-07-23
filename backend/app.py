@@ -14,6 +14,7 @@ import uuid
 import time
 import json
 import re
+from pathlib import Path
 
 # Import Phase 1 enhancements
 from query_analyzer import QueryAnalyzer, get_search_strategy
@@ -27,12 +28,17 @@ from personalization import get_personalization_engine
 # CONFIGURATION
 # ======================================================
 MODEL_NAME = "paraphrase-multilingual-mpnet-base-v2"
-# Using fine-tuned cross-encoder trained on K-drama data
-CROSS_ENCODER_MODEL = r"D:\Projects\SeoulMate\model_traning\models\cross-enc-excellent"
-MODEL_DIR = r"D:\Projects\SeoulMate\model_traning\models"
-INDEX_DIR = r"D:\Projects\SeoulMate\model_traning\faiss_index"
-GENERATED_INDEX_DIR = os.path.join(os.path.dirname(__file__), "generated_indexes")
-RANKING_CONFIG_DIR = os.path.join(os.path.dirname(__file__), "ranking_config")
+BASE_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BASE_DIR.parent
+TRAINING_DIR = PROJECT_DIR / "training"
+RANKING_DIR = BASE_DIR / "ranking"
+
+# Using fine-tuned cross-encoder trained on K-drama data.
+CROSS_ENCODER_MODEL = str(TRAINING_DIR / "models" / "cross-enc-excellent")
+MODEL_DIR = str(TRAINING_DIR / "models")
+INDEX_DIR = str(TRAINING_DIR / "faiss_index")
+GENERATED_INDEX_DIR = str(RANKING_DIR / "indexes")
+RANKING_CONFIG_DIR = str(RANKING_DIR / "config")
 
 # ======================================================
 # FASTAPI SETUP

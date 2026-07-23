@@ -12,5 +12,5 @@
     "calibrated_theme_index.json",
     "title_aliases.json"
   ],
-  "source": "model_traning\\faiss_index\\meta.pkl"
+  "source": "training\\faiss_index\\meta.pkl"
 }
