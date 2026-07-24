@@ -14,6 +14,7 @@ import uuid
 import time
 import json
 import re
+import random
 from pathlib import Path
 
 # Import Phase 1 enhancements
@@ -683,6 +684,7 @@ def recommend(
     sort_by=None,
     sort_order="desc",
     similar_to=None,
+    refresh=0,
     user_id=None,  # NEW: For analytics tracking
     session_id=None,  # NEW: For session tracking
 ):
@@ -713,6 +715,7 @@ def recommend(
             "sort_by": sort_by,
             "sort_order": sort_order,
             "similar_to": similar_to,
+            "refresh": refresh,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cached = get_cached_result(cache_key)
@@ -962,6 +965,16 @@ def recommend(
     else:
         query_text = f"{drama['Title']} {drama.get('Genre', '')} {drama.get('Description', '')} {drama.get('Cast', '')} {expanded_query}"
 
+    title_similarity_mode = bool(drama) and not similar_to
+    if title_similarity_mode:
+        print(
+            f"Title similarity mode: using '{drama['Title']}' as the seed drama and suppressing keyword-only matches"
+        )
+        query_text = " ".join(
+            str(drama.get(field, ""))
+            for field in ["Genre", "Description", "keywords", "Cast", "Director"]
+        )
+
     # ---- Stage 4.3: FAISS Semantic Search on filtered corpus ----
     query_emb = cached_encode(query_text)
     # Optimize search_k for better performance while maintaining accuracy
@@ -992,12 +1005,16 @@ def recommend(
     if max_bm25 == 0:
         max_bm25 = 1
 
+    semantic_weight = 1.0 if title_similarity_mode else alpha
+    lexical_weight = 0.0 if title_similarity_mode else (1 - alpha)
+
     for rec, score in faiss_results:
-        combined_scores[rec["Title"]] = alpha * score
-    for rec, score in bm25_results:
-        combined_scores[rec["Title"]] = combined_scores.get(rec["Title"], 0) + (
-            1 - alpha
-        ) * (score / max_bm25)
+        combined_scores[rec["Title"]] = semantic_weight * score
+    if lexical_weight > 0:
+        for rec, score in bm25_results:
+            combined_scores[rec["Title"]] = combined_scores.get(rec["Title"], 0) + (
+                lexical_weight * (score / max_bm25)
+            )
 
     # Apply genre boost if genres were detected
     if detected_genres:
@@ -1312,7 +1329,7 @@ def recommend(
     exact_match = next(
         (m for m in metadata if m["Title"].lower() == title.lower()), None
     )
-    if exact_match:
+    if exact_match and not title_similarity_mode:
         # Remove from current position if exists, then prepend
         filtered = [r for r in filtered if r["Title"] != exact_match["Title"]]
         filtered.insert(0, exact_match)
@@ -1323,10 +1340,13 @@ def recommend(
     if not resolved_match and not exact_match and intent not in skip_fuzzy_intents:
         resolved_match = drama
 
-    if resolved_match:
+    if resolved_match and not title_similarity_mode:
         filtered = [r for r in filtered if r["Title"] != resolved_match["Title"]]
         filtered.insert(0, resolved_match)
         print(f"Title match injected: {resolved_match['Title']}")
+
+    if title_similarity_mode:
+        filtered = [r for r in filtered if r["Title"] != drama["Title"]]
 
     # Handle similar_to filter (requires FAISS search)
     if similar_to:
@@ -1336,16 +1356,21 @@ def recommend(
             None,
         )
         if sim_drama:
-            sim_query = f"{sim_drama['Title']} {sim_drama.get('Genre', '')} {sim_drama.get('Description', '')} {sim_drama.get('Cast', '')}"
+            sim_query = " ".join(
+                str(sim_drama.get(field, ""))
+                for field in ["Genre", "Description", "keywords", "Cast", "Director"]
+            )
             sim_emb = cached_encode(sim_query)
             D_sim, I_sim = index.search(sim_emb, len(filtered_metadata) + 20)
             # Only keep results that are in our filtered set
-            sim_titles = [
-                metadata[idx]["Title"]
+            sim_results = [
+                metadata[idx]
                 for idx in I_sim[0]
-                if idx < len(metadata) and idx in filtered_indices
+                if idx < len(metadata)
+                and idx in filtered_indices
+                and metadata[idx]["Title"].lower() != similar_to.lower()
             ]
-            filtered = [r for r in filtered if r["Title"] in sim_titles]
+            filtered = sim_results
 
     # Sorting
     if sort_by:
@@ -1366,6 +1391,25 @@ def recommend(
             key=lambda r: float(r.get("rating_value", r.get("score", 0))),
             reverse=True,
         )
+
+    should_diversify = (
+        refresh
+        and not sort_by
+        and not top_rated
+        and not title_similarity_mode
+        and intent
+        in [QueryIntent.GENRE_BROWSE, QueryIntent.VAGUE, QueryIntent.EMOTION_BASED]
+    )
+    if should_diversify and len(filtered) > top_n:
+        rng = random.Random(f"{title}|{genre}|{refresh}")
+        quality_pool_size = min(len(filtered), max(top_n * 4, 20))
+        quality_pool = filtered[:quality_pool_size]
+        fixed_head = quality_pool[: min(2, len(quality_pool))]
+        shuffle_pool = quality_pool[len(fixed_head) :]
+        rng.shuffle(shuffle_pool)
+        filtered = fixed_head + shuffle_pool + filtered[quality_pool_size:]
+        print(f"Applied browse refresh diversification: refresh={refresh}")
+
     top_results = filtered[:top_n]
 
     query_alias = title.lower().strip()
@@ -1506,6 +1550,7 @@ def recommend(
             "sort_by": sort_by,
             "sort_order": sort_order,
             "similar_to": similar_to,
+            "refresh": refresh,
         },
         "recommendations": top_results,
     }
@@ -1532,6 +1577,7 @@ def recommend(
             "sort_by": sort_by,
             "sort_order": sort_order,
             "similar_to": similar_to,
+            "refresh": refresh,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cache_result(cache_key, response)
@@ -1608,6 +1654,7 @@ def get_recommendations(
     ),
     sort_order: str = Query("desc", description="Sort order: asc or desc"),
     similar_to: str = Query(None, description="Find dramas similar to this title"),
+    refresh: int = Query(0, description="Refresh token for varied browse results"),
     user_id: str = Query(None, description="User ID for analytics (optional)"),
     session_id: str = Query(None, description="Session ID for analytics (optional)"),
 ):
@@ -1634,6 +1681,7 @@ def get_recommendations(
         sort_by=sort_by,
         sort_order=sort_order,
         similar_to=similar_to,
+        refresh=refresh,
         user_id=user_id,
         session_id=session_id,
     )

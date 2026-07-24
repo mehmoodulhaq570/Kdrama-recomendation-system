@@ -39,6 +39,10 @@ if "last_filter_params" not in st.session_state:
     st.session_state.last_filter_params = {}
 if "viewed_dramas" not in st.session_state:
     st.session_state.viewed_dramas = []
+if "search_refresh" not in st.session_state:
+    st.session_state.search_refresh = 0
+if "pending_similar_to" not in st.session_state:
+    st.session_state.pending_similar_to = None
 
 # ======================================================
 # PAGE CONFIG
@@ -508,11 +512,13 @@ with tab1:
 
     with example_col1:
         if st.button("💕 Crash Landing on You", use_container_width=True):
-            st.session_state.quick_search_query = "Crash Landing on You"
+            st.session_state.quick_search_query = "similar to Crash Landing on You"
+            st.session_state.pending_similar_to = "Crash Landing on You"
             st.session_state.quick_search_genre = None
     with example_col2:
         if st.button("🍜 Itaewon Class", use_container_width=True):
-            st.session_state.quick_search_query = "Itaewon Class"
+            st.session_state.quick_search_query = "similar to Itaewon Class"
+            st.session_state.pending_similar_to = "Itaewon Class"
             st.session_state.quick_search_genre = None
     with example_col3:
         if st.button("😂 Romantic Comedy", use_container_width=True):
@@ -537,6 +543,7 @@ with tab1:
 
     # Search results
     if query and search_button:
+        st.session_state.search_refresh += 1
         # FIRST: Pre-analyze the query to detect genres BEFORE searching
         if not genre:  # Only auto-detect if user hasn't manually set a genre
             try:
@@ -574,7 +581,12 @@ with tab1:
             "sort_by": sort_by,
             "sort_order": sort_order,
             "similar_to": similar_to,
+            "refresh": st.session_state.search_refresh,
         }
+        if st.session_state.pending_similar_to:
+            filter_params["similar_to"] = st.session_state.pending_similar_to
+            st.session_state.pending_similar_to = None
+
         # Remove empty values
         filter_params = {k: v for k, v in filter_params.items() if v not in [None, ""]}
 
@@ -761,7 +773,8 @@ with tab1:
 
                     with btn_col3:
                         if st.button("🔄 Similar", key=f"similar_{idx}_{title}"):
-                            st.session_state.quick_search_query = title
+                            st.session_state.quick_search_query = f"similar to {title}"
+                            st.session_state.pending_similar_to = title
                             st.session_state.quick_search_genre = None
                             st.session_state.last_results = (
                                 None  # Clear to trigger new search

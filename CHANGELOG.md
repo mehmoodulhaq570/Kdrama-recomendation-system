@@ -4,6 +4,20 @@ Important project history reconstructed from Git commits and project documentati
 
 ## 2026-07-24
 
+### Recommendation Flow and Runtime Data Updates
+
+- Updated exact title searches to behave like similar-drama recommendations instead of literal keyword searches.
+  - Title queries such as `Crash Landing on You` now use the matched drama as a seed.
+  - BM25 keyword influence is suppressed for exact-title similarity mode so individual title words like `crash` do not dominate results.
+  - The seed drama is excluded from its own recommendation list.
+- Updated the frontend `Similar` action to call the backend `similar_to` flow instead of re-searching the clicked title as plain text.
+- Added a `refresh` token for broad browse queries so repeated genre/vague/emotion searches can lightly vary results from a high-quality candidate pool.
+- Confirmed runtime analytics storage locations:
+  - searches, clicks, and watchlist interactions: `backend/runtime_data/analytics/`
+  - user taste profiles: `backend/runtime_data/user_profiles/`
+- Organized training support scripts under `training/steps/` while keeping `training/train_pipeline.py` as the main entry point.
+- Updated training step paths so generated artifacts still write to `training/training_data/`, `training/models/`, and `training/faiss_index/`.
+
 ### Repository Structure Cleanup
 
 - Reorganized the project layout so backend ranking, training, data, scrapers, docs, and run scripts have clearer ownership.
