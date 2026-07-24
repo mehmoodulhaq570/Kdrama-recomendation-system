@@ -16,7 +16,7 @@ from pathlib import Path
 import requests
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 BASE_WEIGHTS = {
     "genre_combo": 2.55,
     "genre": 2.2,
@@ -218,7 +218,7 @@ def run_scenario(name, scenario, port):
             tail = log_path.read_text(encoding="utf-8", errors="replace")[-3000:]
             raise RuntimeError(f"{exc}\nBackend log tail:\n{tail}") from exc
         result = subprocess.run(
-            [sys.executable, "tests/evaluate_accuracy.py"],
+            [sys.executable, "tests/evaluation/evaluate_accuracy.py"],
             cwd=ROOT,
             env=env,
             capture_output=True,

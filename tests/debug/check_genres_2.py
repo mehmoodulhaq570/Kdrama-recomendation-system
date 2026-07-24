@@ -1,13 +1,14 @@
 import pickle
 import os
+from pathlib import Path
 
 # Find the metadata file
 metadata_path = None
+ROOT = Path(__file__).resolve().parents[2]
 possible_paths = [
-    "../training/faiss_index/meta.pkl",
+    str(ROOT / "training" / "faiss_index" / "meta.pkl"),
     "./meta.pkl",
     "faiss_index/meta.pkl",
-    "d:/Projects/SeoulMate/training/faiss_index/meta.pkl",
 ]
 
 for path in possible_paths:

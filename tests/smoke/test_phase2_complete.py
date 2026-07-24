@@ -6,7 +6,7 @@ Tests: Backend API + User Profiles + Personalization + Frontend Integration
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "backend"))
 
 import requests
 import time

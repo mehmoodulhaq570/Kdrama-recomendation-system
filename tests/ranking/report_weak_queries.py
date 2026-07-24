@@ -19,6 +19,10 @@ from pathlib import Path
 
 import requests
 
+ROOT = Path(__file__).resolve().parents[2]
+EVALUATION_DIR = ROOT / "tests" / "evaluation"
+sys.path.append(str(EVALUATION_DIR))
+
 from evaluate_accuracy import (
     SEARCH_TEST_CASES,
     calculate_mrr,
@@ -28,7 +32,6 @@ from evaluate_accuracy import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "tests" / "reports"
 AUDIT_DIR = REPORT_DIR / "audits"
 LOG_DIR = REPORT_DIR / "logs"

@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 REPORT_DIR = ROOT / "tests" / "reports"
 AUDIT_DIR = REPORT_DIR / "audits"
 COMPARISON_PATH = REPORT_DIR / "ranking_mode_comparison.json"

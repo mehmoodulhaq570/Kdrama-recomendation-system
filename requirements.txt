@@ -1,0 +1,30 @@
+# SeoulMate combined runtime/training requirements.
+# For a smaller UI-only install, use frontend/requirements.txt.
+# For training-only install, use training/requirements.txt.
+
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+
+streamlit==1.29.0
+requests==2.31.0
+
+pandas==2.1.4
+numpy
+openpyxl
+
+sentence-transformers
+faiss-cpu
+rank-bm25
+rapidfuzz
+torch
+transformers
+
+scikit-learn
+lightgbm
+datasets
+accelerate>=0.26.0
+tqdm
+huggingface_hub[hf_xet]
+hf_xet

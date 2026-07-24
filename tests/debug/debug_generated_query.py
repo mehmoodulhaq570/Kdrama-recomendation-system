@@ -2,7 +2,7 @@
 Trace one query through generated-index candidates and final API ranking.
 
 Usage:
-    python tests/debug_generated_query.py "school drama"
+    python tests/debug/debug_generated_query.py "school drama"
 
 This is an API-level diagnostic for generated replacement work. It shows what
 the calibrated generated indexes can offer for a query, then compares that with
@@ -22,10 +22,13 @@ from pathlib import Path
 
 import requests
 
+ROOT = Path(__file__).resolve().parents[2]
+EVALUATION_DIR = ROOT / "tests" / "evaluation"
+sys.path.append(str(EVALUATION_DIR))
+
 from evaluate_accuracy import SEARCH_TEST_CASES
 
 
-ROOT = Path(__file__).resolve().parents[1]
 BACKEND_DIR = ROOT / "backend"
 GENERATED_INDEX_DIR = BACKEND_DIR / "ranking" / "indexes"
 REPORT_DIR = ROOT / "tests" / "reports"

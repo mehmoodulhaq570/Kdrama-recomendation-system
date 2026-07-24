@@ -1,3 +1,3 @@
 $ErrorActionPreference = "Stop"
 Set-Location (Join-Path $PSScriptRoot "..")
-python tests\evaluate_accuracy.py
+python tests\evaluation\evaluate_accuracy.py

@@ -227,7 +227,7 @@ def cached_search(query, top_n):
 1. **Immediate:** Investigate `query_analyzer.py` for genre detection bug
 2. **Today:** Add debug logging to personalization code
 3. **This Week:** Implement query expansion for genre searches
-4. **Test:** Re-run `python tests/evaluate_accuracy.py` after each fix
+4. **Test:** Re-run `python tests/evaluation/evaluate_accuracy.py` after each fix
 
 ---
 

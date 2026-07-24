@@ -1,0 +1,66 @@
+[project]
+name = "seoulmate"
+version = "0.1.0"
+description = "AI-powered Korean drama recommendation system with semantic search, calibrated ranking, personalization, and analytics."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "SeoulMate Contributors" }
+]
+keywords = [
+  "recommendation-system",
+  "k-drama",
+  "fastapi",
+  "streamlit",
+  "faiss",
+  "sentence-transformers",
+  "semantic-search"
+]
+
+[project.urls]
+Homepage = "https://github.com/mehmoodulhaq570/Seoulmate"
+Repository = "https://github.com/mehmoodulhaq570/Seoulmate"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/smoke"]
+python_files = ["test_*.py"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+exclude = [
+  ".git",
+  ".venv",
+  "__pycache__",
+  "backend/runtime_data",
+  "tests/reports",
+  "training/models",
+  "training/faiss_index",
+  "training/training_data",
+  "scrapers/DramaList_Scrapper/dramas_html",
+  "scrapers/DramaList_Scrapper/html_pages"
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | __pycache__
+  | backend/runtime_data
+  | tests/reports
+  | training/models
+  | training/faiss_index
+  | training/training_data
+  | scrapers/DramaList_Scrapper/dramas_html
+  | scrapers/DramaList_Scrapper/html_pages
+)/
+'''

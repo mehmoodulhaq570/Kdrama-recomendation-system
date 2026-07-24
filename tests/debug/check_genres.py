@@ -1,7 +1,9 @@
 import pickle
+from pathlib import Path
 
 # Load metadata
-with open(r"D:\Projects\SeoulMate\training\faiss_index\meta.pkl", "rb") as f:
+ROOT = Path(__file__).resolve().parents[2]
+with open(ROOT / "training" / "faiss_index" / "meta.pkl", "rb") as f:
     meta = pickle.load(f)
 
 print("Sample drama keys:", list(meta[0].keys()))

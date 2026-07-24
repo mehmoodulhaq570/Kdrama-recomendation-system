@@ -6,7 +6,7 @@ Phase 2: Step 2 - Personalized Weighting
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "backend"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "backend"))
 
 from user_profile import UserProfileManager
 from personalization import PersonalizationEngine

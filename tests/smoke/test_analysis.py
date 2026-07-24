@@ -1,6 +1,8 @@
 import sys
+from pathlib import Path
 
-sys.path.append(".")
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.append(str(ROOT / "backend"))
 from query_analyzer import QueryAnalyzer
 
 analyzer = QueryAnalyzer()

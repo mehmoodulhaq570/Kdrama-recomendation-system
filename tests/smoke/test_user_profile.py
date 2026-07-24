@@ -4,13 +4,15 @@ Phase 2: Personalization
 """
 
 import sys
+from pathlib import Path
 
-sys.path.append(".")
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.append(str(ROOT / "backend"))
 
 from user_profile import UserProfileManager
 
 # Create profile manager
-profile_manager = UserProfileManager(profiles_dir="../tests/test_profiles")
+profile_manager = UserProfileManager(profiles_dir=str(ROOT / "tests" / "test_profiles"))
 
 print("=" * 80)
 print("Testing User Profile System (Phase 2)")

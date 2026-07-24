@@ -39,6 +39,30 @@ Important project history reconstructed from Git commits and project documentati
 - Updated report scripts so future logs/debug/audit outputs use the new report folders.
 - Left nested Git metadata in `training/.git/` and `frontend/.git/` untouched pending explicit approval to delete it.
 
+### Test Folder Structure Cleanup
+
+- Reorganized `tests/` into clearer subfolders:
+  - `tests/evaluation/` for live accuracy evaluation and offline generated-index validation
+  - `tests/ranking/` for ranking mode comparisons, prior experiments, weak-query reports, and generated-replacement audits
+  - `tests/debug/` for single-query generated-index tracing and metadata inspection helpers
+  - `tests/smoke/` for older API, personalization, filter, profile, and phase checks
+  - `tests/docs/` for historical reports and improvement notes
+- Moved hidden ranking experiment logs into `tests/reports/logs/`.
+- Updated test scripts and helper commands to use the new paths.
+- Verified the new structure with:
+  - `python -m compileall tests`
+  - `python tests\evaluation\validate_generated_indexes.py`
+
+### Root Project Metadata
+
+- Added root project files for a more professional repository setup:
+  - `requirements.txt`
+  - `LICENSE`
+  - `pyproject.toml`
+  - `CONTRIBUTING.md`
+- Added combined dependency installation guidance while keeping frontend/training-specific requirement files available.
+- Added Python project metadata and basic tool configuration for pytest, Ruff, and Black.
+
 
 ## 2026-07-23
 

@@ -14,7 +14,7 @@ from itertools import combinations
 from pathlib import Path
 
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path(__file__).resolve().parents[2]
 BACKEND_DIR = ROOT_DIR / "backend"
 INDEX_DIR = BACKEND_DIR / "ranking" / "indexes"
 
