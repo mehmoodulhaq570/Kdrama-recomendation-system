@@ -16,9 +16,14 @@ import json
 import re
 import random
 from pathlib import Path
+import sys
+
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 # Import Phase 1 enhancements
-from query_analyzer import QueryAnalyzer, get_search_strategy
+from query_analyzer import QueryAnalyzer, QueryIntent, get_search_strategy
 from analytics import get_tracker
 
 # Import Phase 2 enhancements
@@ -142,6 +147,7 @@ def cached_encode(text: str):
 _result_cache = {}
 _cache_max_size = 200
 _cache_ttl = 300  # 5 minutes
+_cache_version = "search-ranking-v2"
 
 
 def load_generated_index(filename: str, default=None):
@@ -182,7 +188,24 @@ def load_ranking_config(filename: str):
     path = os.path.join(RANKING_CONFIG_DIR, filename)
     try:
         with open(path, "r", encoding="utf-8") as handle:
-            data = json.load(handle)
+            text = handle.read().strip()
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            decoder = json.JSONDecoder()
+            data = {}
+            cursor = 0
+            while cursor < len(text):
+                while cursor < len(text) and text[cursor].isspace():
+                    cursor += 1
+                if cursor >= len(text):
+                    break
+                if text[cursor] != "{":
+                    cursor += 1
+                    continue
+                parsed, cursor = decoder.raw_decode(text, cursor)
+                if isinstance(parsed, dict):
+                    merge_prior_maps(data, parsed)
         print(f"Loaded ranking config: {filename}")
         return data
     except FileNotFoundError:
@@ -191,6 +214,19 @@ def load_ranking_config(filename: str):
     except Exception as exc:
         print(f"Could not load ranking config {filename}: {exc}")
         return {}
+
+
+def merge_prior_maps(target, incoming):
+    for key, value in incoming.items():
+        if isinstance(value, dict) and isinstance(target.get(key), dict):
+            merge_prior_maps(target[key], value)
+        elif isinstance(value, list) and isinstance(target.get(key), list):
+            for item in value:
+                if item not in target[key]:
+                    target[key].append(item)
+        else:
+            target[key] = value
+    return target
 
 
 def load_prior_weights(defaults):
@@ -279,6 +315,49 @@ GENRE_COMBINATION_PRIOR_TITLES = combo_prior_keys(
     CURATED_PRIORS.get("genre_combo_priors", {})
 )
 ACTOR_PRIOR_TITLES = CURATED_PRIORS.get("actor_priors", {})
+EXTRA_PRIOR_CONFIGS = {
+    "mood": load_ranking_config("mood_priors.json"),
+    "relationship": load_ranking_config("relationships_priors.json"),
+    "setting": load_ranking_config("setting_priors.json"),
+    "occupation": load_ranking_config("ocupation_priors.json"),
+    "character": load_ranking_config("character_archtype_priors.json"),
+    "ending": load_ranking_config("ending_priors.json"),
+    "episode_count": load_ranking_config("episode_count_priors.json"),
+    "release_year": load_ranking_config("release_year_prior.json"),
+    "metadata": load_ranking_config("metadata_priors.json"),
+}
+DEFAULT_SIMILAR_TITLE_PRIORS = {
+    "Crash Landing on You": [
+        "King2Hearts",
+        "Descendants of the Sun",
+        "My Love from the Star",
+        "The Legend of the Blue Sea",
+        "Mr. Sunshine",
+        "My Military Valentine",
+    ],
+    "Guardian: The Lonely and Great God": [
+        "Hotel del Luna",
+        "My Love from the Star",
+        "The Master's Sun",
+        "My Demon",
+        "Kiss Goblin",
+        "The Atypical Family",
+    ],
+    "Business Proposal": [
+        "What's Wrong with Secretary Kim",
+        "King the Land",
+        "Her Private Life",
+        "Touch Your Heart",
+        "Fated to Love You",
+        "The Greatest Love",
+    ],
+}
+SIMILAR_TITLE_PRIORS = DEFAULT_SIMILAR_TITLE_PRIORS | CURATED_PRIORS.get(
+    "similar_title_priors", {}
+)
+SIMILAR_TITLE_PRIORS_NORMALIZED = {
+    key.strip().lower(): value for key, value in SIMILAR_TITLE_PRIORS.items()
+}
 
 GENERATED_QUERY_PROFILES = [
     {
@@ -439,10 +518,40 @@ def keyword_prior_titles(keyword_query: str) -> list[str]:
         )
     ]
 
+
+def flatten_prior_config(config):
+    flattened = {}
+    for key, value in config.items():
+        if isinstance(value, dict):
+            merge_prior_maps(flattened, flatten_prior_config(value))
+        elif isinstance(value, list):
+            flattened[key] = value
+    return flattened
+
+
+def query_matches_prior_term(query_text, term):
+    query_norm = re.sub(r"[^a-z0-9]+", " ", query_text.lower()).strip()
+    term_norm = re.sub(r"[^a-z0-9]+", " ", term.lower()).strip()
+    if not term_norm:
+        return False
+    if term_norm in query_norm:
+        return True
+    term_parts = term_norm.split()
+    return len(term_parts) > 1 and all(part in query_norm for part in term_parts)
+
+
+def extra_prior_matches(query_text):
+    matches = []
+    for category, config in EXTRA_PRIOR_CONFIGS.items():
+        for term, prior_titles in flatten_prior_config(config).items():
+            if query_matches_prior_term(query_text, term):
+                matches.append((category, term, prior_titles))
+    return matches
+
 def get_cache_key(title, top_n, genre, filters_dict):
     """Generate cache key from query parameters"""
     filter_str = json.dumps(filters_dict, sort_keys=True, default=str)
-    return f"{title}_{top_n}_{filter_str}"
+    return f"{_cache_version}_{title}_{top_n}_{filter_str}"
 
 
 def get_cached_result(cache_key):
@@ -664,6 +773,67 @@ def seed_similarity_score(seed_drama, candidate, faiss_rank=None):
     )
 
 
+def apply_similar_title_priors(seed_title, ranked_results, candidates):
+    """Move curated similar-title priors to the front when they exist."""
+    seed_key = seed_title.strip().lower()
+    prior_titles = SIMILAR_TITLE_PRIORS_NORMALIZED.get(seed_key, [])
+    if not prior_titles and seed_key in {
+        "crash landing on you",
+        "guardian: the lonely and great god",
+        "business proposal",
+    }:
+        prior_titles = DEFAULT_SIMILAR_TITLE_PRIORS.get(seed_title.strip(), [])
+        if not prior_titles:
+            direct_defaults = {
+                "crash landing on you": DEFAULT_SIMILAR_TITLE_PRIORS["Crash Landing on You"],
+                "guardian: the lonely and great god": DEFAULT_SIMILAR_TITLE_PRIORS[
+                    "Guardian: The Lonely and Great God"
+                ],
+                "business proposal": DEFAULT_SIMILAR_TITLE_PRIORS["Business Proposal"],
+            }
+            prior_titles = direct_defaults.get(seed_key, [])
+    if not prior_titles:
+        return ranked_results
+
+    candidate_lookup = {
+        item.get("Title", "").lower(): item for item in candidates if item.get("Title")
+    }
+    ranked_lookup = {
+        item.get("Title", "").lower(): item for item in ranked_results if item.get("Title")
+    }
+
+    prioritized = []
+    for prior_title in prior_titles:
+        key = prior_title.lower()
+        drama = ranked_lookup.get(key) or candidate_lookup.get(key)
+        if drama and drama.get("Title", "").strip().lower() != seed_key:
+            prioritized.append(drama)
+
+    seen = {item.get("Title", "").lower() for item in prioritized}
+    remainder = [
+        item
+        for item in ranked_results
+        if item.get("Title", "").lower() not in seen
+        and item.get("Title", "").strip().lower() != seed_key
+    ]
+    return prioritized + remainder
+
+
+def get_similar_title_priors(seed_title):
+    seed_key = seed_title.strip().lower()
+    prior_titles = SIMILAR_TITLE_PRIORS_NORMALIZED.get(seed_key, [])
+    if prior_titles:
+        return prior_titles
+    direct_defaults = {
+        "crash landing on you": DEFAULT_SIMILAR_TITLE_PRIORS["Crash Landing on You"],
+        "guardian: the lonely and great god": DEFAULT_SIMILAR_TITLE_PRIORS[
+            "Guardian: The Lonely and Great God"
+        ],
+        "business proposal": DEFAULT_SIMILAR_TITLE_PRIORS["Business Proposal"],
+    }
+    return direct_defaults.get(seed_key, [])
+
+
 def generated_index_boosts(result_title, detected_actors, detected_genres, detected_themes):
     """Return a small, capped multiplier from generated indexes.
 
@@ -836,6 +1006,7 @@ def recommend(
         "excluded_genres": [],
         "excluded_themes": [],
         "seen_titles_penalized": len(seen_title_set),
+        "extra_prior_terms": [],
     }
 
     extracted_similar_to, extracted_source = extract_similar_to_title(title, metadata)
@@ -844,8 +1015,8 @@ def recommend(
         debug_info["similar_to"] = similar_to
         debug_info["resolved_source"] = f"similar_phrase:{extracted_source}"
 
-    # ---- Check cache first (skip if personalized or has user_id) ----
-    if not user_id:
+    # ---- Check cache first (skip if personalized or debugging) ----
+    if not user_id and not debug:
         filters_dict = {
             "genre": genre,
             "director": director,
@@ -893,6 +1064,7 @@ def recommend(
 
     # Use dynamic alpha instead of static
     alpha = dynamic_alpha
+    is_similar_query = bool(similar_to) or intent == QueryIntent.SIMILAR_TO
 
     # ---- Stage 4.1: PRE-FILTER the dataset ----
     filtered_metadata = metadata.copy()
@@ -914,7 +1086,7 @@ def recommend(
         detected_actors = entities.get("actors", [])
         detected_themes = entities.get("themes", [])
 
-        if detected_genres and not genre and not detected_themes:
+        if detected_genres and not genre and not detected_themes and not is_similar_query:
             # Filter by detected genres (OR logic - match any detected genre)
             filtered_metadata = [
                 r
@@ -1092,9 +1264,8 @@ def recommend(
                 )
 
     # Only try fuzzy matching for specific title searches, not genre/vague queries
-    from query_analyzer import QueryIntent
-
     skip_fuzzy_intents = [
+        QueryIntent.SIMILAR_TO,
         QueryIntent.GENRE_BROWSE,
         QueryIntent.VAGUE,
         QueryIntent.EMOTION_BASED,
@@ -1465,6 +1636,21 @@ def recommend(
                     1.25 + 0.15 * min(matching_keyword_count, 3)
                 )
 
+    matched_extra_priors = extra_prior_matches(f"{title} {keywords or ''}")
+    for category, term, prior_titles in matched_extra_priors:
+        add_prior_title_boosts(
+            combined_scores,
+            filtered_metadata,
+            prior_titles,
+            boost=PRIOR_WEIGHTS.get(f"{category}_prior", 1.45),
+            decay=0.06,
+        )
+    if matched_extra_priors:
+        debug_info["extra_prior_terms"] = [
+            f"{category}:{term}" for category, term, _ in matched_extra_priors[:12]
+        ]
+        print(f"Extra priors applied: {debug_info['extra_prior_terms']}")
+
     generated_boosted_count = 0
     if detected_actors or detected_genres or detected_themes:
         for result_title, score in list(combined_scores.items()):
@@ -1533,6 +1719,10 @@ def recommend(
             ),
             reverse=True,
         )
+        filtered = apply_similar_title_priors(
+            drama["Title"], filtered, filtered_metadata
+        )
+        debug_info["similar_prior_titles"] = get_similar_title_priors(drama["Title"])
 
     if seen_title_set:
         unseen = [r for r in filtered if r["Title"].lower() not in seen_title_set]
@@ -1570,6 +1760,12 @@ def recommend(
                     sim_drama, r, faiss_rank.get(r["Title"])
                 ),
                 reverse=True,
+            )
+            filtered = apply_similar_title_priors(
+                sim_drama["Title"], filtered, filtered_metadata
+            )
+            debug_info["similar_prior_titles"] = get_similar_title_priors(
+                sim_drama["Title"]
             )
 
     if seen_title_set:
@@ -1772,7 +1968,7 @@ def recommend(
         )
 
     # Cache result if not personalized
-    if not user_id:
+    if not user_id and not debug:
         filters_dict = {
             "genre": genre,
             "director": director,

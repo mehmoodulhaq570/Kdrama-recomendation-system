@@ -1,0 +1,61 @@
+{
+  "episode_count_priors": {
+    "12 episodes": [
+      "The Glory",
+      "Moving",
+      "Bloodhounds",
+      "Mask Girl",
+      "Celebrity",
+      "Business Proposal",
+      "Daily Dose of Sunshine",
+      "Weak Hero Class 1",
+      "Move to Heaven",
+      "D.P."
+    ],
+
+    "16 episodes": [
+      "Business Proposal",
+      "Goblin",
+      "Hospital Playlist",
+      "Hometown Cha-Cha-Cha",
+      "Crash Landing on You",
+      "Vincenzo",
+      "Extraordinary Attorney Woo",
+      "Queen of Tears",
+      "My Demon",
+      "Doctor Slump",
+      "Twenty Five Twenty One",
+      "Lovely Runner"
+    ],
+
+    "20+ episodes": [
+      "Empress Ki",
+      "Six Flying Dragons",
+      "Jumong",
+      "The Penthouse: War in Life",
+      "Queen Seon Duk",
+      "Dong Yi"
+    ],
+
+    "short drama": [
+      "The Glory",
+      "Business Proposal",
+      "Bloodhounds",
+      "Mask Girl",
+      "Move to Heaven",
+      "Daily Dose of Sunshine",
+      "Weak Hero Class 1",
+      "D.P.",
+      "Celebrity",
+      "One Ordinary Day"
+    ],
+
+    "long drama": [
+      "Empress Ki",
+      "Six Flying Dragons",
+      "Jumong",
+      "Dong Yi",
+      "The Penthouse: War in Life"
+    ]
+  }
+}

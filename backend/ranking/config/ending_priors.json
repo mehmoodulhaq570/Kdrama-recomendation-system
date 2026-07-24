@@ -1,0 +1,125 @@
+{
+  "bittersweet ending": [
+    "Twenty Five Twenty One",
+    "My Mister",
+    "The Red Sleeve",
+    "Scarlet Heart Ryeo",
+    "Youth of May",
+    "Signal",
+    "Chicago Typewriter"
+  ],
+
+  "sad ending": [
+    "Youth of May",
+    "Scarlet Heart Ryeo",
+    "Uncontrollably Fond",
+    "Mr. Sunshine",
+    "The Hymn of Death",
+    "Tree of Heaven"
+  ],
+
+  "tragic ending": [
+    "Youth of May",
+    "Mr. Sunshine",
+    "Scarlet Heart Ryeo",
+    "The Hymn of Death",
+    "Tree of Heaven"
+  ],
+
+  "open ending": [
+    "Signal",
+    "Vagabond",
+    "Memories of the Alhambra",
+    "Mouse",
+    "The Silent Sea"
+  ],
+
+  "satisfying ending": [
+    "The Glory",
+    "Vincenzo",
+    "Business Proposal",
+    "Hospital Playlist",
+    "Prison Playbook",
+    "Reply 1988",
+    "Extraordinary Attorney Woo"
+  ],
+
+  "revenge completed": [
+    "The Glory",
+    "Vincenzo",
+    "Taxi Driver",
+    "My Name",
+    "Again My Life"
+  ],
+
+  "justice served": [
+    "Vincenzo",
+    "Taxi Driver",
+    "The Glory",
+    "Lawless Lawyer",
+    "Again My Life",
+    "Juvenile Justice"
+  ],
+
+  "cliffhanger": [
+    "Vagabond",
+    "Signal",
+    "The Silent Sea",
+    "Sweet Home",
+    "Kingdom"
+  ],
+
+  "multiple endings": [
+    "The Penthouse: War in Life",
+    "Love Alarm",
+    "Sweet Home"
+  ],
+
+  "happy ending": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Her Private Life",
+    "Strong Woman Do Bong Soon",
+    "Touch Your Heart",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Fight for My Way",
+    "Hometown Cha-Cha-Cha",
+    "Extraordinary Attorney Woo",
+    "Hospital Playlist",
+    "Run On",
+    "Doctor Slump",
+    "Romance Is a Bonus Book",
+    "Because This Is My First Life",
+    "Our Beloved Summer",
+    "Sh**ting Stars",
+    "Love to Hate You",
+    "Dali and Cocky Prince"
+  ],
+
+  "romance happy ending": [
+    "Business Proposal",
+    "King the Land",
+    "Hometown Cha-Cha-Cha",
+    "What's Wrong with Secretary Kim",
+    "Her Private Life",
+    "Strong Woman Do Bong Soon",
+    "Touch Your Heart",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Fight for My Way",
+    "Run On",
+    "Doctor Slump",
+    "Because This Is My First Life"
+  ],
+
+  "revenge ending": [
+    "The Glory",
+    "Vincenzo",
+    "Taxi Driver",
+    "My Name",
+    "Lawless Lawyer",
+    "Again My Life",
+    "Eve",
+    "The Devil Judge"
+  ]
+}

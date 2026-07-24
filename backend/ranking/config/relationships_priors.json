@@ -1,0 +1,558 @@
+{
+  "friends to lovers": [
+    "Fight for My Way",
+    "Romance Is a Bonus Book",
+    "Our Beloved Summer",
+    "Doctor Slump",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Reply 1988",
+    "Soundtrack #1",
+    "Twenty Five Twenty One",
+    "Dear.M",
+    "More Than Friends",
+    "The Time We Were Not in Love"
+  ],
+
+  "childhood friends": [
+    "Fight for My Way",
+    "Doctor Slump",
+    "Our Beloved Summer",
+    "Romance Is a Bonus Book",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Bubblegum",
+    "Reply 1988",
+    "Come and Hug Me"
+  ],
+
+  "enemies to lovers": [
+    "Mad for Each Other",
+    "Love to Hate You",
+    "Mr. Queen",
+    "The Law Cafe",
+    "Crash Course in Romance",
+    "Crazy Love",
+    "Her Private Life",
+    "Dali and Cocky Prince",
+    "Suspicious Partner",
+    "So I Married the Anti-Fan",
+    "Secret Garden"
+  ],
+
+  "fake dating": [
+    "Business Proposal",
+    "Marriage, Not Dating",
+    "Love to Hate You",
+    "Her Private Life",
+    "The Beauty Inside",
+    "Something About 1 Percent",
+    "My Secret Romance"
+  ],
+
+  "contract marriage": [
+    "Because This Is My First Life",
+    "Love in Contract",
+    "Marriage Contract",
+    "The Story of Park's Marriage Contract",
+    "Business Proposal",
+    "Fated to Love You",
+    "Full House"
+  ],
+
+  "forced cohabitation": [
+    "Because This Is My First Life",
+    "Personal Taste",
+    "My Roommate Is a Gumiho",
+    "Full House",
+    "Something About 1 Percent"
+  ],
+
+  "boss employee romance": [
+    "Business Proposal",
+    "What's Wrong with Secretary Kim",
+    "King the Land",
+    "She Was Pretty",
+    "Jugglers",
+    "The Secret Life of My Secretary",
+    "Forecasting Love and Weather",
+    "My Secret Romance",
+    "Clean with Passion for Now"
+  ],
+
+  "teacher student": [
+    "Doctors",
+    "Melancholia"
+  ],
+
+  "doctor patient": [
+    "Doctor Slump",
+    "Doctors"
+  ],
+
+  "love triangle": [
+    "True Beauty",
+    "Start-Up",
+    "Cheese in the Trap",
+    "Reply 1988",
+    "Boys Over Flowers",
+    "Extraordinary You",
+    "Twenty Five Twenty One",
+    "Dream High",
+    "The Heirs",
+    "Love Alarm"
+  ],
+
+  "second chance romance": [
+    "Go Back Couple",
+    "18 Again",
+    "Familiar Wife",
+    "Welcome 2 Life",
+    "Emergency Couple"
+  ],
+
+  "office romance": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Her Private Life",
+    "Forecasting Love and Weather",
+    "Jugglers",
+    "The Secret Life of My Secretary",
+    "She Was Pretty",
+    "Touch Your Heart",
+    "Romance Is a Bonus Book"
+  ],
+
+  "secret relationship": [
+    "Nevertheless",
+    "Something in the Rain",
+    "Forecasting Love and Weather",
+    "Encounter"
+  ],
+
+  "marriage of convenience": [
+    "Marriage Contract",
+    "Because This Is My First Life",
+    "Love in Contract",
+    "The Story of Park's Marriage Contract"
+  ],
+
+  "rich poor romance": [
+    "Boys Over Flowers",
+    "The Heirs",
+    "Business Proposal",
+    "King the Land",
+    "Secret Garden",
+    "Cinderella and the Four Knights"
+  ]
+}
+
+{
+  "slow burn romance": [
+    "My Mister",
+    "Our Beloved Summer",
+    "When the Weather Is Fine",
+    "Call It Love",
+    "Because This Is My First Life",
+    "One Spring Night",
+    "Something in the Rain",
+    "Summer Strike"
+  ],
+
+  "opposites attract": [
+    "Business Proposal",
+    "King the Land",
+    "Crash Course in Romance",
+    "Dali and Cocky Prince",
+    "Mad for Each Other",
+    "Beauty Inside",
+    "Secret Garden"
+  ],
+
+  "grumpy x sunshine": [
+    "Hometown Cha-Cha-Cha",
+    "King the Land",
+    "Doctor Slump",
+    "Call It Love",
+    "Summer Strike",
+    "Crash Course in Romance"
+  ],
+
+  "sunshine x sunshine": [
+    "Weightlifting Fairy Kim Bok Joo",
+    "Fight for My Way",
+    "Twenty Five Twenty One",
+    "Our Beloved Summer"
+  ],
+
+  "bad boy good girl": [
+    "Healer",
+    "My Name",
+    "Heartless City",
+    "Cheese in the Trap",
+    "The Smile Has Left Your Eyes"
+  ],
+
+  "good boy bad girl": [
+    "It's Okay to Not Be Okay",
+    "Love to Hate You",
+    "Mad for Each Other"
+  ],
+
+  "tsundere male lead": [
+    "What's Wrong with Secretary Kim",
+    "Secret Garden",
+    "Boys Over Flowers",
+    "The Heirs",
+    "My Love from the Star"
+  ],
+
+  "tsundere female lead": [
+    "It's Okay to Not Be Okay",
+    "Hotel Del Luna",
+    "Mr. Queen"
+  ],
+
+  "green flag male lead": [
+    "Hometown Cha-Cha-Cha",
+    "Extraordinary Attorney Woo",
+    "Weightlifting Fairy Kim Bok Joo",
+    "King the Land",
+    "Doctor Slump",
+    "Hospital Playlist"
+  ],
+
+  "strong female lead": [
+    "Strong Woman Do Bong Soon",
+    "Hotel Del Luna",
+    "My Name",
+    "Little Women",
+    "Mr. Queen",
+    "Search: WWW",
+    "Queen of Tears"
+  ],
+
+  "independent female lead": [
+    "Search: WWW",
+    "Her Private Life",
+    "Run On",
+    "Because This Is My First Life",
+    "Little Women"
+  ],
+
+  "protective male lead": [
+    "Healer",
+    "The K2",
+    "Crash Landing on You",
+    "Strong Woman Do Bong Soon",
+    "Goblin",
+    "Descendants of the Sun"
+  ],
+
+  "protective female lead": [
+    "Strong Woman Do Bong Soon",
+    "My Name",
+    "Happiness"
+  ],
+
+  "chaebol male lead": [
+    "Business Proposal",
+    "King the Land",
+    "The Heirs",
+    "Secret Garden",
+    "What's Wrong with Secretary Kim",
+    "Queen of Tears",
+    "Boys Over Flowers"
+  ],
+
+  "chaebol female lead": [
+    "Queen of Tears",
+    "Graceful Family",
+    "Mine"
+  ],
+
+  "royal romance": [
+    "The King's Affection",
+    "Love in the Moonlight",
+    "100 Days My Prince",
+    "The Red Sleeve",
+    "Moon Embracing the Sun"
+  ],
+
+  "age gap romance": [
+    "Goblin",
+    "Romance Is a Bonus Book",
+    "Something in the Rain",
+    "Secret Love Affair"
+  ],
+
+  "noona romance": [
+    "Something in the Rain",
+    "Romance Is a Bonus Book",
+    "I Hear Your Voice",
+    "Secret Love Affair",
+    "Encounter"
+  ],
+
+  "first love": [
+    "Twenty Five Twenty One",
+    "Our Beloved Summer",
+    "Reply 1988",
+    "The Heirs",
+    "Love Rain"
+  ],
+
+  "unrequited love": [
+    "Start-Up",
+    "Reply 1988",
+    "True Beauty",
+    "Cheese in the Trap",
+    "Twenty Five Twenty One"
+  ]
+}
+
+{
+  "fake marriage": [
+    "Because This Is My First Life",
+    "Love in Contract",
+    "Marriage Contract",
+    "The Story of Park's Marriage Contract",
+    "Full House"
+  ],
+
+  "marriage after divorce": [
+    "Go Back Couple",
+    "Emergency Couple",
+    "Familiar Wife"
+  ],
+
+  "divorced couple": [
+    "Go Back Couple",
+    "Emergency Couple",
+    "Familiar Wife"
+  ],
+
+  "single parent romance": [
+    "When the Camellia Blooms",
+    "One Spring Night",
+    "Marriage Contract",
+    "Was It Love?"
+  ],
+
+  "widow romance": [
+    "When the Camellia Blooms",
+    "Hi Bye, Mama!"
+  ],
+
+  "secret identity": [
+    "Healer",
+    "City Hunter",
+    "My Love from the Star",
+    "The K2",
+    "The Legend of the Blue Sea",
+    "Are You Human Too?"
+  ],
+
+  "hidden identity": [
+    "Healer",
+    "City Hunter",
+    "Goblin",
+    "My Demon",
+    "Mr. Queen",
+    "100 Days My Prince"
+  ],
+
+  "double life": [
+    "Healer",
+    "My Demon",
+    "Pinocchio",
+    "Private Lives",
+    "Celebrity"
+  ],
+
+  "amnesia romance": [
+    "Shopping King Louie",
+    "The Smile Has Left Your Eyes",
+    "Big Mouth",
+    "Winter Sonata"
+  ],
+
+  "body swap romance": [
+    "Secret Garden",
+    "Mr. Queen",
+    "Come Back Alive"
+  ],
+
+  "time travel romance": [
+    "Lovely Runner",
+    "Tomorrow with You",
+    "Queen In Hyun's Man",
+    "Rooftop Prince",
+    "Nine: Nine Times Time Travel",
+    "Go Back Couple"
+  ],
+
+  "parallel universe romance": [
+    "W",
+    "The King: Eternal Monarch",
+    "Extraordinary You",
+    "Alice"
+  ],
+
+  "reincarnation romance": [
+    "Goblin",
+    "See You in My 19th Life",
+    "Chicago Typewriter",
+    "Bulgasal",
+    "My Love from the Star"
+  ],
+
+  "fated lovers": [
+    "Goblin",
+    "Alchemy of Souls",
+    "My Demon",
+    "My Love from the Star",
+    "See You in My 19th Life"
+  ],
+
+  "immortal x human": [
+    "Goblin",
+    "My Demon",
+    "Hotel Del Luna",
+    "Doom at Your Service",
+    "My Love from the Star"
+  ],
+
+  "human x supernatural": [
+    "Goblin",
+    "Hotel Del Luna",
+    "My Demon",
+    "Bring It On, Ghost",
+    "Oh My Ghost",
+    "The Master's Sun"
+  ],
+
+  "gumiho romance": [
+    "My Roommate Is a Gumiho",
+    "Tale of the Nine Tailed",
+    "My Girlfriend Is a Gumiho"
+  ],
+
+  "ghost romance": [
+    "Oh My Ghost",
+    "Hotel Del Luna",
+    "Bring It On, Ghost",
+    "The Master's Sun"
+  ],
+
+  "vampire romance": [
+    "Blood",
+    "Scholar Who Walks the Night",
+    "Orange Marmalade"
+  ],
+
+  "mermaid romance": [
+    "The Legend of the Blue Sea"
+  ],
+
+  "alien romance": [
+    "My Love from the Star"
+  ],
+
+  "robot romance": [
+    "I Am Not a Robot",
+    "Are You Human Too?",
+    "My Holo Love"
+  ],
+
+  "ai romance": [
+    "My Holo Love",
+    "Are You Human Too?"
+  ],
+
+  "royalty x commoner": [
+    "The King's Affection",
+    "100 Days My Prince",
+    "Love in the Moonlight",
+    "Moon Embracing the Sun"
+  ],
+
+  "prince x commoner": [
+    "100 Days My Prince",
+    "Love in the Moonlight",
+    "Moon Embracing the Sun"
+  ],
+
+  "celeb x ordinary person": [
+    "Shooting Stars",
+    "So I Married the Anti-Fan",
+    "Touch Your Heart"
+  ],
+
+  "idol romance": [
+    "Imitation",
+    "Let Me Be Your Knight",
+    "The Liar and His Lover",
+    "Top Management"
+  ],
+
+  "sports romance": [
+    "Weightlifting Fairy Kim Bok Joo",
+    "Twenty Five Twenty One",
+    "Love All Play",
+    "Run On",
+    "Fight for My Way"
+  ],
+
+  "workplace romance": [
+    "Business Proposal",
+    "King the Land",
+    "Her Private Life",
+    "Forecasting Love and Weather",
+    "Search: WWW",
+    "Agency"
+  ],
+
+  "healing romance": [
+    "Hometown Cha-Cha-Cha",
+    "Our Beloved Summer",
+    "When the Weather Is Fine",
+    "Summer Strike",
+    "One Spring Night",
+    "Run On"
+  ],
+
+  "noona romance": [
+    "Something in the Rain",
+    "Romance Is a Bonus Book",
+    "Encounter",
+    "I Hear Your Voice",
+    "Search: WWW"
+  ],
+
+  "found family": [
+    "Hospital Playlist",
+    "Reply 1988",
+    "Prison Playbook",
+    "Move to Heaven",
+    "Racket Boys",
+    "Our Blues",
+    "The Uncanny Counter",
+    "Navillera",
+    "The Good Bad Mother"
+  ],
+
+  "sibling bond": [
+    "My Mister",
+    "Reply 1988",
+    "Little Women",
+    "It's Okay to Not Be Okay",
+    "My Liberation Notes"
+  ],
+
+  "single parent romance": [
+    "When the Camellia Blooms",
+    "One Spring Night",
+    "Marriage Contract",
+    "Hi Bye, Mama!"
+  ]
+}

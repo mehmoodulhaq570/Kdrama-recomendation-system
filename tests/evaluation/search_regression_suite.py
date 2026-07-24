@@ -124,6 +124,7 @@ CASES = [
             has_debug_value("resolved_title", "Crash Landing on You"),
             title_absent("Crash Landing on You"),
             no_title_word("crash"),
+            any_title_in_top(["King2Hearts", "Descendants of the Sun"], 3),
         ],
     ),
     SearchCase(
@@ -157,6 +158,7 @@ CASES = [
             has_debug_value("search_mode", "similar_to"),
             has_debug_value("similar_to", "Business Proposal"),
             title_absent("Business Proposal"),
+            any_title_in_top(["What's Wrong with Secretary Kim", "King the Land"], 3),
         ],
     ),
     SearchCase(

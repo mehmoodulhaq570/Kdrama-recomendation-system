@@ -1,0 +1,1014 @@
+{
+  "Doctor": [
+    "Hospital Playlist",
+    "Dr. Romantic",
+    "Doctor Cha",
+    "Doctors",
+    "Good Doctor",
+    "Doctor Slump",
+    "Ghost Doctor",
+    "Daily Dose of Sunshine",
+    "Doctor Stranger",
+    "Life",
+    "Doctor John",
+    "D-Day",
+    "Hospital Ship",
+    "Heart Surgeons"
+  ],
+
+  "Surgeon": [
+    "Dr. Romantic",
+    "Doctor Stranger",
+    "Ghost Doctor",
+    "Hospital Playlist",
+    "Doctors",
+    "Life"
+  ],
+
+  "Nurse": [
+    "Hospital Playlist",
+    "Daily Dose of Sunshine",
+    "Doctor Cha",
+    "Life",
+    "Good Doctor"
+  ],
+
+  "Psychiatrist": [
+    "It's Okay to Not Be Okay",
+    "Soul Mechanic",
+    "Fix You",
+    "Daily Dose of Sunshine"
+  ],
+
+  "Lawyer": [
+    "Extraordinary Attorney Woo",
+    "Law School",
+    "Lawless Lawyer",
+    "The Devil Judge",
+    "Again My Life",
+    "Hyena",
+    "Divorce Attorney Shin",
+    "Suspicious Partner",
+    "Vincenzo",
+    "The Law Cafe",
+    "One Dollar Lawyer",
+    "Military Prosecutor Doberman",
+    "Juvenile Justice"
+  ],
+
+  "Judge": [
+    "The Devil Judge",
+    "Juvenile Justice",
+    "Miss Hammurabi",
+    "Your Honor"
+  ],
+
+  "Prosecutor": [
+    "Again My Life",
+    "Stranger",
+    "Diary of a Prosecutor",
+    "Lawless Lawyer",
+    "Vincenzo",
+    "Confession",
+    "The Good Detective"
+  ],
+
+  "Police Officer": [
+    "Live",
+    "Signal",
+    "Voice",
+    "The Good Detective",
+    "Tunnel",
+    "Mouse",
+    "Beyond Evil",
+    "Bad and Crazy",
+    "The First Responders"
+  ],
+
+  "Detective": [
+    "Signal",
+    "Tunnel",
+    "Voice",
+    "Beyond Evil",
+    "Mouse",
+    "Flower of Evil",
+    "Stranger",
+    "The Good Detective",
+    "Blind",
+    "Memorist",
+    "Through the Darkness",
+    "Nobody Knows",
+    "Tell Me What You Saw"
+  ],
+
+  "Profiler": [
+    "Through the Darkness",
+    "Mouse",
+    "Signal",
+    "Voice",
+    "Memorist"
+  ],
+
+  "Journalist": [
+    "Pinocchio",
+    "Healer",
+    "Argon",
+    "While You Were Sleeping",
+    "Jealousy Incarnate"
+  ],
+
+  "Reporter": [
+    "Pinocchio",
+    "Healer",
+    "Argon",
+    "Jealousy Incarnate",
+    "While You Were Sleeping"
+  ],
+
+  "Teacher": [
+    "Black Dog",
+    "Angry Mom",
+    "School 2017",
+    "Moment at Eighteen",
+    "Dream High"
+  ],
+
+  "Professor": [
+    "Law School",
+    "Hospital Playlist",
+    "Doctor Cha",
+    "Melancholia"
+  ],
+
+  "Student": [
+    "True Beauty",
+    "Extraordinary You",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Cheese in the Trap",
+    "School 2017",
+    "Moment at Eighteen",
+    "My ID Is Gangnam Beauty",
+    "A Love So Beautiful",
+    "Live On",
+    "Twenty Five Twenty One",
+    "Weak Hero Class 1",
+    "All of Us Are Dead",
+    "Hierarchy",
+    "Dream High"
+  ],
+
+  "CEO": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Strong Woman Do Bong Soon",
+    "Her Private Life",
+    "My Secret Romance",
+    "Secret Garden",
+    "Beauty Inside",
+    "Touch Your Heart",
+    "Forecasting Love and Weather",
+    "Queen of Tears",
+    "Reborn Rich",
+    "Start-Up"
+  ]
+}
+{
+  "Secretary": [
+    "What's Wrong with Secretary Kim",
+    "Jugglers",
+    "Protect the Boss",
+    "The Secret Life of My Secretary",
+    "Business Proposal",
+    "King the Land",
+    "Her Private Life"
+  ],
+
+  "Bodyguard": [
+    "The K2",
+    "Man to Man",
+    "Strong Woman Do Bong Soon",
+    "City Hunter",
+    "Are You Human Too?",
+    "The King: Eternal Monarch"
+  ],
+
+  "Chef": [
+    "Wok of Love",
+    "Pasta",
+    "Oh My Ghost",
+    "Temperature of Love",
+    "Chocolate",
+    "Mr. Queen",
+    "Dae Jang Geum"
+  ],
+
+  "Restaurant Owner": [
+    "Itaewon Class",
+    "Wok of Love",
+    "Let's Eat",
+    "Pasta",
+    "Late Night Restaurant",
+    "Chocolate"
+  ],
+
+  "Barista": [
+    "Coffee Prince",
+    "Would You Like a Cup of Coffee?",
+    "Cafe Minamdang",
+    "The Third Charm"
+  ],
+
+  "Hotel Manager": [
+    "Hotel Del Luna",
+    "King the Land",
+    "Grand Prince",
+    "Hotel King"
+  ],
+
+  "Business Owner": [
+    "Itaewon Class",
+    "Start-Up",
+    "Agency",
+    "Business Proposal",
+    "King the Land",
+    "Strongest Deliveryman"
+  ],
+
+  "Entrepreneur": [
+    "Start-Up",
+    "Itaewon Class",
+    "Agency",
+    "Misaeng",
+    "Hot Stove League"
+  ],
+
+  "Startup Founder": [
+    "Start-Up",
+    "Agency",
+    "Misaeng",
+    "Search: WWW"
+  ],
+
+  "Programmer": [
+    "Start-Up",
+    "Search: WWW",
+    "My Holo Love",
+    "Love Alarm"
+  ],
+
+  "Software Engineer": [
+    "Start-Up",
+    "Search: WWW",
+    "Love Alarm",
+    "My Holo Love"
+  ],
+
+  "Game Developer": [
+    "Memories of the Alhambra",
+    "W",
+    "Start-Up"
+  ],
+
+  "AI Engineer": [
+    "My Holo Love",
+    "Are You Human Too?",
+    "I Am Not a Robot"
+  ],
+
+  "Scientist": [
+    "Sisyphus: The Myth",
+    "Kairos",
+    "Grid",
+    "Circle",
+    "The Silent Sea"
+  ],
+
+  "Researcher": [
+    "The Silent Sea",
+    "Sisyphus: The Myth",
+    "Kairos",
+    "Grid",
+    "Life"
+  ],
+
+  "Psychologist": [
+    "It's Okay to Not Be Okay",
+    "Soul Mechanic",
+    "Daily Dose of Sunshine",
+    "Fix You"
+  ],
+
+  "Psychiatric Nurse": [
+    "It's Okay to Not Be Okay",
+    "Daily Dose of Sunshine"
+  ],
+
+  "Forensic Expert": [
+    "Partners for Justice",
+    "Signal",
+    "Voice",
+    "Tunnel"
+  ],
+
+  "Medical Examiner": [
+    "Partners for Justice",
+    "Signal",
+    "Voice"
+  ],
+
+  "Coroner": [
+    "Partners for Justice",
+    "Signal"
+  ]
+}
+
+
+{
+  "Soldier": [
+    "Descendants of the Sun",
+    "D.P.",
+    "Crash Landing on You",
+    "Search",
+    "The King 2 Hearts",
+    "Mr. Sunshine",
+    "Duty After School",
+    "Road Number One"
+  ],
+
+  "Special Forces": [
+    "Descendants of the Sun",
+    "The K2",
+    "Iris",
+    "Athena: Goddess of War",
+    "City Hunter",
+    "Man to Man"
+  ],
+
+  "Army Officer": [
+    "Descendants of the Sun",
+    "The King 2 Hearts",
+    "Search",
+    "Road Number One"
+  ],
+
+  "Military Doctor": [
+    "Descendants of the Sun",
+    "Dr. Romantic",
+    "Hospital Playlist"
+  ],
+
+  "Military Nurse": [
+    "Descendants of the Sun",
+    "Hospital Playlist"
+  ],
+
+  "Military Police": [
+    "D.P.",
+    "Search"
+  ],
+
+  "Spy": [
+    "Iris",
+    "Athena: Goddess of War",
+    "Snowdrop",
+    "The Spy Gone North",
+    "Man to Man",
+    "Terius Behind Me"
+  ],
+
+  "Secret Agent": [
+    "Healer",
+    "The K2",
+    "City Hunter",
+    "Man to Man",
+    "Terius Behind Me",
+    "Iris"
+  ],
+
+  "Intelligence Agent": [
+    "Iris",
+    "Athena: Goddess of War",
+    "Snowdrop",
+    "Man to Man"
+  ],
+
+  "Bodyguard Agent": [
+    "The K2",
+    "Man to Man",
+    "Strong Woman Do Bong Soon"
+  ],
+
+  "Firefighter": [
+    "The First Responders",
+    "Moving",
+    "When the Camellia Blooms"
+  ],
+
+  "Paramedic": [
+    "The First Responders",
+    "Hospital Playlist",
+    "Dr. Romantic"
+  ],
+
+  "Emergency Responder": [
+    "The First Responders",
+    "Hospital Playlist",
+    "Dr. Romantic"
+  ],
+
+  "Disaster Response": [
+    "The First Responders",
+    "Descendants of the Sun"
+  ],
+
+  "Prison Guard": [
+    "Prison Playbook",
+    "Doctor Prisoner"
+  ],
+
+  "Prison Warden": [
+    "Prison Playbook"
+  ],
+
+  "Taxi Driver": [
+    "Taxi Driver",
+    "Taxi Driver 2"
+  ],
+
+  "Bus Driver": [
+    "My Mister"
+  ],
+
+  "Truck Driver": [
+    "Move to Heaven"
+  ],
+
+  "Delivery Rider": [
+    "Strongest Deliveryman",
+    "Black Knight"
+  ],
+
+  "Courier": [
+    "Strongest Deliveryman",
+    "Black Knight"
+  ],
+
+  "Pilot": [
+    "Where Stars Land",
+    "Crash Landing on You"
+  ],
+
+  "Flight Attendant": [
+    "Where Stars Land",
+    "On the Way to the Airport"
+  ],
+
+  "Airport Staff": [
+    "Where Stars Land"
+  ],
+
+  "Train Conductor": [
+    "Tomorrow",
+    "Train"
+  ],
+
+  "Subway Employee": [
+    "My Mister"
+  ],
+
+  "Hacker": [
+    "Healer",
+    "The Girl Who Sees Smells",
+    "Player",
+    "Private Lives",
+    "Leverage"
+  ],
+
+  "Cyber Security Expert": [
+    "Player",
+    "Private Lives",
+    "Healer"
+  ],
+
+  "Program Analyst": [
+    "Start-Up",
+    "Search: WWW"
+  ],
+
+  "Government Officer": [
+    "Designated Survivor: 60 Days",
+    "Chief of Staff",
+    "The Whirlwind"
+  ],
+
+  "Politician": [
+    "Chief of Staff",
+    "Designated Survivor: 60 Days",
+    "The Whirlwind",
+    "Assembly"
+  ],
+
+  "President": [
+    "Designated Survivor: 60 Days",
+    "The President",
+    "The Whirlwind"
+  ],
+
+  "Mayor": [
+    "Into the Ring"
+  ],
+
+  "Civil Servant": [
+    "Into the Ring",
+    "Diary of a Prosecutor"
+  ]
+}
+
+{
+  "Actor": [
+    "Beauty Inside",
+    "Find Me in Your Memory",
+    "Shooting Stars",
+    "The Producers",
+    "Be Melodramatic",
+    "Record of Youth",
+    "Our Beloved Summer",
+    "Touch Your Heart"
+  ],
+
+  "Actress": [
+    "Beauty Inside",
+    "Touch Your Heart",
+    "Find Me in Your Memory",
+    "Shooting Stars",
+    "Record of Youth"
+  ],
+
+  "Child Actor": [
+    "Hi Bye Mama",
+    "When the Camellia Blooms",
+    "18 Again"
+  ],
+
+  "Idol": [
+    "Imitation",
+    "Let Me Be Your Knight",
+    "So I Married the Anti-Fan",
+    "Top Management",
+    "Dream High",
+    "The Liar and His Lover",
+    "Do You Like Brahms?"
+  ],
+
+  "Singer": [
+    "The Liar and His Lover",
+    "Dream High",
+    "Imitation",
+    "Top Management",
+    "Do You Like Brahms?",
+    "Let Me Be Your Knight"
+  ],
+
+  "Rapper": [
+    "Dream High",
+    "Imitation"
+  ],
+
+  "Dancer": [
+    "Navillera",
+    "Dream High",
+    "Angel's Last Mission: Love"
+  ],
+
+  "Composer": [
+    "Do You Like Brahms?",
+    "The Liar and His Lover",
+    "Secret Love Affair"
+  ],
+
+  "Songwriter": [
+    "The Liar and His Lover",
+    "Do You Like Brahms?"
+  ],
+
+  "Music Producer": [
+    "The Producers",
+    "Top Management",
+    "Dream High"
+  ],
+
+  "Pianist": [
+    "Do You Like Brahms?",
+    "Secret Love Affair",
+    "Page Turner"
+  ],
+
+  "Violinist": [
+    "Do You Like Brahms?"
+  ],
+
+  "Cellist": [
+    "Do You Like Brahms?"
+  ],
+
+  "Model": [
+    "Record of Youth",
+    "She Was Pretty",
+    "True Beauty"
+  ],
+
+  "Fashion Designer": [
+    "Now, We Are Breaking Up",
+    "Perfume",
+    "Fashion King"
+  ],
+
+  "Stylist": [
+    "Shooting Stars",
+    "Record of Youth",
+    "Beauty Inside"
+  ],
+
+  "Makeup Artist": [
+    "True Beauty",
+    "Perfume"
+  ],
+
+  "Photographer": [
+    "Her Private Life",
+    "Record of Youth",
+    "Now, We Are Breaking Up"
+  ],
+
+  "Film Director": [
+    "Be Melodramatic",
+    "The Producers"
+  ],
+
+  "Drama Director": [
+    "The Producers",
+    "Be Melodramatic"
+  ],
+
+  "Screenwriter": [
+    "Be Melodramatic",
+    "The Producers"
+  ],
+
+  "Novelist": [
+    "Romance Is a Bonus Book",
+    "Chicago Typewriter",
+    "It's Okay to Not Be Okay",
+    "Monthly Magazine Home"
+  ],
+
+  "Author": [
+    "Romance Is a Bonus Book",
+    "Chicago Typewriter",
+    "It's Okay to Not Be Okay"
+  ],
+
+  "Poet": [
+    "When My Love Blooms"
+  ],
+
+  "Webtoon Artist": [
+    "Today's Webtoon",
+    "W",
+    "Backstreet Rookie"
+  ],
+
+  "Illustrator": [
+    "Her Private Life",
+    "It's Okay to Not Be Okay"
+  ],
+
+  "Painter": [
+    "Lovers of the Red Sky",
+    "Dali and Cocky Prince"
+  ],
+
+  "Artist": [
+    "Dali and Cocky Prince",
+    "Her Private Life",
+    "Lovers of the Red Sky"
+  ],
+
+  "Museum Curator": [
+    "Her Private Life",
+    "Dali and Cocky Prince"
+  ],
+
+  "Art Gallery Director": [
+    "Dali and Cocky Prince"
+  ],
+
+  "Radio DJ": [
+    "Tomorrow with You",
+    "You Are My Spring"
+  ],
+
+  "News Anchor": [
+    "Pinocchio",
+    "Argon"
+  ],
+
+  "TV Producer": [
+    "The Producers",
+    "Be Melodramatic"
+  ],
+
+  "Producer": [
+    "The Producers",
+    "Top Management",
+    "Dream High"
+  ],
+
+  "MC": [
+    "The Producers"
+  ],
+
+  "Host": [
+    "The Producers"
+  ],
+
+  "YouTuber": [
+    "Sh**ting Stars",
+    "Love Revolution"
+  ],
+
+  "Streamer": [
+    "Love Revolution"
+  ],
+
+  "Influencer": [
+    "Celebrity",
+    "Sh**ting Stars"
+  ],
+
+  "Social Media Star": [
+    "Celebrity"
+  ]
+}
+
+{
+  "Athlete": [
+    "Twenty Five Twenty One",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Racket Boys",
+    "Fight for My Way",
+    "Run On",
+    "Hot Stove League"
+  ],
+
+  "Baseball Player": [
+    "Hot Stove League",
+    "Prison Playbook"
+  ],
+
+  "Weightlifter": [
+    "Weightlifting Fairy Kim Bok Joo"
+  ],
+
+  "Badminton Player": [
+    "Racket Boys",
+    "Love All Play"
+  ],
+
+  "Tennis Player": [
+    "Love All Play"
+  ],
+
+  "Boxer": [
+    "Bloodhounds",
+    "Fight for My Way"
+  ],
+
+  "Martial Artist": [
+    "Fight for My Way",
+    "Bloodhounds",
+    "The K2",
+    "Healer"
+  ],
+
+  "Taekwondo Athlete": [
+    "Fight for My Way"
+  ],
+
+  "Runner": [
+    "Run On"
+  ],
+
+  "Sports Coach": [
+    "Hot Stove League",
+    "Love All Play",
+    "Weightlifting Fairy Kim Bok Joo"
+  ],
+
+  "Sports Manager": [
+    "Hot Stove League"
+  ],
+
+  "Gangster": [
+    "Vincenzo",
+    "My Name",
+    "Bloodhounds",
+    "Big Bet",
+    "Heartless City",
+    "A Model Family"
+  ],
+
+  "Mafia Boss": [
+    "Vincenzo",
+    "Big Bet"
+  ],
+
+  "Hitman": [
+    "The K2",
+    "My Name",
+    "Iris"
+  ],
+
+  "Assassin": [
+    "Alchemy of Souls",
+    "Arthdal Chronicles",
+    "The K2"
+  ],
+
+  "Private Investigator": [
+    "Player",
+    "Leverage",
+    "Team Bulldog: Off-duty Investigation"
+  ],
+
+  "Security Guard": [
+    "The K2",
+    "Strong Woman Do Bong Soon",
+    "King the Land"
+  ],
+
+  "Farmer": [
+    "Modern Farmer",
+    "Our Blues",
+    "When the Camellia Blooms"
+  ],
+
+  "Fisherman": [
+    "Our Blues"
+  ],
+
+  "Gardener": [
+    "Forest",
+    "Secret Garden"
+  ],
+
+  "Florist": [
+    "Flower Crew: Joseon Marriage Agency",
+    "When the Weather Is Fine"
+  ],
+
+  "Architect": [
+    "Monthly Magazine Home",
+    "Personal Taste"
+  ],
+
+  "Interior Designer": [
+    "Monthly Magazine Home",
+    "Personal Taste"
+  ],
+
+  "Construction Worker": [
+    "My Mister",
+    "Navillera"
+  ],
+
+  "Real Estate Agent": [
+    "Sell Your Haunted House",
+    "Monthly Magazine Home"
+  ],
+
+  "Librarian": [
+    "Romance Is a Bonus Book",
+    "When the Weather Is Fine"
+  ],
+
+  "Bookstore Owner": [
+    "When the Weather Is Fine",
+    "Romance Is a Bonus Book"
+  ],
+
+  "Priest": [
+    "The Fiery Priest",
+    "Priest",
+    "The Guest"
+  ],
+
+  "Pastor": [
+    "Save Me",
+    "The Guest"
+  ],
+
+  "Nun": [
+    "The Fiery Priest"
+  ],
+
+  "Monk": [
+    "Bulgasal",
+    "The Guest"
+  ],
+
+  "Shaman": [
+    "The Guest",
+    "Lovers of the Red Sky",
+    "The Cursed",
+    "Revenant"
+  ],
+
+  "Exorcist": [
+    "The Guest",
+    "Priest",
+    "Island"
+  ],
+
+  "Fortune Teller": [
+    "Cafe Minamdang",
+    "Lovers of the Red Sky"
+  ],
+
+  "Veterinarian": [
+    "Once Upon a Small Town"
+  ],
+
+  "Animal Trainer": [
+    "Once Upon a Small Town"
+  ],
+
+  "Pet Groomer": [
+    "Meow, the Secret Boy"
+  ],
+
+  "Wedding Planner": [
+    "Because This Is My First Life",
+    "Flower Crew: Joseon Marriage Agency"
+  ],
+
+  "Housekeeper": [
+    "The Lady in Dignity",
+    "Mine"
+  ],
+
+  "Maid": [
+    "The Handmaiden",
+    "Mr. Sunshine"
+  ],
+
+  "Babysitter": [
+    "Hi Bye, Mama!",
+    "The Lady in Dignity"
+  ],
+
+  "Attorney": [
+    "Extraordinary Attorney Woo",
+    "Law School",
+    "Hyena",
+    "Lawless Lawyer",
+    "Suspicious Partner",
+    "The Law Cafe"
+  ],
+
+  "Soldier": [
+    "Descendants of the Sun",
+    "Crash Landing on You",
+    "D.P.",
+    "The King 2 Hearts",
+    "Search",
+    "Mr. Sunshine",
+    "My Military Valentine",
+    "Snowdrop"
+  ],
+
+  "Idol": [
+    "Imitation",
+    "Dream High",
+    "The Liar and His Lover",
+    "Let Me Be Your Knight",
+    "Top Management"
+  ],
+
+  "Athlete": [
+    "Weightlifting Fairy Kim Bok Joo",
+    "Twenty Five Twenty One",
+    "Love All Play",
+    "Racket Boys",
+    "Run On"
+  ],
+
+  "Startup Founder": [
+    "Start-Up",
+    "Itaewon Class",
+    "Misaeng",
+    "Strongest Deliveryman",
+    "Agency"
+  ]
+}

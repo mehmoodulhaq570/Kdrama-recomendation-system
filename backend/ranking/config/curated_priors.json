@@ -82,7 +82,291 @@
       "The Penthouse: War in Life",
       "Eve",
       "Revenge of Others"
-    ]
+    ], 
+    "serial killer": [
+    "Mouse",
+    "Beyond Evil",
+    "Flower of Evil",
+    "Through the Darkness",
+    "Voice",
+    "Tunnel",
+    "Signal",
+    "Blind"
+],
+
+"zombie apocalypse": [
+    "Kingdom",
+    "All of Us Are Dead",
+    "Happiness",
+    "Sweet Home",
+    "Duty After School",
+    "Dark Hole"
+],
+
+"high school romance": [
+    "True Beauty",
+    "Extraordinary You",
+    "School 2017",
+    "A Love So Beautiful",
+    "Moment at Eighteen",
+    "Live On"
+],
+
+"office romance": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Her Private Life",
+    "Forecasting Love and Weather",
+    "Touch Your Heart"
+],
+
+"childhood friends": [
+    "Fight for My Way",
+    "Romance Is a Bonus Book",
+    "Our Beloved Summer",
+    "Doctor Slump",
+    "Weightlifting Fairy Kim Bok Joo"
+],
+
+"fake dating": [
+    "Business Proposal",
+    "Love to Hate You",
+    "Marriage, Not Dating",
+    "Her Private Life"
+],
+
+"enemies to lovers": [
+    "Mad for Each Other",
+    "Love to Hate You",
+    "Mr. Queen",
+    "The Law Cafe",
+    "Crash Course in Romance"
+],
+
+"second chance romance": [
+    "Go Back Couple",
+    "Familiar Wife",
+    "18 Again",
+    "Welcome 2 Life"
+],
+
+"bullying": [
+    "Weak Hero Class 1",
+    "The Glory",
+    "Revenge of Others",
+    "Angry Mom",
+    "How to Buy a Friend"
+],
+
+"prison": [
+    "Prison Playbook",
+    "Doctor Prisoner",
+    "Big Mouth",
+    "Innocent Defendant"
+],
+
+"mafia": [
+    "Vincenzo",
+    "My Name",
+    "Bloodhounds",
+    "Big Bet"
+],
+
+"undercover": [
+    "Healer",
+    "The K2",
+    "City Hunter",
+    "Iris",
+    "Snowdrop"
+],
+
+"body swap": [
+    "Mr. Queen",
+    "Secret Garden",
+    "Come Back Alive"
+],
+
+"memory loss": [
+    "Shopping King Louie",
+    "The Smile Has Left Your Eyes",
+    "Big Mouth"
+],
+
+"single parent": [
+    "When the Camellia Blooms",
+    "One Spring Night",
+    "Marriage Contract"
+],
+
+"doctor romance": [
+    "Doctor Slump",
+    "Doctor Romantic",
+    "Hospital Playlist",
+    "Doctors"
+],
+
+"ghosts": [
+    "Hotel Del Luna",
+    "Oh My Ghost",
+    "The Master's Sun",
+    "Bring It On Ghost",
+    "Sell Your Haunted House"
+],
+
+"grim reaper": [
+    "Goblin",
+    "Tomorrow",
+    "Black"
+],
+
+"politics": [
+    "Designated Survivor: 60 Days",
+    "Chief of Staff",
+    "The Whirlwind",
+    "Snowdrop"
+],
+
+"sports": [
+    "Hot Stove League",
+    "Racket Boys",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Twenty Five Twenty One"
+],
+"law school": [
+  "Law School",
+  "Extraordinary Attorney Woo",
+  "The Devil Judge",
+  "Lawless Lawyer",
+  "Again My Life"
+],
+
+"detective": [
+  "Signal",
+  "Tunnel",
+  "Voice",
+  "Beyond Evil",
+  "Mouse",
+  "Stranger",
+  "The Good Detective"
+],
+
+"prosecutor": [
+  "Again My Life",
+  "Stranger",
+  "Diary of a Prosecutor",
+  "Lawless Lawyer",
+  "Vincenzo"
+],
+
+"hospital": [
+  "Hospital Playlist",
+  "Dr. Romantic",
+  "Doctor Cha",
+  "Doctors",
+  "Good Doctor"
+],
+
+"military": [
+  "Descendants of the Sun",
+  "D.P.",
+  "Crash Landing on You",
+  "The King 2 Hearts",
+  "Search"
+],
+
+"journalism": [
+  "Pinocchio",
+  "While You Were Sleeping",
+  "Healer",
+  "Argon"
+],
+
+"bodyguard": [
+  "The K2",
+  "Strong Woman Do Bong Soon",
+  "Are You Human Too?",
+  "Man to Man"
+],
+
+"artificial intelligence": [
+  "Are You Human Too?",
+  "My Holo Love",
+  "I Am Not a Robot"
+],
+
+"robot": [
+  "I Am Not a Robot",
+  "Are You Human Too?",
+  "My Holo Love"
+],
+
+"college": [
+  "Cheese in the Trap",
+  "Weightlifting Fairy Kim Bok Joo",
+  "Age of Youth",
+  "My ID Is Gangnam Beauty"
+],
+
+"family": [
+  "Reply 1988",
+  "Our Blues",
+  "My Mister",
+  "When the Camellia Blooms",
+  "Hi Bye Mama"
+],
+
+"vampire": [
+  "Blood",
+  "Scholar Who Walks the Night",
+  "Orange Marmalade"
+],
+
+"gumiho": [
+  "My Roommate Is a Gumiho",
+  "Tale of the Nine Tailed",
+  "My Girlfriend Is a Gumiho"
+],
+
+"reincarnation": [
+  "Goblin",
+  "See You in My 19th Life",
+  "Chicago Typewriter",
+  "Moon Lovers"
+],
+
+"parallel universe": [
+  "The King: Eternal Monarch",
+  "W",
+  "Extraordinary You",
+  "Memories of the Alhambra"
+],
+
+"time loop": [
+  "Reset",
+  "A Day",
+  "Circle"
+],
+
+"psychological": [
+  "Mouse",
+  "Beyond Evil",
+  "Flower of Evil",
+  "It's Okay to Not Be Okay",
+  "Strangers from Hell"
+],
+
+"cult": [
+  "Save Me",
+  "The Guest",
+  "Hellbound"
+],
+
+"exorcism": [
+  "The Guest",
+  "Priest",
+  "Island"
+] 
   },
   "theme_combo_priors": {
     "school bullying|revenge": [
@@ -134,7 +418,61 @@
       "Kingdom",
       "The Red Sleeve",
       "Empress Ki"
-    ]
+    ],
+    "Crime": [
+  "Mouse",
+  "Beyond Evil",
+  "Signal",
+  "Voice",
+  "Tunnel",
+  "Stranger"
+],
+
+"Mystery": [
+  "Signal",
+  "Mouse",
+  "Beyond Evil",
+  "Flower of Evil",
+  "Tunnel"
+],
+
+"Law": [
+  "Law School",
+  "Extraordinary Attorney Woo",
+  "Lawless Lawyer",
+  "The Devil Judge"
+],
+
+"Action": [
+  "Healer",
+  "The K2",
+  "My Name",
+  "Bloodhounds",
+  "City Hunter"
+],
+
+"Slice of Life": [
+  "Reply 1988",
+  "Hospital Playlist",
+  "My Mister",
+  "Our Blues",
+  "Prison Playbook"
+],
+
+"Youth": [
+  "Twenty Five Twenty One",
+  "Weightlifting Fairy Kim Bok Joo",
+  "True Beauty",
+  "Extraordinary You"
+],
+
+"Fantasy": [
+  "Goblin",
+  "Hotel Del Luna",
+  "Alchemy of Souls",
+  "My Demon",
+  "Doom at Your Service"
+]
   },
   "genre_combo_priors": {
     "Drama|Law": [
@@ -178,7 +516,246 @@
       "The Penthouse: War in Life",
       "Eve",
       "Revenge of Others"
-    ]
+    ],
+    "Crime|Thriller": [
+    "Mouse",
+    "Beyond Evil",
+    "Signal",
+    "Tunnel",
+    "Voice",
+    "Blind"
+],
+
+"Romance|Comedy": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Strong Woman Do Bong Soon",
+    "Her Private Life"
+],
+
+"Fantasy|Action": [
+    "Alchemy of Souls",
+    "Arthdal Chronicles",
+    "Bulgasal"
+],
+
+"Medical|Drama": [
+    "Hospital Playlist",
+    "Doctor Cha",
+    "Dr. Romantic",
+    "Doctors"
+],
+
+"Historical|Romance": [
+    "The Red Sleeve",
+    "Moon Lovers",
+    "Mr. Sunshine",
+    "100 Days My Prince"
+],
+    "office romance|comedy": [
+    "Business Proposal",
+    "King the Land",
+    "What's Wrong with Secretary Kim",
+    "Her Private Life",
+    "Touch Your Heart"
+],
+
+"fantasy|romance": [
+    "Goblin",
+    "Hotel Del Luna",
+    "My Love From the Star",
+    "My Demon",
+    "Doom at Your Service"
+],
+
+"serial killer|crime": [
+    "Mouse",
+    "Beyond Evil",
+    "Signal",
+    "Flower of Evil",
+    "Voice"
+],
+
+"medical|slice of life": [
+    "Hospital Playlist",
+    "Doctor Cha",
+    "Dr. Romantic"
+],
+
+"revenge|crime": [
+    "My Name",
+    "Vincenzo",
+    "The Glory",
+    "Big Mouth",
+    "Again My Life"
+],
+
+"historical|fantasy": [
+    "Alchemy of Souls",
+    "Moon Lovers",
+    "Lovers of the Red Sky",
+    "Arthdal Chronicles"
+],
+
+"zombie|historical": [
+    "Kingdom"
+],
+
+"action|spy": [
+    "Healer",
+    "The K2",
+    "Iris",
+    "Snowdrop",
+    "City Hunter"
+],
+"doctor|romance": [
+  "Doctor Slump",
+  "Doctors",
+  "Dr. Romantic",
+  "Hospital Playlist"
+],
+
+"doctor|slice of life": [
+  "Hospital Playlist",
+  "Dr. Romantic",
+  "Doctor Cha"
+],
+
+"doctor|comedy": [
+  "Doctor Cha",
+  "Hospital Playlist"
+],
+
+"ghost|romance": [
+  "Goblin",
+  "Hotel Del Luna",
+  "Oh My Ghost",
+  "The Master's Sun"
+],
+
+"ghost|comedy": [
+  "Oh My Ghost",
+  "Bring It On Ghost"
+],
+
+"detective|serial killer": [
+  "Signal",
+  "Tunnel",
+  "Mouse",
+  "Beyond Evil",
+  "Voice"
+],
+
+"crime|revenge": [
+  "Vincenzo",
+  "My Name",
+  "Again My Life",
+  "The Glory"
+],
+
+"crime|psychological": [
+  "Mouse",
+  "Beyond Evil",
+  "Flower of Evil",
+  "Strangers from Hell"
+],
+
+"office|romance": [
+  "Business Proposal",
+  "King the Land",
+  "What's Wrong with Secretary Kim",
+  "Her Private Life"
+],
+
+"office|comedy": [
+  "Business Proposal",
+  "King the Land",
+  "What's Wrong with Secretary Kim"
+],
+
+"school|romance": [
+  "True Beauty",
+  "Extraordinary You",
+  "A Love So Beautiful",
+  "Moment at Eighteen"
+],
+
+"school|bullying": [
+  "Weak Hero Class 1",
+  "The Glory",
+  "Revenge of Others",
+  "Angry Mom"
+],
+
+"historical|politics": [
+  "Mr. Sunshine",
+  "The Red Sleeve",
+  "Queen for Seven Days",
+  "The Crowned Clown"
+],
+
+"historical|action": [
+  "Kingdom",
+  "Mr. Sunshine",
+  "Arthdal Chronicles",
+  "Alchemy of Souls"
+],
+"Crime|Drama": [
+  "Mouse",
+  "Beyond Evil",
+  "Signal",
+  "Stranger",
+  "Flower of Evil"
+],
+
+"Crime|Mystery": [
+  "Signal",
+  "Tunnel",
+  "Voice",
+  "Mouse"
+],
+
+"Action|Crime": [
+  "Bloodhounds",
+  "My Name",
+  "The K2",
+  "City Hunter"
+],
+
+"Action|Thriller": [
+  "Healer",
+  "The K2",
+  "My Name",
+  "Bloodhounds"
+],
+
+"Fantasy|Comedy": [
+  "Goblin",
+  "My Demon",
+  "My Roommate Is a Gumiho",
+  "Oh My Ghost"
+],
+
+"Fantasy|Historical": [
+  "Alchemy of Souls",
+  "Moon Lovers",
+  "Lovers of the Red Sky"
+],
+
+"Youth|Romance": [
+  "True Beauty",
+  "Twenty Five Twenty One",
+  "Extraordinary You",
+  "Weightlifting Fairy Kim Bok Joo"
+],
+
+"Romance|Slice of Life": [
+  "Hometown Cha-Cha-Cha",
+  "Our Beloved Summer",
+  "One Spring Night",
+  "Because This Is My First Life"
+]
   },
   "actor_priors": {
     "Hyun Bin": [
@@ -230,6 +807,312 @@
       "Guardian: The Lonely and Great God",
       "Coffee Prince",
       "Big"
-    ]
+    ],
+    "Lee Jong Suk": [
+    "While You Were Sleeping",
+    "Big Mouth",
+    "Pinocchio",
+    "W",
+    "Doctor Stranger"
+],
+
+"Nam Joo Hyuk": [
+    "Twenty Five Twenty One",
+    "Start-Up",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Vigilante"
+],
+
+"Kim Ji Won": [
+    "Queen of Tears",
+    "Fight for My Way",
+    "My Liberation Notes",
+    "Descendants of the Sun"
+],
+
+"Kim Go Eun": [
+    "Goblin",
+    "Little Women",
+    "Yumi's Cells",
+    "The King: Eternal Monarch"
+],
+
+"Lee Dong Wook": [
+    "Goblin",
+    "Tale of the Nine Tailed",
+    "Bad and Crazy",
+    "Touch Your Heart"
+],
+
+"Han So Hee": [
+    "My Name",
+    "Nevertheless",
+    "Gyeongseong Creature",
+    "Soundtrack #1"
+],
+
+"Park Hyung Sik": [
+    "Strong Woman Do Bong Soon",
+    "Doctor Slump",
+    "Happiness",
+    "Soundtrack #1"
+],
+
+"Kim Seon Ho": [
+    "Hometown Cha-Cha-Cha",
+    "Start-Up",
+    "Catch the Ghost"
+],
+
+"Shin Min Ah": [
+    "Hometown Cha-Cha-Cha",
+    "Our Blues",
+    "Oh My Venus"
+],
+
+"Jung Hae In": [
+    "Snowdrop",
+    "Something in the Rain",
+    "D.P.",
+    "One Spring Night"
+], 
+"Ahn Hyo Seop": [
+  "Business Proposal",
+  "Dr. Romantic 2",
+  "Dr. Romantic 3",
+  "Lovers of the Red Sky"
+],
+
+"Cha Eun Woo": [
+  "True Beauty",
+  "Island",
+  "A Good Day to Be a Dog",
+  "My ID Is Gangnam Beauty"
+],
+
+"Kim Yoo Jung": [
+  "Lovers of the Red Sky",
+  "Backstreet Rookie",
+  "My Demon",
+  "Love in the Moonlight"
+],
+
+"Moon Ga Young": [
+  "True Beauty",
+  "Find Me in Your Memory",
+  "The Interest of Love",
+  "Link: Eat, Love, Kill"
+],
+
+"Park Bo Young": [
+  "Strong Woman Do Bong Soon",
+  "Doom at Your Service",
+  "Daily Dose of Sunshine",
+  "Oh My Ghost"
+],
+
+"Kim Bum": [
+  "Tale of the Nine Tailed",
+  "Law School",
+  "Ghost Doctor",
+  "Boys Over Flowers"
+],
+
+"Lee Junho": [
+  "King the Land",
+  "The Red Sleeve",
+  "Just Between Lovers",
+  "Confession"
+],
+
+"Woo Do Hwan": [
+  "Bloodhounds",
+  "The King: Eternal Monarch",
+  "Joseon Attorney",
+  "Mad Dog"
+]
+  },
+  "similar_title_priors": {
+    "Crash Landing on You": [
+      "King2Hearts",
+      "Descendants of the Sun",
+      "My Love from the Star",
+      "The Legend of the Blue Sea",
+      "Mr. Sunshine",
+      "My Military Valentine",
+      "Queen of Tears",
+      "The King: Eternal Monarch",
+      "Snowdrop",
+      "D.P."
+    ],
+    "Guardian: The Lonely and Great God": [
+      "Hotel Del Luna",
+      "My Love from the Star",
+      "The Master's Sun",
+      "My Demon",
+      "Kiss Goblin",
+      "The Atypical Family"
+    ],
+    "Business Proposal": [
+      "What's Wrong with Secretary Kim",
+      "King the Land",
+      "Her Private Life",
+      "Touch Your Heart",
+      "Fated to Love You",
+      "The Greatest Love",
+      "Sh**ting Stars",
+      "Love to Hate You",
+      "She Was Pretty",
+      "The Secret Life of My Secretary"
+    ],
+    "The Glory": [
+      "Revenge of Others",
+      "Weak Hero Class 1",
+      "Angry Mom",
+      "The Penthouse: War in Life",
+      "Eve",
+      "My Name",
+      "Taxi Driver",
+      "Juvenile Justice",
+      "Mask Girl"
+    ],
+    "Itaewon Class": [
+      "Start-Up",
+      "Misaeng",
+      "Fight for My Way",
+      "Hot Stove League",
+      "Agency"
+    ],
+    "Squid Game": [
+      "All of Us Are Dead",
+      "Kingdom",
+      "Happiness",
+      "Sweet Home",
+      "Duty after School: Part 2"
+    ],
+    "Hospital Playlist": [
+      "Dr. Romantic",
+      "Doctor Cha",
+      "Good Doctor",
+      "Reply 1988",
+      "Prison Playbook"
+    ],
+    "Extraordinary Attorney Woo": [
+      "Law School",
+      "Vincenzo",
+      "Lawless Lawyer",
+      "The Good Detective"
+    ],
+    "Queen of Tears": [
+    "Crash Landing on You",
+    "Hometown Cha-Cha-Cha",
+    "Doctor Slump",
+    "Our Beloved Summer",
+    "It's Okay to Not Be Okay",
+    "My Liberation Notes",
+    "Because This Is My First Life",
+    "Twenty Five Twenty One",
+    "King the Land"
+],
+
+"My Demon": [
+    "Goblin",
+    "Hotel Del Luna",
+    "Doom at Your Service",
+    "My Love From the Star",
+    "Alchemy of Souls",
+    "Tale of the Nine Tailed",
+    "My Roommate Is a Gumiho",
+    "The Atypical Family",
+    "See You in My 19th Life"
+],
+
+"Mouse": [
+    "Beyond Evil",
+    "Signal",
+    "Flower of Evil",
+    "Blind",
+    "Tunnel",
+    "Voice"
+],
+
+"Twenty Five Twenty One": [
+    "Our Beloved Summer",
+    "Reply 1988",
+    "Weightlifting Fairy Kim Bok Joo",
+    "Moment at Eighteen"
+],
+
+"Happiness": [
+    "Sweet Home",
+    "All of Us Are Dead",
+    "Kingdom",
+    "Duty After School"
+], 
+"True Beauty": [
+  "My ID Is Gangnam Beauty",
+  "Extraordinary You",
+  "A Love So Beautiful",
+  "Weightlifting Fairy Kim Bok Joo",
+  "Moment at Eighteen",
+  "Live On"
+],
+
+"Hometown Cha-Cha-Cha": [
+  "Our Beloved Summer",
+  "Because This Is My First Life",
+  "When the Camellia Blooms",
+  "Our Blues",
+  "One Spring Night"
+],
+
+"Flower of Evil": [
+  "Mouse",
+  "Beyond Evil",
+  "Stranger",
+  "Signal",
+  "Blind",
+  "Tunnel"
+],
+
+"Healer": [
+  "City Hunter",
+  "The K2",
+  "Suspicious Partner",
+  "Vagabond",
+  "Man to Man"
+],
+
+"Alchemy of Souls": [
+  "Arthdal Chronicles",
+  "Moon Lovers",
+  "Lovers of the Red Sky",
+  "Goblin",
+  "My Demon"
+],
+
+"My Name": [
+  "Bloodhounds",
+  "Vincenzo",
+  "The K2",
+  "Big Mouth",
+  "Weak Hero Class 1"
+],
+
+"Reply 1988": [
+  "Hospital Playlist",
+  "Prison Playbook",
+  "Our Blues",
+  "Twenty Five Twenty One",
+  "Hometown Cha-Cha-Cha"
+],
+
+"Stranger": [
+  "Signal",
+  "Beyond Evil",
+  "Law School",
+  "The Good Detective",
+  "Voice"
+]
   }
 }

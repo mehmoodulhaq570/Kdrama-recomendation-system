@@ -1,0 +1,67 @@
+{
+  "network_priors": {
+    "tvN": [
+      "Hospital Playlist",
+      "Reply 1988",
+      "Goblin",
+      "Hotel Del Luna",
+      "Crash Landing on You",
+      "Queen of Tears",
+      "Mr. Queen",
+      "Signal",
+      "Mouse",
+      "Alchemy of Souls"
+    ],
+
+    "JTBC": [
+      "My Mister",
+      "The Good Bad Mother",
+      "Strong Woman Do Bong Soon",
+      "Doctor Slump",
+      "Snowdrop",
+      "Reborn Rich",
+      "Beyond Evil",
+      "Agency",
+      "SKY Castle"
+    ],
+
+    "Netflix Original": [
+      "The Glory",
+      "Squid Game",
+      "Sweet Home",
+      "Kingdom",
+      "Bloodhounds",
+      "Celebrity",
+      "Mask Girl",
+      "Daily Dose of Sunshine",
+      "All of Us Are Dead",
+      "Vincenzo",
+      "The East Palace"
+    ],
+
+    "SBS": [
+      "Taxi Driver",
+      "Dr. Romantic",
+      "Business Proposal",
+      "The Penthouse",
+      "Pinocchio",
+      "While You Were Sleeping"
+    ],
+
+    "KBS": [
+      "Fight for My Way",
+      "Descendants of the Sun",
+      "Youth of May",
+      "Good Doctor",
+      "Who Are You: School 2015"
+    ],
+
+    "MBC": [
+      "The Red Sleeve",
+      "Extraordinary You",
+      "W",
+      "Weightlifting Fairy Kim Bok Joo",
+      "Tomorrow"
+    ]
+  }
+}

@@ -21,6 +21,11 @@ Important project history reconstructed from Git commits and project documentati
 - Added `tests/evaluation/search_regression_suite.py` for live API regression checks matching the new search semantics.
   - Covers title similarity, aliases, `similar to` phrases, exclusions, actor routing, theme routing, seen-title demotion, and browse refresh variation.
   - Current focused regression result: `10/10` checks passed against the local backend.
+- Fixed `similar_to` searches so title words such as `Business` in `Business Proposal` do not pre-filter away better romance-comedy matches.
+- Versioned the recommendation cache and made debug requests bypass cache so stale cached responses do not hide ranking changes during testing.
+- Wired new prior config files into backend ranking for mood, relationship, setting, occupation, character archetype, ending, episode-count, release-year, and metadata signals.
+- Added extra curated prior entries for common searches such as `doctor drama`, `office romance`, `cozy small town romance`, `strong female lead revenge`, `romance with happy ending`, short dramas, and long dramas.
+- Expanded prior lists with additional dramas across mood, relationship, setting, occupation, ending, episode-count, character archetype, and similar-title ranking signals.
 - Confirmed runtime analytics storage locations:
   - searches, clicks, and watchlist interactions: `backend/runtime_data/analytics/`
   - user taste profiles: `backend/runtime_data/user_profiles/`
