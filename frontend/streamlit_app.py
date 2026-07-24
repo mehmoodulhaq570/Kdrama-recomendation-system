@@ -582,6 +582,7 @@ with tab1:
             "sort_order": sort_order,
             "similar_to": similar_to,
             "refresh": st.session_state.search_refresh,
+            "seen_titles": "|".join(st.session_state.viewed_dramas[:50]),
         }
         if st.session_state.pending_similar_to:
             filter_params["similar_to"] = st.session_state.pending_similar_to

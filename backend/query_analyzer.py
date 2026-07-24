@@ -155,6 +155,8 @@ class QueryAnalyzer:
 
         # Extract entities
         entities = self._extract_entities(query_lower)
+        if entities.get("actors"):
+            intent, confidence = QueryIntent.ACTOR_BASED, 0.9
 
         # Expand query with synonyms
         expanded_query = self._expand_query(query_lower)
@@ -181,6 +183,8 @@ class QueryAnalyzer:
         """
         # Check each intent pattern
         for intent, patterns in self.intent_patterns.items():
+            if intent == QueryIntent.ACTOR_BASED:
+                continue
             for pattern in patterns:
                 if re.search(pattern, query, re.IGNORECASE):
                     return intent, 0.9  # High confidence on pattern match
@@ -238,7 +242,9 @@ class QueryAnalyzer:
         entities = {
             "actors": [],
             "genres": [],
+            "exclude_genres": [],
             "themes": [],
+            "exclude_themes": [],
             "years": [],
             "emotions": [],
             "constraints": {},
@@ -426,6 +432,14 @@ class QueryAnalyzer:
 
         query_lower = query.lower()
         detected_genres = []
+        excluded_genres = []
+
+        exclusion_query = ""
+        exclusion_match = re.search(
+            r"\b(?:not|without|except|exclude|no)\b\s+(.+)", query_lower
+        )
+        if exclusion_match:
+            exclusion_query = exclusion_match.group(1)
 
         # Sort by length (longest first) to match multi-word terms first
         sorted_terms = sorted(genre_mapping.keys(), key=len, reverse=True)
@@ -438,8 +452,17 @@ class QueryAnalyzer:
                     detected_genres.extend([g.strip() for g in genre.split(",")])
                 else:
                     detected_genres.append(genre)
+            if exclusion_query and term in exclusion_query:
+                genre = genre_mapping[term]
+                if "," in genre:
+                    excluded_genres.extend([g.strip() for g in genre.split(",")])
+                else:
+                    excluded_genres.append(genre)
 
-        entities["genres"] = list(set(detected_genres))  # Remove duplicates
+        entities["exclude_genres"] = list(set(excluded_genres))
+        entities["genres"] = [
+            genre for genre in list(set(detected_genres)) if genre not in entities["exclude_genres"]
+        ]
 
         # Extract themes (common K-drama themes)
         theme_keywords = {
@@ -467,11 +490,17 @@ class QueryAnalyzer:
         }
 
         detected_themes = []
+        excluded_themes = []
         for theme, keywords in theme_keywords.items():
             if any(kw in query_lower for kw in keywords):
                 detected_themes.append(theme)
+            if exclusion_query and any(kw in exclusion_query for kw in keywords):
+                excluded_themes.append(theme)
 
-        entities["themes"] = detected_themes
+        entities["exclude_themes"] = list(set(excluded_themes))
+        entities["themes"] = [
+            theme for theme in detected_themes if theme not in entities["exclude_themes"]
+        ]
 
         # Extract emotions
         emotions = [

@@ -223,6 +223,13 @@ GENERATED_CALIBRATED_KEYWORD_INDEX = load_generated_index("calibrated_keyword_in
 TITLE_ALIASES = GENERATED_TITLE_ALIASES | {
     "goblin": "Guardian: The Lonely and Great God",
     "guardian": "Guardian: The Lonely and Great God",
+    "cloy": "Crash Landing on You",
+    "crash landing": "Crash Landing on You",
+    "crash landing on you": "Crash Landing on You",
+    "dots": "Descendants of the Sun",
+    "descendants": "Descendants of the Sun",
+    "wwsk": "What's Wrong with Secretary Kim",
+    "secretary kim": "What's Wrong with Secretary Kim",
 }
 
 CURATED_PRIORS = load_ranking_config("curated_priors.json")
@@ -545,6 +552,118 @@ def resolve_title_alias(user_input: str, candidates):
     )
 
 
+def resolve_title(user_input: str, candidates, fuzzy_threshold=90):
+    """Resolve exact, alias, or high-confidence fuzzy title against candidates."""
+    normalized = user_input.lower().strip()
+    exact_match = next(
+        (m for m in candidates if m.get("Title", "").lower() == normalized), None
+    )
+    if exact_match:
+        return exact_match, "exact"
+
+    alias_match = resolve_title_alias(user_input, candidates)
+    if alias_match:
+        return alias_match, "alias"
+
+    candidate_titles = [m.get("Title", "") for m in candidates if m.get("Title")]
+    if candidate_titles:
+        match, score, _ = process.extractOne(
+            user_input, candidate_titles, scorer=fuzz.WRatio
+        )
+        if match and score >= fuzzy_threshold:
+            return (
+                next((m for m in candidates if m.get("Title") == match), None),
+                f"fuzzy:{score:.1f}",
+            )
+
+    return None, None
+
+
+def extract_similar_to_title(query: str, candidates):
+    """Extract and resolve titles from user phrases such as 'like Goblin'."""
+    patterns = [
+        r"(?:something\s+)?(?:like|similar to|same as|shows like|dramas like|more like)\s+(.+)",
+        r"(.+)\s+(?:similar|vibes|vibe)$",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, query, re.IGNORECASE)
+        if not match:
+            continue
+        raw_title = re.sub(r"\b(?:drama|kdrama|k-drama|show|series)\b", "", match.group(1), flags=re.IGNORECASE)
+        raw_title = raw_title.strip(" .!?")
+        if not raw_title:
+            continue
+        resolved, source = resolve_title(raw_title, candidates, fuzzy_threshold=82)
+        if resolved:
+            return resolved.get("Title"), source
+    return None, None
+
+
+def split_metadata_terms(value):
+    return {
+        part.strip().lower()
+        for part in re.split(r"[,;/|]", str(value or ""))
+        if part.strip()
+    }
+
+
+def drama_theme_set(drama):
+    searchable_text = " ".join(
+        str(drama.get(field, ""))
+        for field in ["Title", "Genre", "Description", "keywords"]
+    ).lower()
+    theme_keywords = {
+        "north korea": ["north korea", "north and south korea", "defector", "dmz"],
+        "military romance": ["soldier", "army", "military", "army officer"],
+        "supernatural romance": ["goblin", "ghost", "supernatural", "immortal", "dokkaebi"],
+        "contract relationship": ["contract relationship", "fake identity", "fake dating", "contract marriage"],
+        "office romance": ["boss-employee", "company", "office", "ceo", "workplace"],
+        "school bullying": ["bullying", "school violence", "bullied"],
+        "revenge": ["revenge", "vengeance", "payback"],
+        "medical": ["doctor", "hospital", "medical", "surgeon"],
+        "legal": ["lawyer", "attorney", "court", "prosecutor"],
+        "time travel": ["time travel", "time slip", "time loop", "past life"],
+        "healing slice of life": ["healing", "slice of life", "comfort", "everyday"],
+    }
+    return {
+        theme
+        for theme, keywords in theme_keywords.items()
+        if any(keyword in searchable_text for keyword in keywords)
+    }
+
+
+def seed_similarity_score(seed_drama, candidate, faiss_rank=None):
+    seed_genres = split_metadata_terms(seed_drama.get("Genre", ""))
+    candidate_genres = split_metadata_terms(candidate.get("Genre", ""))
+    genre_overlap = len(seed_genres & candidate_genres)
+    genre_union = len(seed_genres | candidate_genres) or 1
+
+    seed_keywords = split_metadata_terms(seed_drama.get("keywords", ""))
+    candidate_keywords = split_metadata_terms(candidate.get("keywords", ""))
+    keyword_overlap = len(seed_keywords & candidate_keywords)
+
+    seed_themes = drama_theme_set(seed_drama)
+    candidate_themes = drama_theme_set(candidate)
+    theme_overlap = len(seed_themes & candidate_themes)
+
+    try:
+        rating = float(candidate.get("rating_value", 0) or 0)
+    except Exception:
+        rating = 0.0
+
+    rank_bonus = 0.0
+    if faiss_rank is not None:
+        rank_bonus = max(0.0, 1.0 - (faiss_rank / 200))
+
+    return (
+        (genre_overlap / genre_union) * 3.0
+        + theme_overlap * 2.4
+        + min(keyword_overlap, 4) * 0.35
+        + (rating / 10.0) * 0.8
+        + rank_bonus
+    )
+
+
 def generated_index_boosts(result_title, detected_actors, detected_genres, detected_themes):
     """Return a small, capped multiplier from generated indexes.
 
@@ -685,6 +804,8 @@ def recommend(
     sort_order="desc",
     similar_to=None,
     refresh=0,
+    seen_titles=None,
+    debug=False,
     user_id=None,  # NEW: For analytics tracking
     session_id=None,  # NEW: For session tracking
 ):
@@ -699,6 +820,29 @@ def recommend(
     6. Optional reranking (Cross-Encoder)
     7. Analytics logging (NEW)
     """
+
+    seen_title_set = {
+        title.strip().lower()
+        for title in (seen_titles.split("|") if isinstance(seen_titles, str) else seen_titles or [])
+        if title and title.strip()
+    }
+    debug_info = {
+        "search_mode": "hybrid",
+        "resolved_title": None,
+        "resolved_source": None,
+        "similar_to": similar_to,
+        "semantic_weight": None,
+        "bm25_weight": None,
+        "excluded_genres": [],
+        "excluded_themes": [],
+        "seen_titles_penalized": len(seen_title_set),
+    }
+
+    extracted_similar_to, extracted_source = extract_similar_to_title(title, metadata)
+    if not similar_to and extracted_similar_to:
+        similar_to = extracted_similar_to
+        debug_info["similar_to"] = similar_to
+        debug_info["resolved_source"] = f"similar_phrase:{extracted_source}"
 
     # ---- Check cache first (skip if personalized or has user_id) ----
     if not user_id:
@@ -716,6 +860,8 @@ def recommend(
             "sort_order": sort_order,
             "similar_to": similar_to,
             "refresh": refresh,
+            "seen_titles": "|".join(sorted(seen_title_set)),
+            "debug": debug,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cached = get_cached_result(cache_key)
@@ -737,6 +883,11 @@ def recommend(
     if entities.get("actors"):
         print(f"🎬 Detected Actors: {entities['actors']}")
 
+    excluded_genres = entities.get("exclude_genres", [])
+    excluded_themes = entities.get("exclude_themes", [])
+    debug_info["excluded_genres"] = excluded_genres
+    debug_info["excluded_themes"] = excluded_themes
+
     # Get search strategy for this intent
     strategy = get_search_strategy(intent)
 
@@ -747,11 +898,11 @@ def recommend(
     filtered_metadata = metadata.copy()
 
     # Check for exact title match FIRST - skip filtering if exact match exists
-    exact_title_match = next(
-        (m for m in metadata if m["Title"].lower() == title.lower()), None
-    )
-    alias_title_match = resolve_title_alias(title, metadata)
-    title_resolution_match = exact_title_match or alias_title_match
+    exact_title_match, title_match_source = resolve_title(title, metadata, fuzzy_threshold=95)
+    title_resolution_match = exact_title_match
+    if title_resolution_match:
+        debug_info["resolved_title"] = title_resolution_match.get("Title")
+        debug_info["resolved_source"] = title_match_source
     if title_resolution_match:
         print(
             f"✓ Title found: {title_resolution_match['Title']} - skipping genre/actor filtering"
@@ -866,6 +1017,25 @@ def recommend(
             for r in filtered_metadata
             if screenwriters.lower() in str(r.get("screenwriters", "")).lower()
         ]
+    if excluded_genres:
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if not any(
+                excluded.lower() in str(r.get("Genre", "")).lower()
+                for excluded in excluded_genres
+            )
+        ]
+    if excluded_themes:
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if not any(
+                excluded in str(r.get("Description", "")).lower()
+                or excluded in str(r.get("keywords", "")).lower()
+                for excluded in excluded_themes
+            )
+        ]
 
     # If no results after filtering, return empty
     if not filtered_metadata:
@@ -979,7 +1149,10 @@ def recommend(
     query_emb = cached_encode(query_text)
     # Optimize search_k for better performance while maintaining accuracy
     # Only search within filtered corpus + small buffer
-    search_k = min(len(filtered_metadata) + 20, max(top_n * 5, 50))
+    search_k = min(
+        len(filtered_metadata) + 20,
+        max(top_n * 20, 200) if title_similarity_mode else max(top_n * 5, 50),
+    )
     D_all, I_all = index.search(query_emb, search_k)
 
     # Filter FAISS results to only include filtered_metadata indices
@@ -1007,6 +1180,11 @@ def recommend(
 
     semantic_weight = 1.0 if title_similarity_mode else alpha
     lexical_weight = 0.0 if title_similarity_mode else (1 - alpha)
+    debug_info["semantic_weight"] = semantic_weight
+    debug_info["bm25_weight"] = lexical_weight
+    debug_info["search_mode"] = (
+        "similar_to" if similar_to else "title_similarity" if title_similarity_mode else intent.value
+    )
 
     for rec, score in faiss_results:
         combined_scores[rec["Title"]] = semantic_weight * score
@@ -1347,6 +1525,19 @@ def recommend(
 
     if title_similarity_mode:
         filtered = [r for r in filtered if r["Title"] != drama["Title"]]
+        faiss_rank = {rec["Title"]: rank for rank, (rec, _) in enumerate(faiss_results)}
+        filtered = sorted(
+            filtered,
+            key=lambda r: seed_similarity_score(
+                drama, r, faiss_rank.get(r["Title"])
+            ),
+            reverse=True,
+        )
+
+    if seen_title_set:
+        unseen = [r for r in filtered if r["Title"].lower() not in seen_title_set]
+        seen = [r for r in filtered if r["Title"].lower() in seen_title_set]
+        filtered = unseen + seen
 
     # Handle similar_to filter (requires FAISS search)
     if similar_to:
@@ -1370,7 +1561,21 @@ def recommend(
                 and idx in filtered_indices
                 and metadata[idx]["Title"].lower() != similar_to.lower()
             ]
-            filtered = sim_results
+            faiss_rank = {
+                result["Title"]: rank for rank, result in enumerate(sim_results)
+            }
+            filtered = sorted(
+                sim_results,
+                key=lambda r: seed_similarity_score(
+                    sim_drama, r, faiss_rank.get(r["Title"])
+                ),
+                reverse=True,
+            )
+
+    if seen_title_set:
+        unseen = [r for r in filtered if r["Title"].lower() not in seen_title_set]
+        seen = [r for r in filtered if r["Title"].lower() in seen_title_set]
+        filtered = unseen + seen
 
     # Sorting
     if sort_by:
@@ -1551,9 +1756,13 @@ def recommend(
             "sort_order": sort_order,
             "similar_to": similar_to,
             "refresh": refresh,
+            "seen_titles": "|".join(sorted(seen_title_set)),
+            "debug": debug,
         },
         "recommendations": top_results,
     }
+    if debug:
+        response["debug"] = debug_info
 
     # Add personalization info if available
     if personalization_info:
@@ -1578,6 +1787,8 @@ def recommend(
             "sort_order": sort_order,
             "similar_to": similar_to,
             "refresh": refresh,
+            "seen_titles": "|".join(sorted(seen_title_set)),
+            "debug": debug,
         }
         cache_key = get_cache_key(title, top_n, genre, filters_dict)
         cache_result(cache_key, response)
@@ -1655,6 +1866,8 @@ def get_recommendations(
     sort_order: str = Query("desc", description="Sort order: asc or desc"),
     similar_to: str = Query(None, description="Find dramas similar to this title"),
     refresh: int = Query(0, description="Refresh token for varied browse results"),
+    seen_titles: str = Query(None, description="Pipe-separated titles already shown to the user"),
+    debug: bool = Query(False, description="Include search routing/debug details"),
     user_id: str = Query(None, description="User ID for analytics (optional)"),
     session_id: str = Query(None, description="Session ID for analytics (optional)"),
 ):
@@ -1682,6 +1895,8 @@ def get_recommendations(
         sort_order=sort_order,
         similar_to=similar_to,
         refresh=refresh,
+        seen_titles=seen_titles,
+        debug=debug,
         user_id=user_id,
         session_id=session_id,
     )

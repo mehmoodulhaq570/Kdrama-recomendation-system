@@ -12,6 +12,15 @@ Important project history reconstructed from Git commits and project documentati
   - The seed drama is excluded from its own recommendation list.
 - Updated the frontend `Similar` action to call the backend `similar_to` flow instead of re-searching the clicked title as plain text.
 - Added a `refresh` token for broad browse queries so repeated genre/vague/emotion searches can lightly vary results from a high-quality candidate pool.
+- Enhanced search intent handling:
+  - added aliases such as `CLOY`, `DOTS`, and `WWWSK`
+  - added parsing for natural phrases such as `similar to Goblin` and `shows like Business Proposal`
+  - added exclusion extraction for queries such as `romance without historical` or `thriller no horror`
+  - added seen-title demotion support so viewed dramas can move down on later searches
+  - added optional recommendation debug data for inspecting search mode, resolved title, and semantic/BM25 weights
+- Added `tests/evaluation/search_regression_suite.py` for live API regression checks matching the new search semantics.
+  - Covers title similarity, aliases, `similar to` phrases, exclusions, actor routing, theme routing, seen-title demotion, and browse refresh variation.
+  - Current focused regression result: `10/10` checks passed against the local backend.
 - Confirmed runtime analytics storage locations:
   - searches, clicks, and watchlist interactions: `backend/runtime_data/analytics/`
   - user taste profiles: `backend/runtime_data/user_profiles/`
