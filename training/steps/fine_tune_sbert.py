@@ -1,4 +1,4 @@
-"""
+r"""
 Fine-tune SentenceTransformer on SeoulMate dataset.
 
 Usage:

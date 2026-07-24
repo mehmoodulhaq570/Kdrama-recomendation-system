@@ -29,10 +29,11 @@ import gc
 # Configuration (using relative paths)
 # ======================================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+PROJECT_ROOT = os.path.dirname(TRAINING_ROOT)
 
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "final", "dramalist_kdramas.xlsx")
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "training_data")
+OUTPUT_DIR = os.path.join(TRAINING_ROOT, "training_data")
 
 # Theme definitions (same as enhanced_index_builder.py)
 THEME_DEFINITIONS = {

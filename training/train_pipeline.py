@@ -39,14 +39,15 @@ from datetime import datetime
 # ======================================================
 SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPTS_DIR)
+STEPS_DIR = os.path.join(SCRIPTS_DIR, "steps")
 
 SCRIPTS = {
-    "generate_data": os.path.join(SCRIPTS_DIR, "generate_training_data.py"),
-    "fine_tune": os.path.join(SCRIPTS_DIR, "fine_tune_kdrama_sbert.py"),
-    "build_index": os.path.join(SCRIPTS_DIR, "enhanced_index_builder.py"),
-    "generate_reranker_data": os.path.join(SCRIPTS_DIR, "generate_reranker_data.py"),
-    "fine_tune_reranker": os.path.join(SCRIPTS_DIR, "fine_tune_cross_encoder.py"),
-    "train_ltr": os.path.join(SCRIPTS_DIR, "learning_to_rank.py"),
+    "generate_data": os.path.join(STEPS_DIR, "generate_training_data.py"),
+    "fine_tune": os.path.join(STEPS_DIR, "fine_tune_kdrama_sbert.py"),
+    "build_index": os.path.join(STEPS_DIR, "enhanced_index_builder.py"),
+    "generate_reranker_data": os.path.join(STEPS_DIR, "generate_reranker_data.py"),
+    "fine_tune_reranker": os.path.join(STEPS_DIR, "fine_tune_cross_encoder.py"),
+    "train_ltr": os.path.join(STEPS_DIR, "learning_to_rank.py"),
 }
 
 RERANKER_TRAIN_PATH = os.path.join(SCRIPTS_DIR, "reranker_train.csv")

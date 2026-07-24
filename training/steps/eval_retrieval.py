@@ -1,4 +1,4 @@
-"""
+r"""
 Evaluate retrieval performance (Recall@K, NDCG@K) for a FAISS index and encoder.
 
 Usage examples:
@@ -15,6 +15,9 @@ import faiss
 import csv
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics import ndcg_score
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
 
 
 def load_metadata(meta_path):
@@ -72,10 +75,10 @@ def main():
     )
     parser.add_argument(
         "--index",
-        default=r"d:\Projects\SeoulMate\training\faiss_index\index.faiss",
+        default=os.path.join(TRAINING_ROOT, "faiss_index", "index.faiss"),
     )
     parser.add_argument(
-        "--meta", default=r"d:\Projects\SeoulMate\training\faiss_index\meta.pkl"
+        "--meta", default=os.path.join(TRAINING_ROOT, "faiss_index", "meta.pkl")
     )
     parser.add_argument(
         "--test_csv",

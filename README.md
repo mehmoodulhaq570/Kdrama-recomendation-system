@@ -52,12 +52,13 @@ SeoulMate/
 |   +-- TEST_FRONTEND.md
 +-- training/
 |   +-- train_pipeline.py
-|   +-- build_index.py
-|   +-- enhanced_index_builder.py
-|   +-- generate_training_data.py
-|   +-- fine_tune_kdrama_sbert.py
-|   +-- fine_tune_cross_encoder.py
-|   +-- learning_to_rank.py
+|   +-- steps/
+|   |   +-- build_index.py
+|   |   +-- enhanced_index_builder.py
+|   |   +-- generate_training_data.py
+|   |   +-- fine_tune_kdrama_sbert.py
+|   |   +-- fine_tune_cross_encoder.py
+|   |   +-- learning_to_rank.py
 |   +-- models/
 |   +-- faiss_index/
 |   +-- training_data/
@@ -410,7 +411,7 @@ Rebuild the FAISS index:
 
 ```powershell
 cd training
-python enhanced_index_builder.py --mode full
+python training\steps\enhanced_index_builder.py --mode full
 ```
 
 Regenerate backend ranking indexes:

@@ -25,6 +25,9 @@ try:
 except ImportError:
     from torch.optim import AdamW
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+
 
 class PairDataset(Dataset):
     def __init__(self, rows: List[Dict]):
@@ -141,7 +144,10 @@ def main():
         "--data", required=True, help="CSV with columns query,doc_text,label"
     )
     parser.add_argument("--model", default="cross-encoder/ms-marco-MiniLM-L-6-v2")
-    parser.add_argument("--output", default="models/cross-enc-finetuned")
+    parser.add_argument(
+        "--output",
+        default=os.path.join(TRAINING_ROOT, "models", "cross-enc-finetuned"),
+    )
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--lr", type=float, default=2e-5)

@@ -36,14 +36,15 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 # Configuration (using relative paths)
 # ======================================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
 
 # Use a smaller model for CPU training - still multilingual but faster
 BASE_MODEL = (
     "paraphrase-multilingual-MiniLM-L12-v2"  # Smaller than mpnet, faster on CPU
 )
 # Alternative: "paraphrase-multilingual-mpnet-base-v2" for higher quality (needs more RAM)
-TRAINING_DATA_DIR = os.path.join(SCRIPT_DIR, "training_data")
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "models", "sbert-kdrama-finetuned")
+TRAINING_DATA_DIR = os.path.join(TRAINING_ROOT, "training_data")
+OUTPUT_DIR = os.path.join(TRAINING_ROOT, "models", "sbert-kdrama-finetuned")
 
 
 def load_training_pairs(data_dir: str) -> List[InputExample]:

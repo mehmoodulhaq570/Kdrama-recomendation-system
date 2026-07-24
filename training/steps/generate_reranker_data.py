@@ -21,6 +21,9 @@ import csv
 from sentence_transformers import SentenceTransformer
 import faiss
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+
 
 def load_metadata(meta_path):
     with open(meta_path, "rb") as f:
@@ -31,14 +34,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--index",
-        default=r"d:\Projects\SeoulMate\training\faiss_index\index.faiss",
+        default=os.path.join(TRAINING_ROOT, "faiss_index", "index.faiss"),
     )
     parser.add_argument(
-        "--meta", default=r"d:\Projects\SeoulMate\training\faiss_index\meta.pkl"
+        "--meta", default=os.path.join(TRAINING_ROOT, "faiss_index", "meta.pkl")
     )
     parser.add_argument(
         "--model",
-        default=r"d:\Projects\SeoulMate\training\models\sbert-finetuned-full",
+        default=os.path.join(TRAINING_ROOT, "models", "sbert-finetuned-full"),
     )
     parser.add_argument("--output", default="reranker_train.csv")
     parser.add_argument("--topk", type=int, default=50)

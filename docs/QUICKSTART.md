@@ -9,8 +9,8 @@ The system is currently building the search index with **1,922 dramas**.
 **Current Status**: Building embeddings (~5-10 minutes)
 
 ```bash
-cd d:\Projects\SeoulMate\model_traning
-python build_index.py
+cd d:\Projects\SeoulMate
+python training\steps\build_index.py
 ```
 
 **What this does:**
@@ -22,8 +22,8 @@ python build_index.py
 
 **Output files:**
 
-- `model_traning/faiss_index/index.faiss` - Vector index
-- `model_traning/faiss_index/meta.pkl` - Drama metadata
+- `training/faiss_index/index.faiss` - Vector index
+- `training/faiss_index/meta.pkl` - Drama metadata
 
 ---
 
@@ -176,8 +176,8 @@ python app.py
 **Solution:** Build the index first:
 
 ```bash
-cd d:\Projects\SeoulMate\model_traning
-python build_index.py
+cd d:\Projects\SeoulMate
+python training\steps\build_index.py
 ```
 
 ### Issue: Slow first request

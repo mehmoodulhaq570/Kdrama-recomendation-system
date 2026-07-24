@@ -8,12 +8,13 @@ from sentence_transformers import SentenceTransformer
 # 1. Config (using relative paths)
 # ======================================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+PROJECT_ROOT = os.path.dirname(TRAINING_ROOT)
 
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "final", "dramalist_kdramas.xlsx")
 MODEL_NAME = "paraphrase-multilingual-mpnet-base-v2"
-MODEL_DIR = os.path.join(SCRIPT_DIR, "models")
-INDEX_DIR = os.path.join(SCRIPT_DIR, "faiss_index")
+MODEL_DIR = os.path.join(TRAINING_ROOT, "models")
+INDEX_DIR = os.path.join(TRAINING_ROOT, "faiss_index")
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(INDEX_DIR, exist_ok=True)

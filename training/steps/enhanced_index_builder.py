@@ -25,11 +25,12 @@ import json
 # Configuration (using relative paths)
 # ======================================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+PROJECT_ROOT = os.path.dirname(TRAINING_ROOT)
 
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "final", "dramalist_kdramas.xlsx")
-MODEL_DIR = os.path.join(SCRIPT_DIR, "models")
-INDEX_DIR = os.path.join(SCRIPT_DIR, "faiss_index")
+MODEL_DIR = os.path.join(TRAINING_ROOT, "models")
+INDEX_DIR = os.path.join(TRAINING_ROOT, "faiss_index")
 
 # Base model (use fine-tuned if available)
 BASE_MODEL = "paraphrase-multilingual-mpnet-base-v2"

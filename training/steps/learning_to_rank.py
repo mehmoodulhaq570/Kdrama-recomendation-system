@@ -60,11 +60,12 @@ except ImportError:
 # Configuration (using relative paths)
 # ======================================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+TRAINING_ROOT = os.path.dirname(SCRIPT_DIR)
+PROJECT_ROOT = os.path.dirname(TRAINING_ROOT)
 
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "final", "dramalist_kdramas.xlsx")
-MODEL_DIR = os.path.join(SCRIPT_DIR, "models")
-LTR_DIR = os.path.join(SCRIPT_DIR, "ltr_model")
+MODEL_DIR = os.path.join(TRAINING_ROOT, "models")
+LTR_DIR = os.path.join(TRAINING_ROOT, "ltr_model")
 
 # Feature names for the ranking model
 FEATURE_NAMES = [
