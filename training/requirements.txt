@@ -1,0 +1,18 @@
+pandas
+numpy
+faiss-cpu        # or faiss-gpu if you have GPU and want GPU acceleration
+sentence-transformers
+scikit-learn
+fastapi
+uvicorn[standard]
+python-multipart
+tqdm
+rapidfuzz
+hf_xet
+huggingface_hub[hf_xet]
+rank-bm25
+datasets    
+accelerate>=0.26.0
+torch
+lightgbm
+

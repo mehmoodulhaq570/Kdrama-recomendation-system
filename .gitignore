@@ -10,7 +10,11 @@ backend/user_profiles/
 user_profiles/
 training/.git/
 frontend/.git/
-training/training_data/reranker_train.csv
+training/training_data/
+training/models/
+training/faiss_index/
+training/checkpoints/
+training/__pycache__
 .DS_Store
 .env
 .env.*
