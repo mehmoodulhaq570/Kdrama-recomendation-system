@@ -262,6 +262,17 @@ CASES = [
         ],
     ),
     SearchCase(
+        name="specific occupation prior can beat broad romance",
+        params={"title": "soldier romance", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "occupation:Soldier"),
+            any_title_in_top(
+                ["Descendants of the Sun", "Crash Landing on You", "The King 2 Hearts"],
+                5,
+            ),
+        ],
+    ),
+    SearchCase(
         name="ending prior supports happy ending romance",
         params={"title": "romance with happy ending", "top_n": 8, "debug": True},
         checks=[

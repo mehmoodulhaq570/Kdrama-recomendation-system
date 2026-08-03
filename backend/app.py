@@ -326,6 +326,14 @@ EXTRA_PRIOR_CONFIGS = {
     "release_year": load_ranking_config("release_year_prior.json"),
     "metadata": load_ranking_config("metadata_priors.json"),
 }
+SPECIFIC_EXTRA_PRIOR_CATEGORIES = {
+    "occupation",
+    "setting",
+    "relationship",
+    "character",
+    "ending",
+    "episode_count",
+}
 DEFAULT_SIMILAR_TITLE_PRIORS = {
     "Crash Landing on You": [
         "King2Hearts",
@@ -1008,6 +1016,11 @@ def recommend(
         "seen_titles_penalized": len(seen_title_set),
         "extra_prior_terms": [],
     }
+    matched_extra_priors = extra_prior_matches(f"{title} {keywords or ''}")
+    has_specific_extra_prior = any(
+        category in SPECIFIC_EXTRA_PRIOR_CATEGORIES
+        for category, _, _ in matched_extra_priors
+    )
 
     extracted_similar_to, extracted_source = extract_similar_to_title(title, metadata)
     if not similar_to and extracted_similar_to:
@@ -1444,6 +1457,11 @@ def recommend(
                         if prior_source == "fallback"
                         else PRIOR_WEIGHTS.get("genre", 2.2)
                     )
+                    if has_specific_extra_prior and len(detected_genres) == 1:
+                        genre_boost = min(
+                            genre_boost,
+                            PRIOR_WEIGHTS.get("specific_query_genre_cap", 0.9),
+                        )
                     add_prior_title_boosts(
                         combined_scores,
                         filtered_metadata,
@@ -1636,13 +1654,15 @@ def recommend(
                     1.25 + 0.15 * min(matching_keyword_count, 3)
                 )
 
-    matched_extra_priors = extra_prior_matches(f"{title} {keywords or ''}")
     for category, term, prior_titles in matched_extra_priors:
+        extra_boost = PRIOR_WEIGHTS.get(f"{category}_prior", 1.45)
+        if category in SPECIFIC_EXTRA_PRIOR_CATEGORIES:
+            extra_boost = PRIOR_WEIGHTS.get(f"{category}_prior", 1.85)
         add_prior_title_boosts(
             combined_scores,
             filtered_metadata,
             prior_titles,
-            boost=PRIOR_WEIGHTS.get(f"{category}_prior", 1.45),
+            boost=extra_boost,
             decay=0.06,
         )
     if matched_extra_priors:

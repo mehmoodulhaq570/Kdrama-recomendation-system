@@ -28,6 +28,7 @@ Important project history reconstructed from Git commits and project documentati
 - Expanded prior lists with additional dramas across mood, relationship, setting, occupation, ending, episode-count, character archetype, and similar-title ranking signals.
 - Normalized prior config files into strict JSON and expanded the live regression suite to cover the new prior categories.
   - Current focused regression result: `17/17` checks passed against the local backend.
+- Tuned ranking weights so specific prior intent, such as `soldier romance`, can beat broad single-genre romance priors.
 - Pinned Starlette to the FastAPI-compatible range after local startup exposed an incompatible `starlette 1.x` install.
 - Added a compressed README welcome GIF and reduced the displayed asset from about 4.8 MB to about 0.8 MB.
 - Created a local `.venv`, ignored virtual environment folders, and updated combined requirements for Python 3.14 compatibility.
