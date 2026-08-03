@@ -26,6 +26,12 @@ Important project history reconstructed from Git commits and project documentati
 - Wired new prior config files into backend ranking for mood, relationship, setting, occupation, character archetype, ending, episode-count, release-year, and metadata signals.
 - Added extra curated prior entries for common searches such as `doctor drama`, `office romance`, `cozy small town romance`, `strong female lead revenge`, `romance with happy ending`, short dramas, and long dramas.
 - Expanded prior lists with additional dramas across mood, relationship, setting, occupation, ending, episode-count, character archetype, and similar-title ranking signals.
+- Normalized prior config files into strict JSON and expanded the live regression suite to cover the new prior categories.
+  - Current focused regression result: `17/17` checks passed against the local backend.
+- Pinned Starlette to the FastAPI-compatible range after local startup exposed an incompatible `starlette 1.x` install.
+- Added a compressed README welcome GIF and reduced the displayed asset from about 4.8 MB to about 0.8 MB.
+- Created a local `.venv`, ignored virtual environment folders, and updated combined requirements for Python 3.14 compatibility.
+  - Updated FastAPI/Starlette, Streamlit, and pandas ranges so backend and frontend dependencies can coexist.
 - Confirmed runtime analytics storage locations:
   - searches, clicks, and watchlist interactions: `backend/runtime_data/analytics/`
   - user taste profiles: `backend/runtime_data/user_profiles/`

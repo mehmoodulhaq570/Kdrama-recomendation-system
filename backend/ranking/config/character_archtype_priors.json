@@ -9,9 +9,9 @@
     "When the Weather Is Fine",
     "One Spring Night",
     "Run On",
-    "Our Beloved Summer"
+    "Our Beloved Summer",
+    "Her Private Life"
   ],
-
   "green flag female lead": [
     "Extraordinary Attorney Woo",
     "Weightlifting Fairy Kim Bok Joo",
@@ -19,7 +19,6 @@
     "Run On",
     "Hospital Playlist"
   ],
-
   "strong female lead": [
     "Strong Woman Do Bong Soon",
     "My Name",
@@ -36,7 +35,6 @@
     "Military Prosecutor Doberman",
     "Sell Your Haunted House"
   ],
-
   "independent female lead": [
     "Search: WWW",
     "Her Private Life",
@@ -46,7 +44,6 @@
     "One Spring Night",
     "Our Beloved Summer"
   ],
-
   "cold male lead": [
     "What's Wrong with Secretary Kim",
     "Secret Garden",
@@ -54,9 +51,10 @@
     "The Heirs",
     "Boys Over Flowers",
     "Business Proposal",
-    "King the Land"
+    "King the Land",
+    "Doom at Your Service",
+    "Because This Is My First Life"
   ],
-
   "soft male lead": [
     "Hometown Cha-Cha-Cha",
     "Run On",
@@ -65,7 +63,6 @@
     "Hospital Playlist",
     "When the Weather Is Fine"
   ],
-
   "protective male lead": [
     "Healer",
     "The K2",
@@ -75,14 +72,12 @@
     "Strong Woman Do Bong Soon",
     "Vincenzo"
   ],
-
   "protective female lead": [
     "Strong Woman Do Bong Soon",
     "My Name",
     "Happiness",
     "Hotel Del Luna"
   ],
-
   "genius protagonist": [
     "Doctor Stranger",
     "Good Doctor",
@@ -92,7 +87,6 @@
     "Healer",
     "Extraordinary Attorney Woo"
   ],
-
   "antihero": [
     "Vincenzo",
     "The Devil Judge",
@@ -102,7 +96,6 @@
     "Heartless City",
     "Bad and Crazy"
   ],
-
   "morally gray protagonist": [
     "Vincenzo",
     "Mouse",
@@ -111,13 +104,11 @@
     "The Devil Judge",
     "My Name"
   ],
-
   "villain protagonist": [
     "Mouse",
     "Big Bet",
     "The Devil Judge"
   ],
-
   "tsundere male lead": [
     "The Heirs",
     "Boys Over Flowers",
@@ -125,13 +116,11 @@
     "What's Wrong with Secretary Kim",
     "My Love from the Star"
   ],
-
   "tsundere female lead": [
     "Hotel Del Luna",
     "Mr. Queen",
     "It's Okay to Not Be Okay"
   ],
-
   "chaebol male lead": [
     "Business Proposal",
     "King the Land",
@@ -141,13 +130,11 @@
     "Queen of Tears",
     "Boys Over Flowers"
   ],
-
   "chaebol female lead": [
     "Queen of Tears",
     "Graceful Family",
     "Mine"
   ],
-
   "overpowered protagonist": [
     "Strong Woman Do Bong Soon",
     "Goblin",
@@ -155,21 +142,18 @@
     "Alchemy of Souls",
     "The Uncanny Counter"
   ],
-
   "female warrior": [
     "Alchemy of Souls",
     "Mr. Queen",
     "My Name",
     "Arthdal Chronicles"
   ],
-
   "male warrior": [
     "Arthdal Chronicles",
     "Alchemy of Souls",
     "The K2",
     "Descendants of the Sun"
   ],
-
   "underdog protagonist": [
     "Itaewon Class",
     "Start-Up",
@@ -178,7 +162,6 @@
     "Misaeng",
     "Dream High"
   ],
-
   "genius male lead": [
     "Good Doctor",
     "Dr. Romantic",
@@ -190,30 +173,5 @@
     "Reborn Rich",
     "Again My Life",
     "Law School"
-  ],
-
-  "cold male lead": [
-    "What's Wrong with Secretary Kim",
-    "King the Land",
-    "Doom at Your Service",
-    "My Love from the Star",
-    "Secret Garden",
-    "Business Proposal",
-    "The Heirs",
-    "Boys Over Flowers",
-    "Because This Is My First Life"
-  ],
-
-  "green flag male lead": [
-    "Hometown Cha-Cha-Cha",
-    "Weightlifting Fairy Kim Bok Joo",
-    "Run On",
-    "Her Private Life",
-    "Extraordinary Attorney Woo",
-    "Hospital Playlist",
-    "When the Weather Is Fine",
-    "One Spring Night",
-    "Our Beloved Summer",
-    "Doctor Slump"
   ]
 }

@@ -12,7 +12,6 @@
     "More Than Friends",
     "The Time We Were Not in Love"
   ],
-
   "childhood friends": [
     "Fight for My Way",
     "Doctor Slump",
@@ -23,7 +22,6 @@
     "Reply 1988",
     "Come and Hug Me"
   ],
-
   "enemies to lovers": [
     "Mad for Each Other",
     "Love to Hate You",
@@ -37,7 +35,6 @@
     "So I Married the Anti-Fan",
     "Secret Garden"
   ],
-
   "fake dating": [
     "Business Proposal",
     "Marriage, Not Dating",
@@ -47,7 +44,6 @@
     "Something About 1 Percent",
     "My Secret Romance"
   ],
-
   "contract marriage": [
     "Because This Is My First Life",
     "Love in Contract",
@@ -57,7 +53,6 @@
     "Fated to Love You",
     "Full House"
   ],
-
   "forced cohabitation": [
     "Because This Is My First Life",
     "Personal Taste",
@@ -65,7 +60,6 @@
     "Full House",
     "Something About 1 Percent"
   ],
-
   "boss employee romance": [
     "Business Proposal",
     "What's Wrong with Secretary Kim",
@@ -77,17 +71,14 @@
     "My Secret Romance",
     "Clean with Passion for Now"
   ],
-
   "teacher student": [
     "Doctors",
     "Melancholia"
   ],
-
   "doctor patient": [
     "Doctor Slump",
     "Doctors"
   ],
-
   "love triangle": [
     "True Beauty",
     "Start-Up",
@@ -100,7 +91,6 @@
     "The Heirs",
     "Love Alarm"
   ],
-
   "second chance romance": [
     "Go Back Couple",
     "18 Again",
@@ -108,7 +98,6 @@
     "Welcome 2 Life",
     "Emergency Couple"
   ],
-
   "office romance": [
     "Business Proposal",
     "King the Land",
@@ -121,21 +110,18 @@
     "Touch Your Heart",
     "Romance Is a Bonus Book"
   ],
-
   "secret relationship": [
     "Nevertheless",
     "Something in the Rain",
     "Forecasting Love and Weather",
     "Encounter"
   ],
-
   "marriage of convenience": [
     "Marriage Contract",
     "Because This Is My First Life",
     "Love in Contract",
     "The Story of Park's Marriage Contract"
   ],
-
   "rich poor romance": [
     "Boys Over Flowers",
     "The Heirs",
@@ -143,10 +129,7 @@
     "King the Land",
     "Secret Garden",
     "Cinderella and the Four Knights"
-  ]
-}
-
-{
+  ],
   "slow burn romance": [
     "My Mister",
     "Our Beloved Summer",
@@ -157,7 +140,6 @@
     "Something in the Rain",
     "Summer Strike"
   ],
-
   "opposites attract": [
     "Business Proposal",
     "King the Land",
@@ -167,7 +149,6 @@
     "Beauty Inside",
     "Secret Garden"
   ],
-
   "grumpy x sunshine": [
     "Hometown Cha-Cha-Cha",
     "King the Land",
@@ -176,14 +157,12 @@
     "Summer Strike",
     "Crash Course in Romance"
   ],
-
   "sunshine x sunshine": [
     "Weightlifting Fairy Kim Bok Joo",
     "Fight for My Way",
     "Twenty Five Twenty One",
     "Our Beloved Summer"
   ],
-
   "bad boy good girl": [
     "Healer",
     "My Name",
@@ -191,13 +170,11 @@
     "Cheese in the Trap",
     "The Smile Has Left Your Eyes"
   ],
-
   "good boy bad girl": [
     "It's Okay to Not Be Okay",
     "Love to Hate You",
     "Mad for Each Other"
   ],
-
   "tsundere male lead": [
     "What's Wrong with Secretary Kim",
     "Secret Garden",
@@ -205,13 +182,11 @@
     "The Heirs",
     "My Love from the Star"
   ],
-
   "tsundere female lead": [
     "It's Okay to Not Be Okay",
     "Hotel Del Luna",
     "Mr. Queen"
   ],
-
   "green flag male lead": [
     "Hometown Cha-Cha-Cha",
     "Extraordinary Attorney Woo",
@@ -220,7 +195,6 @@
     "Doctor Slump",
     "Hospital Playlist"
   ],
-
   "strong female lead": [
     "Strong Woman Do Bong Soon",
     "Hotel Del Luna",
@@ -230,7 +204,6 @@
     "Search: WWW",
     "Queen of Tears"
   ],
-
   "independent female lead": [
     "Search: WWW",
     "Her Private Life",
@@ -238,7 +211,6 @@
     "Because This Is My First Life",
     "Little Women"
   ],
-
   "protective male lead": [
     "Healer",
     "The K2",
@@ -247,13 +219,11 @@
     "Goblin",
     "Descendants of the Sun"
   ],
-
   "protective female lead": [
     "Strong Woman Do Bong Soon",
     "My Name",
     "Happiness"
   ],
-
   "chaebol male lead": [
     "Business Proposal",
     "King the Land",
@@ -263,13 +233,11 @@
     "Queen of Tears",
     "Boys Over Flowers"
   ],
-
   "chaebol female lead": [
     "Queen of Tears",
     "Graceful Family",
     "Mine"
   ],
-
   "royal romance": [
     "The King's Affection",
     "Love in the Moonlight",
@@ -277,22 +245,20 @@
     "The Red Sleeve",
     "Moon Embracing the Sun"
   ],
-
   "age gap romance": [
     "Goblin",
     "Romance Is a Bonus Book",
     "Something in the Rain",
     "Secret Love Affair"
   ],
-
   "noona romance": [
     "Something in the Rain",
     "Romance Is a Bonus Book",
     "I Hear Your Voice",
     "Secret Love Affair",
-    "Encounter"
+    "Encounter",
+    "Search: WWW"
   ],
-
   "first love": [
     "Twenty Five Twenty One",
     "Our Beloved Summer",
@@ -300,17 +266,13 @@
     "The Heirs",
     "Love Rain"
   ],
-
   "unrequited love": [
     "Start-Up",
     "Reply 1988",
     "True Beauty",
     "Cheese in the Trap",
     "Twenty Five Twenty One"
-  ]
-}
-
-{
+  ],
   "fake marriage": [
     "Because This Is My First Life",
     "Love in Contract",
@@ -318,31 +280,27 @@
     "The Story of Park's Marriage Contract",
     "Full House"
   ],
-
   "marriage after divorce": [
     "Go Back Couple",
     "Emergency Couple",
     "Familiar Wife"
   ],
-
   "divorced couple": [
     "Go Back Couple",
     "Emergency Couple",
     "Familiar Wife"
   ],
-
   "single parent romance": [
     "When the Camellia Blooms",
     "One Spring Night",
     "Marriage Contract",
-    "Was It Love?"
+    "Was It Love?",
+    "Hi Bye, Mama!"
   ],
-
   "widow romance": [
     "When the Camellia Blooms",
     "Hi Bye, Mama!"
   ],
-
   "secret identity": [
     "Healer",
     "City Hunter",
@@ -351,7 +309,6 @@
     "The Legend of the Blue Sea",
     "Are You Human Too?"
   ],
-
   "hidden identity": [
     "Healer",
     "City Hunter",
@@ -360,7 +317,6 @@
     "Mr. Queen",
     "100 Days My Prince"
   ],
-
   "double life": [
     "Healer",
     "My Demon",
@@ -368,20 +324,17 @@
     "Private Lives",
     "Celebrity"
   ],
-
   "amnesia romance": [
     "Shopping King Louie",
     "The Smile Has Left Your Eyes",
     "Big Mouth",
     "Winter Sonata"
   ],
-
   "body swap romance": [
     "Secret Garden",
     "Mr. Queen",
     "Come Back Alive"
   ],
-
   "time travel romance": [
     "Lovely Runner",
     "Tomorrow with You",
@@ -390,14 +343,12 @@
     "Nine: Nine Times Time Travel",
     "Go Back Couple"
   ],
-
   "parallel universe romance": [
     "W",
     "The King: Eternal Monarch",
     "Extraordinary You",
     "Alice"
   ],
-
   "reincarnation romance": [
     "Goblin",
     "See You in My 19th Life",
@@ -405,7 +356,6 @@
     "Bulgasal",
     "My Love from the Star"
   ],
-
   "fated lovers": [
     "Goblin",
     "Alchemy of Souls",
@@ -413,7 +363,6 @@
     "My Love from the Star",
     "See You in My 19th Life"
   ],
-
   "immortal x human": [
     "Goblin",
     "My Demon",
@@ -421,7 +370,6 @@
     "Doom at Your Service",
     "My Love from the Star"
   ],
-
   "human x supernatural": [
     "Goblin",
     "Hotel Del Luna",
@@ -430,71 +378,59 @@
     "Oh My Ghost",
     "The Master's Sun"
   ],
-
   "gumiho romance": [
     "My Roommate Is a Gumiho",
     "Tale of the Nine Tailed",
     "My Girlfriend Is a Gumiho"
   ],
-
   "ghost romance": [
     "Oh My Ghost",
     "Hotel Del Luna",
     "Bring It On, Ghost",
     "The Master's Sun"
   ],
-
   "vampire romance": [
     "Blood",
     "Scholar Who Walks the Night",
     "Orange Marmalade"
   ],
-
   "mermaid romance": [
     "The Legend of the Blue Sea"
   ],
-
   "alien romance": [
     "My Love from the Star"
   ],
-
   "robot romance": [
     "I Am Not a Robot",
     "Are You Human Too?",
     "My Holo Love"
   ],
-
   "ai romance": [
     "My Holo Love",
     "Are You Human Too?"
   ],
-
   "royalty x commoner": [
     "The King's Affection",
     "100 Days My Prince",
     "Love in the Moonlight",
     "Moon Embracing the Sun"
   ],
-
   "prince x commoner": [
     "100 Days My Prince",
     "Love in the Moonlight",
     "Moon Embracing the Sun"
   ],
-
   "celeb x ordinary person": [
     "Shooting Stars",
     "So I Married the Anti-Fan",
     "Touch Your Heart"
   ],
-
   "idol romance": [
     "Imitation",
     "Let Me Be Your Knight",
     "The Liar and His Lover",
     "Top Management"
   ],
-
   "sports romance": [
     "Weightlifting Fairy Kim Bok Joo",
     "Twenty Five Twenty One",
@@ -502,7 +438,6 @@
     "Run On",
     "Fight for My Way"
   ],
-
   "workplace romance": [
     "Business Proposal",
     "King the Land",
@@ -511,7 +446,6 @@
     "Search: WWW",
     "Agency"
   ],
-
   "healing romance": [
     "Hometown Cha-Cha-Cha",
     "Our Beloved Summer",
@@ -520,15 +454,6 @@
     "One Spring Night",
     "Run On"
   ],
-
-  "noona romance": [
-    "Something in the Rain",
-    "Romance Is a Bonus Book",
-    "Encounter",
-    "I Hear Your Voice",
-    "Search: WWW"
-  ],
-
   "found family": [
     "Hospital Playlist",
     "Reply 1988",
@@ -540,19 +465,11 @@
     "Navillera",
     "The Good Bad Mother"
   ],
-
   "sibling bond": [
     "My Mister",
     "Reply 1988",
     "Little Women",
     "It's Okay to Not Be Okay",
     "My Liberation Notes"
-  ],
-
-  "single parent romance": [
-    "When the Camellia Blooms",
-    "One Spring Night",
-    "Marriage Contract",
-    "Hi Bye, Mama!"
   ]
 }

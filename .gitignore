@@ -18,6 +18,8 @@ training/__pycache__
 .DS_Store
 .env
 .env.*
+.venv/
+venv/
 logs/
 .idea/
 *.log
@@ -28,3 +30,4 @@ logs/
 PHASE2_STEP2_SUMMARY.md
 Phase-to-implement.txt
 SeoulMate_model_traning.zip
+Korean Drama Thumbs Up GIF by The Swoon.gif

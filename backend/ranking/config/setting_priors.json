@@ -15,26 +15,22 @@
     "Hospital Ship",
     "Heart Surgeons"
   ],
-
   "Emergency Room": [
     "Dr. Romantic",
     "Hospital Playlist",
     "Doctors",
     "Doctor Stranger"
   ],
-
   "Psychiatric Hospital": [
     "It's Okay to Not Be Okay",
     "Daily Dose of Sunshine",
     "Soul Mechanic"
   ],
-
   "Medical School": [
     "Hospital Playlist",
     "Doctors",
     "Doctor Cha"
   ],
-
   "School": [
     "True Beauty",
     "Extraordinary You",
@@ -51,7 +47,6 @@
     "Study Group",
     "Night Has Come"
   ],
-
   "High School": [
     "True Beauty",
     "Extraordinary You",
@@ -62,7 +57,6 @@
     "A Love So Beautiful",
     "School 2021"
   ],
-
   "University": [
     "Weightlifting Fairy Kim Bok Joo",
     "Cheese in the Trap",
@@ -71,11 +65,9 @@
     "Do You Like Brahms?",
     "Law School"
   ],
-
   "Law School": [
     "Law School"
   ],
-
   "Office": [
     "Business Proposal",
     "King the Land",
@@ -92,29 +84,26 @@
     "She Was Pretty",
     "Romance Is a Bonus Book"
   ],
-
   "Startup": [
     "Start-Up",
     "Search: WWW",
     "Misaeng",
     "Agency"
   ],
-
   "Law Firm": [
     "Extraordinary Attorney Woo",
     "Lawless Lawyer",
     "Hyena",
     "The Law Cafe",
-    "Suspicious Partner"
+    "Suspicious Partner",
+    "Law School"
   ],
-
   "Courtroom": [
     "The Devil Judge",
     "Juvenile Justice",
     "Miss Hammurabi",
     "Extraordinary Attorney Woo"
   ],
-
   "Police Station": [
     "Live",
     "Voice",
@@ -124,27 +113,23 @@
     "Beyond Evil",
     "Tunnel"
   ],
-
   "Detective Agency": [
     "Team Bulldog: Off-duty Investigation",
     "Player",
     "Leverage"
   ],
-
   "Prison": [
     "Prison Playbook",
     "Doctor Prisoner",
     "Innocent Defendant",
     "Big Mouth"
   ],
-
   "Military Base": [
     "Descendants of the Sun",
     "D.P.",
     "Search",
     "The King 2 Hearts"
   ],
-
   "Restaurant": [
     "Wok of Love",
     "Pasta",
@@ -155,26 +140,20 @@
     "Late Night Restaurant",
     "Warm and Cozy"
   ],
-
   "Cafe": [
     "Coffee Prince",
     "Would You Like a Cup of Coffee?",
     "The Third Charm",
     "Cafe Minamdang"
   ],
-
   "Hotel": [
     "Hotel Del Luna",
     "King the Land",
     "Hotel King"
   ],
-
   "Convenience Store": [
     "Backstreet Rookie"
-  ]
-}
-
-{
+  ],
   "Village": [
     "Hometown Cha-Cha-Cha",
     "Our Blues",
@@ -186,7 +165,6 @@
     "The Good Bad Mother",
     "Welcome to Samdal-ri"
   ],
-
   "Countryside": [
     "Hometown Cha-Cha-Cha",
     "Our Blues",
@@ -195,47 +173,39 @@
     "Modern Farmer",
     "Forest"
   ],
-
   "Island": [
     "Our Blues",
     "Island",
     "Warm and Cozy",
     "Top Star Yoo Baek"
   ],
-
   "Beach": [
     "Hometown Cha-Cha-Cha",
     "Our Blues",
     "Warm and Cozy"
   ],
-
   "Fishing Village": [
     "Our Blues",
     "Hometown Cha-Cha-Cha"
   ],
-
   "Farm": [
     "Modern Farmer",
     "Once Upon a Small Town",
     "Our Blues"
   ],
-
   "Forest": [
     "Forest",
     "Jirisan",
     "Bulgasal"
   ],
-
   "Mountain": [
     "Jirisan",
     "Forest",
     "Bulgasal"
   ],
-
   "National Park": [
     "Jirisan"
   ],
-
   "Palace": [
     "Moon Lovers: Scarlet Heart Ryeo",
     "The Red Sleeve",
@@ -249,7 +219,6 @@
     "The Crowned Clown",
     "Empress Ki"
   ],
-
   "Royal Court": [
     "The Red Sleeve",
     "Moon Embracing the Sun",
@@ -257,7 +226,6 @@
     "The King's Affection",
     "Mr. Queen"
   ],
-
   "Joseon Kingdom": [
     "The Red Sleeve",
     "Love in the Moonlight",
@@ -266,83 +234,68 @@
     "Kingdom",
     "Mr. Queen"
   ],
-
   "Temple": [
     "Bulgasal",
     "The Guest",
     "Revenant"
   ],
-
   "Church": [
     "The Fiery Priest",
     "Save Me",
     "The Guest"
   ],
-
   "Monastery": [
     "Bulgasal",
     "The Guest"
   ],
-
   "Library": [
     "Romance Is a Bonus Book",
     "When the Weather Is Fine"
   ],
-
   "Bookstore": [
     "Romance Is a Bonus Book",
     "When the Weather Is Fine"
   ],
-
   "Museum": [
     "Her Private Life",
     "Dali and Cocky Prince"
   ],
-
   "Art Gallery": [
     "Her Private Life",
     "Dali and Cocky Prince"
   ],
-
   "Airport": [
     "Where Stars Land",
     "On the Way to the Airport"
   ],
-
   "Train Station": [
     "Tomorrow",
     "Train"
   ],
-
   "Subway": [
     "My Mister",
     "Tomorrow"
   ],
-
   "Apartment Complex": [
     "Happiness",
     "The Penthouse: War in Life",
     "My Liberation Notes",
     "My Mister"
   ],
-
   "Neighborhood": [
     "Reply 1988",
     "When the Camellia Blooms",
     "Our Blues",
     "My Mister"
   ],
-
   "Construction Site": [
     "My Mister",
     "Navillera"
   ],
-
   "Factory": [
     "Misaeng",
     "My Mister"
   ],
-
   "Research Lab": [
     "Sisyphus: The Myth",
     "The Silent Sea",
@@ -350,75 +303,33 @@
     "Circle",
     "Kairos"
   ],
-
   "Space Station": [
     "The Silent Sea"
   ],
-
   "Fantasy Kingdom": [
     "Alchemy of Souls",
     "Arthdal Chronicles",
     "Moon Lovers: Scarlet Heart Ryeo"
   ],
-
   "Underworld": [
     "Goblin",
     "Hotel Del Luna",
     "Black",
     "Tomorrow"
   ],
-
   "Nightclub": [
     "Itaewon Class",
     "Heartless City",
     "My Name"
   ],
-
   "Casino": [
     "Big Bet",
     "Vincenzo"
   ],
-
   "Harbor": [
     "Our Blues",
     "Warm and Cozy"
   ],
-
-  "Office": [
-    "Business Proposal",
-    "What's Wrong with Secretary Kim",
-    "Misaeng",
-    "Search: WWW",
-    "Agency",
-    "Radiant Office"
-  ],
-
-  "Hospital": [
-    "Hospital Playlist",
-    "Dr. Romantic",
-    "Doctor Cha",
-    "Doctors",
-    "Good Doctor",
-    "Daily Dose of Sunshine"
-  ],
-
-  "Law Firm": [
-    "Extraordinary Attorney Woo",
-    "Law School",
-    "Hyena",
-    "Lawless Lawyer",
-    "Suspicious Partner"
-  ],
-
-  "School": [
-    "True Beauty",
-    "Extraordinary You",
-    "Weak Hero Class 1",
-    "School 2017",
-    "Moment at Eighteen",
-    "Dream High"
-  ],
-
   "Small Town": [
     "Hometown Cha-Cha-Cha",
     "When the Camellia Blooms",

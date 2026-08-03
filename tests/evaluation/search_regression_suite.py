@@ -106,6 +106,16 @@ def debug_list_contains(key: str, expected: str):
     return check
 
 
+def debug_list_contains_prefix(key: str, expected_prefix: str):
+    def check(data: dict):
+        values = debug(data).get(key, [])
+        return any(str(value).startswith(expected_prefix) for value in values), (
+            f"debug.{key} should contain prefix {expected_prefix!r}: {values}"
+        )
+
+    return check
+
+
 def result_lists_differ(first: dict, second: dict) -> tuple[bool, str]:
     first_titles = titles(first)
     second_titles = titles(second)
@@ -219,6 +229,62 @@ CASES = [
             ),
         ],
     ),
+    SearchCase(
+        name="mood prior supports funny drama",
+        params={"title": "funny drama", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "mood:funny"),
+            any_title_in_top(["Business Proposal", "Mr. Queen", "Gaus Electronics"], 5),
+        ],
+    ),
+    SearchCase(
+        name="relationship prior supports office romance",
+        params={"title": "office romance", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "relationship:office romance"),
+            any_title_in_top(["Business Proposal", "What's Wrong with Secretary Kim"], 3),
+        ],
+    ),
+    SearchCase(
+        name="setting prior supports school setting",
+        params={"title": "school setting", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "setting:School"),
+            any_title_in_top(["True Beauty", "Extraordinary You", "Weak Hero Class 1"], 5),
+        ],
+    ),
+    SearchCase(
+        name="occupation prior supports doctor drama",
+        params={"title": "doctor drama", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "occupation:Doctor"),
+            any_title_in_top(["Hospital Playlist", "Dr. Romantic", "Doctor Cha"], 5),
+        ],
+    ),
+    SearchCase(
+        name="ending prior supports happy ending romance",
+        params={"title": "romance with happy ending", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "ending:happy ending"),
+            any_title_in_top(["Business Proposal", "King the Land", "Touch Your Heart"], 5),
+        ],
+    ),
+    SearchCase(
+        name="episode-count prior supports short drama",
+        params={"title": "short drama", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("extra_prior_terms", "episode_count:short drama"),
+            any_title_in_top(["The Glory", "Bloodhounds", "Move to Heaven"], 5),
+        ],
+    ),
+    SearchCase(
+        name="character prior supports strong female lead",
+        params={"title": "strong female lead", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains_prefix("extra_prior_terms", "character:strong female lead"),
+            any_title_in_top(["Strong Woman Do Bong Soon", "My Name", "The Glory"], 5),
+        ],
+    ),
 ]
 
 
@@ -245,6 +311,7 @@ def run_case(case: SearchCase) -> bool:
                 "excluded_genres",
                 "excluded_themes",
                 "seen_titles_penalized",
+                "extra_prior_terms",
             ]
         },
     )
