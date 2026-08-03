@@ -122,6 +122,8 @@ INTENT_PATTERNS = {
     QueryIntent.VAGUE: [
         r"^(good|nice|great|something|any|recommend|suggest)(\s+(drama|kdrama|k-drama|show))?$",
         r"^(what\s+should\s+i\s+watch|suggest|recommend|anything|any\s+drama)$",
+        r"^(recommend|suggest)\s+me\s+(something|anything|a)?\s*(good|nice|great|worth watching)?",
+        r"^(i\s+want\s+to\s+watch|show\s+me|give\s+me)\s+(something|anything|a)?\s*(good|nice|great)?",
         r"^(drama|kdrama|k-drama|show)$",
     ],
 }
@@ -247,6 +249,7 @@ class QueryAnalyzer:
             "exclude_themes": [],
             "years": [],
             "emotions": [],
+            "exclude_emotions": [],
             "constraints": {},
         }
 
@@ -445,7 +448,7 @@ class QueryAnalyzer:
         sorted_terms = sorted(genre_mapping.keys(), key=len, reverse=True)
 
         for term in sorted_terms:
-            if term in query_lower:
+            if term in query_lower and not (exclusion_query and term in exclusion_query):
                 genre = genre_mapping[term]
                 # Handle comma-separated genres (e.g., "Romance, Comedy")
                 if "," in genre:
@@ -455,7 +458,12 @@ class QueryAnalyzer:
             if exclusion_query and term in exclusion_query:
                 genre = genre_mapping[term]
                 if "," in genre:
-                    excluded_genres.extend([g.strip() for g in genre.split(",")])
+                    excluded_parts = [g.strip() for g in genre.split(",")]
+                    if term in {"zombie", "zombies", "apocalypse"}:
+                        excluded_parts = [
+                            g for g in excluded_parts if g.lower() != "thriller"
+                        ]
+                    excluded_genres.extend(excluded_parts)
                 else:
                     excluded_genres.append(genre)
 
@@ -513,8 +521,16 @@ class QueryAnalyzer:
             "emotional",
             "touching",
             "heartwarming",
+            "dark",
+            "intense",
         ]
-        entities["emotions"] = [e for e in emotions if e in query.lower()]
+        excluded_emotions = [e for e in emotions if exclusion_query and e in exclusion_query]
+        entities["exclude_emotions"] = list(set(excluded_emotions))
+        entities["emotions"] = [
+            e
+            for e in emotions
+            if e in query.lower() and e not in entities["exclude_emotions"]
+        ]
 
         # Extract constraints (episode count, duration)
         episode_match = re.search(

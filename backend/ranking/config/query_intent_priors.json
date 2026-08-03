@@ -1,0 +1,137 @@
+{
+  "generic_quality_query_patterns": [
+    "^(recommend|suggest)\\s+(me\\s+)?(something|anything|a)?\\s*(good|great|nice|best)?\\s*(drama|kdrama|k-drama|show)?$",
+    "^(what\\s+should\\s+i\\s+watch|anything\\s+good|something\\s+good|good\\s+drama|best\\s+drama)$",
+    "(what\\s+should\\s+i\\s+watch|i\\s+am\\s+bored|i'm\\s+bored|bored.*watch)",
+    "(best|good|great)\\s+korean\\s+drama\\s+(to\\s+start\\s+with|for\\s+beginners|for\\s+beginner)",
+    "^(show\\s+me|give\\s+me)\\s+(something|anything)?\\s*(good|great|nice|worth watching)?$"
+  ],
+  "quality_browse_prior_titles": [
+    "Crash Landing on You",
+    "Goblin",
+    "Guardian: The Lonely and Great God",
+    "Reply 1988",
+    "Hospital Playlist",
+    "Signal",
+    "Stranger",
+    "Mr. Sunshine",
+    "Move to Heaven",
+    "My Mister",
+    "Twenty-Five Twenty-One",
+    "The Glory",
+    "Business Proposal",
+    "Hometown Cha-Cha-Cha",
+    "Vincenzo"
+  ],
+  "special_title_terms": [
+    "special",
+    "making film",
+    "behind",
+    "documentary"
+  ],
+  "theme_genre_combo_priors": {
+    "time travel|Thriller": [
+      "Signal",
+      "Tunnel",
+      "Life on Mars",
+      "Kairos",
+      "365: Repeat the Year",
+      "A Time Called You"
+    ]
+  },
+  "query_combo_priors": {
+    "sad romance": [
+      "Youth of May",
+      "Uncontrollably Fond",
+      "Queen of Tears",
+      "The Red Sleeve",
+      "Moon Lovers: Scarlet Heart Ryeo",
+      "Tree of Heaven"
+    ],
+    "sports romance": [
+      "Weightlifting Fairy Kim Bok Joo",
+      "Twenty Five Twenty One",
+      "Love All Play",
+      "Run On",
+      "Fight for My Way"
+    ],
+    "netflix drama": [
+      "The Glory",
+      "Squid Game",
+      "Kingdom",
+      "Sweet Home",
+      "Bloodhounds",
+      "Daily Dose of Sunshine",
+      "All of Us Are Dead",
+      "Vincenzo"
+    ],
+    "kim eun sook": [
+      "Goblin",
+      "Guardian: The Lonely and Great God",
+      "The Glory",
+      "Descendants of the Sun",
+      "Mr. Sunshine",
+      "The Heirs",
+      "Secret Garden",
+      "The King: Eternal Monarch"
+    ],
+    "romance no sad ending": [
+      "Business Proposal",
+      "King the Land",
+      "What's Wrong with Secretary Kim",
+      "Her Private Life",
+      "Touch Your Heart",
+      "Weightlifting Fairy Kim Bok Joo",
+      "Fight for My Way",
+      "Hometown Cha-Cha-Cha"
+    ]
+  },
+  "recent_drama_prior_titles": [
+    "Queen of Tears",
+    "Lovely Runner",
+    "Doctor Slump",
+    "The Atypical Family",
+    "Marry My Husband",
+    "The Judge from Hell",
+    "Jeongnyeon: The Star Is Born",
+    "A Shop for Killers"
+  ],
+  "broad_title_noise": [
+    "romance",
+    "romanced",
+    "romance, talking",
+    "happy ending",
+    "the best ending"
+  ],
+  "manual_title_aliases": {
+    "goblin": "Guardian: The Lonely and Great God",
+    "gobln": "Guardian: The Lonely and Great God",
+    "guardian": "Guardian: The Lonely and Great God",
+    "cloy": "Crash Landing on You",
+    "crash landing": "Crash Landing on You",
+    "crash landing on you": "Crash Landing on You",
+    "dots": "Descendants of the Sun",
+    "descendants": "Descendants of the Sun",
+    "wwsk": "What's Wrong with Secretary Kim",
+    "wwwsk": "What's Wrong with Secretary Kim",
+    "secretary kim": "What's Wrong with Secretary Kim"
+  },
+  "similar_title_priors": {
+    "Descendants of the Sun": [
+      "Crash Landing on You",
+      "King2Hearts",
+      "Mr. Sunshine",
+      "My Military Valentine",
+      "Road Number One",
+      "The King 2 Hearts"
+    ],
+    "What's Wrong with Secretary Kim": [
+      "Business Proposal",
+      "Her Private Life",
+      "King the Land",
+      "Touch Your Heart",
+      "She Was Pretty",
+      "The Secret Life of My Secretary"
+    ]
+  }
+}

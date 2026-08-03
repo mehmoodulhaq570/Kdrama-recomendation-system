@@ -395,8 +395,14 @@ with st.sidebar:
         "📊 Number of Recommendations", 3, 15, 5, help="How many dramas to recommend"
     )
 
+    debug_scores = st.checkbox(
+        "Show ranking scores",
+        value=False,
+        help="Show backend score details for each recommendation.",
+    )
+
     st.markdown("---")
-    st.markdown("### 🎯 Advanced Filters")
+    st.markdown("### Advanced Filters")
 
     with st.expander("🎭 Genre & People", expanded=False):
         genre = st.text_input(
@@ -583,6 +589,7 @@ with tab1:
             "similar_to": similar_to,
             "refresh": st.session_state.search_refresh,
             "seen_titles": "|".join(st.session_state.viewed_dramas[:50]),
+            "debug": debug_scores,
         }
         if st.session_state.pending_similar_to:
             filter_params["similar_to"] = st.session_state.pending_similar_to
@@ -613,6 +620,11 @@ with tab1:
             )
         else:
             recommendations = results.get("recommendations", [])
+            ranking_scores_by_title = {
+                item.get("title"): item
+                for item in results.get("debug", {}).get("ranking_scores", [])
+                if item.get("title")
+            }
 
             if recommendations:
                 st.success(
@@ -737,8 +749,35 @@ with tab1:
 </div>
 """
                     st.markdown(card_html, unsafe_allow_html=True)
-                    st.divider()
 
+                    ranking_debug = drama.get("ranking_debug") or ranking_scores_by_title.get(
+                        title
+                    )
+                    if debug_scores and ranking_debug:
+                        with st.expander(f"Ranking scores for #{idx} {title}"):
+                            score_col1, score_col2, score_col3 = st.columns(3)
+                            with score_col1:
+                                st.metric(
+                                    "Semantic",
+                                    f"{ranking_debug.get('semantic_component', 0):.4f}",
+                                )
+                            with score_col2:
+                                st.metric(
+                                    "BM25",
+                                    f"{ranking_debug.get('bm25_component', 0):.4f}",
+                                )
+                            with score_col3:
+                                st.metric(
+                                    "Final",
+                                    f"{ranking_debug.get('ranking_score', 0):.4f}",
+                                )
+
+                            st.caption(
+                                "Boost delta is the amount added by genre, theme, actor, keyword, curated, generated, and extra prior ranking logic."
+                            )
+                            st.json(ranking_debug)
+
+                    st.divider()
                     # Interactive buttons below each card
                     btn_col1, btn_col2, btn_col3, btn_col4 = st.columns([1, 1, 1, 3])
 

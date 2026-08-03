@@ -296,6 +296,102 @@ CASES = [
             any_title_in_top(["Strong Woman Do Bong Soon", "My Name", "The Glory"], 5),
         ],
     ),
+    SearchCase(
+        name="generic quality query avoids literal good/best matching",
+        params={"title": "recommend me something good", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("generic_quality_query", True),
+            any_title_in_top(
+                ["Crash Landing on You", "Reply 1988", "Hospital Playlist", "Signal"],
+                5,
+            ),
+        ],
+    ),
+    SearchCase(
+        name="typo title resolves to title similarity",
+        params={"title": "crash landng on yu", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("search_mode", "title_similarity"),
+            has_debug_value("resolved_title", "Crash Landing on You"),
+            title_absent("Crash Landing on You"),
+            any_title_in_top(["King2Hearts", "Descendants of the Sun"], 3),
+        ],
+    ),
+    SearchCase(
+        name="multi-intent time travel thriller favors both concepts",
+        params={"title": "time travel thriller", "top_n": 8, "debug": True},
+        checks=[
+            any_title_in_top(["Signal", "Tunnel", "Life on Mars", "Kairos"], 4),
+        ],
+    ),
+    SearchCase(
+        name="negated mood does not apply excluded mood prior",
+        params={"title": "something emotional but not too dark", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("excluded_emotions", "dark"),
+            lambda data: (
+                "mood:dark" not in debug(data).get("extra_prior_terms", []),
+                f"excluded dark prior should not apply: {debug(data).get('extra_prior_terms', [])}",
+            ),
+        ],
+    ),
+    SearchCase(
+        name="recent drama uses recent quality priors",
+        params={"title": "recent drama", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("search_mode", "year_based"),
+            any_title_in_top(["Queen of Tears", "Lovely Runner", "Doctor Slump"], 5),
+        ],
+    ),
+    SearchCase(
+        name="popular alias WWWSK resolves correctly",
+        params={"title": "WWWSK", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("search_mode", "title_similarity"),
+            has_debug_value("resolved_title", "What's Wrong with Secretary Kim"),
+            any_title_in_top(["Business Proposal", "Her Private Life", "King the Land"], 3),
+        ],
+    ),
+    SearchCase(
+        name="short typo Goblin resolves through alias",
+        params={"title": "gobln", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("resolved_title", "Guardian: The Lonely and Great God"),
+            any_title_in_top(["Hotel del Luna", "My Love from the Star", "My Demon"], 5),
+        ],
+    ),
+    SearchCase(
+        name="negated sad ending prefers happy romance",
+        params={"title": "romance no sad ending", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("excluded_emotions", "sad"),
+            lambda data: (
+                "ending:sad ending" not in debug(data).get("extra_prior_terms", []),
+                f"sad ending prior should not apply: {debug(data).get('extra_prior_terms', [])}",
+            ),
+            any_title_in_top(["Business Proposal", "King the Land", "Touch Your Heart"], 5),
+        ],
+    ),
+    SearchCase(
+        name="zombie exclusion keeps thriller but removes zombie titles",
+        params={"title": "thriller without zombies", "top_n": 8, "debug": True},
+        checks=[
+            debug_list_contains("excluded_genres", "Horror"),
+            lambda data: (
+                all("zombie" not in title.lower() for title in titles(data)[:8]),
+                f"zombie title leaked into results: {titles(data)[:8]}",
+            ),
+            any_title_in_top(["Squid Game", "Signal", "Stranger", "Beyond Evil"], 5),
+        ],
+    ),
+    SearchCase(
+        name="bored vague query uses quality fallback",
+        params={"title": "i am bored what should i watch", "top_n": 8, "debug": True},
+        checks=[
+            has_debug_value("generic_quality_query", True),
+            any_title_in_top(["Crash Landing on You", "Reply 1988", "Hospital Playlist"], 5),
+        ],
+    ),
 ]
 
 

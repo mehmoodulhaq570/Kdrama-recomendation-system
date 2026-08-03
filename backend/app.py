@@ -135,6 +135,59 @@ def fuzzy_match_title(user_input: str, threshold=70):
     return None, score
 
 
+QUERY_INTENT_PRIORS = {}
+GENERIC_QUALITY_QUERY_PATTERNS = []
+QUALITY_BROWSE_PRIOR_TITLES = []
+SPECIAL_TITLE_TERMS = []
+THEME_GENRE_COMBO_PRIORS = {}
+QUERY_COMBO_PRIORS = {}
+RECENT_DRAMA_PRIOR_TITLES = []
+BROAD_TITLE_NOISE = set()
+
+
+def is_generic_quality_query(query: str) -> bool:
+    query_text = query.lower().strip()
+    return any(re.search(pattern, query_text) for pattern in GENERIC_QUALITY_QUERY_PATTERNS)
+
+
+def drama_quality_score(drama):
+    try:
+        rating = float(drama.get("rating_value", drama.get("score", 0)) or 0)
+    except Exception:
+        rating = 0.0
+    try:
+        watchers = float(str(drama.get("watchers", 0)).replace(",", "") or 0)
+    except Exception:
+        watchers = 0.0
+    try:
+        popularity = float(str(drama.get("popularity", 0)).replace(",", "") or 0)
+    except Exception:
+        popularity = 0.0
+    watcher_bonus = min(watchers / 100000.0, 1.0)
+    popularity_bonus = min(popularity / 100.0, 0.5) if popularity else 0.0
+    return rating + watcher_bonus + popularity_bonus
+
+
+def is_special_or_meta_title(drama):
+    searchable_text = " ".join(
+        str(drama.get(field, "")) for field in ["Title", "Genre", "Description"]
+    ).lower()
+    return any(term in searchable_text for term in SPECIAL_TITLE_TERMS)
+
+
+def resolve_typo_title(user_input: str, candidates, threshold=74):
+    candidate_titles = [m["Title"] for m in candidates]
+    if not candidate_titles:
+        return None, None
+    match, score, _ = process.extractOne(
+        user_input, candidate_titles, scorer=fuzz.token_set_ratio
+    )
+    if match and score >= threshold:
+        drama = next((m for m in candidates if m["Title"] == match), None)
+        return drama, f"typo:{score:.1f}"
+    return None, None
+
+
 @lru_cache(maxsize=128)
 def cached_encode(text: str):
     """Cached embedding generation for speed."""
@@ -244,6 +297,24 @@ def load_prior_weights(defaults):
 
 
 GENERATED_TITLE_ALIASES = load_generated_index("title_aliases.json")
+QUERY_INTENT_PRIORS = load_ranking_config("query_intent_priors.json")
+GENERIC_QUALITY_QUERY_PATTERNS = QUERY_INTENT_PRIORS.get(
+    "generic_quality_query_patterns", []
+)
+QUALITY_BROWSE_PRIOR_TITLES = QUERY_INTENT_PRIORS.get(
+    "quality_browse_prior_titles", []
+)
+SPECIAL_TITLE_TERMS = QUERY_INTENT_PRIORS.get("special_title_terms", [])
+THEME_GENRE_COMBO_PRIORS = combo_prior_keys(
+    QUERY_INTENT_PRIORS.get("theme_genre_combo_priors", {})
+)
+QUERY_COMBO_PRIORS = QUERY_INTENT_PRIORS.get("query_combo_priors", {})
+RECENT_DRAMA_PRIOR_TITLES = QUERY_INTENT_PRIORS.get(
+    "recent_drama_prior_titles", []
+)
+BROAD_TITLE_NOISE = {
+    title.lower() for title in QUERY_INTENT_PRIORS.get("broad_title_noise", [])
+}
 GENERATED_ACTOR_INDEX = load_generated_index("actor_index.json")
 GENERATED_CALIBRATED_ACTOR_INDEX = load_generated_index("calibrated_actor_index.json")
 GENERATED_GENRE_INDEX = load_generated_index("genre_index.json")
@@ -256,17 +327,9 @@ GENERATED_CALIBRATED_THEME_INDEX = load_generated_index("calibrated_theme_index.
 GENERATED_KEYWORD_INDEX = load_generated_index("keyword_index.json")
 GENERATED_CALIBRATED_KEYWORD_INDEX = load_generated_index("calibrated_keyword_index.json")
 
-TITLE_ALIASES = GENERATED_TITLE_ALIASES | {
-    "goblin": "Guardian: The Lonely and Great God",
-    "guardian": "Guardian: The Lonely and Great God",
-    "cloy": "Crash Landing on You",
-    "crash landing": "Crash Landing on You",
-    "crash landing on you": "Crash Landing on You",
-    "dots": "Descendants of the Sun",
-    "descendants": "Descendants of the Sun",
-    "wwsk": "What's Wrong with Secretary Kim",
-    "secretary kim": "What's Wrong with Secretary Kim",
-}
+TITLE_ALIASES = GENERATED_TITLE_ALIASES | QUERY_INTENT_PRIORS.get(
+    "manual_title_aliases", {}
+)
 
 CURATED_PRIORS = load_ranking_config("curated_priors.json")
 GENRE_PRIOR_SOURCE = os.environ.get(
@@ -360,8 +423,10 @@ DEFAULT_SIMILAR_TITLE_PRIORS = {
         "The Greatest Love",
     ],
 }
-SIMILAR_TITLE_PRIORS = DEFAULT_SIMILAR_TITLE_PRIORS | CURATED_PRIORS.get(
-    "similar_title_priors", {}
+SIMILAR_TITLE_PRIORS = (
+    DEFAULT_SIMILAR_TITLE_PRIORS
+    | CURATED_PRIORS.get("similar_title_priors", {})
+    | QUERY_INTENT_PRIORS.get("similar_title_priors", {})
 )
 SIMILAR_TITLE_PRIORS_NORMALIZED = {
     key.strip().lower(): value for key, value in SIMILAR_TITLE_PRIORS.items()
@@ -1021,6 +1086,8 @@ def recommend(
         category in SPECIFIC_EXTRA_PRIOR_CATEGORIES
         for category, _, _ in matched_extra_priors
     )
+    generic_quality_query = is_generic_quality_query(title)
+    debug_info["generic_quality_query"] = generic_quality_query
 
     extracted_similar_to, extracted_source = extract_similar_to_title(title, metadata)
     if not similar_to and extracted_similar_to:
@@ -1069,8 +1136,10 @@ def recommend(
 
     excluded_genres = entities.get("exclude_genres", [])
     excluded_themes = entities.get("exclude_themes", [])
+    excluded_emotions = entities.get("exclude_emotions", [])
     debug_info["excluded_genres"] = excluded_genres
     debug_info["excluded_themes"] = excluded_themes
+    debug_info["excluded_emotions"] = excluded_emotions
 
     # Get search strategy for this intent
     strategy = get_search_strategy(intent)
@@ -1221,6 +1290,38 @@ def recommend(
                 for excluded in excluded_themes
             )
         ]
+    if excluded_emotions:
+        emotion_exclusion_terms = {
+            "dark": ["dark", "grim", "violent", "violence", "brutal", "serial killer"],
+            "scary": ["scary", "horror", "ghost", "haunted", "creepy"],
+            "sad": ["sad", "tragic", "tearjerker", "heartbreaking"],
+            "intense": ["intense", "violent", "brutal", "suspense"],
+        }
+        excluded_terms = [
+            term
+            for emotion in excluded_emotions
+            for term in emotion_exclusion_terms.get(emotion, [emotion])
+        ]
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if not any(
+                term in " ".join(
+                    str(r.get(field, ""))
+                    for field in ["Title", "Genre", "Description", "keywords"]
+                ).lower()
+                for term in excluded_terms
+            )
+        ]
+    if re.search(r"\b(without|no|not|exclude|except)\s+zombies?\b", title.lower()):
+        filtered_metadata = [
+            r
+            for r in filtered_metadata
+            if "zombie"
+            not in " ".join(
+                str(r.get(field, "")) for field in ["Title", "Description", "keywords"]
+            ).lower()
+        ]
 
     # If no results after filtering, return empty
     if not filtered_metadata:
@@ -1261,7 +1362,30 @@ def recommend(
         drama = resolved_title_match
     high_confidence_fuzzy_match = None
 
-    if not drama:
+    if (
+        not drama
+        and intent == QueryIntent.VAGUE
+        and not generic_quality_query
+        and not detected_genres
+        and not detected_actors
+        and not entities.get("themes", [])
+        and len(title.strip()) >= 8
+    ):
+        typo_candidates = [m for m in filtered_metadata if not is_special_or_meta_title(m)]
+        typo_title_match, typo_title_source = resolve_typo_title(
+            title, typo_candidates or filtered_metadata
+        )
+        if typo_title_match:
+            drama = typo_title_match
+            high_confidence_fuzzy_match = typo_title_match
+            debug_info["resolved_title"] = drama.get("Title")
+            debug_info["resolved_source"] = typo_title_source
+            print(
+                f"Typo title resolved: '{title}' -> '{drama['Title']}' ({typo_title_source})"
+            )
+
+    allow_high_confidence_fuzzy = intent in [QueryIntent.SPECIFIC_TITLE]
+    if not drama and allow_high_confidence_fuzzy:
         filtered_titles = [m["Title"] for m in filtered_metadata]
         if filtered_titles:
             match, score, _ = process.extractOne(
@@ -1272,6 +1396,8 @@ def recommend(
                     (m for m in filtered_metadata if m["Title"] == match), None
                 )
                 drama = high_confidence_fuzzy_match
+                debug_info["resolved_title"] = drama.get("Title")
+                debug_info["resolved_source"] = f"fuzzy:{score:.1f}"
                 print(
                     f"High-confidence title match: '{title}' -> '{match}' ({score:.1f}%)"
                 )
@@ -1284,6 +1410,7 @@ def recommend(
         QueryIntent.EMOTION_BASED,
         QueryIntent.TOP_RATED,
         QueryIntent.TRENDING,
+        QueryIntent.YEAR_BASED,
         QueryIntent.ACTOR_BASED,
     ]
 
@@ -1314,8 +1441,11 @@ def recommend(
             query_text = expanded_query
     elif not drama:
         # For genre/vague queries, use expanded query directly
-        print(f"Genre/vague query detected, using expanded query: '{expanded_query}'")
-        query_text = expanded_query
+        if generic_quality_query:
+            query_text = "highly rated popular acclaimed must watch korean drama"
+        else:
+            query_text = expanded_query
+        print(f"Genre/vague query detected, using expanded query: '{query_text}'")
     else:
         query_text = f"{drama['Title']} {drama.get('Genre', '')} {drama.get('Description', '')} {drama.get('Cast', '')} {expanded_query}"
 
@@ -1358,6 +1488,8 @@ def recommend(
 
     # ---- Stage 4.4: Combine Results ----
     combined_scores = {}
+    semantic_components = {}
+    lexical_components = {}
     max_bm25 = max([score for _, score in bm25_results]) if bm25_results else 1
     if max_bm25 == 0:
         max_bm25 = 1
@@ -1371,11 +1503,15 @@ def recommend(
     )
 
     for rec, score in faiss_results:
-        combined_scores[rec["Title"]] = semantic_weight * score
+        semantic_score = semantic_weight * score
+        semantic_components[rec["Title"]] = semantic_score
+        combined_scores[rec["Title"]] = semantic_score
     if lexical_weight > 0:
         for rec, score in bm25_results:
+            lexical_score = lexical_weight * (score / max_bm25)
+            lexical_components[rec["Title"]] = lexical_score
             combined_scores[rec["Title"]] = combined_scores.get(rec["Title"], 0) + (
-                lexical_weight * (score / max_bm25)
+                lexical_score
             )
 
     # Apply genre boost if genres were detected
@@ -1592,6 +1728,31 @@ def recommend(
                     1.35 + 0.15 * matching_theme_count
                 )
 
+        if detected_genres:
+            for result_title, score in list(combined_scores.items()):
+                drama = next(
+                    (m for m in filtered_metadata if m["Title"] == result_title), None
+                )
+                if not drama:
+                    continue
+                searchable_text = " ".join(
+                    str(drama.get(field, ""))
+                    for field in ["Title", "Genre", "Description", "keywords"]
+                ).lower()
+                genre_match = any(
+                    drama_matches_detected_genre(drama, genre)
+                    for genre in detected_genres
+                )
+                theme_match = any(
+                    any(
+                        keyword in searchable_text
+                        for keyword in theme_keywords.get(theme, [])
+                    )
+                    for theme in detected_themes
+                )
+                if genre_match and theme_match:
+                    combined_scores[result_title] = score * 1.35
+
     if detected_actors:
         print(f"⭐ Applying actor boost for: {detected_actors}")
         for detected_actor in detected_actors:
@@ -1654,7 +1815,12 @@ def recommend(
                     1.25 + 0.15 * min(matching_keyword_count, 3)
                 )
 
-    for category, term, prior_titles in matched_extra_priors:
+    active_extra_priors = [
+        (category, term, prior_titles)
+        for category, term, prior_titles in matched_extra_priors
+        if not any(excluded in term for excluded in excluded_emotions)
+    ]
+    for category, term, prior_titles in active_extra_priors:
         extra_boost = PRIOR_WEIGHTS.get(f"{category}_prior", 1.45)
         if category in SPECIFIC_EXTRA_PRIOR_CATEGORIES:
             extra_boost = PRIOR_WEIGHTS.get(f"{category}_prior", 1.85)
@@ -1665,9 +1831,9 @@ def recommend(
             boost=extra_boost,
             decay=0.06,
         )
-    if matched_extra_priors:
+    if active_extra_priors:
         debug_info["extra_prior_terms"] = [
-            f"{category}:{term}" for category, term, _ in matched_extra_priors[:12]
+            f"{category}:{term}" for category, term, _ in active_extra_priors[:12]
         ]
         print(f"Extra priors applied: {debug_info['extra_prior_terms']}")
 
@@ -1685,11 +1851,69 @@ def recommend(
                 f"Generated index boosts applied to {generated_boosted_count} retrieved results"
             )
 
+    if generic_quality_query:
+        add_prior_title_boosts(
+            combined_scores,
+            filtered_metadata,
+            QUALITY_BROWSE_PRIOR_TITLES,
+            boost=3.0,
+            decay=0.05,
+        )
+        for result_title, score in list(combined_scores.items()):
+            drama = next(
+                (m for m in filtered_metadata if m["Title"] == result_title), None
+            )
+            if drama:
+                combined_scores[result_title] = score + (
+                    drama_quality_score(drama) / 5.0
+                )
+
+    query_text_norm = title.lower()
+    if re.search(r"\b(recent|new|latest|fresh|2024|2025)\b", query_text_norm):
+        add_prior_title_boosts(
+            combined_scores,
+            filtered_metadata,
+            RECENT_DRAMA_PRIOR_TITLES,
+            boost=3.0,
+            decay=0.06,
+        )
+
+    for query_key, prior_titles in QUERY_COMBO_PRIORS.items():
+        if query_matches_prior_term(query_text_norm, query_key):
+            add_prior_title_boosts(
+                combined_scores,
+                filtered_metadata,
+                prior_titles,
+                boost=3.25,
+                decay=0.06,
+            )
+
+    for (theme_name, genre_name), prior_titles in THEME_GENRE_COMBO_PRIORS.items():
+        if theme_name in detected_themes and genre_name in detected_genres:
+            add_prior_title_boosts(
+                combined_scores,
+                filtered_metadata,
+                prior_titles,
+                boost=4.5,
+                decay=0.08,
+            )
+
     # Sort by combined score (filters already applied in Stage 4.0)
     filtered = [
         next(m for m in filtered_metadata if m["Title"] == t)
         for t, _ in sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)
     ]
+
+    if (
+        detected_genres
+        and not detected_themes
+        and not generic_quality_query
+    ):
+        filtered = [
+            result
+            for result in filtered
+            if result.get("Title", "").strip().lower() not in BROAD_TITLE_NOISE
+        ]
 
     # Apply popularity boost - push highly-rated dramas up in genre searches
     if detected_genres and not exact_title_match:
@@ -1846,6 +2070,22 @@ def recommend(
             aliased_results.append(result)
         top_results = aliased_results
 
+    if debug:
+        for rank, result in enumerate(top_results, 1):
+            result_title = result.get("original_title", result.get("Title", ""))
+            semantic_score = semantic_components.get(result_title, 0.0)
+            lexical_score = lexical_components.get(result_title, 0.0)
+            retrieval_score = semantic_score + lexical_score
+            final_score = combined_scores.get(result_title, retrieval_score)
+            result["ranking_debug"] = {
+                "rank_before_personalization": rank,
+                "semantic_component": round(float(semantic_score), 6),
+                "bm25_component": round(float(lexical_score), 6),
+                "retrieval_score": round(float(retrieval_score), 6),
+                "ranking_score": round(float(final_score), 6),
+                "boost_delta": round(float(final_score - retrieval_score), 6),
+            }
+
     # ---- Stage 4.5: Optional Reranking ----
     # Disabled for performance - cross-encoder adds 2-3 seconds
     # Re-enable for production if accuracy is critical
@@ -1926,6 +2166,18 @@ def recommend(
             # Continue with non-personalized results
             personalization_info = {"applied": False, "error": str(e)}
 
+    if debug:
+        for rank, result in enumerate(top_results, 1):
+            ranking_debug = result.setdefault("ranking_debug", {})
+            ranking_debug["final_rank"] = rank
+            ranking_debug["personalization_multiplier"] = round(
+                float(result.get("boost_multiplier", 1.0)), 6
+            )
+            ranking_debug["personalized_score"] = round(
+                float(result.get("personalized_score", ranking_debug.get("ranking_score", 0.0))),
+                6,
+            )
+
     # ---- Stage 4.7: Analytics Logging (Phase 1) ----
     result_titles = [r["Title"] for r in top_results]
 
@@ -1951,6 +2203,35 @@ def recommend(
             print(f"Warning: Analytics logging failed: {e}")
 
     # Build response with personalization info
+    if debug:
+        ranking_scores = []
+        for rank, result in enumerate(top_results, 1):
+            result_title = result.get("original_title", result.get("Title", ""))
+            semantic_score = semantic_components.get(result_title, 0.0)
+            lexical_score = lexical_components.get(result_title, 0.0)
+            retrieval_score = semantic_score + lexical_score
+            final_score = combined_scores.get(result_title, retrieval_score)
+            score_debug = result.setdefault("ranking_debug", {})
+            score_debug.update(
+                {
+                    "title": result.get("Title", result_title),
+                    "final_rank": rank,
+                    "semantic_component": round(float(semantic_score), 6),
+                    "bm25_component": round(float(lexical_score), 6),
+                    "retrieval_score": round(float(retrieval_score), 6),
+                    "ranking_score": round(float(final_score), 6),
+                    "boost_delta": round(float(final_score - retrieval_score), 6),
+                    "personalization_multiplier": round(
+                        float(result.get("boost_multiplier", 1.0)), 6
+                    ),
+                    "personalized_score": round(
+                        float(result.get("personalized_score", final_score)), 6
+                    ),
+                }
+            )
+            ranking_scores.append(score_debug.copy())
+        debug_info["ranking_scores"] = ranking_scores
+
     response = {
         "query": {"Title": title, "expanded": expanded_query},
         "analysis": {

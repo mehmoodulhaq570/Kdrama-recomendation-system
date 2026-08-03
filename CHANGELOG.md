@@ -2,6 +2,36 @@
 
 Important project history reconstructed from Git commits and project documentation.
 
+## 2026-08-04
+
+### Real-World Search QA
+
+- Tested common user search scenarios against the local backend, including exact-title searches, similar-drama searches, broad genre browsing, repeated refresh searches, trope searches, exclusions, actor queries, typos, aliases, vague mood queries, and low-information recommendation requests.
+- Confirmed strong behavior for `Crash Landing on You`, `shows like Goblin`, `similar_to=Business Proposal`, `soldier romance`, `doctor drama`, `office romance`, `romance without historical`, `thriller no horror`, `Park Seo Joon dramas`, and repeated `comedy drama` refresh searches.
+- Identified next search-quality gaps:
+  - generic requests such as `recommend me something good` still over-match literal words like `good` and `best`
+  - typo title searches such as `crash landng on yu` should enter title-similarity mode and exclude the seed title
+  - multi-intent searches such as `time travel thriller` need stronger handling for both requested concepts
+  - negated mood phrases such as `not too dark` need better exclusion logic
+- Verified the current live regression suite remains at `18/18` checks passed after the ranking debug changes.
+- Improved the real-world weak cases found during QA:
+  - generic quality requests now use curated high-quality drama priors instead of literal `good`/`best` keyword matching
+  - typo title searches now use token-set title resolution and enter title-similarity mode
+  - multi-intent theme + genre searches now support combo priors such as `time travel thriller`
+  - negated mood phrases now suppress excluded mood priors, such as `mood:dark` for `not too dark`
+- Expanded the live regression suite to cover these real-world scenarios.
+  - Current focused regression result: `22/22` checks passed against the local backend.
+- Added a second real-world search hardening pass:
+  - fixed short aliases and typo-like aliases such as `gobln`, `DOTS`, and `WWWSK`
+  - improved similar-drama priors for `Descendants of the Sun` and `What's Wrong with Secretary Kim`
+  - prevented recent/year/top-rated browse queries from accidentally entering fuzzy title-similarity mode
+  - added recent, Netflix, Kim Eun-sook, sad-romance, sports-romance, and no-sad-ending query priors
+  - filtered broad literal title noise for broad genre searches such as `romance drama`
+  - fixed zombie exclusions so `thriller without zombies` keeps thriller results but removes zombie titles
+- Expanded live regression coverage for the second hardening pass.
+  - Current focused regression result: `28/28` checks passed against the local backend.
+- Refactored query-specific real-world priors into `backend/ranking/config/query_intent_priors.json` so aliases, generic-quality patterns, combo priors, broad-title noise, recent priors, and similar-title overrides can be tuned as data instead of adding more backend rules.
+
 ## 2026-07-24
 
 ### Recommendation Flow and Runtime Data Updates
@@ -29,6 +59,7 @@ Important project history reconstructed from Git commits and project documentati
 - Normalized prior config files into strict JSON and expanded the live regression suite to cover the new prior categories.
   - Current focused regression result: `17/17` checks passed against the local backend.
 - Tuned ranking weights so specific prior intent, such as `soldier romance`, can beat broad single-genre romance priors.
+- Added an optional ranking score debug view that exposes semantic, BM25, boost, final ranking, and personalization score details per recommendation.
 - Pinned Starlette to the FastAPI-compatible range after local startup exposed an incompatible `starlette 1.x` install.
 - Added a compressed README welcome GIF and reduced the displayed asset from about 4.8 MB to about 0.8 MB.
 - Created a local `.venv`, ignored virtual environment folders, and updated combined requirements for Python 3.14 compatibility.
