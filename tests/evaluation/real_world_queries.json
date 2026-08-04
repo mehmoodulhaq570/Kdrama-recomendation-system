@@ -1,0 +1,319 @@
+[
+  {
+    "id": "title_cloy",
+    "query": "Crash Landing on You",
+    "expected": ["King2Hearts", "Descendants of the Sun", "My Love from the Star"],
+    "tags": ["title_similarity", "romance", "military"]
+  },
+  {
+    "id": "alias_cloy",
+    "query": "CLOY",
+    "expected": ["King2Hearts", "Descendants of the Sun"],
+    "tags": ["alias", "title_similarity"]
+  },
+  {
+    "id": "alias_dots",
+    "query": "DOTS",
+    "expected": ["Crash Landing on You", "King2Hearts", "Mr. Sunshine"],
+    "tags": ["alias", "title_similarity", "military"]
+  },
+  {
+    "id": "alias_wwwsk",
+    "query": "WWWSK",
+    "expected": ["Business Proposal", "Her Private Life", "King the Land"],
+    "tags": ["alias", "title_similarity", "office_romance"]
+  },
+  {
+    "id": "typo_cloy",
+    "query": "crash landng on yu",
+    "expected": ["King2Hearts", "Descendants of the Sun"],
+    "tags": ["typo", "title_similarity"]
+  },
+  {
+    "id": "typo_business_proposal",
+    "query": "busines proposl",
+    "expected": ["What's Wrong with Secretary Kim", "King the Land", "Her Private Life"],
+    "tags": ["typo", "title_similarity", "romcom"]
+  },
+  {
+    "id": "typo_goblin",
+    "query": "gobln",
+    "expected": ["Hotel del Luna", "My Love from the Star", "My Demon"],
+    "tags": ["typo", "alias", "fantasy_romance"]
+  },
+  {
+    "id": "similar_goblin",
+    "query": "shows like Goblin",
+    "expected": ["Hotel del Luna", "My Love from the Star", "My Demon", "Kiss Goblin"],
+    "tags": ["similar_phrase", "fantasy_romance"]
+  },
+  {
+    "id": "similar_business_proposal",
+    "query": "shows like Business Proposal",
+    "expected": ["What's Wrong with Secretary Kim", "King the Land", "Her Private Life"],
+    "tags": ["similar_phrase", "romcom"]
+  },
+  {
+    "id": "generic_good",
+    "query": "recommend me something good",
+    "expected": ["Crash Landing on You", "Reply 1988", "Hospital Playlist", "Signal"],
+    "tags": ["generic_quality"]
+  },
+  {
+    "id": "generic_bored",
+    "query": "i am bored what should i watch",
+    "expected": ["Crash Landing on You", "Reply 1988", "Hospital Playlist", "Signal"],
+    "tags": ["generic_quality", "vague"]
+  },
+  {
+    "id": "beginner_quality",
+    "query": "best korean drama to start with",
+    "expected": ["Guardian: The Lonely and Great God", "Hospital Playlist", "Crash Landing on You", "Reply 1988"],
+    "tags": ["generic_quality", "beginner"]
+  },
+  {
+    "id": "romantic_comedy",
+    "query": "romantic comedy",
+    "expected": ["Business Proposal", "King the Land", "What's Wrong with Secretary Kim"],
+    "tags": ["genre", "romcom"]
+  },
+  {
+    "id": "romance_drama",
+    "query": "romance drama",
+    "expected": ["Business Proposal", "What's Wrong with Secretary Kim", "Strong Woman Do Bong Soon"],
+    "tags": ["genre", "romance"]
+  },
+  {
+    "id": "office_romance",
+    "query": "office romance",
+    "expected": ["Business Proposal", "What's Wrong with Secretary Kim", "King the Land"],
+    "tags": ["relationship", "office"]
+  },
+  {
+    "id": "rich_ceo_romance",
+    "query": "rich CEO romance",
+    "expected": ["Business Proposal", "King the Land", "What's Wrong with Secretary Kim", "Secret Garden"],
+    "tags": ["occupation", "romance"]
+  },
+  {
+    "id": "contract_marriage",
+    "query": "contract marriage romance",
+    "expected": ["Marriage Contract", "Love in Contract", "Because This Is My First Life"],
+    "tags": ["relationship", "romance"]
+  },
+  {
+    "id": "fake_dating",
+    "query": "fake dating romance",
+    "expected": ["Business Proposal", "Marriage, Not Dating", "Love to Hate You"],
+    "tags": ["relationship", "romance"]
+  },
+  {
+    "id": "sports_romance",
+    "query": "sports romance",
+    "expected": ["Weightlifting Fairy Kim Bok Joo", "Love All Play", "Run On", "Fight for My Way"],
+    "tags": ["relationship", "sports", "romance"]
+  },
+  {
+    "id": "sad_romance",
+    "query": "sad romance drama",
+    "expected": ["Youth of May", "Uncontrollably Fond", "Queen of Tears", "The Red Sleeve"],
+    "tags": ["mood", "romance", "sad"]
+  },
+  {
+    "id": "happy_ending_romance",
+    "query": "romance with happy ending",
+    "expected": ["Business Proposal", "King the Land", "Touch Your Heart"],
+    "tags": ["ending", "romance"]
+  },
+  {
+    "id": "no_sad_ending",
+    "query": "romance no sad ending",
+    "expected": ["Business Proposal", "King the Land", "Touch Your Heart", "Her Private Life"],
+    "tags": ["negation", "ending", "romance"]
+  },
+  {
+    "id": "soldier_romance",
+    "query": "soldier romance",
+    "expected": ["Descendants of the Sun", "Crash Landing on You", "Mr. Sunshine"],
+    "tags": ["occupation", "military", "romance"]
+  },
+  {
+    "id": "doctor_drama",
+    "query": "doctor drama",
+    "expected": ["Hospital Playlist", "Doctor Cha", "Dr. Romantic"],
+    "tags": ["occupation", "medical"]
+  },
+  {
+    "id": "medical_romance",
+    "query": "medical romance",
+    "expected": ["Hospital Playlist", "Dr. Romantic", "Good Doctor", "Doctor Cha"],
+    "tags": ["medical", "romance"]
+  },
+  {
+    "id": "lawyer_drama",
+    "query": "lawyer legal drama",
+    "expected": ["Extraordinary Attorney Woo", "Law School", "Vincenzo", "Lawless Lawyer"],
+    "tags": ["occupation", "law"]
+  },
+  {
+    "id": "crime_thriller",
+    "query": "crime thriller",
+    "expected": ["Mouse", "Beyond Evil", "Signal", "Stranger"],
+    "tags": ["genre", "crime", "thriller"]
+  },
+  {
+    "id": "thriller_no_horror",
+    "query": "thriller no horror",
+    "expected": ["Squid Game", "Signal", "Stranger", "Beyond Evil"],
+    "forbidden_title_terms": [],
+    "forbidden_genre_terms": ["Horror"],
+    "tags": ["negation", "thriller"]
+  },
+  {
+    "id": "thriller_without_zombies",
+    "query": "thriller without zombies",
+    "expected": ["Squid Game", "Signal", "Stranger", "Beyond Evil"],
+    "forbidden_title_terms": ["zombie"],
+    "tags": ["negation", "thriller", "zombie"]
+  },
+  {
+    "id": "romance_without_historical",
+    "query": "romance without historical",
+    "expected": ["Business Proposal", "What's Wrong with Secretary Kim", "Strong Woman Do Bong Soon"],
+    "forbidden_genre_terms": ["Historical"],
+    "tags": ["negation", "romance"]
+  },
+  {
+    "id": "funny_romantic_not_historical",
+    "query": "i want something funny and romantic but not historical",
+    "expected": ["Business Proposal", "King the Land", "What's Wrong with Secretary Kim"],
+    "forbidden_genre_terms": ["Historical"],
+    "tags": ["negation", "mood", "romance"]
+  },
+  {
+    "id": "not_too_dark",
+    "query": "something emotional but not too dark",
+    "expected": ["Hi Bye, Mama!", "The Red Sleeve", "Youth of May"],
+    "tags": ["negation", "mood"]
+  },
+  {
+    "id": "healing_comfort",
+    "query": "healing comfort drama",
+    "expected": ["Hospital Playlist", "My Mister", "Our Blues", "Reply 1988"],
+    "tags": ["mood", "healing"]
+  },
+  {
+    "id": "light_funny",
+    "query": "lighthearted funny drama",
+    "expected": ["Business Proposal", "Mr. Queen", "Welcome to Waikiki", "Gaus Electronics"],
+    "tags": ["mood", "comedy"]
+  },
+  {
+    "id": "school_romance",
+    "query": "school romance",
+    "expected": ["True Beauty", "Extraordinary You", "Weightlifting Fairy Kim Bok Joo"],
+    "tags": ["setting", "school", "romance"]
+  },
+  {
+    "id": "school_revenge",
+    "query": "school revenge drama",
+    "expected": ["The Glory", "Weak Hero Class 1", "Revenge of Others"],
+    "tags": ["setting", "school", "revenge"]
+  },
+  {
+    "id": "strong_female_lead",
+    "query": "strong female lead",
+    "expected": ["Strong Woman Do Bong Soon", "My Name", "The Glory"],
+    "tags": ["character"]
+  },
+  {
+    "id": "strong_female_revenge",
+    "query": "strong female lead revenge",
+    "expected": ["The Glory", "My Name", "Eve", "Little Women"],
+    "tags": ["character", "revenge"]
+  },
+  {
+    "id": "time_travel_thriller",
+    "query": "time travel thriller",
+    "expected": ["Signal", "Tunnel", "Life on Mars", "Kairos"],
+    "tags": ["theme", "thriller"]
+  },
+  {
+    "id": "time_travel_romance",
+    "query": "time travel romance",
+    "expected": ["Lovely Runner", "Tomorrow with You", "Rooftop Prince", "Queen In Hyun's Man"],
+    "tags": ["theme", "romance"]
+  },
+  {
+    "id": "small_town_romance",
+    "query": "small town romance",
+    "expected": ["Hometown Cha-Cha-Cha", "When the Camellia Blooms", "Once Upon a Small Town"],
+    "tags": ["setting", "romance"]
+  },
+  {
+    "id": "food_romance",
+    "query": "food romance drama",
+    "expected": ["Wok of Love", "Pasta", "Let's Eat", "Itaewon Class"],
+    "tags": ["food", "romance"]
+  },
+  {
+    "id": "short_drama",
+    "query": "short drama",
+    "expected": ["The Glory", "Bloodhounds", "Move to Heaven"],
+    "tags": ["episode_count"]
+  },
+  {
+    "id": "long_family_drama",
+    "query": "long family drama",
+    "expected": ["Happy Home", "Homemade Love Story", "Bread, Love and Dreams"],
+    "tags": ["episode_count", "family"]
+  },
+  {
+    "id": "recent_drama",
+    "query": "recent drama",
+    "expected": ["Queen of Tears", "Doctor Slump", "The Atypical Family", "Marry My Husband"],
+    "tags": ["year", "recent"]
+  },
+  {
+    "id": "year_2024",
+    "query": "2024 drama",
+    "expected": ["Queen of Tears", "Lovely Runner", "Doctor Slump", "The Atypical Family"],
+    "tags": ["year"]
+  },
+  {
+    "id": "netflix_drama",
+    "query": "netflix drama",
+    "expected": ["The Glory", "Squid Game", "Sweet Home", "Kingdom"],
+    "tags": ["network", "platform"]
+  },
+  {
+    "id": "netflix_revenge",
+    "query": "netflix revenge drama",
+    "expected": ["The Glory", "Vincenzo", "My Name", "Taxi Driver"],
+    "tags": ["network", "revenge"]
+  },
+  {
+    "id": "actor_park_seo_joon",
+    "query": "Park Seo Joon dramas",
+    "expected": ["Itaewon Class", "Kill Me, Heal Me", "She Was Pretty"],
+    "tags": ["actor"]
+  },
+  {
+    "id": "actor_lee_min_ho",
+    "query": "Lee Min Ho dramas",
+    "expected": ["The Heirs", "The King: Eternal Monarch", "Boys over Flowers"],
+    "tags": ["actor"]
+  },
+  {
+    "id": "actor_iu",
+    "query": "IU dramas",
+    "expected": ["My Mister", "Moon Lovers: Scarlet Heart Ryeo", "Dream High"],
+    "tags": ["actor"]
+  },
+  {
+    "id": "writer_kim_eun_sook",
+    "query": "Kim Eun Sook drama",
+    "expected": ["Guardian: The Lonely and Great God", "The Glory", "Descendants of the Sun", "Mr. Sunshine"],
+    "tags": ["writer", "creator"]
+  }
+]

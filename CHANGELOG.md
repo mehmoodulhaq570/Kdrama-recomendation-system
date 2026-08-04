@@ -31,6 +31,11 @@ Important project history reconstructed from Git commits and project documentati
 - Expanded live regression coverage for the second hardening pass.
   - Current focused regression result: `28/28` checks passed against the local backend.
 - Refactored query-specific real-world priors into `backend/ranking/config/query_intent_priors.json` so aliases, generic-quality patterns, combo priors, broad-title noise, recent priors, and similar-title overrides can be tuned as data instead of adding more backend rules.
+- Added a real-world search evaluation harness:
+  - created `tests/evaluation/real_world_queries.json` with 52 realistic user queries across exact titles, aliases, typos, similar-title requests, genres, moods, negations, actors, writers, platforms, recent/year queries, and broad recommendation requests
+  - created `tests/evaluation/evaluate_real_world_search.py` to score live backend results with Hit@1/3/5/10, MRR, Recall@5/10, forbidden-result checks, and tag-level breakdowns
+  - captured the current baseline in `tests/reports/debug/real_world_eval_latest.txt`
+  - Current real-world evaluation result: `52/52` cases passed, `100.0%` Hit@5, `100.0%` Hit@10, `0.985` MRR, and `100.0%` forbidden checks passed.
 
 ## 2026-07-24
 
