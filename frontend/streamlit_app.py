@@ -1175,7 +1175,7 @@ with tab4:
             f"{API_URL}/analytics/popular", params={"days": 7}, timeout=5
         )
         if popular_response.status_code == 200:
-            popular = popular_response.json()
+            popular = popular_response.json().get("popular_dramas", [])
             if popular:
                 st.markdown("##### 🏆 Most Popular Dramas (Last 7 Days)")
                 for item in popular[:10]:
@@ -1193,7 +1193,7 @@ with tab4:
             f"{API_URL}/analytics/trending-searches", params={"limit": 10}, timeout=5
         )
         if trending_response.status_code == 200:
-            trending = trending_response.json()
+            trending = trending_response.json().get("trending_searches", [])
             if trending:
                 st.markdown("##### 🔎 Trending Searches")
                 for item in trending:
@@ -1227,6 +1227,102 @@ with tab4:
     except Exception as e:
         st.warning(f"⚠️ Could not load analytics: {str(e)}")
         st.info("Make sure the backend is running!")
+
+    st.markdown("---")
+    st.markdown("#### Search Quality Signals")
+    quality_days = st.slider(
+        "Quality window",
+        min_value=1,
+        max_value=30,
+        value=7,
+        help="How many recent days of search logs to analyze.",
+    )
+
+    try:
+        quality_response = requests.get(
+            f"{API_URL}/analytics/search-quality",
+            params={"days": quality_days, "limit": 12},
+            timeout=8,
+        )
+        if quality_response.status_code == 200:
+            quality = quality_response.json()
+
+            q_col1, q_col2, q_col3, q_col4 = st.columns(4)
+            with q_col1:
+                st.metric("Analyzed Searches", quality.get("total_searches", 0))
+            with q_col2:
+                st.metric("Unique Queries", quality.get("queries_analyzed", 0))
+            with q_col3:
+                st.metric(
+                    "No-Feedback Searches",
+                    quality.get("searches_without_feedback", 0),
+                )
+            with q_col4:
+                engagement = quality.get("engagement_per_search", 0)
+                st.metric("Engagement/Search", f"{engagement:.2f}")
+
+            weak_queries = quality.get("weak_queries", [])
+            st.markdown("##### Weak Query Candidates")
+            if weak_queries:
+                weak_df = pd.DataFrame(weak_queries)
+                st.dataframe(
+                    weak_df[
+                        [
+                            "query",
+                            "intent",
+                            "search_count",
+                            "positive_actions",
+                            "engagement_rate",
+                            "avg_results",
+                            "avg_first_click_position",
+                        ]
+                    ],
+                    use_container_width=True,
+                    hide_index=True,
+                )
+                with st.expander("Sample results for weak queries", expanded=False):
+                    for row in weak_queries[:8]:
+                        st.markdown(f"**{row.get('query', '')}**")
+                        st.caption(", ".join(row.get("sample_results", [])[:5]))
+            else:
+                st.success("No weak query candidates in this window.")
+
+            no_click = quality.get("recent_no_click_searches", [])
+            st.markdown("##### Recent Searches Without Feedback")
+            if no_click:
+                no_click_df = pd.DataFrame(no_click)
+                st.dataframe(
+                    no_click_df[["query", "intent", "result_count", "timestamp"]],
+                    use_container_width=True,
+                    hide_index=True,
+                )
+            else:
+                st.success("Every recent search has some positive feedback.")
+
+            positives = quality.get("positive_examples", [])
+            st.markdown("##### Positive Training Signals")
+            if positives:
+                positives_df = pd.DataFrame(positives)
+                st.dataframe(
+                    positives_df[
+                        [
+                            "query",
+                            "drama_title",
+                            "action",
+                            "position",
+                            "intent",
+                            "timestamp",
+                        ]
+                    ],
+                    use_container_width=True,
+                    hide_index=True,
+                )
+            else:
+                st.info("No clicked/watchlisted query-drama pairs yet.")
+        else:
+            st.warning("Search quality endpoint is not available yet.")
+    except Exception as e:
+        st.warning(f"Could not load search quality signals: {str(e)}")
 
 with tab5:
     st.markdown("### ℹ️ How SeoulMate Works")

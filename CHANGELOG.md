@@ -36,6 +36,11 @@ Important project history reconstructed from Git commits and project documentati
   - created `tests/evaluation/evaluate_real_world_search.py` to score live backend results with Hit@1/3/5/10, MRR, Recall@5/10, forbidden-result checks, and tag-level breakdowns
   - captured the current baseline in `tests/reports/debug/real_world_eval_latest.txt`
   - Current real-world evaluation result: `52/52` cases passed, `100.0%` Hit@5, `100.0%` Hit@10, `0.985` MRR, and `100.0%` forbidden checks passed.
+- Added a feedback-driven search quality dashboard:
+  - added `/analytics/search-quality` to join search logs with click/watchlist feedback
+  - added fallback matching by user/session/timestamp so older interactions without `search_id` can still produce quality signals
+  - expanded the Streamlit Analytics tab with weak-query candidates, recent no-feedback searches, and positive query-drama examples for future training data
+  - fixed the Analytics tab parsing for wrapped popular-drama and trending-search API responses.
 
 ## 2026-07-24
 

@@ -2499,6 +2499,26 @@ def get_analytics_summary(
         )
 
 
+@app.get("/analytics/search-quality", tags=["Analytics"])
+def get_search_quality_report(
+    days: int = Query(7, description="Look back period in days"),
+    limit: int = Query(20, description="Number of rows per section"),
+):
+    """
+    Show search quality signals from runtime analytics:
+    - Queries with searches but no clicks/watchlist adds
+    - Recent searches without feedback
+    - Positive query-drama examples for future training data
+    """
+    try:
+        report = analytics_tracker.get_search_quality_report(days=days, limit=limit)
+        return report
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Failed to get search quality report: {str(e)}"
+        )
+
+
 # ======================================================
 # USER PROFILE ENDPOINTS (Phase 2)
 # ======================================================

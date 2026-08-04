@@ -298,6 +298,175 @@ class AnalyticsTracker:
 
         return trending
 
+    def get_search_quality_report(self, days: int = 7, limit: int = 20) -> Dict:
+        """
+        Join search logs to interactions so weak searches can become future
+        evaluation cases and training signals.
+        """
+        searches = self._load_searches(days=days)
+        interactions = self._load_interactions(days=days)
+
+        searches_by_session_user = defaultdict(list)
+        for search in searches:
+            session_key = (search.get("user_id"), search.get("session_id"))
+            searches_by_session_user[session_key].append(search)
+        for session_searches in searches_by_session_user.values():
+            session_searches.sort(key=lambda row: row.get("timestamp", ""))
+
+        interactions_by_search = defaultdict(list)
+        for interaction in interactions:
+            search_id = interaction.get("search_id")
+            if search_id:
+                interactions_by_search[search_id].append(interaction)
+                continue
+
+            action = interaction.get("action")
+            if action not in {"click", "watchlist_add"}:
+                continue
+
+            session_key = (interaction.get("user_id"), interaction.get("session_id"))
+            interaction_time = self._parse_timestamp(interaction.get("timestamp"))
+            if not interaction_time:
+                continue
+
+            best_search = None
+            for search in searches_by_session_user.get(session_key, []):
+                search_time = self._parse_timestamp(search.get("timestamp"))
+                if not search_time or search_time > interaction_time:
+                    continue
+                if (interaction_time - search_time) <= timedelta(hours=2):
+                    best_search = search
+
+            if best_search and best_search.get("search_id"):
+                interactions_by_search[best_search["search_id"]].append(interaction)
+
+        query_stats = defaultdict(
+            lambda: {
+                "query": "",
+                "intent": "unknown",
+                "search_count": 0,
+                "result_count_total": 0,
+                "clicks": 0,
+                "watchlist_adds": 0,
+                "first_positions": [],
+                "sample_results": [],
+                "last_seen": "",
+            }
+        )
+
+        no_click_searches = []
+        positive_examples = []
+
+        for search in searches:
+            query = str(search.get("query", "")).strip()
+            if not query:
+                continue
+
+            normalized_query = query.casefold()
+            linked_interactions = interactions_by_search.get(search.get("search_id"), [])
+            clicks = [i for i in linked_interactions if i.get("action") == "click"]
+            watchlist_adds = [
+                i for i in linked_interactions if i.get("action") == "watchlist_add"
+            ]
+            positive_actions = clicks + watchlist_adds
+
+            stats = query_stats[normalized_query]
+            stats["query"] = query
+            stats["intent"] = search.get("intent", "unknown")
+            stats["search_count"] += 1
+            stats["result_count_total"] += int(search.get("result_count", 0) or 0)
+            stats["clicks"] += len(clicks)
+            stats["watchlist_adds"] += len(watchlist_adds)
+            stats["last_seen"] = search.get("timestamp", stats["last_seen"])
+            if not stats["sample_results"]:
+                stats["sample_results"] = search.get("results", [])[:5]
+
+            for interaction in positive_actions:
+                position = interaction.get("position")
+                if isinstance(position, int):
+                    stats["first_positions"].append(position)
+                positive_examples.append(
+                    {
+                        "query": query,
+                        "intent": search.get("intent", "unknown"),
+                        "drama_title": interaction.get("drama_title"),
+                        "action": interaction.get("action"),
+                        "position": position,
+                        "timestamp": interaction.get("timestamp"),
+                    }
+                )
+
+            if not positive_actions:
+                no_click_searches.append(
+                    {
+                        "query": query,
+                        "intent": search.get("intent", "unknown"),
+                        "result_count": search.get("result_count", 0),
+                        "sample_results": search.get("results", [])[:5],
+                        "timestamp": search.get("timestamp"),
+                    }
+                )
+
+        query_rows = []
+        for stats in query_stats.values():
+            search_count = stats["search_count"]
+            positives = stats["clicks"] + stats["watchlist_adds"]
+            avg_results = stats["result_count_total"] / search_count if search_count else 0
+            avg_first_position = (
+                sum(stats["first_positions"]) / len(stats["first_positions"])
+                if stats["first_positions"]
+                else None
+            )
+            query_rows.append(
+                {
+                    "query": stats["query"],
+                    "intent": stats["intent"],
+                    "search_count": search_count,
+                    "clicks": stats["clicks"],
+                    "watchlist_adds": stats["watchlist_adds"],
+                    "positive_actions": positives,
+                    "engagement_rate": round(positives / search_count, 3),
+                    "avg_results": round(avg_results, 2),
+                    "avg_first_click_position": (
+                        round(avg_first_position, 2)
+                        if avg_first_position is not None
+                        else None
+                    ),
+                    "sample_results": stats["sample_results"],
+                    "last_seen": stats["last_seen"],
+                }
+            )
+
+        weak_queries = sorted(
+            query_rows,
+            key=lambda row: (
+                row["positive_actions"] > 0,
+                -row["search_count"],
+                row["avg_results"],
+            ),
+        )[:limit]
+        positive_examples.sort(
+            key=lambda row: (row.get("timestamp") or ""),
+            reverse=True,
+        )
+
+        total_searches = len(searches)
+        total_positive = sum(row["positive_actions"] for row in query_rows)
+
+        return {
+            "period_days": days,
+            "total_searches": total_searches,
+            "queries_analyzed": len(query_rows),
+            "searches_without_feedback": len(no_click_searches),
+            "positive_actions": total_positive,
+            "engagement_per_search": (
+                round(total_positive / total_searches, 3) if total_searches else 0
+            ),
+            "weak_queries": weak_queries,
+            "recent_no_click_searches": no_click_searches[-limit:][::-1],
+            "positive_examples": positive_examples[:limit],
+        }
+
     def get_user_preferences(self, user_id: str) -> Dict:
         """
         Infer user preferences from interaction history
@@ -388,6 +557,14 @@ class AnalyticsTracker:
                     continue
 
         return searches
+
+    def _parse_timestamp(self, value: Optional[str]) -> Optional[datetime]:
+        if not value:
+            return None
+        try:
+            return datetime.fromisoformat(value)
+        except (TypeError, ValueError):
+            return None
 
     def _get_search_by_id(self, search_id: str) -> Optional[Dict]:
         """Get search data by ID"""
